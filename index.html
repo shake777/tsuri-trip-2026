@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北九州 釣りいこか倶楽部 — 여행 계획 사이트</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #1f4e79;
+  --primary-light: #2e75b6;
+  --primary-lighter: #d9e2f3;
+  --accent: #e67e22;
+  --bg: #f5f8fc;
+  --card: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #555;
+  --text-muted: #888;
+  --border: #e1e8f0;
+  --success: #27ae60;
+  --warning: #e67e22;
+  --danger: #e74c3c;
+  --shadow: 0 2px 8px rgba(31, 78, 121, 0.08);
+}
+body {
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 14px;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+/* ============ HEADER ============ */
+header {
+  background: linear-gradient(135deg, #1f4e79 0%, #2e75b6 100%);
+  color: white;
+  padding: 24px 16px 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-top {
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1100px; margin: 0 auto; flex-wrap: wrap; gap: 12px;
+}
+.brand h1 { font-size: 20px; font-weight: 700; }
+.brand .subtitle { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+.member-area {
+  display: flex; align-items: center; gap: 10px; font-size: 13px;
+}
+.member-area input {
+  padding: 6px 12px; border-radius: 6px; border: none;
+  background: rgba(255,255,255,0.2); color: white; font-size: 13px;
+  width: 130px;
+}
+.member-area input::placeholder { color: rgba(255,255,255,0.7); }
+.member-area button {
+  background: rgba(255,255,255,0.95); color: var(--primary);
+  border: none; padding: 6px 14px; border-radius: 6px;
+  font-weight: 600; cursor: pointer; font-size: 13px;
+}
+.member-area button:hover { background: white; }
+#current-user { font-weight: 600; }
+
+/* ============ NAVIGATION ============ */
+.tabs {
+  display: flex; gap: 4px; max-width: 1100px; margin: 14px auto 0;
+  flex-wrap: wrap;
+}
+.tab {
+  padding: 8px 16px; background: rgba(255,255,255,0.15); color: white;
+  border: none; border-radius: 8px 8px 0 0; cursor: pointer;
+  font-size: 13px; font-weight: 500; transition: background 0.2s;
+}
+.tab:hover { background: rgba(255,255,255,0.25); }
+.tab.active { background: var(--bg); color: var(--primary); font-weight: 700; }
+
+/* ============ MAIN ============ */
+main { padding: 24px 0 60px; }
+.section { display: none; }
+.section.active { display: block; }
+.card {
+  background: var(--card); border-radius: 12px; padding: 20px;
+  margin-bottom: 16px; box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.card h2 {
+  font-size: 18px; color: var(--primary);
+  margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary-lighter);
+  display: flex; align-items: center; gap: 8px;
+}
+.card h3 {
+  font-size: 15px; color: var(--primary-light);
+  margin: 14px 0 8px; font-weight: 600;
+}
+.card p { margin-bottom: 10px; color: var(--text-secondary); }
+.card ul { padding-left: 20px; margin-bottom: 10px; }
+.card li { margin-bottom: 4px; color: var(--text-secondary); }
+
+/* ============ COUNTDOWN ============ */
+.countdown-banner {
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+  color: white; padding: 18px 20px; border-radius: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+}
+.countdown-label { font-size: 13px; opacity: 0.95; }
+.countdown-date { font-size: 14px; margin-top: 2px; font-weight: 500; }
+.countdown-days {
+  font-size: 32px; font-weight: 700; line-height: 1;
+}
+.countdown-days span { font-size: 14px; font-weight: 400; opacity: 0.9; }
+.date-controls {
+  background: rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 8px;
+  font-size: 12px; display: flex; gap: 6px; align-items: center;
+}
+.date-controls input {
+  background: white; border: none; padding: 4px 6px; border-radius: 4px;
+  font-size: 12px; color: var(--text);
+}
+
+/* ============ TABLES ============ */
+table {
+  width: 100%; border-collapse: collapse;
+  margin: 8px 0 16px; font-size: 13px;
+}
+th {
+  background: var(--primary-lighter); color: var(--primary);
+  text-align: left; padding: 10px 12px; font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+}
+td {
+  padding: 9px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+tr:hover td { background: #fafcff; }
+
+/* ============ FISHING CALENDAR ============ */
+.fish-calendar {
+  display: grid; grid-template-columns: 160px repeat(12, 1fr);
+  gap: 3px; font-size: 11px; margin: 10px 0 20px;
+}
+.fish-calendar .head {
+  text-align: center; font-weight: 600; padding: 6px 0;
+  color: var(--text-muted);
+}
+.fish-calendar .name {
+  padding: 8px 8px; color: var(--text); font-size: 12px;
+  display: flex; align-items: center;
+}
+.fish-calendar .cell {
+  height: 24px; border-radius: 3px;
+  background: transparent; border: 1px solid var(--border);
+}
+.fish-calendar .cell.peak { background: var(--primary); border-color: var(--primary); }
+.fish-calendar .cell.avail { background: #85b7eb; border-color: #85b7eb; }
+.legend {
+  display: flex; gap: 14px; font-size: 12px; margin-bottom: 8px;
+  color: var(--text-muted); flex-wrap: wrap;
+}
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+
+/* ============ TIMELINE ============ */
+.timeline {
+  margin: 14px 0; padding-left: 0; list-style: none;
+  border-left: 3px solid var(--primary-lighter);
+}
+.timeline li {
+  position: relative; padding: 12px 0 12px 24px;
+  margin-left: 8px;
+}
+.timeline li::before {
+  content: ''; position: absolute; left: -8px; top: 16px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--primary-light); border: 3px solid var(--card);
+}
+.timeline-time {
+  font-weight: 600; color: var(--primary); font-size: 13px;
+}
+.timeline-title { font-weight: 500; color: var(--text); margin-top: 2px; }
+.timeline-detail { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+/* ============ VOTING ============ */
+.poll-card { margin-bottom: 18px; }
+.poll-question {
+  font-size: 15px; font-weight: 600; color: var(--text);
+  margin-bottom: 12px;
+}
+.poll-option {
+  margin-bottom: 8px; padding: 10px 14px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  cursor: pointer; transition: all 0.15s;
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; overflow: hidden;
+}
+.poll-option:hover { border-color: var(--primary-light); background: #fafcff; }
+.poll-option.voted { border-color: var(--primary); background: #f0f7fc; }
+.poll-option .label {
+  font-weight: 500; font-size: 13px; z-index: 1; position: relative;
+}
+.poll-option .count {
+  font-size: 12px; color: var(--text-muted); z-index: 1; position: relative;
+}
+.poll-option .bar {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: var(--primary-lighter); transition: width 0.4s ease;
+}
+.poll-voters {
+  font-size: 11px; color: var(--text-muted); margin-top: 4px; padding-left: 4px;
+}
+.poll-total {
+  text-align: right; font-size: 11px; color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ============ DISCUSSION ============ */
+.thread-list { display: flex; flex-direction: column; gap: 12px; }
+.thread {
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; background: white;
+}
+.thread-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.thread-title { font-weight: 600; font-size: 14px; color: var(--primary); }
+.thread-meta { font-size: 11px; color: var(--text-muted); }
+.thread-body { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; }
+.comments {
+  border-top: 1px solid var(--border); padding-top: 10px; margin-top: 8px;
+}
+.comment {
+  padding: 8px 10px; background: #f8fafc; border-radius: 6px;
+  margin-bottom: 6px; font-size: 12px;
+}
+.comment-meta {
+  font-size: 11px; color: var(--text-muted);
+  margin-bottom: 3px; display: flex; justify-content: space-between;
+}
+.comment-author { font-weight: 600; color: var(--primary); }
+.comment-body { color: var(--text); }
+.comment-form { display: flex; gap: 6px; margin-top: 8px; }
+.comment-form input {
+  flex: 1; padding: 7px 10px; border: 1px solid var(--border);
+  border-radius: 6px; font-size: 12px;
+}
+.comment-form button {
+  background: var(--primary); color: white; border: none;
+  padding: 7px 14px; border-radius: 6px; cursor: pointer;
+  font-size: 12px; font-weight: 500;
+}
+.comment-form button:hover { background: var(--primary-light); }
+.new-thread {
+  background: #f8fafc; border: 2px dashed var(--border);
+  border-radius: 10px; padding: 14px; margin-bottom: 14px;
+}
+.new-thread input, .new-thread textarea {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--border);
+  border-radius: 6px; font-size: 13px; margin-bottom: 8px;
+  font-family: inherit;
+}
+.new-thread textarea { min-height: 60px; resize: vertical; }
+.new-thread button {
+  background: var(--primary); color: white; border: none;
+  padding: 8px 18px; border-radius: 6px; cursor: pointer;
+  font-weight: 500; font-size: 13px;
+}
+
+/* ============ MEMBERS ============ */
+.member-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px; margin: 10px 0;
+}
+.member-chip {
+  background: white; border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 12px; font-size: 13px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.member-chip .name { font-weight: 600; color: var(--primary); }
+.member-chip .meta { font-size: 11px; color: var(--text-muted); }
+
+/* ============ ALERTS / NOTES ============ */
+.note {
+  padding: 10px 14px; border-radius: 8px; font-size: 12px;
+  margin: 10px 0; line-height: 1.6;
+}
+.note.info { background: #e6f1fb; color: #185fa5; border-left: 3px solid #2e75b6; }
+.note.warn { background: #fef3e6; color: #8a4500; border-left: 3px solid #e67e22; }
+.note.success { background: #e6f7ec; color: #155f3a; border-left: 3px solid #27ae60; }
+
+/* ============ BUTTONS ============ */
+.btn {
+  background: var(--primary); color: white; border: none;
+  padding: 8px 16px; border-radius: 6px; cursor: pointer;
+  font-size: 13px; font-weight: 500;
+}
+.btn:hover { background: var(--primary-light); }
+.btn.secondary { background: white; color: var(--primary); border: 1px solid var(--primary); }
+.btn.danger { background: var(--danger); }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+/* ============ EMPTY STATE ============ */
+.empty {
+  text-align: center; padding: 40px 20px; color: var(--text-muted);
+  font-size: 13px;
+}
+.login-required {
+  background: #fff8e1; border: 2px dashed #ffc107;
+  padding: 30px; text-align: center; border-radius: 10px;
+  color: #856404; margin: 14px 0;
+}
+
+footer {
+  text-align: center; padding: 30px 16px;
+  color: var(--text-muted); font-size: 11px;
+  border-top: 1px solid var(--border); margin-top: 40px;
+}
+
+@media (max-width: 700px) {
+  .fish-calendar { font-size: 10px; grid-template-columns: 100px repeat(12, 1fr); }
+  .fish-calendar .name { font-size: 10.5px; padding: 6px 4px; }
+  .countdown-days { font-size: 26px; }
+  .brand h1 { font-size: 17px; }
+  th, td { padding: 7px 8px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="brand">
+      <h1>北九州 釣りいこか倶楽部 — 여행 계획</h1>
+      <div class="subtitle">키타큐슈 바다낚시 여행 회원 전용 페이지</div>
+    </div>
+    <div class="member-area" id="member-area-content"></div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-section="home">🏠 홈</button>
+    <button class="tab" data-section="info">📋 여행정보</button>
+    <button class="tab" data-section="schedule">📅 일정</button>
+    <button class="tab" data-section="vote">🗳️ 투표</button>
+    <button class="tab" data-section="discuss">💬 토론</button>
+    <button class="tab" data-section="members">👥 회원</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- ============ HOME ============ -->
+    <section class="section active" id="section-home">
+      <div class="countdown-banner">
+        <div>
+          <div class="countdown-label">출발까지 남은 일수</div>
+          <div class="countdown-date" id="countdown-date">출발일을 설정하세요</div>
+        </div>
+        <div class="countdown-days" id="countdown-days">--<span>일</span></div>
+        <div class="date-controls">
+          <label>출발일</label>
+          <input type="date" id="departure-date">
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🎣 여행 개요</h2>
+        <p>일본 후쿠오카현 키타큐슈시(北九州市)에 위치한 바다낚시 종합 클럽 <strong>「釣りいこか倶楽部」</strong>에서 운영하는 올인원 바다낚시 패키지를 이용하는 여행입니다. 9개 항구의 24척 등록 유어선과 제휴하여 초보자부터 전문가까지 즐길 수 있습니다.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px;">
+          <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+            <div style="font-size: 11px; color: var(--text-muted);">예상 일정</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">3박 4일</div>
+            <div style="font-size: 11px; color: var(--text-muted);">선상 1박 + 코쿠라 2박</div>
+          </div>
+          <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+            <div style="font-size: 11px; color: var(--text-muted);">권장 시기</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">9월~12월</div>
+            <div style="font-size: 11px; color: var(--text-muted);">가을·겨울 시즌</div>
+          </div>
+          <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+            <div style="font-size: 11px; color: var(--text-muted);">출국</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">부산→하카타</div>
+            <div style="font-size: 11px; color: var(--text-muted);">뉴카멜리아 야간 페리</div>
+          </div>
+          <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+            <div style="font-size: 11px; color: var(--text-muted);">귀국</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">FUK→ICN/GMP</div>
+            <div style="font-size: 11px; color: var(--text-muted);">항공편 1시간 29분</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📌 진행 현황</h2>
+        <div id="progress-summary"></div>
+      </div>
+
+      <div class="card">
+        <h2>🔗 빠른 메뉴</h2>
+        <div class="btn-row">
+          <button class="btn" onclick="switchTab('vote')">투표 참여하기</button>
+          <button class="btn secondary" onclick="switchTab('discuss')">토론 게시판</button>
+          <button class="btn secondary" onclick="switchTab('info')">여행 정보 보기</button>
+          <button class="btn secondary" onclick="window.open('https://tsuri-ikoka.com/general', '_blank')">원본 클럽 사이트</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INFO ============ -->
+    <section class="section" id="section-info">
+      <div class="card">
+        <h2>🏢 클럽 소개</h2>
+        <p>키타큐슈시는 시 중심부에서 유어선이 출항할 수 있는 편리한 지리적 이점과 사계절 다양한 어종이 잡히는 풍부한 어장을 보유한 도시입니다. 釣りいこか倶楽部는 9개 항구의 24척의 유어선과 제휴하여 운영되며, 낚시 가이드·도구 렌탈·생선 손질·요리·숙박까지 통합 서비스를 제공합니다.</p>
+        <h3>5단계 올인원 패키지</h3>
+        <ul>
+          <li>① 낚시터·낚시일정·낚시방법 검토</li>
+          <li>② 어떤 유어선을 탈 것인지 선택</li>
+          <li>③ 8가지 부가 서비스 신청</li>
+          <li>④ 잡은 생선 요리·식당 안내</li>
+          <li>⑤ 숙박 시설 안내</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🌊 낚시 가능 해역</h2>
+        <table>
+          <thead><tr><th>해역</th><th>특징</th><th>유어요금</th></tr></thead>
+          <tbody>
+            <tr><td>관문해협 (関門海峡)</td><td>날씨 강함, 사계절 운영</td><td>6,000 ~ 10,000엔</td></tr>
+            <tr><td>하쿠시마·향탄 해역</td><td>대형어 노림, 중급자 이상</td><td>8,000 ~ 15,000엔</td></tr>
+            <tr><td>겐카이나다 (玄界灘)</td><td>GT게임 등 본격 외양</td><td>15,000 ~ 18,000엔</td></tr>
+            <tr><td>GT게임 종일</td><td>특수 종일 코스</td><td>18,000엔 이상</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>🐟 7가지 낚시 방법</h2>
+        <h3>① 오토시코미 (落とし込み)</h3>
+        <p>가을~겨울 시즌. 사비키 채비로 전갱이를 미끼로 걸어 대형 청물·참돔·광어 노림.</p>
+        <h3>② 타이고모쿠 도즈키 (鯛五目胴突き)</h3>
+        <p>심플한 채비, 초보자에게 적합. 참돔·옥돔·근어 다양한 어종.</p>
+        <h3>③ 텐빈고모쿠 (天秤五目)</h3>
+        <p>봄~여름 시즌. 오키아미 미끼로 이사키·참돔·청물 노림.</p>
+        <h3>④ 타이라바 / SLJ / 히토츠텐야</h3>
+        <p>연중 가능. 모조 미끼와 일정 속도 감기로 참돔·청물·광어 노림. 초보자도 도전하기 좋음.</p>
+        <h3>⑤ 이카요타키 (イカ夜焚き)</h3>
+        <p>야간 출항. 배의 등불로 오징어를 모으고 슛테 채비로 노림. 봄~늦가을 시즌.</p>
+        <h3>⑥ 지깅 (ジギング)</h3>
+        <p>메탈지그로 청물·참돔 노림. 연중 가능, 전동지깅도 가능.</p>
+        <h3>⑦ 관문 아라카부 (関門アラカブ)</h3>
+        <p>도즈키 카부라 채비에 오징어 미끼로 쏨뱅이 노림. 늦가을~이른 봄이 베스트.</p>
+      </div>
+
+      <div class="card">
+        <h2>📅 월별 시즌 캘린더</h2>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-swatch" style="background:#1f4e79;"></span>베스트 시즌</span>
+          <span class="legend-item"><span class="legend-swatch" style="background:#85b7eb;"></span>낚시 가능</span>
+          <span class="legend-item"><span class="legend-swatch" style="border: 1px solid var(--border);"></span>비시즌</span>
+        </div>
+        <div class="fish-calendar" id="fish-calendar"></div>
+      </div>
+
+      <div class="card">
+        <h2>🏨 숙박 옵션</h2>
+        <h3>테리하 스파리조트 모지점 (照葉スパリゾート門司店)</h3>
+        <p>대형 입욕시설 병설. 大里港·大里漁港에서 도보권. 객실 손님은 입욕시설 무료.</p>
+        <table>
+          <thead><tr><th>객실</th><th>금/토/축전일</th><th>그 외</th></tr></thead>
+          <tbody>
+            <tr><td>스탠더드 싱글</td><td>6,500엔</td><td>5,500엔</td></tr>
+            <tr><td>스탠더드 더블</td><td>7,500엔</td><td>6,500엔</td></tr>
+            <tr><td>스탠더드 트윈</td><td>12,000엔</td><td>10,000엔</td></tr>
+            <tr><td>수페리어 트윈</td><td>16,000엔</td><td>14,000엔</td></tr>
+          </tbody>
+        </table>
+        <h3>컴포트호텔 코쿠라 (コンフォートホテル小倉)</h3>
+        <p>JR小倉駅 도보 3분, 小倉港까지 도보 3분. 1박 조식 포함.</p>
+        <table>
+          <thead><tr><th>객실</th><th>요금</th></tr></thead>
+          <tbody>
+            <tr><td>더블 이코노미 (베드 1대 1인)</td><td>4,700엔</td></tr>
+            <tr><td>트윈 스탠더드 (베드 2대 2인)</td><td>8,000엔</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>🍴 제휴 식당 (잡은 생선 요리 제공)</h2>
+        <table>
+          <thead><tr><th>식당명</th><th>특징</th><th>코스</th><th>요금</th></tr></thead>
+          <tbody>
+            <tr><td>廻転寿司 平四郎 코쿠라점</td><td>회전초밥, 아뮤플라자</td><td>만푸쿠 / 특상스시</td><td>3,850 / 5,000엔</td></tr>
+            <tr><td>네오 대중주점 우초우텐</td><td>닭요리 전문점</td><td>오마카세</td><td>4,500엔</td></tr>
+            <tr><td>旬のとろ箱 시키마루</td><td>참돔 전문 유어선 운영</td><td>오마카세</td><td>4,500엔</td></tr>
+            <tr><td>식선 와뇨야 (食膳 和んや)</td><td>모지역 인근 해산물</td><td>오마카세</td><td>4,500엔</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ SCHEDULE ============ -->
+    <section class="section" id="section-schedule">
+      <div class="card">
+        <h2>🚢 DAY 1 — 출국 (부산항)</h2>
+        <ul class="timeline">
+          <li>
+            <div class="timeline-time">~19:00</div>
+            <div class="timeline-title">부산 국제여객터미널 체크인</div>
+            <div class="timeline-detail">탑승 수속 마감 18:30 / 출국심사</div>
+          </li>
+          <li>
+            <div class="timeline-time">22:30 출항</div>
+            <div class="timeline-title">뉴카멜리아 부산항 출항 (선상 1박)</div>
+            <div class="timeline-detail">선내 식당·대욕장 이용 후 취침</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🚢 DAY 2 — 일본 도착 & 키타큐슈 이동</h2>
+        <ul class="timeline">
+          <li>
+            <div class="timeline-time">07:30 도착</div>
+            <div class="timeline-title">하카타항 도착 → 입국심사·세관</div>
+            <div class="timeline-detail">짐 찾기 30~45분</div>
+          </li>
+          <li>
+            <div class="timeline-time">~09:00</div>
+            <div class="timeline-title">하카타항 → JR하카타역</div>
+            <div class="timeline-detail">시내버스 약 15분</div>
+          </li>
+          <li>
+            <div class="timeline-time">~09:30</div>
+            <div class="timeline-title">JR하카타 → JR코쿠라 (신칸센 15분)</div>
+            <div class="timeline-detail">4,000엔 / 재래선 70~80분 1,310엔도 가능</div>
+          </li>
+          <li>
+            <div class="timeline-time">오전</div>
+            <div class="timeline-title">호텔 체크인 또는 짐 보관</div>
+            <div class="timeline-detail">컴포트호텔 코쿠라 또는 테리하 스파리조트 모지</div>
+          </li>
+          <li>
+            <div class="timeline-time">오후</div>
+            <div class="timeline-title">사무국 브리핑 / 도구 점검 / 시내 휴식</div>
+            <div class="timeline-detail">다음날 출조 준비</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🎣 DAY 3 — 출조 (메인 낚시일)</h2>
+        <ul class="timeline">
+          <li>
+            <div class="timeline-time">새벽</div>
+            <div class="timeline-title">유어선 출항 (낚시)</div>
+            <div class="timeline-detail">새벽 출항 → 오후 귀항</div>
+          </li>
+          <li>
+            <div class="timeline-time">오후</div>
+            <div class="timeline-title">잡은 생선 손질 + 쿨택배 발송</div>
+            <div class="timeline-detail">국제 EMS로 한국 자택 발송 가능</div>
+          </li>
+          <li>
+            <div class="timeline-time">저녁</div>
+            <div class="timeline-title">테리하 스파 입욕 + 회·스시 디너</div>
+            <div class="timeline-detail">제휴 식당 (3,850~5,000엔)</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>✈️ DAY 4 — 귀국 (FUK → ICN/GMP)</h2>
+        <ul class="timeline">
+          <li>
+            <div class="timeline-time">~10:00</div>
+            <div class="timeline-title">호텔 체크아웃 → JR코쿠라역</div>
+            <div class="timeline-detail">도보 3분</div>
+          </li>
+          <li>
+            <div class="timeline-time">~10:30</div>
+            <div class="timeline-title">JR코쿠라 → JR하카타 (신칸센 15분)</div>
+            <div class="timeline-detail">4,000엔</div>
+          </li>
+          <li>
+            <div class="timeline-time">~10:50</div>
+            <div class="timeline-title">JR하카타 → 후쿠오카공항 (지하철 5분)</div>
+            <div class="timeline-detail">공항선 2정거장 / 260엔</div>
+          </li>
+          <li>
+            <div class="timeline-time">~11:30</div>
+            <div class="timeline-title">FUK 국제선 청사 도착·체크인</div>
+            <div class="timeline-detail">출국심사 2시간 전 권장</div>
+          </li>
+          <li>
+            <div class="timeline-time">13:30~14:30</div>
+            <div class="timeline-title">FUK → ICN/GMP 항공편 (약 1시간 29분)</div>
+            <div class="timeline-detail">ICN: 7개 항공사 / GMP: 대한항공·ANA</div>
+          </li>
+          <li>
+            <div class="timeline-time">~16:00</div>
+            <div class="timeline-title">서울 공항 도착·입국심사</div>
+            <div class="timeline-detail">귀가</div>
+          </li>
+        </ul>
+        <div class="note warn">
+          ⚠️ 신선 생선은 항공 위탁수하물 제약 있음. 키타큐슈 사무국에서 진공 포장 + 국제 EMS 쿨택배 발송 권장.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VOTE ============ -->
+    <section class="section" id="section-vote">
+      <div id="vote-login-check"></div>
+      <div id="vote-content" style="display:none;">
+        <div class="note info">
+          🗳️ 4가지 주제에 투표해 주세요. 다른 회원들이 선택한 결과를 실시간으로 확인할 수 있습니다.
+        </div>
+        <div id="polls-container"></div>
+      </div>
+    </section>
+
+    <!-- ============ DISCUSS ============ -->
+    <section class="section" id="section-discuss">
+      <div id="discuss-login-check"></div>
+      <div id="discuss-content" style="display:none;">
+        <div class="card">
+          <h2>💬 토론 게시판</h2>
+          <div class="new-thread">
+            <input type="text" id="new-thread-title" placeholder="새 토론 제목" maxlength="60">
+            <textarea id="new-thread-body" placeholder="내용을 입력하세요"></textarea>
+            <button onclick="addThread()">새 토론 등록</button>
+          </div>
+          <div id="thread-list" class="thread-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MEMBERS ============ -->
+    <section class="section" id="section-members">
+      <div class="card">
+        <h2>👥 참여 회원</h2>
+        <p>현재 사이트에 로그인한 회원 목록입니다. 출발일 전까지 의견·투표를 모아 함께 결정해요!</p>
+        <div id="member-list" class="member-list"></div>
+        <div class="btn-row">
+          <button class="btn secondary" onclick="exportData()">📥 모든 데이터 내보내기 (JSON)</button>
+          <button class="btn secondary" onclick="importData()">📤 데이터 가져오기</button>
+          <button class="btn danger" onclick="resetAll()">🗑️ 모든 데이터 초기화</button>
+        </div>
+        <input type="file" id="import-file" accept=".json" style="display:none;" onchange="handleImport(event)">
+        <div class="note info" style="margin-top: 14px;">
+          💡 <strong>여러 회원과 데이터를 공유하려면:</strong> '데이터 내보내기'로 JSON 파일을 받아 다른 회원에게 전달하고, 그 회원이 자신의 페이지에서 '데이터 가져오기'를 하면 의견·투표가 합쳐집니다.
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  © 2026 北九州 釣りいこか倶楽部 여행 모임 | 원본 클럽 정보: <a href="https://tsuri-ikoka.com/general" target="_blank" style="color: var(--primary-light);">tsuri-ikoka.com</a>
+</footer>
+
+<script>
+// ============== DATA STORE ==============
+const STORAGE_KEY = 'tsuri_trip_planner_v1';
+let DB = loadDB();
+
+function defaultDB() {
+  return {
+    user: null,
+    members: {},
+    departureDate: null,
+    votes: {},
+    threads: [
+      {
+        id: 't1', title: '환영합니다 🎉', author: '관리자',
+        body: '키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 자유롭게 의견 남겨주세요!',
+        ts: Date.now(), comments: []
+      }
+    ]
+  };
+}
+function loadDB() {
+  try {
+    const s = localStorage.getItem(STORAGE_KEY);
+    if (s) return Object.assign(defaultDB(), JSON.parse(s));
+  } catch (e) {}
+  return defaultDB();
+}
+function saveDB() { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); }
+
+// ============== POLLS ==============
+const POLLS = [
+  {
+    id: 'dates',
+    question: '🗓️ 여행 일정 (9월~12월 중 선호 주간을 골라주세요)',
+    options: [
+      '9월 둘째주 — 오토시코미 초기, 시즌 진입',
+      '10월 셋째주 — 단풍·날씨 좋음 + 다양한 어종',
+      '11월 둘째주 — 오토시코미·아라카부 베스트',
+      '12월 첫째주 — 아라카부·아라 낚시 본격, 가격 저렴'
+    ]
+  },
+  {
+    id: 'fishing',
+    question: '🎣 낚시 방법 (가장 해보고 싶은 것)',
+    options: [
+      '오토시코미 (대형 청물·참돔·광어)',
+      '타이라바·SLJ (참돔·청물, 초보자도 OK)',
+      '아라카부 (쏨뱅이 - 가볍게 즐기기)',
+      '지깅 (메탈지그로 청물 정통 루어)',
+      '이카요타키 (야간 오징어 낚시)'
+    ]
+  },
+  {
+    id: 'hotel',
+    question: '🏨 숙박 호텔 (1박 기준)',
+    options: [
+      '컴포트호텔 코쿠라 — 트윈 8,000엔, 역세권',
+      '컴포트호텔 코쿠라 — 더블 4,700엔, 1인실',
+      '테리하 스파리조트 — 트윈 10,000~12,000엔, 온천 포함',
+      '테리하 스파리조트 — 싱글 5,500~6,500엔, 온천 포함'
+    ]
+  },
+  {
+    id: 'restaurant',
+    question: '🍴 잡은 생선을 어디서 먹을까?',
+    options: [
+      '廻転寿司 平四郎 — 회전초밥 만푸쿠 코스 3,850엔',
+      '廻転寿司 平四郎 — 특상 스시 코스 5,000엔',
+      '네오 대중주점 우초우텐 — 닭요리+회 4,500엔',
+      '旬のとろ箱 시키마루 — 참돔 전문 오마카세 4,500엔',
+      '식선 와뇨야 — 해산물+닭요리 4,500엔'
+    ]
+  }
+];
+
+// ============== FISH CALENDAR DATA ==============
+const FISH_DATA = [
+  { name: '관문 텐야', months: ['','','','','P','P','P','P','P','P','A',''] },
+  { name: '아라카부 (쏨뱅이)', months: ['P','P','P','A','','','','','','A','P','P'] },
+  { name: '오토시코미', months: ['A','A','','','','','','','P','P','P','A'] },
+  { name: '아지오요가세', months: ['A','A','A','A','A','A','A','A','A','A','A','A'] },
+  { name: '타이고모쿠 도즈키', months: ['A','P','P','P','P','P','P','A','A','A','A','A'] },
+  { name: '텐빈고모쿠', months: ['A','A','A','A','P','P','P','P','A','A','A','A'] },
+  { name: '타이라바·SLJ', months: ['A','A','A','P','P','P','P','P','P','P','A','A'] },
+  { name: '이카요타키 (야간)', months: ['','','','','A','P','P','P','P','P','A',''] },
+  { name: '이카메탈', months: ['','','','','P','P','P','P','P','P','A',''] },
+  { name: '지깅', months: ['A','A','A','A','A','A','A','A','A','A','A','A'] }
+];
+
+// ============== INIT ==============
+function init() {
+  renderMemberArea();
+  renderFishCalendar();
+  renderCountdown();
+  renderPolls();
+  renderThreads();
+  renderMembers();
+  renderProgress();
+  document.getElementById('departure-date').addEventListener('change', e => {
+    DB.departureDate = e.target.value;
+    saveDB();
+    renderCountdown();
+  });
+  if (DB.departureDate) {
+    document.getElementById('departure-date').value = DB.departureDate;
+  }
+  document.querySelectorAll('.tab').forEach(t => {
+    t.onclick = () => switchTab(t.dataset.section);
+  });
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.section === name);
+  });
+  document.querySelectorAll('.section').forEach(s => {
+    s.classList.toggle('active', s.id === 'section-' + name);
+  });
+  if (name === 'vote') renderPolls();
+  if (name === 'discuss') renderThreads();
+  if (name === 'members') renderMembers();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============== MEMBER AREA ==============
+function renderMemberArea() {
+  const el = document.getElementById('member-area-content');
+  if (DB.user) {
+    el.innerHTML = `
+      <span>안녕하세요, <span id="current-user">${escapeHtml(DB.user)}</span> 님!</span>
+      <button onclick="logout()">로그아웃</button>
+    `;
+  } else {
+    el.innerHTML = `
+      <input type="text" id="login-name" placeholder="이름을 입력하세요" maxlength="20">
+      <button onclick="login()">참여하기</button>
+    `;
+    setTimeout(() => {
+      const input = document.getElementById('login-name');
+      if (input) input.addEventListener('keypress', e => { if (e.key === 'Enter') login(); });
+    }, 0);
+  }
+}
+function login() {
+  const input = document.getElementById('login-name');
+  const name = input.value.trim();
+  if (!name) { alert('이름을 입력해주세요'); return; }
+  if (name.length > 20) { alert('이름은 20자 이내로 입력해주세요'); return; }
+  DB.user = name;
+  if (!DB.members[name]) DB.members[name] = { joinedAt: Date.now() };
+  saveDB();
+  renderMemberArea();
+  renderPolls();
+  renderThreads();
+  renderMembers();
+  renderProgress();
+}
+function logout() { DB.user = null; saveDB(); renderMemberArea(); renderPolls(); renderThreads(); renderProgress(); }
+
+// ============== COUNTDOWN ==============
+function renderCountdown() {
+  const dateStr = DB.departureDate;
+  const dateEl = document.getElementById('countdown-date');
+  const daysEl = document.getElementById('countdown-days');
+  if (!dateStr) {
+    dateEl.textContent = '출발일을 설정하세요';
+    daysEl.innerHTML = '--<span>일</span>';
+    return;
+  }
+  const target = new Date(dateStr + 'T00:00:00');
+  const now = new Date(); now.setHours(0,0,0,0);
+  const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
+  const formatted = target.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
+  dateEl.textContent = '출발일: ' + formatted;
+  if (diff > 0) daysEl.innerHTML = `D-${diff}<span>일</span>`;
+  else if (diff === 0) daysEl.innerHTML = `<span style="font-size: 22px;">D-DAY!</span>`;
+  else daysEl.innerHTML = `<span style="font-size: 18px;">여행 ${-diff}일 경과</span>`;
+}
+
+// ============== FISH CALENDAR ==============
+function renderFishCalendar() {
+  const el = document.getElementById('fish-calendar');
+  let html = '<div class="head"></div>';
+  for (let i = 1; i <= 12; i++) html += `<div class="head">${i}월</div>`;
+  FISH_DATA.forEach(row => {
+    html += `<div class="name">${row.name}</div>`;
+    row.months.forEach(v => {
+      const cls = v === 'P' ? 'cell peak' : v === 'A' ? 'cell avail' : 'cell';
+      html += `<div class="${cls}"></div>`;
+    });
+  });
+  el.innerHTML = html;
+}
+
+// ============== POLLS ==============
+function renderPolls() {
+  const loginCheck = document.getElementById('vote-login-check');
+  const content = document.getElementById('vote-content');
+  if (!DB.user) {
+    loginCheck.innerHTML = `<div class="login-required">🔒 투표하려면 상단에서 이름을 입력하고 참여해주세요</div>`;
+    content.style.display = 'none';
+    return;
+  }
+  loginCheck.innerHTML = '';
+  content.style.display = 'block';
+  const container = document.getElementById('polls-container');
+  let html = '';
+  POLLS.forEach(poll => {
+    if (!DB.votes[poll.id]) DB.votes[poll.id] = {};
+    const myVote = DB.votes[poll.id][DB.user];
+    const counts = poll.options.map((_, i) => 0);
+    const voters = poll.options.map(() => []);
+    Object.entries(DB.votes[poll.id]).forEach(([user, idx]) => {
+      if (typeof idx === 'number' && idx >= 0 && idx < poll.options.length) {
+        counts[idx]++;
+        voters[idx].push(user);
+      }
+    });
+    const total = counts.reduce((a, b) => a + b, 0);
+    html += `<div class="card poll-card">
+      <div class="poll-question">${escapeHtml(poll.question)}</div>`;
+    poll.options.forEach((opt, i) => {
+      const pct = total > 0 ? Math.round(counts[i] / total * 100) : 0;
+      const isMine = myVote === i;
+      html += `
+        <div class="poll-option ${isMine ? 'voted' : ''}" onclick="vote('${poll.id}', ${i})">
+          <div class="bar" style="width: ${pct}%;"></div>
+          <span class="label">${isMine ? '✓ ' : ''}${escapeHtml(opt)}</span>
+          <span class="count">${counts[i]}표 (${pct}%)</span>
+        </div>
+        ${voters[i].length > 0 ? `<div class="poll-voters">└ ${voters[i].map(escapeHtml).join(', ')}</div>` : ''}
+      `;
+    });
+    html += `<div class="poll-total">총 ${total}명 투표</div>`;
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+function vote(pollId, optionIdx) {
+  if (!DB.user) return;
+  if (DB.votes[pollId][DB.user] === optionIdx) {
+    delete DB.votes[pollId][DB.user];
+  } else {
+    DB.votes[pollId][DB.user] = optionIdx;
+  }
+  saveDB();
+  renderPolls();
+  renderProgress();
+}
+
+// ============== THREADS ==============
+function renderThreads() {
+  const loginCheck = document.getElementById('discuss-login-check');
+  const content = document.getElementById('discuss-content');
+  if (!DB.user) {
+    loginCheck.innerHTML = `<div class="login-required">🔒 토론에 참여하려면 상단에서 이름을 입력하고 참여해주세요</div>`;
+    content.style.display = 'none';
+    return;
+  }
+  loginCheck.innerHTML = '';
+  content.style.display = 'block';
+  const list = document.getElementById('thread-list');
+  if (!DB.threads || DB.threads.length === 0) {
+    list.innerHTML = '<div class="empty">아직 토론이 없습니다. 첫 토론을 시작해보세요!</div>';
+    return;
+  }
+  let html = '';
+  const sorted = [...DB.threads].sort((a, b) => b.ts - a.ts);
+  sorted.forEach(t => {
+    html += `<div class="thread">
+      <div class="thread-header">
+        <div class="thread-title">${escapeHtml(t.title)}</div>
+        <div class="thread-meta">${escapeHtml(t.author)} · ${formatTime(t.ts)}</div>
+      </div>
+      <div class="thread-body">${escapeHtml(t.body).replace(/\n/g, '<br>')}</div>
+      <div class="comments">
+        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">댓글 ${t.comments.length}개</div>
+        ${t.comments.map(c => `
+          <div class="comment">
+            <div class="comment-meta">
+              <span class="comment-author">${escapeHtml(c.author)}</span>
+              <span>${formatTime(c.ts)}</span>
+            </div>
+            <div class="comment-body">${escapeHtml(c.body)}</div>
+          </div>
+        `).join('')}
+        <div class="comment-form">
+          <input type="text" placeholder="댓글 입력" id="comment-input-${t.id}" onkeypress="if(event.key==='Enter') addComment('${t.id}')">
+          <button onclick="addComment('${t.id}')">등록</button>
+        </div>
+        ${t.author === DB.user ? `<div style="margin-top: 6px;"><button class="btn danger" style="padding: 4px 10px; font-size: 11px;" onclick="deleteThread('${t.id}')">삭제</button></div>` : ''}
+      </div>
+    </div>`;
+  });
+  list.innerHTML = html;
+}
+function addThread() {
+  if (!DB.user) return;
+  const title = document.getElementById('new-thread-title').value.trim();
+  const body = document.getElementById('new-thread-body').value.trim();
+  if (!title) { alert('제목을 입력해주세요'); return; }
+  if (!body) { alert('내용을 입력해주세요'); return; }
+  DB.threads.push({
+    id: 't' + Date.now(), title, body, author: DB.user, ts: Date.now(), comments: []
+  });
+  saveDB();
+  document.getElementById('new-thread-title').value = '';
+  document.getElementById('new-thread-body').value = '';
+  renderThreads();
+  renderProgress();
+}
+function addComment(threadId) {
+  if (!DB.user) return;
+  const input = document.getElementById('comment-input-' + threadId);
+  const body = input.value.trim();
+  if (!body) return;
+  const t = DB.threads.find(x => x.id === threadId);
+  if (!t) return;
+  t.comments.push({ author: DB.user, body, ts: Date.now() });
+  saveDB();
+  input.value = '';
+  renderThreads();
+  renderProgress();
+}
+function deleteThread(threadId) {
+  if (!confirm('이 토론을 삭제하시겠습니까?')) return;
+  DB.threads = DB.threads.filter(t => t.id !== threadId);
+  saveDB();
+  renderThreads();
+  renderProgress();
+}
+
+// ============== MEMBERS ==============
+function renderMembers() {
+  const list = document.getElementById('member-list');
+  const memberNames = Object.keys(DB.members);
+  if (memberNames.length === 0) {
+    list.innerHTML = '<div class="empty">아직 참여한 회원이 없습니다.</div>';
+    return;
+  }
+  let html = '';
+  memberNames.forEach(name => {
+    const m = DB.members[name];
+    const voteCount = Object.values(DB.votes).reduce((sum, p) => sum + (p[name] !== undefined ? 1 : 0), 0);
+    const commentCount = DB.threads.reduce((sum, t) =>
+      sum + (t.author === name ? 1 : 0) + t.comments.filter(c => c.author === name).length, 0);
+    html += `<div class="member-chip">
+      <div class="name">${escapeHtml(name)}${name === DB.user ? ' (나)' : ''}</div>
+      <div class="meta">투표 ${voteCount}/4 · 활동 ${commentCount}</div>
+    </div>`;
+  });
+  list.innerHTML = html;
+}
+
+// ============== PROGRESS ==============
+function renderProgress() {
+  const el = document.getElementById('progress-summary');
+  const totalMembers = Object.keys(DB.members).length;
+  const totalThreads = DB.threads.length;
+  const totalComments = DB.threads.reduce((s, t) => s + t.comments.length, 0);
+  const totalVotes = Object.values(DB.votes).reduce((s, p) => s + Object.keys(p).length, 0);
+  let html = `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
+    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
+      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalMembers}</div>
+      <div style="font-size: 11px; color: var(--text-muted);">참여 회원</div>
+    </div>
+    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
+      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalVotes}</div>
+      <div style="font-size: 11px; color: var(--text-muted);">총 투표 수</div>
+    </div>
+    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
+      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalThreads}</div>
+      <div style="font-size: 11px; color: var(--text-muted);">토론 주제</div>
+    </div>
+    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
+      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalComments}</div>
+      <div style="font-size: 11px; color: var(--text-muted);">댓글</div>
+    </div>
+  </div>`;
+  POLLS.forEach(poll => {
+    const v = DB.votes[poll.id] || {};
+    const counts = poll.options.map((_, i) => 0);
+    Object.values(v).forEach(idx => { if (counts[idx] !== undefined) counts[idx]++; });
+    const top = counts.indexOf(Math.max(...counts));
+    const total = counts.reduce((a, b) => a + b, 0);
+    if (total > 0) {
+      html += `<div style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid var(--primary); border-radius: 4px; font-size: 12px;">
+        <strong>${escapeHtml(poll.question.split(' ').slice(0, 3).join(' '))}</strong>
+        — 현재 1위: ${escapeHtml(poll.options[top])} (${counts[top]}/${total}표)
+      </div>`;
+    }
+  });
+  el.innerHTML = html;
+}
+
+// ============== DATA EXPORT / IMPORT ==============
+function exportData() {
+  const data = JSON.stringify(DB, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'tsuri_trip_planner_data_' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+function importData() {
+  document.getElementById('import-file').click();
+}
+function handleImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!confirm('가져온 데이터와 현재 데이터를 병합하시겠습니까? (회원, 투표, 토론 모두 병합)')) return;
+      // Merge members
+      Object.entries(imported.members || {}).forEach(([name, m]) => {
+        if (!DB.members[name]) DB.members[name] = m;
+      });
+      // Merge votes
+      Object.entries(imported.votes || {}).forEach(([pid, v]) => {
+        if (!DB.votes[pid]) DB.votes[pid] = {};
+        Object.entries(v).forEach(([user, idx]) => {
+          DB.votes[pid][user] = idx;
+        });
+      });
+      // Merge threads (avoid duplicates by id)
+      const existingIds = new Set(DB.threads.map(t => t.id));
+      (imported.threads || []).forEach(t => {
+        if (existingIds.has(t.id)) {
+          // Merge comments
+          const existing = DB.threads.find(x => x.id === t.id);
+          const existingCommentKeys = new Set(existing.comments.map(c => c.author + '|' + c.ts));
+          (t.comments || []).forEach(c => {
+            if (!existingCommentKeys.has(c.author + '|' + c.ts)) existing.comments.push(c);
+          });
+        } else {
+          DB.threads.push(t);
+        }
+      });
+      if (imported.departureDate && !DB.departureDate) DB.departureDate = imported.departureDate;
+      saveDB();
+      alert('데이터가 성공적으로 병합되었습니다.');
+      location.reload();
+    } catch (err) {
+      alert('파일 읽기 오류: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+function resetAll() {
+  if (!confirm('모든 데이터를 정말로 초기화하시겠습니까?\n(회원, 투표, 토론, 출발일 모두 삭제됩니다)')) return;
+  if (!confirm('정말로 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+// ============== UTILS ==============
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+function formatTime(ts) {
+  const d = new Date(ts);
+  const now = new Date();
+  const diff = (now - d) / 1000;
+  if (diff < 60) return '방금 전';
+  if (diff < 3600) return Math.floor(diff / 60) + '분 전';
+  if (diff < 86400) return Math.floor(diff / 3600) + '시간 전';
+  if (diff < 2592000) return Math.floor(diff / 86400) + '일 전';
+  return d.toLocaleDateString('ko-KR');
+}
+
+// ============== START ==============
+init();
+</script>
+</body>
+</html>
