@@ -393,6 +393,12 @@ footer {
         </div>
       </div>
 
+      <div class="card" id="home-login-card">
+        <h2>👤 본인 이름을 클릭해서 시작하세요</h2>
+        <p>등록된 8명 중 본인을 클릭하면 바로 투표·토론에 참여할 수 있습니다.</p>
+        <div id="home-login-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 12px;"></div>
+      </div>
+
       <div class="card">
         <h2>📌 진행 현황</h2>
         <div id="progress-summary"></div>
@@ -667,19 +673,25 @@ footer {
 
 <script>
 // ============== DATA STORE ==============
-const STORAGE_KEY = 'tsuri_trip_planner_v1';
+const STORAGE_KEY = 'tsuri_trip_planner_v2';
+const REGISTERED_MEMBERS = ['박중산', '최근호', '김석', '김기태', '조성화', '최진원', '윤유병', '김철현'];
+
 let DB = loadDB();
 
 function defaultDB() {
+  const members = {};
+  REGISTERED_MEMBERS.forEach(name => {
+    members[name] = { joinedAt: Date.now(), preRegistered: true };
+  });
   return {
     user: null,
-    members: {},
+    members,
     departureDate: null,
     votes: {},
     threads: [
       {
         id: 't1', title: '환영합니다 🎉', author: '관리자',
-        body: '키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 자유롭게 의견 남겨주세요!',
+        body: '키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 박중산·최근호·김석·김기태·조성화·최진원·윤유병·김철현 8분이 등록되어 있습니다. 자유롭게 의견 남겨주세요!',
         ts: Date.now(), comments: []
       }
     ]
@@ -688,7 +700,16 @@ function defaultDB() {
 function loadDB() {
   try {
     const s = localStorage.getItem(STORAGE_KEY);
-    if (s) return Object.assign(defaultDB(), JSON.parse(s));
+    if (s) {
+      const saved = JSON.parse(s);
+      const def = defaultDB();
+      // Merge: keep saved data, but ensure pre-registered members are present
+      const merged = Object.assign(def, saved);
+      REGISTERED_MEMBERS.forEach(name => {
+        if (!merged.members[name]) merged.members[name] = { joinedAt: Date.now(), preRegistered: true };
+      });
+      return merged;
+    }
   } catch (e) {}
   return defaultDB();
 }
@@ -763,6 +784,7 @@ function init() {
   renderThreads();
   renderMembers();
   renderProgress();
+  renderHomeLoginGrid();
   document.getElementById('departure-date').addEventListener('change', e => {
     DB.departureDate = e.target.value;
     saveDB();
@@ -798,8 +820,14 @@ function renderMemberArea() {
       <button onclick="logout()">로그아웃</button>
     `;
   } else {
+    const options = REGISTERED_MEMBERS.map(n => `<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join('');
     el.innerHTML = `
-      <input type="text" id="login-name" placeholder="이름을 입력하세요" maxlength="20">
+      <select id="login-select" onchange="onLoginSelectChange()" style="padding:6px 8px;border-radius:6px;border:none;background:rgba(255,255,255,0.95);color:var(--primary);font-size:13px;font-weight:600;min-width:130px;">
+        <option value="">이름 선택 ▾</option>
+        ${options}
+        <option value="__other__">기타 (직접입력)</option>
+      </select>
+      <input type="text" id="login-name" placeholder="이름 입력" maxlength="20" style="display:none;">
       <button onclick="login()">참여하기</button>
     `;
     setTimeout(() => {
@@ -808,11 +836,29 @@ function renderMemberArea() {
     }, 0);
   }
 }
-function login() {
+function onLoginSelectChange() {
+  const sel = document.getElementById('login-select');
   const input = document.getElementById('login-name');
-  const name = input.value.trim();
-  if (!name) { alert('이름을 입력해주세요'); return; }
+  if (sel.value === '__other__') {
+    input.style.display = '';
+    input.focus();
+  } else {
+    input.style.display = 'none';
+    input.value = '';
+    if (sel.value) { login(); }
+  }
+}
+function login() {
+  const sel = document.getElementById('login-select');
+  const input = document.getElementById('login-name');
+  let name = '';
+  if (sel && sel.value && sel.value !== '__other__') name = sel.value.trim();
+  else if (input) name = input.value.trim();
+  if (!name) { alert('이름을 선택하거나 입력해주세요'); return; }
   if (name.length > 20) { alert('이름은 20자 이내로 입력해주세요'); return; }
+  loginAs(name);
+}
+function loginAs(name) {
   DB.user = name;
   if (!DB.members[name]) DB.members[name] = { joinedAt: Date.now() };
   saveDB();
@@ -821,8 +867,10 @@ function login() {
   renderThreads();
   renderMembers();
   renderProgress();
+  renderHomeLoginGrid();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function logout() { DB.user = null; saveDB(); renderMemberArea(); renderPolls(); renderThreads(); renderProgress(); }
+function logout() { DB.user = null; saveDB(); renderMemberArea(); renderPolls(); renderThreads(); renderMembers(); renderProgress(); renderHomeLoginGrid(); }
 
 // ============== COUNTDOWN ==============
 function renderCountdown() {
@@ -913,6 +961,7 @@ function vote(pollId, optionIdx) {
   saveDB();
   renderPolls();
   renderProgress();
+  renderHomeLoginGrid();
 }
 
 // ============== THREADS ==============
@@ -975,6 +1024,7 @@ function addThread() {
   document.getElementById('new-thread-body').value = '';
   renderThreads();
   renderProgress();
+  renderHomeLoginGrid();
 }
 function addComment(threadId) {
   if (!DB.user) return;
@@ -988,6 +1038,7 @@ function addComment(threadId) {
   input.value = '';
   renderThreads();
   renderProgress();
+  renderHomeLoginGrid();
 }
 function deleteThread(threadId) {
   if (!confirm('이 토론을 삭제하시겠습니까?')) return;
@@ -995,6 +1046,7 @@ function deleteThread(threadId) {
   saveDB();
   renderThreads();
   renderProgress();
+  renderHomeLoginGrid();
 }
 
 // ============== MEMBERS ==============
@@ -1005,21 +1057,56 @@ function renderMembers() {
     list.innerHTML = '<div class="empty">아직 참여한 회원이 없습니다.</div>';
     return;
   }
+  // Sort: pre-registered first, then alphabetical
+  memberNames.sort((a, b) => {
+    const aIsReg = REGISTERED_MEMBERS.indexOf(a);
+    const bIsReg = REGISTERED_MEMBERS.indexOf(b);
+    if (aIsReg !== -1 && bIsReg !== -1) return aIsReg - bIsReg;
+    if (aIsReg !== -1) return -1;
+    if (bIsReg !== -1) return 1;
+    return a.localeCompare(b);
+  });
   let html = '';
   memberNames.forEach(name => {
     const m = DB.members[name];
     const voteCount = Object.values(DB.votes).reduce((sum, p) => sum + (p[name] !== undefined ? 1 : 0), 0);
     const commentCount = DB.threads.reduce((sum, t) =>
       sum + (t.author === name ? 1 : 0) + t.comments.filter(c => c.author === name).length, 0);
-    html += `<div class="member-chip">
-      <div class="name">${escapeHtml(name)}${name === DB.user ? ' (나)' : ''}</div>
-      <div class="meta">투표 ${voteCount}/4 · 활동 ${commentCount}</div>
+    const isMe = name === DB.user;
+    const canSwitch = !isMe && (!DB.user);  // only allow login switching when not logged in
+    const chipStyle = canSwitch ? 'cursor:pointer;' : '';
+    const clickHandler = canSwitch ? `onclick="loginAs('${escapeHtml(name).replace(/'/g, "\\'")}')"` : '';
+    html += `<div class="member-chip" style="${chipStyle}" ${clickHandler}>
+      <div class="name">${escapeHtml(name)}${isMe ? ' ✓ (나)' : ''}</div>
+      <div class="meta">투표 ${voteCount}/4 · 활동 ${commentCount}${canSwitch ? ' · 👆 클릭해서 로그인' : ''}</div>
     </div>`;
   });
   list.innerHTML = html;
 }
 
 // ============== PROGRESS ==============
+function renderHomeLoginGrid() {
+  const card = document.getElementById('home-login-card');
+  const grid = document.getElementById('home-login-grid');
+  if (!card || !grid) return;
+  if (DB.user) {
+    card.style.display = 'none';
+    return;
+  }
+  card.style.display = '';
+  let html = '';
+  REGISTERED_MEMBERS.forEach(name => {
+    const voteCount = Object.values(DB.votes).reduce((sum, p) => sum + (p[name] !== undefined ? 1 : 0), 0);
+    html += `<button onclick="loginAs('${escapeHtml(name).replace(/'/g, "\\'")}')" style="background: white; border: 2px solid var(--primary-lighter); color: var(--primary); padding: 14px 12px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600; transition: all 0.15s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">
+      ${escapeHtml(name)}
+      <div style="font-size: 11px; font-weight: 400; margin-top: 3px; opacity: 0.7;">투표 ${voteCount}/4</div>
+    </button>`;
+  });
+  html += `<button onclick="document.querySelector('#login-select option[value=__other__]').selected=true; onLoginSelectChange();" style="background: #f8fafc; border: 2px dashed var(--border); color: var(--text-secondary); padding: 14px 12px; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 500;">
+    + 기타<div style="font-size: 11px; font-weight: 400; margin-top: 3px;">직접 입력</div>
+  </button>`;
+  grid.innerHTML = html;
+}
 function renderProgress() {
   const el = document.getElementById('progress-summary');
   const totalMembers = Object.keys(DB.members).length;
@@ -1032,116 +1119,4 @@ function renderProgress() {
       <div style="font-size: 11px; color: var(--text-muted);">참여 회원</div>
     </div>
     <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
-      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalVotes}</div>
-      <div style="font-size: 11px; color: var(--text-muted);">총 투표 수</div>
-    </div>
-    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
-      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalThreads}</div>
-      <div style="font-size: 11px; color: var(--text-muted);">토론 주제</div>
-    </div>
-    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
-      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalComments}</div>
-      <div style="font-size: 11px; color: var(--text-muted);">댓글</div>
-    </div>
-  </div>`;
-  POLLS.forEach(poll => {
-    const v = DB.votes[poll.id] || {};
-    const counts = poll.options.map((_, i) => 0);
-    Object.values(v).forEach(idx => { if (counts[idx] !== undefined) counts[idx]++; });
-    const top = counts.indexOf(Math.max(...counts));
-    const total = counts.reduce((a, b) => a + b, 0);
-    if (total > 0) {
-      html += `<div style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid var(--primary); border-radius: 4px; font-size: 12px;">
-        <strong>${escapeHtml(poll.question.split(' ').slice(0, 3).join(' '))}</strong>
-        — 현재 1위: ${escapeHtml(poll.options[top])} (${counts[top]}/${total}표)
-      </div>`;
-    }
-  });
-  el.innerHTML = html;
-}
-
-// ============== DATA EXPORT / IMPORT ==============
-function exportData() {
-  const data = JSON.stringify(DB, null, 2);
-  const blob = new Blob([data], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'tsuri_trip_planner_data_' + new Date().toISOString().split('T')[0] + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
-function importData() {
-  document.getElementById('import-file').click();
-}
-function handleImport(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const imported = JSON.parse(e.target.result);
-      if (!confirm('가져온 데이터와 현재 데이터를 병합하시겠습니까? (회원, 투표, 토론 모두 병합)')) return;
-      // Merge members
-      Object.entries(imported.members || {}).forEach(([name, m]) => {
-        if (!DB.members[name]) DB.members[name] = m;
-      });
-      // Merge votes
-      Object.entries(imported.votes || {}).forEach(([pid, v]) => {
-        if (!DB.votes[pid]) DB.votes[pid] = {};
-        Object.entries(v).forEach(([user, idx]) => {
-          DB.votes[pid][user] = idx;
-        });
-      });
-      // Merge threads (avoid duplicates by id)
-      const existingIds = new Set(DB.threads.map(t => t.id));
-      (imported.threads || []).forEach(t => {
-        if (existingIds.has(t.id)) {
-          // Merge comments
-          const existing = DB.threads.find(x => x.id === t.id);
-          const existingCommentKeys = new Set(existing.comments.map(c => c.author + '|' + c.ts));
-          (t.comments || []).forEach(c => {
-            if (!existingCommentKeys.has(c.author + '|' + c.ts)) existing.comments.push(c);
-          });
-        } else {
-          DB.threads.push(t);
-        }
-      });
-      if (imported.departureDate && !DB.departureDate) DB.departureDate = imported.departureDate;
-      saveDB();
-      alert('데이터가 성공적으로 병합되었습니다.');
-      location.reload();
-    } catch (err) {
-      alert('파일 읽기 오류: ' + err.message);
-    }
-  };
-  reader.readAsText(file);
-}
-function resetAll() {
-  if (!confirm('모든 데이터를 정말로 초기화하시겠습니까?\n(회원, 투표, 토론, 출발일 모두 삭제됩니다)')) return;
-  if (!confirm('정말로 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  location.reload();
-}
-
-// ============== UTILS ==============
-function escapeHtml(s) {
-  if (s == null) return '';
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
-}
-function formatTime(ts) {
-  const d = new Date(ts);
-  const now = new Date();
-  const diff = (now - d) / 1000;
-  if (diff < 60) return '방금 전';
-  if (diff < 3600) return Math.floor(diff / 60) + '분 전';
-  if (diff < 86400) return Math.floor(diff / 3600) + '시간 전';
-  if (diff < 2592000) return Math.floor(diff / 86400) + '일 전';
-  return d.toLocaleDateString('ko-KR');
-}
-
-// ============== START ==============
-init();
-</script>
-</body>
-</html>
+      <div style="font-size: 22px;
