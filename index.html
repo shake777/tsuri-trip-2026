@@ -454,6 +454,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
     <button class="tab" data-section="info">📋 여행정보</button>
     <button class="tab" data-section="schedule">📅 일정</button>
     <button class="tab" data-section="vote">🗳️ 투표</button>
+    <button class="tab" data-section="result">✅ 확정 일정</button>
     <button class="tab" data-section="discuss">💬 토론</button>
     <button class="tab" data-section="members">👥 회원</button>
   </div>
@@ -995,6 +996,24 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
     </section>
 
+    <!-- ============ RESULT ============ -->
+    <section class="section" id="section-result">
+      <div class="card">
+        <h2>✅ 투표 기반 확정 일정 (현재 1위)</h2>
+        <p>각 투표 주제별로 가장 많은 표를 받은 항목과 투표한 회원 명단을 표시합니다. 출발 전까지 투표가 진행되어 최종 결정이 됩니다.</p>
+        <div id="result-summary"></div>
+      </div>
+      <div class="card">
+        <h2>🗓️ 종합 추천 일정 (투표 결과 반영)</h2>
+        <div id="result-itinerary"></div>
+      </div>
+      <div class="card">
+        <h2>👥 회원별 투표 현황</h2>
+        <p>각 회원이 어떤 항목을 선택했는지 한눈에 확인할 수 있습니다.</p>
+        <div id="result-by-member" style="overflow-x:auto;"></div>
+      </div>
+    </section>
+
     <!-- ============ DISCUSS ============ -->
     <section class="section" id="section-discuss">
       <div id="discuss-login-check"></div>
@@ -1187,6 +1206,7 @@ function switchTab(name) {
   if (name === 'vote') renderPolls();
   if (name === 'discuss') renderThreads();
   if (name === 'members') renderMembers();
+  if (name === 'result') renderResult();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1432,10 +1452,11 @@ function renderPolls() {
           <span class="label">${isMine ? '✓ ' : ''}${escapeHtml(opt)}</span>
           <span class="count">${counts[i]}표 (${pct}%)</span>
         </div>
-        ${voters[i].length > 0 ? `<div class="poll-voters">└ ${voters[i].map(escapeHtml).join(', ')}</div>` : ''}
+        ${voters[i].length > 0 ? `<div class="poll-voters" style="background:#f0f7fc;padding:6px 12px;border-radius:6px;margin:2px 0 8px 14px;color:var(--primary);font-weight:500;">👥 투표한 회원: ${voters[i].map(escapeHtml).join(' · ')}</div>` : ''}
       `;
     });
-    html += `<div class="poll-total">총 ${total}명 투표</div>`;
+    const nonVoters = REGISTERED_MEMBERS.filter(n => DB.votes[poll.id][n] === undefined);
+    html += `<div class="poll-total">총 ${total}명 투표${nonVoters.length > 0 ? ` · 미투표: ${nonVoters.map(escapeHtml).join(', ')}` : ''}</div>`;
     html += `</div>`;
   });
   container.innerHTML = html;
@@ -1450,6 +1471,8 @@ function vote(pollId, optionIdx) {
   saveDB();
   renderPolls();
   renderProgress();
+  renderResult();
+  renderMembers();
 }
 
 // ============== THREADS ==============
@@ -1710,6 +1733,203 @@ function formatTime(ts) {
   if (diff < 86400) return Math.floor(diff / 3600) + '시간 전';
   if (diff < 2592000) return Math.floor(diff / 86400) + '일 전';
   return d.toLocaleDateString('ko-KR');
+}
+
+// ============== RESULT (확정 일정) ==============
+function renderResult() {
+  renderResultSummary();
+  renderResultItinerary();
+  renderResultByMember();
+}
+function _getPollWinner(pollId) {
+  const poll = POLLS.find(p => p.id === pollId);
+  if (!poll) return null;
+  const votes = DB.votes[pollId] || {};
+  const counts = poll.options.map(() => 0);
+  const voters = poll.options.map(() => []);
+  Object.entries(votes).forEach(([user, idx]) => {
+    if (typeof idx === 'number' && counts[idx] !== undefined) {
+      counts[idx]++;
+      voters[idx].push(user);
+    }
+  });
+  const total = counts.reduce((a, b) => a + b, 0);
+  const maxCount = Math.max(...counts);
+  if (maxCount === 0) return { poll, total, winners: [], winnerVoters: [], counts, voters };
+  const winnerIdxs = counts.map((c, i) => c === maxCount ? i : -1).filter(i => i >= 0);
+  return {
+    poll,
+    total,
+    winnerIdxs,
+    winners: winnerIdxs.map(i => poll.options[i]),
+    winnerVoters: winnerIdxs.flatMap(i => voters[i]),
+    counts,
+    voters,
+    maxCount
+  };
+}
+function renderResultSummary() {
+  const el = document.getElementById('result-summary');
+  if (!el) return;
+  let html = '';
+  POLLS.forEach(poll => {
+    const r = _getPollWinner(poll.id);
+    if (r.total === 0) {
+      html += `<div style="padding: 14px 16px; background: #f8fafc; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #ccc;">
+        <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px;">${escapeHtml(poll.question)}</div>
+        <div style="font-size: 13px; color: var(--text-muted);">⏳ 아직 투표가 없습니다</div>
+      </div>`;
+      return;
+    }
+    const tied = r.winnerIdxs.length > 1;
+    html += `<div style="padding: 14px 16px; background: white; border: 1.5px solid var(--primary-lighter); border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary);">
+      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 6px;">${escapeHtml(poll.question)}</div>
+      ${r.winners.map((w, idx) => `
+        <div style="margin-bottom: 6px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 3px;">
+            <span style="background: var(--primary); color: white; font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600;">${tied ? '공동 ' : ''}1위</span>
+            <span style="font-size: 14px; font-weight: 600; color: var(--text);">${escapeHtml(w)}</span>
+            <span style="font-size: 12px; color: var(--text-muted);">(${r.maxCount}표)</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-left: 8px;">
+            👥 투표자: ${r.voters[r.winnerIdxs[idx]].length > 0 ? r.voters[r.winnerIdxs[idx]].map(escapeHtml).join(' · ') : '없음'}
+          </div>
+        </div>
+      `).join('')}
+      <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);">
+        총 ${r.total}명 투표 · ${tied ? '동률 발생, 재투표 권장' : '단독 1위'}
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+function renderResultItinerary() {
+  const el = document.getElementById('result-itinerary');
+  if (!el) return;
+  const datesR = _getPollWinner('dates');
+  const fishingR = _getPollWinner('fishing');
+  const hotelR = _getPollWinner('hotel');
+  const restR = _getPollWinner('restaurant');
+  const onsenR = _getPollWinner('onsen');
+  const pick = (r) => r.total > 0 && r.winners.length === 1 ? r.winners[0] : null;
+  const datesPick = pick(datesR);
+  const fishingPick = pick(fishingR);
+  const hotelPick = pick(hotelR);
+  const restPick = pick(restR);
+  const onsenPick = pick(onsenR);
+  const allConfirmed = datesPick && fishingPick && hotelPick && restPick && onsenPick;
+  let html = '';
+  if (!allConfirmed) {
+    html += `<div class="note warn" style="margin-bottom: 14px;">⚠️ 일부 항목은 아직 투표가 부족하거나 동률 상태입니다. 모든 회원이 5개 항목 전부 투표하면 자동으로 채워집니다.</div>`;
+  }
+  html += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 16px;">
+    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+      <div style="font-size: 11px; color: var(--text-muted);">📅 여행 일정</div>
+      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${datesPick ? escapeHtml(datesPick) : '미확정'}</div>
+    </div>
+    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+      <div style="font-size: 11px; color: var(--text-muted);">🎣 낚시 방법</div>
+      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${fishingPick ? escapeHtml(fishingPick) : '미확정'}</div>
+    </div>
+    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+      <div style="font-size: 11px; color: var(--text-muted);">🏨 숙박 호텔</div>
+      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${hotelPick ? escapeHtml(hotelPick) : '미확정'}</div>
+    </div>
+    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+      <div style="font-size: 11px; color: var(--text-muted);">🍴 식당</div>
+      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${restPick ? escapeHtml(restPick) : '미확정'}</div>
+    </div>
+    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
+      <div style="font-size: 11px; color: var(--text-muted);">♨️ 온천</div>
+      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${onsenPick ? escapeHtml(onsenPick) : '미확정'}</div>
+    </div>
+  </div>
+  <h3 style="font-size: 14px; color: var(--primary); margin-top: 16px; margin-bottom: 8px;">📋 종합 일정 시뮬레이션</h3>
+  <ul class="timeline">
+    <li>
+      <div class="timeline-time">DAY 1 (출국일 저녁)</div>
+      <div class="timeline-title">부산 국제여객터미널 → 뉴카멜리아 페리 22:30 출항</div>
+      <div class="timeline-detail">선상 1박</div>
+    </li>
+    <li>
+      <div class="timeline-time">DAY 2 오전</div>
+      <div class="timeline-title">하카타항 07:30 도착 → 코쿠라 이동 (신칸센 15분)</div>
+      <div class="timeline-detail">호텔: ${hotelPick ? escapeHtml(hotelPick) : '(미확정)'}</div>
+    </li>
+    <li>
+      <div class="timeline-time">DAY 2 오후</div>
+      <div class="timeline-title">♨️ 온천 여행: ${onsenPick ? escapeHtml(onsenPick) : '(미확정 — 투표 후 결정)'}</div>
+      <div class="timeline-detail">호텔 체크인 후 출발, 저녁 코쿠라 복귀</div>
+    </li>
+    <li>
+      <div class="timeline-time">DAY 3 새벽~오후</div>
+      <div class="timeline-title">🎣 출조: ${fishingPick ? escapeHtml(fishingPick) : '(미확정)'}</div>
+      <div class="timeline-detail">유어선 출항, 잡은 생선 손질·택배</div>
+    </li>
+    <li>
+      <div class="timeline-time">DAY 3 저녁</div>
+      <div class="timeline-title">🍴 디너: ${restPick ? escapeHtml(restPick) : '(미확정)'}</div>
+      <div class="timeline-detail">테리하 스파 입욕 후 식사</div>
+    </li>
+    <li>
+      <div class="timeline-time">DAY 4 (귀국)</div>
+      <div class="timeline-title">코쿠라 → 후쿠오카공항 → FUK→ICN/GMP 항공편</div>
+      <div class="timeline-detail">약 13:30~14:30 출발, 15~16시 서울 도착</div>
+    </li>
+  </ul>
+  <div class="note info">
+    📅 확정 일정: ${datesPick ? escapeHtml(datesPick) : '(투표 진행 중)'}
+  </div>`;
+  el.innerHTML = html;
+}
+function renderResultByMember() {
+  const el = document.getElementById('result-by-member');
+  if (!el) return;
+  const memberNames = Object.keys(DB.members).sort((a, b) => {
+    const ai = REGISTERED_MEMBERS.indexOf(a);
+    const bi = REGISTERED_MEMBERS.indexOf(b);
+    if (ai !== -1 && bi !== -1) return ai - bi;
+    if (ai !== -1) return -1;
+    if (bi !== -1) return 1;
+    return a.localeCompare(b);
+  });
+  const topics = [
+    { id: 'dates', label: '📅 일정' },
+    { id: 'fishing', label: '🎣 낚시' },
+    { id: 'hotel', label: '🏨 숙박' },
+    { id: 'restaurant', label: '🍴 식당' },
+    { id: 'onsen', label: '♨️ 온천' }
+  ];
+  let html = `<table style="font-size: 12px; min-width: 700px;">
+    <thead>
+      <tr>
+        <th style="min-width: 80px;">회원</th>
+        ${topics.map(t => `<th>${t.label}</th>`).join('')}
+        <th>완료율</th>
+      </tr>
+    </thead>
+    <tbody>`;
+  memberNames.forEach(name => {
+    let done = 0;
+    html += `<tr><td style="font-weight: 600; color: var(--primary);">${escapeHtml(name)}</td>`;
+    topics.forEach(t => {
+      const poll = POLLS.find(p => p.id === t.id);
+      const voteIdx = (DB.votes[t.id] || {})[name];
+      if (typeof voteIdx === 'number' && poll && poll.options[voteIdx]) {
+        done++;
+        const opt = poll.options[voteIdx];
+        const short = opt.length > 18 ? opt.substring(0, 16) + '…' : opt;
+        html += `<td title="${escapeHtml(opt)}" style="color: var(--text);">${escapeHtml(short)}</td>`;
+      } else {
+        html += `<td style="color: var(--text-muted);">—</td>`;
+      }
+    });
+    const pct = Math.round(done / topics.length * 100);
+    const color = pct === 100 ? '#27ae60' : pct >= 60 ? '#e67e22' : '#888';
+    html += `<td style="font-weight: 600; color: ${color};">${done}/${topics.length} (${pct}%)</td></tr>`;
+  });
+  html += `</tbody></table>`;
+  el.innerHTML = html;
 }
 
 // ============== START ==============
