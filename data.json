@@ -7,7 +7,9 @@
     "fishing": {
       "박중산": 0
     },
-    "hotel": {},
+    "hotel": {
+      "박중산": 2
+    },
     "restaurant": {},
     "onsen": {}
   },
@@ -56,6 +58,6 @@
     }
   },
   "departureDate": null,
-  "lastSavedAt": 1779063262804,
+  "lastSavedAt": 1779063273102,
   "lastSavedBy": "박중산"
 }
