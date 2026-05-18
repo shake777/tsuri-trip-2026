@@ -23,7 +23,7 @@
       "title": "환영합니다 🎉",
       "author": "관리자",
       "body": "키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 박중산·최근호·김석·김기태·조성화·최진원·윤유병·김철현 8분이 등록되어 있습니다. 자유롭게 의견 남겨주세요!",
-      "ts": 1779063207520,
+      "ts": 1779063843432,
       "comments": []
     },
     {
@@ -37,39 +37,99 @@
   ],
   "members": {
     "박중산": {
-      "joinedAt": 1779063207520,
-      "preRegistered": true
+      "joinedAt": 1779063843432,
+      "preRegistered": true,
+      "passport": {
+        "surname": "PARK",
+        "givenNames": "JUNG SAN",
+        "passportNo": "M99330806",
+        "dob": "1973-09-09",
+        "sex": "M",
+        "issueDate": "2016-10-18",
+        "expiryDate": "2026-10-18",
+        "nationality": "KOR"
+      }
     },
     "최근호": {
-      "joinedAt": 1779063207520,
+      "joinedAt": 1779063843432,
       "preRegistered": true
     },
     "김석": {
-      "joinedAt": 1779063207520,
-      "preRegistered": true
+      "joinedAt": 1779063843432,
+      "preRegistered": true,
+      "passport": {
+        "surname": "KIM",
+        "givenNames": "SUK",
+        "passportNo": "M538A2730",
+        "dob": "1974-02-22",
+        "sex": "M",
+        "issueDate": "2023-03-03",
+        "expiryDate": "2033-03-03",
+        "nationality": "KOR"
+      }
     },
     "김기태": {
-      "joinedAt": 1779063207520,
+      "joinedAt": 1779063843432,
       "preRegistered": true
     },
     "조성화": {
-      "joinedAt": 1779063207520,
-      "preRegistered": true
+      "joinedAt": 1779063843432,
+      "preRegistered": true,
+      "passport": {
+        "surname": "CHO",
+        "givenNames": "SUNG HWA",
+        "passportNo": "M26303355",
+        "dob": "1973-04-28",
+        "sex": "M",
+        "issueDate": "2020-09-04",
+        "expiryDate": "2030-09-04",
+        "nationality": "KOR"
+      }
     },
     "최진원": {
-      "joinedAt": 1779063207520,
-      "preRegistered": true
+      "joinedAt": 1779063843432,
+      "preRegistered": true,
+      "passport": {
+        "surname": "CHOI",
+        "givenNames": "JIN WON",
+        "passportNo": "M94163217",
+        "dob": "1974-03-01",
+        "sex": "M",
+        "issueDate": "2019-08-01",
+        "expiryDate": "2029-08-01",
+        "nationality": "KOR"
+      }
     },
     "윤유병": {
-      "joinedAt": 1779063207520,
-      "preRegistered": true
+      "joinedAt": 1779063843432,
+      "preRegistered": true,
+      "passport": {
+        "surname": "YOON",
+        "givenNames": "YOO BYUNG",
+        "passportNo": "M70489169",
+        "dob": "1974-01-28",
+        "sex": "M",
+        "issueDate": "2019-01-08",
+        "expiryDate": "2029-01-08",
+        "nationality": "KOR"
+      }
     },
     "김철현": {
-      "joinedAt": 1779063207520,
-      "preRegistered": true
+      "joinedAt": 1779063843432,
+      "preRegistered": true,
+      "passport": {
+        "surname": "KIM",
+        "givenNames": "CHUL HYUN",
+        "passportNo": "M798G5857",
+        "dob": "1973-10-06",
+        "sex": "M",
+        "issueDate": "2023-03-03",
+        "expiryDate": "2033-03-03",
+        "nationality": "KOR"
+      }
     }
   },
-  "departureDate": null,
-  "lastSavedAt": 1779063674930,
+  "departureDate": "2026-09-11",
+  "lastSavedAt": 1779064036162,
   "lastSavedBy": "박중산"
 }
