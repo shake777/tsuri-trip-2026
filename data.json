@@ -73,7 +73,7 @@
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
-        "givenNames": "KITAE",
+        "givenNames": "KI TAE",
         "passportNo": "M238L9379",
         "dob": "19730430",
         "sex": "M",
@@ -141,6 +141,6 @@
   },
   "checklists": {},
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779065384910,
+  "lastSavedAt": 1779065409691,
   "lastSavedBy": "김기태"
 }
