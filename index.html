@@ -1324,23 +1324,25 @@ const POLLS = [
 const CHECKLISTS = [
   {
     id: 'predeparture',
-    title: '🧳 출국 전 준비 (D-7 ~ D-1)',
+    title: '🧳 출국 전 준비 (D-90 ~ D-1)',
     color: '#1f4e79',
     items: [
-      '여권 유효기간 6개월 이상 확인',
-      'Visit Japan Web (VJW) 사전등록 + QR 캡처',
-      '페리 / 항공권 예약 확정 (출국·귀국)',
-      '호텔 예약 확정 (코쿠라)',
-      '여행자 보험 가입',
-      '엔화 환전 (1인 8~15만 엔 권장)',
-      'eSIM 또는 유심 준비',
-      '방한복 + 방수 자켓 + 모자·장갑',
-      '멀미약 · 비상약 · 진통제',
-      '국제운전면허증 (필요시)',
-      '여권 사본 / 비상연락처 메모',
-      '낚시도구 (또는 현지 렌탈 확정)',
-      '카메라 / 보조배터리 / 충전기 (110V → 220V 변환)',
-      '캐리어 짐 무게 확인 (페리 30kg / 항공사별)'
+      { text: '여권 유효기간 6개월 이상 확인', deadline: 90 },
+      { text: '국제운전면허증 발급 (필요시)', deadline: 30 },
+      { text: '페리 예약 확정 (뉴카멜리아)', deadline: 60 },
+      { text: '항공권 예약 확정 (FUK→ICN/GMP)', deadline: 60 },
+      { text: '호텔 예약 확정 (코쿠라)', deadline: 45 },
+      { text: '신칸센·특급 좌석 예약', deadline: 14 },
+      { text: '여행자 보험 가입', deadline: 7 },
+      { text: 'Visit Japan Web (VJW) 사전등록 + QR 캡처', deadline: 7 },
+      { text: '방한복 + 방수 자켓 + 모자·장갑 준비', deadline: 7 },
+      { text: '낚시도구 점검 (또는 현지 렌탈 확정)', deadline: 7 },
+      { text: '엔화 환전 (1인 8~15만 엔 권장)', deadline: 3 },
+      { text: 'eSIM 또는 유심 준비', deadline: 3 },
+      { text: '멀미약 · 비상약 · 진통제 구입', deadline: 3 },
+      { text: '카메라 / 보조배터리 / 충전기·변환플러그', deadline: 3 },
+      { text: '여권 사본 / 비상연락처 메모', deadline: 1 },
+      { text: '캐리어 짐 무게 확인 (페리 30kg / 항공사별)', deadline: 1 }
     ]
   },
   {
@@ -1348,14 +1350,14 @@ const CHECKLISTS = [
     title: '🚢 일본 도착 당일 (DAY 2)',
     color: '#2e75b6',
     items: [
-      '하카타항 입국심사·세관 통과',
-      '시내버스로 JR하카타역 이동',
-      '신칸센 또는 재래선으로 코쿠라 이동',
-      '호텔 체크인 또는 짐 보관',
-      'IC카드 (SUGOCA) 발급 (선택)',
-      '사무국 (釣りいこか) 미팅·브리핑',
-      '낚시 도구 점검·렌탈 수령',
-      '저녁 식사 + 휴식 (22시 취침 권장)'
+      { text: '하카타항 입국심사·세관 통과', deadline: 0 },
+      { text: '시내버스로 JR하카타역 이동', deadline: 0 },
+      { text: '신칸센 또는 재래선으로 코쿠라 이동', deadline: 0 },
+      { text: '호텔 체크인 또는 짐 보관', deadline: 0 },
+      { text: 'IC카드 (SUGOCA) 발급 (선택)', deadline: 0 },
+      { text: '사무국 (釣りいこか) 미팅·브리핑', deadline: 0 },
+      { text: '낚시 도구 점검·렌탈 수령', deadline: 0 },
+      { text: '저녁 식사 + 휴식 (22시 취침 권장)', deadline: 0 }
     ]
   },
   {
@@ -1363,18 +1365,18 @@ const CHECKLISTS = [
     title: '🎣 출조일 (DAY 3) 준비물',
     color: '#185fa5',
     items: [
-      '구명조끼 착용 (자동팽창식)',
-      '방수 자켓·바지',
-      '논슬립 신발',
-      '장갑·모자·선글라스',
-      '멀미약 (출항 30분 전 복용)',
-      '보온병 + 따뜻한 차',
-      '간단한 간식 (김밥·삼각김밥 등)',
-      '휴대폰 방수팩',
-      '아이스박스 또는 보냉백',
-      '낚싯대·릴 (개인 또는 렌탈)',
-      '미끼·채비 (현지 낚시점 또는 사무국)',
-      '잡은 생선 손질 / 택배 발송 의뢰'
+      { text: '구명조끼 착용 (자동팽창식)', deadline: 0 },
+      { text: '방수 자켓·바지', deadline: 7 },
+      { text: '논슬립 신발', deadline: 7 },
+      { text: '장갑·모자·선글라스', deadline: 3 },
+      { text: '멀미약 (출항 30분 전 복용)', deadline: 0 },
+      { text: '보온병 + 따뜻한 차', deadline: 1 },
+      { text: '간단한 간식 (김밥·삼각김밥 등)', deadline: 0 },
+      { text: '휴대폰 방수팩', deadline: 3 },
+      { text: '아이스박스 또는 보냉백', deadline: 3 },
+      { text: '낚싯대·릴 (개인 또는 렌탈)', deadline: 7 },
+      { text: '미끼·채비 (현지 낚시점 또는 사무국)', deadline: 0 },
+      { text: '잡은 생선 손질 / 택배 발송 의뢰', deadline: 0 }
     ]
   },
   {
@@ -1382,14 +1384,14 @@ const CHECKLISTS = [
     title: '♨️ 온천 일정 (DAY 2 오후)',
     color: '#e67e22',
     items: [
-      '갈아입을 속옷·양말',
-      '수건 (호텔/온천 제공 확인)',
-      '슬리퍼 또는 워킹슈즈',
-      '기초 화장품·세면도구',
-      '여권 (이동 시 필요)',
-      '교통편 예약 확인 (특급·신칸센)',
-      '입욕료 + 식사비 현금 준비',
-      '온천 마을 지도·관광 코스 확인'
+      { text: '갈아입을 속옷·양말', deadline: 3 },
+      { text: '수건 (호텔/온천 제공 확인)', deadline: 3 },
+      { text: '슬리퍼 또는 워킹슈즈', deadline: 3 },
+      { text: '기초 화장품·세면도구', deadline: 3 },
+      { text: '여권 (이동 시 필요)', deadline: 0 },
+      { text: '교통편 예약 확인 (특급·신칸센)', deadline: 7 },
+      { text: '입욕료 + 식사비 현금 준비', deadline: 1 },
+      { text: '온천 마을 지도·관광 코스 확인', deadline: 3 }
     ]
   },
   {
@@ -1397,16 +1399,16 @@ const CHECKLISTS = [
     title: '✈️ 귀국 (DAY 4)',
     color: '#27ae60',
     items: [
-      '호텔 체크아웃 (~10:00 권장)',
-      '신칸센 코쿠라→하카타 예약 확인',
-      '지하철 하카타→후쿠오카공항',
-      '국제선 청사 셔틀버스 (15분)',
-      '출국심사 2시간 전 도착',
-      '잡은 생선 진공포장·EMS 발송 (전날)',
-      '면세품 휴대 한도 확인 (주류 3병·담배 등)',
-      '면세 환급 (TAX FREE)',
-      '비행기 탑승 / 입국심사 (한국)',
-      '검역대 통과 (수산물 5kg 이하)'
+      { text: '호텔 체크아웃 (~10:00 권장)', deadline: 0 },
+      { text: '신칸센 코쿠라→하카타 예약 확인', deadline: 14 },
+      { text: '지하철 하카타→후쿠오카공항', deadline: 0 },
+      { text: '국제선 청사 셔틀버스 (15분)', deadline: 0 },
+      { text: '출국심사 2시간 전 도착', deadline: 0 },
+      { text: '잡은 생선 진공포장·EMS 발송 (전날)', deadline: 0 },
+      { text: '면세품 휴대 한도 확인 (주류 3병·담배 등)', deadline: 0 },
+      { text: '면세 환급 (TAX FREE)', deadline: 0 },
+      { text: '비행기 탑승 / 입국심사 (한국)', deadline: 0 },
+      { text: '검역대 통과 (수산물 5kg 이하)', deadline: 0 }
     ]
   }
 ];
@@ -1602,6 +1604,7 @@ function init() {
     saveDB();
     renderCountdown();
     renderPassports();
+    renderChecklists();
     triggerAutoSave();
   });
   if (DB.departureDate) {
@@ -2552,8 +2555,34 @@ function renderChecklists() {
       html += '<th style="background: ' + cl.color + '20; color:' + cl.color + '; text-align:center; padding:8px; min-width:40px;" title="' + escapeHtml(n) + '">' + escapeHtml(short) + '</th>';
     });
     html += '</tr></thead><tbody>';
-    cl.items.forEach((item, idx) => {
-      html += '<tr><td style="padding: 8px; color:var(--text);">' + escapeHtml(item) + '</td>';
+    cl.items.forEach((itemObj, idx) => {
+      const item = typeof itemObj === 'string' ? itemObj : itemObj.text;
+      const deadlineDays = typeof itemObj === 'object' ? itemObj.deadline : null;
+      let deadlineHtml = '';
+      if (deadlineDays !== null && deadlineDays !== undefined) {
+        if (deadlineDays === 0) {
+          deadlineHtml = '<span style="font-size:10px; background:#f0f0f0; color:#666; padding:2px 6px; border-radius:8px; margin-left:6px;">당일</span>';
+        } else {
+          let dueLabel = 'D-' + deadlineDays;
+          let dueColor = '#666';
+          let dueBg = '#f0f0f0';
+          let dueDateStr = '';
+          if (DB.departureDate) {
+            const dep = new Date(DB.departureDate);
+            const due = new Date(dep);
+            due.setDate(due.getDate() - deadlineDays);
+            const today = new Date(); today.setHours(0,0,0,0);
+            const daysToDue = Math.ceil((due - today) / (1000*60*60*24));
+            dueDateStr = ' (' + due.toLocaleDateString('ko-KR', {month:'numeric', day:'numeric'}) + ')';
+            if (daysToDue < 0) { dueColor = '#e74c3c'; dueBg = '#fdebec'; dueLabel = '⚠️ 지났음 D-' + deadlineDays; }
+            else if (daysToDue <= 3) { dueColor = '#e67e22'; dueBg = '#fef3e6'; dueLabel = '🔥 임박 D-' + deadlineDays; }
+            else if (daysToDue <= 14) { dueColor = '#185fa5'; dueBg = '#e6f1fb'; dueLabel = 'D-' + deadlineDays; }
+            else { dueColor = '#27ae60'; dueBg = '#e6f7ec'; dueLabel = 'D-' + deadlineDays; }
+          }
+          deadlineHtml = '<span style="font-size:10px; background:' + dueBg + '; color:' + dueColor + '; padding:2px 6px; border-radius:8px; margin-left:6px; white-space:nowrap;">' + dueLabel + dueDateStr + '</span>';
+        }
+      }
+      html += '<tr><td style="padding: 8px; color:var(--text);">' + escapeHtml(item) + deadlineHtml + '</td>';
       REGISTERED_MEMBERS.forEach(name => {
         const key = name + '__' + cl.id + '__' + idx;
         const checked = !!DB.checklists[key];
