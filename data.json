@@ -2,8 +2,7 @@
   "votes": {
     "dates": {
       "최근호": 2,
-      "박중산": 0,
-      "김기태": 0
+      "박중산": 0
     },
     "fishing": {
       "박중산": 0
@@ -24,7 +23,7 @@
       "title": "환영합니다 🎉",
       "author": "관리자",
       "body": "키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 박중산·최근호·김석·김기태·조성화·최진원·윤유병·김철현 8분이 등록되어 있습니다. 자유롭게 의견 남겨주세요!",
-      "ts": 1779064687406,
+      "ts": 1779064829143,
       "comments": []
     },
     {
@@ -38,7 +37,7 @@
   ],
   "members": {
     "박중산": {
-      "joinedAt": 1779064687406,
+      "joinedAt": 1779064829143,
       "preRegistered": true,
       "passport": {
         "surname": "PARK",
@@ -52,11 +51,11 @@
       }
     },
     "최근호": {
-      "joinedAt": 1779064687406,
+      "joinedAt": 1779064829143,
       "preRegistered": true
     },
     "김석": {
-      "joinedAt": 1779064687406,
+      "joinedAt": 1779064829143,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -70,7 +69,7 @@
       }
     },
     "김기태": {
-      "joinedAt": 1779064687406,
+      "joinedAt": 1779064829143,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -84,7 +83,7 @@
       }
     },
     "조성화": {
-      "joinedAt": 1779064687406,
+      "joinedAt": 1779064829143,
       "preRegistered": true,
       "passport": {
         "surname": "CHO",
@@ -98,7 +97,7 @@
       }
     },
     "최진원": {
-      "joinedAt": 1779064687406,
+      "joinedAt": 1779064829143,
       "preRegistered": true,
       "passport": {
         "surname": "CHOI",
@@ -112,7 +111,7 @@
       }
     },
     "윤유병": {
-      "joinedAt": 1779064687406,
+      "joinedAt": 1779064829143,
       "preRegistered": true,
       "passport": {
         "surname": "YOON",
@@ -126,7 +125,7 @@
       }
     },
     "김철현": {
-      "joinedAt": 1779064687406,
+      "joinedAt": 1779064829143,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -141,14 +140,32 @@
     }
   },
   "checklists": {
+    "박중산__predeparture__1": {
+      "ts": 1779065434042
+    },
     "박중산__predeparture__0": {
       "ts": 1779065430574
     },
-    "박중산__predeparture__1": {
-      "ts": 1779065434042
+    "박중산__onsen__2": {
+      "ts": 1779065682027
+    },
+    "박중산__onsen__3": {
+      "ts": 1779065682500
+    },
+    "박중산__predeparture__3": {
+      "ts": 1779065767900
+    },
+    "박중산__predeparture__4": {
+      "ts": 1779065768986
+    },
+    "박중산__predeparture__5": {
+      "ts": 1779065770068
+    },
+    "박중산__predeparture__6": {
+      "ts": 1779066349559
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779065940043,
-  "lastSavedBy": "김기태"
+  "lastSavedAt": 1779066354452,
+  "lastSavedBy": "박중산"
 }
