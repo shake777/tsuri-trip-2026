@@ -10,7 +10,9 @@
     "hotel": {
       "박중산": 2
     },
-    "restaurant": {},
+    "restaurant": {
+      "박중산": 1
+    },
     "onsen": {}
   },
   "threads": [
@@ -58,6 +60,6 @@
     }
   },
   "departureDate": null,
-  "lastSavedAt": 1779063273102,
+  "lastSavedAt": 1779063276454,
   "lastSavedBy": "박중산"
 }
