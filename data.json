@@ -46,6 +46,14 @@
       "author": "박중산",
       "ts": 1779063673089,
       "comments": []
+    },
+    {
+      "id": "t1779105447582",
+      "title": "날짜",
+      "body": "11월은 첫째주 가능",
+      "author": "김기태",
+      "ts": 1779105447582,
+      "comments": []
     }
   ],
   "members": {
@@ -148,6 +156,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779105342311,
+  "lastSavedAt": 1779105449535,
   "lastSavedBy": "김기태"
 }
