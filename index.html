@@ -478,6 +478,12 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
+        <h2>📊 회원별 준비 현황</h2>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: -4px; margin-bottom: 12px;">출발 전 모든 회원의 투표·체크리스트·여권 상태를 한눈에 확인하세요. 클릭하면 해당 회원의 상세를 볼 수 있습니다.</p>
+        <div id="home-member-status"></div>
+      </div>
+
+      <div class="card">
         <h2>🎣 여행 개요</h2>
         <p>일본 후쿠오카현 키타큐슈시(北九州市)에 위치한 바다낚시 종합 클럽 <strong>「釣りいこか倶楽部」</strong>에서 운영하는 올인원 바다낚시 패키지를 이용하는 여행입니다. 9개 항구의 24척 등록 유어선과 제휴하여 초보자부터 전문가까지 즐길 수 있습니다.</p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px;">
@@ -1460,6 +1466,8 @@ async function loadFromCloud(silent) {
       renderProgress();
       renderResult();
       renderHomeLoginGrid();
+      renderPassports();
+      renderHomeMemberStatus();
       renderCloudStatus();
     }
     return cloud;
@@ -1568,6 +1576,7 @@ function init() {
   renderProgress();
   renderHomeLoginGrid();
   renderPassports();
+  renderHomeMemberStatus();
   renderCloudStatus();
   // Auto-load from cloud on startup (async)
   loadFromCloud(false);
@@ -1653,7 +1662,6 @@ function _gateRetry() {
 }
 function loginAs(name) {
   // When called from gate, password already verified.
-  // When called directly from in-page (already logged in user switching), require password again
   if (!DB.user) {
     _gateSelectedName = name;
     showGateStep2();
@@ -1668,6 +1676,7 @@ function loginAs(name) {
   renderMembers();
   renderProgress();
   renderHomeLoginGrid();
+  renderHomeMemberStatus();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function _completeLogin(name) {
@@ -1681,6 +1690,8 @@ function _completeLogin(name) {
   renderMembers();
   renderProgress();
   renderHomeLoginGrid();
+  renderPassports();
+  renderHomeMemberStatus();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function logout() {
@@ -1863,6 +1874,7 @@ function vote(pollId, optionIdx) {
   renderProgress();
   renderResult();
   renderMembers();
+  renderHomeMemberStatus();
   triggerAutoSave();
 }
 
@@ -1926,6 +1938,7 @@ function addThread() {
   document.getElementById('new-thread-body').value = '';
   renderThreads();
   renderProgress();
+  renderHomeMemberStatus();
   triggerAutoSave();
 }
 function addComment(threadId) {
@@ -2054,6 +2067,7 @@ function editPassport(name) {
   };
   saveDB();
   renderPassports();
+  renderHomeMemberStatus();
   triggerAutoSave();
 }
 
@@ -2092,6 +2106,93 @@ function renderMembers() {
 }
 
 // ============== HOME LOGIN GRID ==============
+function renderHomeMemberStatus() {
+  const el = document.getElementById('home-member-status');
+  if (!el) return;
+  const tripDate = DB.departureDate;
+  const totalVotes = POLLS.length;
+  const totalChecks = CHECKLISTS.reduce((s, cl) => s + cl.items.length, 0);
+  // Compute group totals
+  let groupVoteSum = 0, groupCheckSum = 0, passportOK = 0;
+  REGISTERED_MEMBERS.forEach(name => {
+    const voted = POLLS.filter(p => (DB.votes[p.id] || {})[name] !== undefined).length;
+    groupVoteSum += voted;
+    let checked = 0;
+    CHECKLISTS.forEach(cl => {
+      cl.items.forEach((_, idx) => {
+        if (DB.checklists && DB.checklists[name + '__' + cl.id + '__' + idx]) checked++;
+      });
+    });
+    groupCheckSum += checked;
+    const p = DB.members[name] && DB.members[name].passport;
+    const pCheck = checkPassportStatus(p, tripDate);
+    if (pCheck.status === 'ok') passportOK++;
+  });
+  const groupVotePct = Math.round(groupVoteSum / (REGISTERED_MEMBERS.length * totalVotes) * 100);
+  const groupCheckPct = Math.round(groupCheckSum / (REGISTERED_MEMBERS.length * totalChecks) * 100);
+  // Group summary banner
+  let html = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:10px; margin-bottom:14px;">';
+  html += '<div style="background: var(--primary); color:white; padding:14px; border-radius:10px; text-align:center;">';
+  html += '<div style="font-size:11px; opacity:0.9;">📊 그룹 투표 진행률</div>';
+  html += '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + groupVotePct + '%</div>';
+  html += '<div style="font-size:11px; opacity:0.8;">' + groupVoteSum + ' / ' + (REGISTERED_MEMBERS.length * totalVotes) + ' 투표</div>';
+  html += '</div>';
+  html += '<div style="background: #185fa5; color:white; padding:14px; border-radius:10px; text-align:center;">';
+  html += '<div style="font-size:11px; opacity:0.9;">✅ 그룹 체크리스트</div>';
+  html += '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + groupCheckPct + '%</div>';
+  html += '<div style="font-size:11px; opacity:0.8;">' + groupCheckSum + ' / ' + (REGISTERED_MEMBERS.length * totalChecks) + ' 항목</div>';
+  html += '</div>';
+  html += '<div style="background: ' + (passportOK === REGISTERED_MEMBERS.length ? 'var(--success)' : '#e67e22') + '; color:white; padding:14px; border-radius:10px; text-align:center;">';
+  html += '<div style="font-size:11px; opacity:0.9;">🛂 여권 정상</div>';
+  html += '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + passportOK + '/' + REGISTERED_MEMBERS.length + '</div>';
+  html += '<div style="font-size:11px; opacity:0.8;">' + (passportOK === REGISTERED_MEMBERS.length ? '전원 정상' : '주의 ' + (REGISTERED_MEMBERS.length - passportOK) + '명') + '</div>';
+  html += '</div>';
+  html += '</div>';
+  // Per-member table
+  html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:600px;"><thead><tr>';
+  html += '<th style="text-align:left; min-width:80px;">회원</th>';
+  html += '<th style="text-align:center; min-width:90px;">🗳️ 투표</th>';
+  html += '<th style="text-align:center; min-width:120px;">✅ 체크리스트</th>';
+  html += '<th style="text-align:center; min-width:100px;">🛂 여권</th>';
+  html += '<th style="text-align:center; min-width:60px;">활동</th>';
+  html += '</tr></thead><tbody>';
+  REGISTERED_MEMBERS.forEach(name => {
+    const voted = POLLS.filter(p => (DB.votes[p.id] || {})[name] !== undefined).length;
+    const votePct = Math.round(voted / totalVotes * 100);
+    let checked = 0;
+    CHECKLISTS.forEach(cl => {
+      cl.items.forEach((_, idx) => {
+        if (DB.checklists && DB.checklists[name + '__' + cl.id + '__' + idx]) checked++;
+      });
+    });
+    const checkPct = Math.round(checked / totalChecks * 100);
+    const p = DB.members[name] && DB.members[name].passport;
+    const pCheck = checkPassportStatus(p, tripDate);
+    const commentCount = DB.threads.reduce((s, t) => s + (t.author === name ? 1 : 0) + t.comments.filter(c => c.author === name).length, 0);
+    const isMe = DB.user === name;
+    const rowBg = isMe ? 'background: #f0f7fc;' : '';
+    html += '<tr style="' + rowBg + '">';
+    html += '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:var(--primary);">' + escapeHtml(name) + (isMe ? ' ✓' : '') + '</td>';
+    // Vote bar
+    html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + votePct + '%; background:var(--primary);"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (votePct > 50 ? 'white' : 'var(--text)') + ';">' + voted + '/' + totalVotes + ' (' + votePct + '%)</div></div></td>';
+    // Checklist bar
+    html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + checkPct + '%; background:#185fa5;"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (checkPct > 50 ? 'white' : 'var(--text)') + ';">' + checked + '/' + totalChecks + ' (' + checkPct + '%)</div></div></td>';
+    // Passport status
+    html += '<td style="text-align:center; padding:6px 10px;"><span style="background:' + pCheck.color + '20; color:' + pCheck.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600;">' + pCheck.label.replace(/\s*\([^)]*\)/, '') + '</span></td>';
+    // Activity (comments + threads)
+    html += '<td style="text-align:center; padding:8px 10px; font-size:12px; color:var(--text-secondary);">💬 ' + commentCount + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  // Quick links
+  html += '<div class="btn-row" style="margin-top:14px;">';
+  html += '<button class="btn" onclick="switchTab(\'vote\')">🗳️ 투표하러 가기</button>';
+  html += '<button class="btn secondary" onclick="switchTab(\'result\')">✅ 체크리스트 보기</button>';
+  html += '<button class="btn secondary" onclick="switchTab(\'members\')">🛂 여권 정보 보기</button>';
+  html += '</div>';
+  el.innerHTML = html;
+}
+
 function renderHomeLoginGrid() {
   const card = document.getElementById('home-login-card');
   const grid = document.getElementById('home-login-grid');
@@ -2460,6 +2561,7 @@ function toggleChecklist(name, clId, idx) {
   }
   saveDB();
   renderChecklists();
+  renderHomeMemberStatus();
   triggerAutoSave();
 }
 
