@@ -77,7 +77,7 @@
         "passportNo": "M238L9379",
         "dob": "19730430",
         "sex": "M",
-        "issueDate": "20231003",
+        "issueDate": "20230310",
         "expiryDate": "20330310",
         "nationality": "KOR"
       }
@@ -141,6 +141,6 @@
   },
   "checklists": {},
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779065266018,
+  "lastSavedAt": 1779065315375,
   "lastSavedBy": "김기태"
 }
