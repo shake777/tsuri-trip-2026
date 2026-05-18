@@ -1446,8 +1446,15 @@ async function loadFromCloud(silent) {
       Object.entries(cloud.members).forEach(([name, m]) => {
         if (!DB.members[name]) {
           DB.members[name] = m;
-        } else if (m && m.passport && (!DB.members[name].passport || (m.passport && (cloud.lastSavedAt > (_lastCloudSync || 0))))) {
-          DB.members[name].passport = m.passport;
+        } else {
+          // Cloud is authoritative for passport: if cloud has it, use cloud's version;
+          // if cloud explicitly does NOT have it, remove local passport too
+          if (m && m.passport) {
+            DB.members[name].passport = m.passport;
+          } else if (REGISTERED_MEMBERS.includes(name)) {
+            // Only remove for registered members; if cloud says no passport, sync that
+            delete DB.members[name].passport;
+          }
         }
       });
     }
