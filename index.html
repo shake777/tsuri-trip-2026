@@ -1122,6 +1122,13 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <p>각 회원이 어떤 항목을 선택했는지 한눈에 확인할 수 있습니다.</p>
         <div id="result-by-member" style="overflow-x:auto;"></div>
       </div>
+
+      <div class="card">
+        <h2>✅ 출발 준비 체크리스트</h2>
+        <p>각 단계별 준비물·해야할 일 체크리스트입니다. 본인 로그인 후 체크하면 회원별로 저장되며, 다른 회원들도 모두의 진행 상황을 볼 수 있습니다.</p>
+        <div id="checklist-summary" style="margin-bottom: 14px;"></div>
+        <div id="checklist-container"></div>
+      </div>
     </section>
 
     <!-- ============ DISCUSS ============ -->
@@ -1208,6 +1215,7 @@ function defaultDB() {
     members,
     departureDate: null,
     votes: {},
+    checklists: {},
     threads: [
       {
         id: 't1', title: '환영합니다 🎉', author: '관리자',
@@ -1224,6 +1232,7 @@ function loadDB() {
       const saved = JSON.parse(s);
       const def = defaultDB();
       const merged = Object.assign(def, saved);
+      if (!merged.checklists) merged.checklists = {};
       REGISTERED_MEMBERS.forEach(name => {
         if (!merged.members[name]) merged.members[name] = { joinedAt: Date.now(), preRegistered: true };
         if (INITIAL_PASSPORTS[name] && !merged.members[name].passport) {
@@ -1295,6 +1304,97 @@ const POLLS = [
   }
 ];
 
+// ============== CHECKLISTS ==============
+const CHECKLISTS = [
+  {
+    id: 'predeparture',
+    title: '🧳 출국 전 준비 (D-7 ~ D-1)',
+    color: '#1f4e79',
+    items: [
+      '여권 유효기간 6개월 이상 확인',
+      'Visit Japan Web (VJW) 사전등록 + QR 캡처',
+      '페리 / 항공권 예약 확정 (출국·귀국)',
+      '호텔 예약 확정 (코쿠라)',
+      '여행자 보험 가입',
+      '엔화 환전 (1인 8~15만 엔 권장)',
+      'eSIM 또는 유심 준비',
+      '방한복 + 방수 자켓 + 모자·장갑',
+      '멀미약 · 비상약 · 진통제',
+      '국제운전면허증 (필요시)',
+      '여권 사본 / 비상연락처 메모',
+      '낚시도구 (또는 현지 렌탈 확정)',
+      '카메라 / 보조배터리 / 충전기 (110V → 220V 변환)',
+      '캐리어 짐 무게 확인 (페리 30kg / 항공사별)'
+    ]
+  },
+  {
+    id: 'arrival',
+    title: '🚢 일본 도착 당일 (DAY 2)',
+    color: '#2e75b6',
+    items: [
+      '하카타항 입국심사·세관 통과',
+      '시내버스로 JR하카타역 이동',
+      '신칸센 또는 재래선으로 코쿠라 이동',
+      '호텔 체크인 또는 짐 보관',
+      'IC카드 (SUGOCA) 발급 (선택)',
+      '사무국 (釣りいこか) 미팅·브리핑',
+      '낚시 도구 점검·렌탈 수령',
+      '저녁 식사 + 휴식 (22시 취침 권장)'
+    ]
+  },
+  {
+    id: 'fishing',
+    title: '🎣 출조일 (DAY 3) 준비물',
+    color: '#185fa5',
+    items: [
+      '구명조끼 착용 (자동팽창식)',
+      '방수 자켓·바지',
+      '논슬립 신발',
+      '장갑·모자·선글라스',
+      '멀미약 (출항 30분 전 복용)',
+      '보온병 + 따뜻한 차',
+      '간단한 간식 (김밥·삼각김밥 등)',
+      '휴대폰 방수팩',
+      '아이스박스 또는 보냉백',
+      '낚싯대·릴 (개인 또는 렌탈)',
+      '미끼·채비 (현지 낚시점 또는 사무국)',
+      '잡은 생선 손질 / 택배 발송 의뢰'
+    ]
+  },
+  {
+    id: 'onsen',
+    title: '♨️ 온천 일정 (DAY 2 오후)',
+    color: '#e67e22',
+    items: [
+      '갈아입을 속옷·양말',
+      '수건 (호텔/온천 제공 확인)',
+      '슬리퍼 또는 워킹슈즈',
+      '기초 화장품·세면도구',
+      '여권 (이동 시 필요)',
+      '교통편 예약 확인 (특급·신칸센)',
+      '입욕료 + 식사비 현금 준비',
+      '온천 마을 지도·관광 코스 확인'
+    ]
+  },
+  {
+    id: 'return',
+    title: '✈️ 귀국 (DAY 4)',
+    color: '#27ae60',
+    items: [
+      '호텔 체크아웃 (~10:00 권장)',
+      '신칸센 코쿠라→하카타 예약 확인',
+      '지하철 하카타→후쿠오카공항',
+      '국제선 청사 셔틀버스 (15분)',
+      '출국심사 2시간 전 도착',
+      '잡은 생선 진공포장·EMS 발송 (전날)',
+      '면세품 휴대 한도 확인 (주류 3병·담배 등)',
+      '면세 환급 (TAX FREE)',
+      '비행기 탑승 / 입국심사 (한국)',
+      '검역대 통과 (수산물 5kg 이하)'
+    ]
+  }
+];
+
 // ============== FISH CALENDAR DATA ==============
 const FISH_DATA = [
   { name: '관문 텐야', months: ['','','','','P','P','P','P','P','P','A',''] },
@@ -1338,8 +1438,16 @@ async function loadFromCloud(silent) {
     }
     if (cloud.members) {
       Object.entries(cloud.members).forEach(([name, m]) => {
-        if (!DB.members[name]) DB.members[name] = m;
+        if (!DB.members[name]) {
+          DB.members[name] = m;
+        } else if (m && m.passport && (!DB.members[name].passport || (m.passport && (cloud.lastSavedAt > (_lastCloudSync || 0))))) {
+          DB.members[name].passport = m.passport;
+        }
       });
+    }
+    if (cloud.checklists) {
+      if (!DB.checklists) DB.checklists = {};
+      Object.assign(DB.checklists, cloud.checklists);
     }
     if (cloud.departureDate && !DB.departureDate) DB.departureDate = cloud.departureDate;
     _lastCloudSync = cloud.lastSavedAt || Date.now();
@@ -1383,6 +1491,7 @@ async function saveToCloud(silent) {
       votes: DB.votes,
       threads: DB.threads,
       members: DB.members,
+      checklists: DB.checklists || {},
       departureDate: DB.departureDate,
       lastSavedAt: Date.now(),
       lastSavedBy: DB.user
@@ -2130,6 +2239,7 @@ function renderResult() {
   renderResultSummary();
   renderResultItinerary();
   renderResultByMember();
+  renderChecklists();
 }
 function _getPollWinner(pollId) {
   const poll = POLLS.find(p => p.id === pollId);
@@ -2272,6 +2382,87 @@ function renderResultItinerary() {
   </div>`;
   el.innerHTML = html;
 }
+function renderChecklists() {
+  const summary = document.getElementById('checklist-summary');
+  const container = document.getElementById('checklist-container');
+  if (!container) return;
+  // Initialize checklists structure
+  if (!DB.checklists) DB.checklists = {};
+  let summaryHtml = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">';
+  let totalItems = 0, totalChecked = 0;
+  CHECKLISTS.forEach(cl => {
+    let clChecked = 0;
+    cl.items.forEach((_, idx) => {
+      REGISTERED_MEMBERS.forEach(name => {
+        totalItems++;
+        const key = name + '__' + cl.id + '__' + idx;
+        if (DB.checklists[key]) { totalChecked++; clChecked++; }
+      });
+    });
+    const clTotal = cl.items.length * REGISTERED_MEMBERS.length;
+    const pct = clTotal > 0 ? Math.round(clChecked / clTotal * 100) : 0;
+    summaryHtml += '<div style="background: ' + cl.color + '10; padding:10px; border-radius:8px; border-left:3px solid ' + cl.color + ';">';
+    summaryHtml += '<div style="font-size:11px; color:var(--text-muted);">' + escapeHtml(cl.title.substring(0, 14)) + '</div>';
+    summaryHtml += '<div style="font-size:18px; font-weight:700; color:' + cl.color + ';">' + pct + '%</div>';
+    summaryHtml += '<div style="font-size:10px; color:var(--text-muted);">' + clChecked + '/' + clTotal + ' 완료</div>';
+    summaryHtml += '</div>';
+  });
+  summaryHtml += '</div>';
+  const overallPct = totalItems > 0 ? Math.round(totalChecked / totalItems * 100) : 0;
+  summaryHtml = '<div style="margin-bottom:10px; padding:12px 14px; background: var(--primary-lighter); border-radius:8px; font-size:14px;"><strong>전체 진행률:</strong> ' + overallPct + '% (' + totalChecked + '/' + totalItems + ')</div>' + summaryHtml;
+  summary.innerHTML = summaryHtml;
+
+  let html = '';
+  CHECKLISTS.forEach(cl => {
+    html += '<details style="margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px; overflow:hidden;">';
+    html += '<summary style="padding: 12px 16px; cursor: pointer; background: ' + cl.color + '10; font-weight:600; color:' + cl.color + ';">' + escapeHtml(cl.title) + ' (' + cl.items.length + '개 항목)</summary>';
+    html += '<div style="padding: 14px 16px; background: white;">';
+    html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:600px;"><thead><tr>';
+    html += '<th style="background: ' + cl.color + '20; color:' + cl.color + '; text-align:left; padding:8px;">항목</th>';
+    REGISTERED_MEMBERS.forEach(n => {
+      const short = n.length > 3 ? n.substring(0,3) : n;
+      html += '<th style="background: ' + cl.color + '20; color:' + cl.color + '; text-align:center; padding:8px; min-width:40px;" title="' + escapeHtml(n) + '">' + escapeHtml(short) + '</th>';
+    });
+    html += '</tr></thead><tbody>';
+    cl.items.forEach((item, idx) => {
+      html += '<tr><td style="padding: 8px; color:var(--text);">' + escapeHtml(item) + '</td>';
+      REGISTERED_MEMBERS.forEach(name => {
+        const key = name + '__' + cl.id + '__' + idx;
+        const checked = !!DB.checklists[key];
+        const canEdit = DB.user === name;
+        const cursor = canEdit ? 'pointer' : 'default';
+        const onclick = canEdit ? "toggleChecklist('" + escapeHtml(name).replace(/'/g, "\\'") + "', '" + cl.id + "', " + idx + ")" : '';
+        html += '<td style="text-align:center; padding:6px; cursor:' + cursor + ';" onclick="' + onclick + '">';
+        if (checked) {
+          html += '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:' + cl.color + '; color:white; border-radius:4px; font-size:13px;">✓</span>';
+        } else if (canEdit) {
+          html += '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:white; border:1.5px solid ' + cl.color + '; border-radius:4px;"></span>';
+        } else {
+          html += '<span style="color:var(--text-muted); font-size:10px;">—</span>';
+        }
+        html += '</td>';
+      });
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '</div></details>';
+  });
+  container.innerHTML = html;
+}
+function toggleChecklist(name, clId, idx) {
+  if (DB.user !== name) return;
+  if (!DB.checklists) DB.checklists = {};
+  const key = name + '__' + clId + '__' + idx;
+  if (DB.checklists[key]) {
+    delete DB.checklists[key];
+  } else {
+    DB.checklists[key] = { ts: Date.now() };
+  }
+  saveDB();
+  renderChecklists();
+  triggerAutoSave();
+}
+
 function renderResultByMember() {
   const el = document.getElementById('result-by-member');
   if (!el) return;
