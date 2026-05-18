@@ -1047,6 +1047,11 @@ body.gated header, body.gated main, body.gated footer { display: none; }
     <!-- ============ MEMBERS ============ -->
     <section class="section" id="section-members">
       <div class="card">
+        <h2>🛂 여권 정보 & 여행 가능 여부</h2>
+        <p>회원별 여권 정보와 출발일 기준 유효기간을 자동 검토합니다. 일본 입국 시 권장 잔여 유효기간은 <strong>6개월 이상</strong>입니다.</p>
+        <div id="passport-list"></div>
+      </div>
+      <div class="card">
         <h2>👥 참여 회원</h2>
         <p>현재 사이트에 로그인한 회원 목록입니다. 출발일 전까지 의견·투표를 모아 함께 결정해요!</p>
         <div id="member-list" class="member-list"></div>
@@ -1071,9 +1076,17 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 
 <script>
 // ============== DATA STORE ==============
-const STORAGE_KEY = 'tsuri_trip_planner_v2';
+const STORAGE_KEY = 'tsuri_trip_planner_v3';
 const REGISTERED_MEMBERS = ['박중산', '최근호', '김석', '김기태', '조성화', '최진원', '윤유병', '김철현'];
 const ACCESS_PASSWORD = '111111';
+const INITIAL_PASSPORTS = {
+  '박중산': { surname: 'PARK', givenNames: 'JUNG SAN', passportNo: 'M99330806', dob: '1973-09-09', sex: 'M', issueDate: '2016-10-18', expiryDate: '2026-10-18', nationality: 'KOR' },
+  '김석':   { surname: 'KIM',  givenNames: 'SUK',      passportNo: 'M538A2730', dob: '1974-02-22', sex: 'M', issueDate: '2023-03-03', expiryDate: '2033-03-03', nationality: 'KOR' },
+  '김철현': { surname: 'KIM',  givenNames: 'CHUL HYUN', passportNo: 'M798G5857', dob: '1973-10-06', sex: 'M', issueDate: '2023-03-03', expiryDate: '2033-03-03', nationality: 'KOR' },
+  '조성화': { surname: 'CHO',  givenNames: 'SUNG HWA', passportNo: 'M26303355', dob: '1973-04-28', sex: 'M', issueDate: '2020-09-04', expiryDate: '2030-09-04', nationality: 'KOR' },
+  '최진원': { surname: 'CHOI', givenNames: 'JIN WON',  passportNo: 'M94163217', dob: '1974-03-01', sex: 'M', issueDate: '2019-08-01', expiryDate: '2029-08-01', nationality: 'KOR' },
+  '윤유병': { surname: 'YOON', givenNames: 'YOO BYUNG', passportNo: 'M70489169', dob: '1974-01-28', sex: 'M', issueDate: '2019-01-08', expiryDate: '2029-01-08', nationality: 'KOR' }
+};
 const CLOUD_REPO = 'shake777/tsuri-trip-2026';
 const CLOUD_FILE = 'data.json';
 const CLOUD_RAW_URL = 'https://raw.githubusercontent.com/' + CLOUD_REPO + '/main/' + CLOUD_FILE;
@@ -1092,6 +1105,7 @@ function defaultDB() {
   const members = {};
   REGISTERED_MEMBERS.forEach(name => {
     members[name] = { joinedAt: Date.now(), preRegistered: true };
+    if (INITIAL_PASSPORTS[name]) members[name].passport = INITIAL_PASSPORTS[name];
   });
   return {
     user: null,
@@ -1116,6 +1130,9 @@ function loadDB() {
       const merged = Object.assign(def, saved);
       REGISTERED_MEMBERS.forEach(name => {
         if (!merged.members[name]) merged.members[name] = { joinedAt: Date.now(), preRegistered: true };
+        if (INITIAL_PASSPORTS[name] && !merged.members[name].passport) {
+          merged.members[name].passport = INITIAL_PASSPORTS[name];
+        }
       });
       return merged;
     }
@@ -1345,6 +1362,7 @@ function init() {
   renderMembers();
   renderProgress();
   renderHomeLoginGrid();
+  renderPassports();
   renderCloudStatus();
   // Auto-load from cloud on startup (async)
   loadFromCloud(false);
@@ -1352,6 +1370,7 @@ function init() {
     DB.departureDate = e.target.value;
     saveDB();
     renderCountdown();
+    renderPassports();
     triggerAutoSave();
   });
   if (DB.departureDate) {
@@ -1371,7 +1390,7 @@ function switchTab(name) {
   });
   if (name === 'vote') renderPolls();
   if (name === 'discuss') renderThreads();
-  if (name === 'members') renderMembers();
+  if (name === 'members') { renderMembers(); renderPassports(); }
   if (name === 'result') renderResult();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1728,6 +1747,111 @@ function deleteThread(threadId) {
 }
 
 // ============== MEMBERS ==============
+function checkPassportStatus(passport, tripDate) {
+  if (!passport || !passport.expiryDate) {
+    return { status: 'missing', label: '⚠️ 여권 정보 없음', color: '#888', detail: '여권 사진을 등록해주세요' };
+  }
+  const expiry = new Date(passport.expiryDate);
+  const today = new Date(); today.setHours(0,0,0,0);
+  if (isNaN(expiry.getTime())) {
+    return { status: 'invalid', label: '⚠️ 만료일 오류', color: '#e67e22', detail: '만료일 형식 확인 필요' };
+  }
+  // Calculate months remaining from trip date (or today if no trip date)
+  const refDate = tripDate ? new Date(tripDate) : today;
+  if (isNaN(refDate.getTime())) { return checkPassportStatus(passport, null); }
+  const monthsLeft = (expiry - refDate) / (1000 * 60 * 60 * 24 * 30.44);
+  const ymd = expiry.toLocaleDateString('ko-KR');
+  if (monthsLeft < 0) {
+    return { status: 'expired', label: '❌ 만료됨', color: '#e74c3c', detail: '만료일: ' + ymd + ' · 즉시 갱신 필요' };
+  }
+  if (monthsLeft < 6) {
+    return { status: 'risk', label: '⚠️ 유효기간 부족 (6개월 미만)', color: '#e67e22', detail: '만료일: ' + ymd + ' · 일본 입국 시 6개월 잔여기간 권장, 갱신 권장' };
+  }
+  return { status: 'ok', label: '✅ 정상', color: '#27ae60', detail: '만료일: ' + ymd + ' · 여행에 문제 없음' };
+}
+
+function renderPassports() {
+  const el = document.getElementById('passport-list');
+  if (!el) return;
+  const tripDate = DB.departureDate;
+  let html = '';
+  if (!tripDate) {
+    html += '<div class="note warn" style="margin-bottom: 14px;">📅 출발일이 설정되지 않았습니다. 홈 화면에서 출발일을 입력하면 여권 유효기간을 더 정확히 검토합니다. 현재는 오늘 날짜 기준으로 표시됩니다.</div>';
+  }
+  REGISTERED_MEMBERS.forEach(name => {
+    const m = DB.members[name] || {};
+    const p = m.passport;
+    const check = checkPassportStatus(p, tripDate);
+    html += '<div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;">';
+    html += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">';
+    html += '<div style="font-weight:600; font-size:15px; color:var(--primary);">' + escapeHtml(name) + (p ? ' (' + escapeHtml(p.surname || '') + ' ' + escapeHtml(p.givenNames || '') + ')' : '') + '</div>';
+    html += '<span style="background:' + check.color + '20; color:' + check.color + '; font-size:11px; padding:4px 10px; border-radius:12px; font-weight:600;">' + check.label + '</span>';
+    html += '</div>';
+    if (p) {
+      html += '<table style="width:100%; font-size:12px; margin:0;"><tr>';
+      html += '<td style="padding:4px 0; color:var(--text-muted); width:90px;">여권번호</td><td style="font-family: monospace; font-weight:500;">' + escapeHtml(p.passportNo || '-') + '</td>';
+      html += '<td style="padding:4px 0; color:var(--text-muted); width:60px;">성별</td><td>' + escapeHtml(p.sex || '-') + '</td>';
+      html += '</tr><tr>';
+      html += '<td style="padding:4px 0; color:var(--text-muted);">생년월일</td><td>' + escapeHtml(p.dob || '-') + '</td>';
+      html += '<td style="padding:4px 0; color:var(--text-muted);">국적</td><td>' + escapeHtml(p.nationality || '-') + '</td>';
+      html += '</tr><tr>';
+      html += '<td style="padding:4px 0; color:var(--text-muted);">발급일</td><td>' + escapeHtml(p.issueDate || '-') + '</td>';
+      html += '<td style="padding:4px 0; color:var(--text-muted);">만료일</td><td><strong>' + escapeHtml(p.expiryDate || '-') + '</strong></td>';
+      html += '</tr></table>';
+      html += '<div style="font-size:11px; color:' + check.color + '; margin-top:8px; padding-top:8px; border-top:1px solid var(--border);">' + escapeHtml(check.detail) + '</div>';
+    } else {
+      html += '<div style="font-size:13px; color:var(--text-muted); padding:10px 0;">여권 사진을 단톡방에 공유해 주세요. 관리자가 등록 후 자동 검토됩니다.</div>';
+    }
+    if (DB.user === name || DB.user) {
+      html += '<div style="margin-top:8px;"><button class="btn secondary" style="font-size:11px; padding: 4px 10px;" onclick="editPassport(\'' + escapeHtml(name).replace(/\\/g, "\\\\").replace(/\'/g, "\\\'") + '\')">' + (p ? '✏️ 수정' : '✏️ 등록') + '</button></div>';
+    }
+    html += '</div>';
+  });
+  // Summary
+  const issues = REGISTERED_MEMBERS.filter(n => {
+    const c = checkPassportStatus(DB.members[n] && DB.members[n].passport, tripDate);
+    return c.status !== 'ok';
+  });
+  if (issues.length > 0) {
+    html = '<div class="note warn" style="margin-bottom:14px;">⚠️ <strong>주의 필요 회원 ' + issues.length + '명:</strong> ' + issues.map(escapeHtml).join(', ') + '</div>' + html;
+  } else {
+    html = '<div class="note success" style="margin-bottom:14px;">✅ <strong>전 회원 여권 정상</strong> — 여행에 문제 없습니다.</div>' + html;
+  }
+  el.innerHTML = html;
+}
+
+function editPassport(name) {
+  const current = (DB.members[name] && DB.members[name].passport) || {};
+  const passportNo = prompt('여권번호 (Passport No.)', current.passportNo || '');
+  if (passportNo === null) return;
+  const surname = prompt('영문 성 (Surname)', current.surname || '');
+  if (surname === null) return;
+  const givenNames = prompt('영문 이름 (Given Names)', current.givenNames || '');
+  if (givenNames === null) return;
+  const dob = prompt('생년월일 (YYYY-MM-DD)', current.dob || '');
+  if (dob === null) return;
+  const issueDate = prompt('발급일 (YYYY-MM-DD)', current.issueDate || '');
+  if (issueDate === null) return;
+  const expiryDate = prompt('만료일 (YYYY-MM-DD)', current.expiryDate || '');
+  if (expiryDate === null) return;
+  const sex = prompt('성별 (M/F)', current.sex || 'M');
+  if (sex === null) return;
+  if (!DB.members[name]) DB.members[name] = { joinedAt: Date.now(), preRegistered: true };
+  DB.members[name].passport = {
+    surname: surname.trim().toUpperCase(),
+    givenNames: givenNames.trim().toUpperCase(),
+    passportNo: passportNo.trim().toUpperCase(),
+    dob: dob.trim(),
+    sex: sex.trim().toUpperCase(),
+    issueDate: issueDate.trim(),
+    expiryDate: expiryDate.trim(),
+    nationality: 'KOR'
+  };
+  saveDB();
+  renderPassports();
+  triggerAutoSave();
+}
+
 function renderMembers() {
   const list = document.getElementById('member-list');
   const memberNames = Object.keys(DB.members);
