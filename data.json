@@ -142,9 +142,12 @@
   "checklists": {
     "박중산__predeparture__0": {
       "ts": 1779065430574
+    },
+    "박중산__predeparture__1": {
+      "ts": 1779065434042
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779065432442,
+  "lastSavedAt": 1779065435824,
   "lastSavedBy": "박중산"
 }
