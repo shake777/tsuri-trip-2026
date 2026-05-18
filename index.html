@@ -2483,11 +2483,9 @@ function renderResultItinerary() {
   </div>`;
   el.innerHTML = html;
 }
-function renderChecklists() {
+function renderChecklistSummary() {
   const summary = document.getElementById('checklist-summary');
-  const container = document.getElementById('checklist-container');
-  if (!container) return;
-  // Initialize checklists structure
+  if (!summary) return;
   if (!DB.checklists) DB.checklists = {};
   let summaryHtml = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">';
   let totalItems = 0, totalChecked = 0;
@@ -2512,10 +2510,22 @@ function renderChecklists() {
   const overallPct = totalItems > 0 ? Math.round(totalChecked / totalItems * 100) : 0;
   summaryHtml = '<div style="margin-bottom:10px; padding:12px 14px; background: var(--primary-lighter); border-radius:8px; font-size:14px;"><strong>전체 진행률:</strong> ' + overallPct + '% (' + totalChecked + '/' + totalItems + ')</div>' + summaryHtml;
   summary.innerHTML = summaryHtml;
+}
 
+function renderChecklists() {
+  const container = document.getElementById('checklist-container');
+  if (!container) return;
+  if (!DB.checklists) DB.checklists = {};
+  // Save which details are currently open
+  const openSet = new Set();
+  container.querySelectorAll('details[open]').forEach(d => {
+    if (d.dataset.clId) openSet.add(d.dataset.clId);
+  });
+  renderChecklistSummary();
   let html = '';
   CHECKLISTS.forEach(cl => {
-    html += '<details style="margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px; overflow:hidden;">';
+    const isOpen = openSet.has(cl.id);
+    html += '<details data-cl-id="' + cl.id + '"' + (isOpen ? ' open' : '') + ' style="margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px; overflow:hidden;">';
     html += '<summary style="padding: 12px 16px; cursor: pointer; background: ' + cl.color + '10; font-weight:600; color:' + cl.color + ';">' + escapeHtml(cl.title) + ' (' + cl.items.length + '개 항목)</summary>';
     html += '<div style="padding: 14px 16px; background: white;">';
     html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:600px;"><thead><tr>';
@@ -2532,8 +2542,8 @@ function renderChecklists() {
         const checked = !!DB.checklists[key];
         const canEdit = DB.user === name;
         const cursor = canEdit ? 'pointer' : 'default';
-        const onclick = canEdit ? "toggleChecklist('" + escapeHtml(name).replace(/'/g, "\\'") + "', '" + cl.id + "', " + idx + ")" : '';
-        html += '<td style="text-align:center; padding:6px; cursor:' + cursor + ';" onclick="' + onclick + '">';
+        const onclick = canEdit ? "toggleChecklist('" + escapeHtml(name).replace(/'/g, "\\'") + "', '" + cl.id + "', " + idx + ", event)" : '';
+        html += '<td data-cl-cell="' + escapeHtml(key) + '" data-cl-color="' + cl.color + '" data-cl-edit="' + (canEdit?1:0) + '" style="text-align:center; padding:6px; cursor:' + cursor + ';" onclick="' + onclick + '">';
         if (checked) {
           html += '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:' + cl.color + '; color:white; border-radius:4px; font-size:13px;">✓</span>';
         } else if (canEdit) {
@@ -2550,17 +2560,34 @@ function renderChecklists() {
   });
   container.innerHTML = html;
 }
-function toggleChecklist(name, clId, idx) {
+
+function toggleChecklist(name, clId, idx, event) {
+  if (event) { event.stopPropagation(); event.preventDefault(); }
   if (DB.user !== name) return;
   if (!DB.checklists) DB.checklists = {};
   const key = name + '__' + clId + '__' + idx;
-  if (DB.checklists[key]) {
+  const wasChecked = !!DB.checklists[key];
+  if (wasChecked) {
     delete DB.checklists[key];
   } else {
     DB.checklists[key] = { ts: Date.now() };
   }
   saveDB();
-  renderChecklists();
+  // Incremental update: only the changed cell, no full re-render
+  const cells = document.querySelectorAll('[data-cl-cell="' + key + '"]');
+  cells.forEach(cell => {
+    const color = cell.dataset.clColor;
+    const canEdit = cell.dataset.clEdit === '1';
+    if (!wasChecked) {
+      cell.innerHTML = '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:' + color + '; color:white; border-radius:4px; font-size:13px;">✓</span>';
+    } else if (canEdit) {
+      cell.innerHTML = '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:white; border:1.5px solid ' + color + '; border-radius:4px;"></span>';
+    } else {
+      cell.innerHTML = '<span style="color:var(--text-muted); font-size:10px;">—</span>';
+    }
+  });
+  // Update only the summary numbers, not the entire checklist
+  renderChecklistSummary();
   renderHomeMemberStatus();
   triggerAutoSave();
 }
