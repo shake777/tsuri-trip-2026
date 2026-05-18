@@ -23,7 +23,7 @@
       "title": "환영합니다 🎉",
       "author": "관리자",
       "body": "키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 박중산·최근호·김석·김기태·조성화·최진원·윤유병·김철현 8분이 등록되어 있습니다. 자유롭게 의견 남겨주세요!",
-      "ts": 1779063843432,
+      "ts": 1779064687406,
       "comments": []
     },
     {
@@ -37,7 +37,7 @@
   ],
   "members": {
     "박중산": {
-      "joinedAt": 1779063843432,
+      "joinedAt": 1779064687406,
       "preRegistered": true,
       "passport": {
         "surname": "PARK",
@@ -51,11 +51,11 @@
       }
     },
     "최근호": {
-      "joinedAt": 1779063843432,
+      "joinedAt": 1779064687406,
       "preRegistered": true
     },
     "김석": {
-      "joinedAt": 1779063843432,
+      "joinedAt": 1779064687406,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -69,11 +69,21 @@
       }
     },
     "김기태": {
-      "joinedAt": 1779063843432,
-      "preRegistered": true
+      "joinedAt": 1779064687406,
+      "preRegistered": true,
+      "passport": {
+        "surname": "KIM",
+        "givenNames": "KI TAE",
+        "passportNo": "M238L9379",
+        "dob": "19730430",
+        "sex": "M",
+        "issueDate": "20230310",
+        "expiryDate": "20330310",
+        "nationality": "KOR"
+      }
     },
     "조성화": {
-      "joinedAt": 1779063843432,
+      "joinedAt": 1779064687406,
       "preRegistered": true,
       "passport": {
         "surname": "CHO",
@@ -87,7 +97,7 @@
       }
     },
     "최진원": {
-      "joinedAt": 1779063843432,
+      "joinedAt": 1779064687406,
       "preRegistered": true,
       "passport": {
         "surname": "CHOI",
@@ -101,7 +111,7 @@
       }
     },
     "윤유병": {
-      "joinedAt": 1779063843432,
+      "joinedAt": 1779064687406,
       "preRegistered": true,
       "passport": {
         "surname": "YOON",
@@ -115,7 +125,7 @@
       }
     },
     "김철현": {
-      "joinedAt": 1779063843432,
+      "joinedAt": 1779064687406,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -129,7 +139,8 @@
       }
     }
   },
+  "checklists": {},
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779064036162,
-  "lastSavedBy": "박중산"
+  "lastSavedAt": 1779065189020,
+  "lastSavedBy": "김기태"
 }
