@@ -1185,7 +1185,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 
 <script>
 // ============== DATA STORE ==============
-const STORAGE_KEY = 'tsuri_trip_planner_v3';
+const STORAGE_KEY = 'tsuri_trip_planner_v4';
 const REGISTERED_MEMBERS = ['박중산', '최근호', '김석', '김기태', '조성화', '최진원', '윤유병', '김철현'];
 const ACCESS_PASSWORD = '111111';
 const INITIAL_PASSPORTS = {
@@ -1243,6 +1243,11 @@ function loadDB() {
         if (!merged.members[name]) merged.members[name] = { joinedAt: Date.now(), preRegistered: true };
         if (INITIAL_PASSPORTS[name] && !merged.members[name].passport) {
           merged.members[name].passport = INITIAL_PASSPORTS[name];
+        }
+        // Safety: validate passport date format; remove if invalid (e.g., "20230310" should be "2023-03-10")
+        const p = merged.members[name].passport;
+        if (p && p.expiryDate && !/^\d{4}-\d{2}-\d{2}$/.test(p.expiryDate)) {
+          delete merged.members[name].passport;
         }
       });
       return merged;
