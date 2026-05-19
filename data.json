@@ -8,6 +8,9 @@
       "김철현": [
         2,
         6
+      ],
+      "김기태": [
+        1
       ]
     },
     "fishing": {
@@ -198,6 +201,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779168017510,
+  "lastSavedAt": 1779168024279,
   "lastSavedBy": "김기태"
 }
