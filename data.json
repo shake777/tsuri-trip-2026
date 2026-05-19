@@ -28,7 +28,8 @@
       "최진원": 1,
       "김석": 0,
       "김기태": 3
-    }
+    },
+    "alt_activity": {}
   },
   "threads": [
     {
@@ -176,6 +177,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779149209266,
+  "lastSavedAt": 1779150648059,
   "lastSavedBy": "박중산"
 }
