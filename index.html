@@ -1189,13 +1189,10 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <p>현재 사이트에 로그인한 회원 목록입니다. 출발일 전까지 의견·투표를 모아 함께 결정해요!</p>
         <div id="member-list" class="member-list"></div>
         <div class="btn-row">
-          <button class="btn secondary" onclick="exportData()">📥 모든 데이터 내보내기 (JSON)</button>
-          <button class="btn secondary" onclick="importData()">📤 데이터 가져오기</button>
-          <button class="btn danger" onclick="resetAll()">🗑️ 모든 데이터 초기화</button>
+          <button class="btn danger" onclick="resetAll()">🗑️ 본인 로컬 데이터 초기화</button>
         </div>
-        <input type="file" id="import-file" accept=".json" style="display:none;" onchange="handleImport(event)">
-        <div class="note info" style="margin-top: 14px;">
-          💡 <strong>여러 회원과 데이터를 공유하려면:</strong> '데이터 내보내기'로 JSON 파일을 받아 다른 회원에게 전달하고, 그 회원이 자신의 페이지에서 '데이터 가져오기'를 하면 의견·투표가 합쳐집니다.
+        <div class="note success" style="margin-top: 14px;">
+          ✅ <strong>자동 동기화:</strong> 모든 회원의 투표·체크리스트·여권 정보는 클라우드(GitHub)에 자동 저장되며, 사이트 접속 시 자동으로 최신 데이터를 불러옵니다. 회원 간 데이터를 따로 공유하실 필요 없습니다.
         </div>
       </div>
     </section>
