@@ -47,7 +47,8 @@
       ]
     },
     "participation": {
-      "박중산": 0
+      "박중산": 0,
+      "조성화": 1
     }
   },
   "threads": [
@@ -196,6 +197,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779152629895,
-  "lastSavedBy": "박중산"
+  "lastSavedAt": 1779153095479,
+  "lastSavedBy": "조성화"
 }
