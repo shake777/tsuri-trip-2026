@@ -1046,6 +1046,25 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
+        <h2>🚌 DAY 3 (대안) — 비낚시 회원 관광 코스</h2>
+        <p>낚시에 참여하지 않는 회원분들을 위한 DAY 3 대안 활동입니다. 투표를 통해 그룹 선호 코스를 정합니다.</p>
+        <ul>
+          <li><strong>🏯 코쿠라 시내 관광</strong> (반나절): 코쿠라성 → 탄가시장 → 카쓰리타이지 박물관 → 리버워크 코쿠라 쇼핑</li>
+          <li><strong>🚢 모지코 레트로 + 시모노세키</strong> (풀데이): 모지코 역사 거리 → 야키카레 점심 → 칸몬해저터널 도보 → 시모노세키 카라토 시장 (복어 시식)</li>
+          <li><strong>🌃 사라쿠라야마 야경</strong> (오후~저녁): 일본 신 3대 야경, 케이블카 1,230엔 왕복</li>
+          <li><strong>♨️ 벳푸 지옥순례 + 온천</strong> (풀데이): JR 특급 1.5시간 → 지옥 8곳 순례 → 온천 입욕 → 저녁 복귀</li>
+          <li><strong>♨️ 유후인 료칸거리</strong> (풀데이): 특급 유후 2시간 → 긴린호 산책 → 료칸 외탕 → 스위츠</li>
+          <li><strong>🍜 후쿠오카 쇼핑</strong> (풀데이): 신칸센 15분 → 캐널시티 → 텐진 지하상가 → 라멘 거리</li>
+          <li><strong>⛩️ 다자이후 텐만구</strong> (반나절): 학문의 신 신사, 우메가에 모찌 명물</li>
+          <li><strong>⛳ 골프 라운딩</strong> (풀데이): 키타큐슈 권역 골프장 사전 예약 필요</li>
+          <li><strong>🛌 자유 휴식 + 호텔 온천</strong>: 테리하 스파 입욕, 코쿠라 산책, 카페 투어</li>
+        </ul>
+        <div class="note info">
+          💡 <strong>그룹 분리 운영:</strong> DAY 3 새벽 낚시 그룹 출항 후, 비낚시 그룹은 호텔에서 늦은 아침 식사 후 각자 또는 그룹으로 활동. 저녁에 호텔/식당에서 다시 합류해 함께 식사.
+        </div>
+      </div>
+
+      <div class="card">
         <h2>🎣 DAY 3 — 출조 (메인 낚시일)</h2>
         <ul class="timeline">
           <li>
@@ -1285,13 +1304,37 @@ const POLLS = [
   },
   {
     id: 'fishing',
-    question: '🎣 낚시 방법 (가장 해보고 싶은 것)',
+    question: '🎣 낚시 방법 (DAY 3 출조 - 관심 있는 모두 선택)',
     options: [
-      '오토시코미 (대형 청물·참돔·광어)',
-      '타이라바·SLJ (참돔·청물, 초보자도 OK)',
-      '아라카부 (쏨뱅이 - 가볍게 즐기기)',
-      '지깅 (메탈지그로 청물 정통 루어)',
-      '이카요타키 (야간 오징어 낚시)'
+      '🐟 오토시코미 (落とし込み) — 대형 청물·참돔·광어, 가을~겨울',
+      '🐟 타이라바 (タイラバ) — 참돔 전용, 연중 가능',
+      '🐟 SLJ 슈퍼라이트지깅 — 청물·참돔, 가벼운 태클',
+      '🦐 히토츠텐야 (一つテンヤ) — 새우 미끼, 참돔',
+      '🪨 아라카부 (쏨뱅이) — 가볍게 즐기기, 초보자 OK',
+      '🪨 관문 아라카부 — 칸몬해협 쏨뱅이 본격',
+      '🐠 도즈키 (鯛五目胴突き) — 참돔·옥돔·근어 다양',
+      '🐠 텐빈고모쿠 (天秤五目) — 봄·여름, 이사키·참돔',
+      '⚙️ 지깅 (메탈지그) — 청물 정통 루어',
+      '⚙️ 전동 지깅 — 편한 지깅 (체력 부담 적음)',
+      '🦑 이카요타키 (야간 오징어 낚시)',
+      '🦑 이카메탈 — 라이트 태클 오징어'
+    ]
+  },
+  {
+    id: 'alt_activity',
+    question: '🚌 DAY 3 비낚시 활동 (낚시 안 가시는 분 — 관심 있는 모두 선택)',
+    options: [
+      '🏯 코쿠라성 + 탄가시장 + 시내 산책 (도보 반나절)',
+      '🚢 모지코 레트로 + 시모노세키 + 해저터널 (풀데이)',
+      '🌃 사라쿠라야마 케이블카 + 야경 (반나절~저녁)',
+      '♨️ 벳푸 지옥순례 + 온천 (풀데이)',
+      '♨️ 유후인 료칸거리 + 긴린호 (풀데이)',
+      '🍜 후쿠오카 시내 쇼핑 (캐널시티·텐진, 풀데이)',
+      '⛩️ 다자이후 텐만구 + 학문의 신 (반나절)',
+      '⛳ 골프 라운딩 (키타큐슈 권역, 풀데이)',
+      '🚄 가고시마 당일치기 (이부스키 모래찜질, 풀데이)',
+      '🎨 키타큐슈 만화박물관 + 아쿠아리움 (반나절)',
+      '🛌 호텔 휴식 + 온천 입욕 + 코쿠라 산책 (자유)'
     ]
   },
   {
@@ -2507,6 +2550,8 @@ function renderResultItinerary() {
   if (!allConfirmed) {
     html += `<div class="note warn" style="margin-bottom: 14px;">⚠️ 일부 항목은 아직 투표가 부족하거나 동률 상태입니다. 모든 회원이 5개 항목 전부 투표하면 자동으로 채워집니다.</div>`;
   }
+  const altR = _getPollWinner('alt_activity');
+  const altPick = altR && altR.total > 0 && altR.winners.length === 1 ? altR.winners[0] : null;
   html += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 16px;">
     <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
       <div style="font-size: 11px; color: var(--text-muted);">📅 여행 일정</div>
@@ -2515,6 +2560,10 @@ function renderResultItinerary() {
     <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
       <div style="font-size: 11px; color: var(--text-muted);">🎣 낚시 방법</div>
       <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${fishingPick ? escapeHtml(fishingPick) : '미확정'}</div>
+    </div>
+    <div style="background: #fef3e6; padding: 12px; border-radius: 8px;">
+      <div style="font-size: 11px; color: var(--text-muted);">🚌 비낚시 대안</div>
+      <div style="font-size: 13px; font-weight: 600; color: var(--accent); margin-top: 4px;">${altPick ? escapeHtml(altPick) : '미확정'}</div>
     </div>
     <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
       <div style="font-size: 11px; color: var(--text-muted);">🏨 숙박 호텔</div>
@@ -2547,9 +2596,14 @@ function renderResultItinerary() {
       <div class="timeline-detail">호텔 체크인 후 출발, 저녁 코쿠라 복귀</div>
     </li>
     <li>
-      <div class="timeline-time">DAY 3 새벽~오후</div>
+      <div class="timeline-time">DAY 3 새벽~오후 (낚시 그룹)</div>
       <div class="timeline-title">🎣 출조: ${fishingPick ? escapeHtml(fishingPick) : '(미확정)'}</div>
       <div class="timeline-detail">유어선 출항, 잡은 생선 손질·택배</div>
+    </li>
+    <li>
+      <div class="timeline-time">DAY 3 (비낚시 그룹 대안)</div>
+      <div class="timeline-title">🚌 관광: ${(function(){const r = _getPollWinner('alt_activity'); if (r && r.total > 0 && r.winners.length === 1) return escapeHtml(r.winners[0]); return '(투표 진행 중)';})()}</div>
+      <div class="timeline-detail">비낚시 회원들은 관광·온천·골프 등 자유 활동</div>
     </li>
     <li>
       <div class="timeline-time">DAY 3 저녁</div>
@@ -2714,8 +2768,10 @@ function renderResultByMember() {
     return a.localeCompare(b);
   });
   const topics = [
+    { id: 'participation', label: '👤 참가' },
     { id: 'dates', label: '📅 일정' },
     { id: 'fishing', label: '🎣 낚시' },
+    { id: 'alt_activity', label: '🚌 대안' },
     { id: 'hotel', label: '🏨 숙박' },
     { id: 'restaurant', label: '🍴 식당' },
     { id: 'onsen', label: '♨️ 온천' }
