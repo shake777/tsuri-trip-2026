@@ -1375,18 +1375,34 @@ const POLLS = [
 // ============== CHECKLISTS ==============
 const CHECKLISTS = [
   {
+    id: 'booking',
+    title: '🎫 예약 (D-90 ~ D-14) - 가장 먼저 처리',
+    color: '#0c447c',
+    items: [
+      { text: '부산→후쿠오카 페리 (뉴카멜리아) 예약 — 고려훼리', deadline: 60 },
+      { text: '후쿠오카→인천/김포 항공권 예약 (귀국)', deadline: 60 },
+      { text: '코쿠라 호텔 예약 (컴포트호텔 또는 테리하 스파리조트)', deadline: 45 },
+      { text: 'JR큐슈 신칸센 좌석 예약 (smartEX 또는 JR큐슈 인터넷예약)', deadline: 30 },
+      { text: '유어선 (釣りいこか) 출조일 예약 — 사무국 통해', deadline: 60 },
+      { text: '낚시 가이드·도구 렌탈 신청 (필요시)', deadline: 30 },
+      { text: '비낚시 회원: DAY 3 관광·온천·골프 일정 예약', deadline: 14 },
+      { text: '온천지 교통편 예약 (벳푸·유후인 특급 좌석)', deadline: 14 },
+      { text: '제휴 식당 단체 예약 (廻転寿司 平四郎 등)', deadline: 14 },
+      { text: '여행자 보험 가입 (가족 단위 가능)', deadline: 14 },
+      { text: '부산행 KTX/SRT 또는 버스 예약 (수도권 출발 시)', deadline: 21 },
+      { text: '공항버스/공항철도 (귀국 후) 예약 또는 확인', deadline: 7 }
+    ]
+  },
+  {
     id: 'predeparture',
-    title: '🧳 출국 전 준비 (D-90 ~ D-1)',
+    title: '🧳 출국 전 준비 (D-30 ~ D-1)',
     color: '#1f4e79',
     items: [
       { text: '여권 유효기간 6개월 이상 확인', deadline: 90 },
       { text: '국제운전면허증 발급 (필요시)', deadline: 30 },
-      { text: '페리 예약 확정 (뉴카멜리아)', deadline: 60 },
-      { text: '항공권 예약 확정 (FUK→ICN/GMP)', deadline: 60 },
-      { text: '호텔 예약 확정 (코쿠라)', deadline: 45 },
-      { text: '신칸센·특급 좌석 예약', deadline: 14 },
-      { text: '여행자 보험 가입', deadline: 7 },
+      { text: '여행자 보험 증서 출력 / 모바일 저장', deadline: 7 },
       { text: 'Visit Japan Web (VJW) 사전등록 + QR 캡처', deadline: 7 },
+      { text: '예약 확인서 출력 (페리·항공·호텔·신칸센)', deadline: 7 },
       { text: '방한복 + 방수 자켓 + 모자·장갑 준비', deadline: 7 },
       { text: '낚시도구 점검 (또는 현지 렌탈 확정)', deadline: 7 },
       { text: '엔화 환전 (1인 8~15만 엔 권장)', deadline: 3 },
