@@ -42,6 +42,9 @@
       "김기태": 3,
       "김철현": [
         1
+      ],
+      "윤유병": [
+        3
       ]
     },
     "alt_activity": {
@@ -204,6 +207,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779168142088,
+  "lastSavedAt": 1779168165535,
   "lastSavedBy": "윤유병"
 }
