@@ -2296,8 +2296,9 @@ function renderHomeMemberStatus() {
   html += '</div>';
   html += '</div>';
   // Per-member table
-  html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:600px;"><thead><tr>';
+  html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:680px;"><thead><tr>';
   html += '<th style="text-align:left; min-width:80px;">회원</th>';
+  html += '<th style="text-align:center; min-width:80px;">참가</th>';
   html += '<th style="text-align:center; min-width:90px;">🗳️ 투표</th>';
   html += '<th style="text-align:center; min-width:120px;">✅ 체크리스트</th>';
   html += '<th style="text-align:center; min-width:100px;">🛂 여권</th>';
@@ -2317,17 +2318,27 @@ function renderHomeMemberStatus() {
     const pCheck = checkPassportStatus(p, tripDate);
     const commentCount = DB.threads.reduce((s, t) => s + (t.author === name ? 1 : 0) + t.comments.filter(c => c.author === name).length, 0);
     const isMe = DB.user === name;
+    const partStatus = getParticipationStatus(name);
+    const isNotParticipating = partStatus.code === 'no';
     const rowBg = isMe ? 'background: #f0f7fc;' : '';
-    html += '<tr style="' + rowBg + '">';
-    html += '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:var(--primary);">' + escapeHtml(name) + (isMe ? ' ✓' : '') + '</td>';
-    // Vote bar
-    html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + votePct + '%; background:var(--primary);"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (votePct > 50 ? 'white' : 'var(--text)') + ';">' + voted + '/' + totalVotes + ' (' + votePct + '%)</div></div></td>';
-    // Checklist bar
-    html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + checkPct + '%; background:#185fa5;"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (checkPct > 50 ? 'white' : 'var(--text)') + ';">' + checked + '/' + totalChecks + ' (' + checkPct + '%)</div></div></td>';
-    // Passport status
-    html += '<td style="text-align:center; padding:6px 10px;"><span style="background:' + pCheck.color + '20; color:' + pCheck.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600;">' + pCheck.label.replace(/\s*\([^)]*\)/, '') + '</span></td>';
-    // Activity (comments + threads)
-    html += '<td style="text-align:center; padding:8px 10px; font-size:12px; color:var(--text-secondary);">💬 ' + commentCount + '</td>';
+    const rowExtra = isNotParticipating ? 'opacity:0.45; background: repeating-linear-gradient(45deg, #f5f5f5, #f5f5f5 6px, #fafafa 6px, #fafafa 12px);' : '';
+    html += '<tr style="' + rowBg + rowExtra + '">';
+    html += '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:' + (isNotParticipating ? 'var(--text-muted)' : 'var(--primary)') + ';">' + escapeHtml(name) + (isMe ? ' ✓' : '') + (isNotParticipating ? ' <span style="text-decoration:line-through;color:var(--text-muted);font-size:10px;">(불참)</span>' : '') + '</td>';
+    // Participation badge
+    html += '<td style="text-align:center; padding:6px 10px;"><span style="background:' + partStatus.bg + '; color:' + partStatus.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600; white-space:nowrap;">' + partStatus.label + '</span></td>';
+    if (isNotParticipating) {
+      // Hide other columns - 불참은 다른 항목 표시 안 함
+      html += '<td colspan="4" style="text-align:center; padding:8px 10px; color:var(--text-muted); font-size:11px; font-style:italic;">— 불참 — 준비 항목 해당 없음 —</td>';
+    } else {
+      // Vote bar
+      html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + votePct + '%; background:var(--primary);"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (votePct > 50 ? 'white' : 'var(--text)') + ';">' + voted + '/' + totalVotes + ' (' + votePct + '%)</div></div></td>';
+      // Checklist bar
+      html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + checkPct + '%; background:#185fa5;"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (checkPct > 50 ? 'white' : 'var(--text)') + ';">' + checked + '/' + totalChecks + ' (' + checkPct + '%)</div></div></td>';
+      // Passport status
+      html += '<td style="text-align:center; padding:6px 10px;"><span style="background:' + pCheck.color + '20; color:' + pCheck.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600;">' + pCheck.label.replace(/\s*\([^)]*\)/, '') + '</span></td>';
+      // Activity (comments + threads)
+      html += '<td style="text-align:center; padding:8px 10px; font-size:12px; color:var(--text-secondary);">💬 ' + commentCount + '</td>';
+    }
     html += '</tr>';
   });
   html += '</tbody></table></div>';
