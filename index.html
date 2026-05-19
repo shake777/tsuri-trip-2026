@@ -2539,19 +2539,36 @@ function renderResultItinerary() {
   const hotelR = _getPollWinner('hotel');
   const restR = _getPollWinner('restaurant');
   const onsenR = _getPollWinner('onsen');
-  const pick = (r) => r.total > 0 && r.winners.length === 1 ? r.winners[0] : null;
-  const datesPick = pick(datesR);
-  const fishingPick = pick(fishingR);
-  const hotelPick = pick(hotelR);
-  const restPick = pick(restR);
-  const onsenPick = pick(onsenR);
-  const allConfirmed = datesPick && fishingPick && hotelPick && restPick && onsenPick;
-  let html = '';
-  if (!allConfirmed) {
-    html += `<div class="note warn" style="margin-bottom: 14px;">⚠️ 일부 항목은 아직 투표가 부족하거나 동률 상태입니다. 모든 회원이 5개 항목 전부 투표하면 자동으로 채워집니다.</div>`;
-  }
   const altR = _getPollWinner('alt_activity');
-  const altPick = altR && altR.total > 0 && altR.winners.length === 1 ? altR.winners[0] : null;
+  // Show top option(s) even when partial / tied
+  const pick = (r, withTie) => {
+    if (!r || !r.total || r.total === 0) return null;
+    if (!r.winners || r.winners.length === 0) return null;
+    if (r.winners.length === 1) return r.winners[0];
+    if (withTie) return r.winners[0] + ' (외 ' + (r.winners.length - 1) + '개 동률)';
+    return r.winners.join(' · ');
+  };
+  const datesPick = pick(datesR, true);
+  const fishingPick = pick(fishingR, true);
+  const hotelPick = pick(hotelR, true);
+  const restPick = pick(restR, true);
+  const onsenPick = pick(onsenR, true);
+  const altPickInner = pick(altR, true);
+  // Count actively voted participants to inform whether everyone has voted
+  const totalActive = REGISTERED_MEMBERS.filter(n => getParticipationStatus(n).code !== 'no').length || 1;
+  const pendingPolls = [];
+  if (!datesR || datesR.total < totalActive) pendingPolls.push('일정');
+  if (!fishingR || fishingR.total < totalActive) pendingPolls.push('낚시');
+  if (!hotelR || hotelR.total < totalActive) pendingPolls.push('숙박');
+  if (!restR || restR.total < totalActive) pendingPolls.push('식당');
+  if (!onsenR || onsenR.total < totalActive) pendingPolls.push('온천');
+  let html = '';
+  if (pendingPolls.length > 0) {
+    html += `<div class="note info" style="margin-bottom: 14px;">💡 아직 투표 진행 중인 항목: <strong>${pendingPolls.join(', ')}</strong>. 현재까지의 1위는 아래와 같이 표시됩니다 (투표 추가 시 자동 갱신).</div>`;
+  } else {
+    html += `<div class="note success" style="margin-bottom: 14px;">✅ 전체 회원이 모든 항목에 투표 완료했습니다. 아래가 최종 확정 일정입니다.</div>`;
+  }
+  const altPick = altPickInner;
   html += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 16px;">
     <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
       <div style="font-size: 11px; color: var(--text-muted);">📅 여행 일정</div>
