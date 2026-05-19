@@ -1296,8 +1296,9 @@ const POLLS = [
     question: '👤 참가 여부 (가장 먼저 결정해 주세요)',
     options: [
       '✅ 참가 확정 — 일정 맞춰 출발 가능',
-      '❌ 불참 — 이번 여행 불참',
-      '🤔 미정 — 일정·여건 확인 후 결정'
+      '❌ 불참 — 이번 여행 불참 (일정 무관)',
+      '🟢 일정 맞으면 가능 — 본인 일정 OK 시 출발',
+      '🔴 일정 안 맞으면 불가 — 본인 일정 충돌 시 불참'
     ]
   },
   {
@@ -2517,10 +2518,13 @@ function getParticipationStatus(name) {
   const v = (DB.votes['participation'] || {})[name];
   if (v === 0) return { code: 'yes', label: '✅ 참가', color: '#27ae60', bg: '#e6f7ec' };
   if (v === 1) return { code: 'no', label: '❌ 불참', color: '#e74c3c', bg: '#fdebec' };
-  if (v === 2) return { code: 'maybe', label: '🤔 미정', color: '#e67e22', bg: '#fef3e6' };
+  if (v === 2) return { code: 'maybe', label: '🟢 일정맞으면 가능', color: '#27ae60', bg: '#e6f7ec' };
+  if (v === 3) return { code: 'cond_no', label: '🔴 일정안맞으면 불가', color: '#e67e22', bg: '#fef3e6' };
   return { code: 'none', label: '⏳ 미투표', color: '#888', bg: '#f0f0f0' };
 }
 function getActiveMembers() {
+  // 'no' (1) is the only definitive non-attendance.
+  // 'cond_no' (3) is still potentially attending if dates work out
   return REGISTERED_MEMBERS.filter(n => {
     const v = (DB.votes['participation'] || {})[n];
     return v !== 1;
