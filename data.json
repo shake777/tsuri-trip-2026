@@ -15,7 +15,10 @@
       "박중산": 2,
       "최진원": 2,
       "김석": 2,
-      "김기태": 2
+      "김기태": 2,
+      "김철현": [
+        2
+      ]
     },
     "restaurant": {
       "박중산": 1,
@@ -36,7 +39,7 @@
       "title": "환영합니다 🎉",
       "author": "관리자",
       "body": "키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 박중산·최근호·김석·김기태·조성화·최진원·윤유병·김철현 8분이 등록되어 있습니다. 자유롭게 의견 남겨주세요!",
-      "ts": 1779068095888,
+      "ts": 1779150849626,
       "comments": []
     },
     {
@@ -78,7 +81,7 @@
   ],
   "members": {
     "박중산": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1779150849626,
       "preRegistered": true,
       "passport": {
         "surname": "PARK",
@@ -92,11 +95,11 @@
       }
     },
     "최근호": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1779150849626,
       "preRegistered": true
     },
     "김석": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1779150849626,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -110,11 +113,11 @@
       }
     },
     "김기태": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1779150849626,
       "preRegistered": true
     },
     "조성화": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1779150849626,
       "preRegistered": true,
       "passport": {
         "surname": "CHO",
@@ -128,7 +131,7 @@
       }
     },
     "최진원": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1779150849626,
       "preRegistered": true,
       "passport": {
         "surname": "CHOI",
@@ -142,7 +145,7 @@
       }
     },
     "윤유병": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1779150849626,
       "preRegistered": true,
       "passport": {
         "surname": "YOON",
@@ -156,7 +159,7 @@
       }
     },
     "김철현": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1779150849626,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -176,6 +179,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779150825936,
-  "lastSavedBy": "최근호"
+  "lastSavedAt": 1779150963707,
+  "lastSavedBy": "김철현"
 }
