@@ -2462,6 +2462,20 @@ function renderResult() {
   renderResultByMember();
   renderChecklists();
 }
+function getParticipationStatus(name) {
+  const v = (DB.votes['participation'] || {})[name];
+  if (v === 0) return { code: 'yes', label: '✅ 참가', color: '#27ae60', bg: '#e6f7ec' };
+  if (v === 1) return { code: 'no', label: '❌ 불참', color: '#e74c3c', bg: '#fdebec' };
+  if (v === 2) return { code: 'maybe', label: '🤔 미정', color: '#e67e22', bg: '#fef3e6' };
+  return { code: 'none', label: '⏳ 미투표', color: '#888', bg: '#f0f0f0' };
+}
+function getActiveMembers() {
+  return REGISTERED_MEMBERS.filter(n => {
+    const v = (DB.votes['participation'] || {})[n];
+    return v !== 1;
+  });
+}
+
 function _getPollWinner(pollId) {
   const poll = POLLS.find(p => p.id === pollId);
   if (!poll) return null;
