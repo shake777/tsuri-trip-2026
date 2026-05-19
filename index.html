@@ -527,6 +527,17 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
+        <h2>✅ 현재까지의 확정 일정 (홈 요약)</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px; margin-bottom:12px;">투표 진행 중인 1위 항목 미리보기 — 자세히 보려면 상단 "✅ 확정 일정" 탭 클릭</p>
+        <div id="home-result-summary"></div>
+        <div id="home-result-itinerary" style="margin-top:14px;"></div>
+        <div class="btn-row" style="margin-top:14px;">
+          <button class="btn" onclick="switchTab('result')">✅ 확정 일정 상세 보기 →</button>
+          <button class="btn secondary" onclick="switchTab('vote')">🗳️ 투표 추가하기</button>
+        </div>
+      </div>
+
+      <div class="card">
         <h2>☁️ 클라우드 자동 동기화</h2>
         <p><strong>자동 저장 활성화됨</strong> — 투표·토론·댓글·일정 변경 시 자동으로 클라우드에 저장됩니다. 다른 회원이 새로고침하면 즉시 반영된 결과를 볼 수 있습니다.</p>
         <div class="btn-row">
@@ -1661,6 +1672,7 @@ function init() {
   renderHomeLoginGrid();
   renderPassports();
   renderHomeMemberStatus();
+  renderResult();
   renderCloudStatus();
   // Auto-load from cloud on startup (async)
   loadFromCloud(false);
@@ -2471,9 +2483,15 @@ function formatTime(ts) {
 // ============== RESULT (확정 일정) ==============
 function renderResult() {
   renderResultSummary();
+  renderResultSummary('home-result-summary', true);
   renderResultItinerary();
+  renderResultItinerary('home-result-itinerary', true);
   renderResultByMember();
   renderChecklists();
+}
+function renderHomeResultMini() {
+  renderResultSummary('home-result-summary', true);
+  renderResultItinerary('home-result-itinerary', true);
 }
 function getParticipationStatus(name) {
   const v = (DB.votes['participation'] || {})[name];
@@ -2523,8 +2541,8 @@ function _getPollWinner(pollId) {
     maxCount
   };
 }
-function renderResultSummary() {
-  const el = document.getElementById('result-summary');
+function renderResultSummary(targetId, compact) {
+  const el = document.getElementById(targetId || 'result-summary');
   if (!el) return;
   let html = '';
   POLLS.forEach(poll => {
@@ -2558,8 +2576,8 @@ function renderResultSummary() {
   });
   el.innerHTML = html;
 }
-function renderResultItinerary() {
-  const el = document.getElementById('result-itinerary');
+function renderResultItinerary(targetId, compact) {
+  const el = document.getElementById(targetId || 'result-itinerary');
   if (!el) return;
   const datesR = _getPollWinner('dates');
   const fishingR = _getPollWinner('fishing');
