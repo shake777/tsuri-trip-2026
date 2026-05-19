@@ -2370,6 +2370,10 @@ function _getPollWinner(pollId) {
   const voters = poll.options.map(() => []);
   Object.entries(votes).forEach(([user, idx]) => {
     if (typeof idx === 'number' && counts[idx] !== undefined) {
+      if (pollId !== 'participation') {
+        const pS = getParticipationStatus(user);
+        if (pS.code === 'no') return;
+      }
       counts[idx]++;
       voters[idx].push(user);
     }
@@ -2666,8 +2670,11 @@ function renderResultByMember() {
     </thead>
     <tbody>`;
   memberNames.forEach(name => {
+    const partS = getParticipationStatus(name);
+    const isNo = partS.code === 'no';
+    const rowOp = isNo ? ' style="opacity:0.5;"' : '';
     let done = 0;
-    html += `<tr><td style="font-weight: 600; color: var(--primary);">${escapeHtml(name)}</td>`;
+    html += `<tr${rowOp}><td style="font-weight: 600; color: var(--primary);">${escapeHtml(name)}${isNo ? ' (불참)' : ''}</td>`;
     topics.forEach(t => {
       const poll = POLLS.find(p => p.id === t.id);
       const voteIdx = (DB.votes[t.id] || {})[name];
