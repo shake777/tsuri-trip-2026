@@ -1,16 +1,19 @@
 {
   "votes": {
     "dates": {
+      "최근호": 2,
       "박중산": [
         0,
         2
       ],
       "최진원": 2,
-      "김기태": 0,
       "김석": 2,
       "김철현": [
         2,
         6
+      ],
+      "김기태": [
+        1
       ],
       "윤유병": [
         3,
@@ -60,6 +63,13 @@
         3
       ]
     },
+    "participation": {
+      "박중산": 0,
+      "조성화": 1,
+      "김기태": 2,
+      "윤유병": 3,
+      "최근호": 3
+    },
     "alt_activity": {
       "김철현": [
         0
@@ -67,12 +77,6 @@
       "윤유병": [
         3
       ]
-    },
-    "participation": {
-      "박중산": 0,
-      "조성화": 1,
-      "윤유병": 3,
-      "최근호": 3
     }
   },
   "threads": [
@@ -81,7 +85,7 @@
       "title": "환영합니다 🎉",
       "author": "관리자",
       "body": "키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 박중산·최근호·김석·김기태·조성화·최진원·윤유병·김철현 8분이 등록되어 있습니다. 자유롭게 의견 남겨주세요!",
-      "ts": 1779163642873,
+      "ts": 1779091810168,
       "comments": []
     },
     {
@@ -123,7 +127,7 @@
   ],
   "members": {
     "박중산": {
-      "joinedAt": 1779163642873,
+      "joinedAt": 1779091810168,
       "preRegistered": true,
       "passport": {
         "surname": "PARK",
@@ -137,11 +141,11 @@
       }
     },
     "최근호": {
-      "joinedAt": 1779163642873,
+      "joinedAt": 1779091810168,
       "preRegistered": true
     },
     "김석": {
-      "joinedAt": 1779163642873,
+      "joinedAt": 1779091810168,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -155,11 +159,11 @@
       }
     },
     "김기태": {
-      "joinedAt": 1779163642873,
+      "joinedAt": 1779091810168,
       "preRegistered": true
     },
     "조성화": {
-      "joinedAt": 1779163642873,
+      "joinedAt": 1779091810168,
       "preRegistered": true,
       "passport": {
         "surname": "CHO",
@@ -173,7 +177,7 @@
       }
     },
     "최진원": {
-      "joinedAt": 1779163642873,
+      "joinedAt": 1779091810168,
       "preRegistered": true,
       "passport": {
         "surname": "CHOI",
@@ -187,7 +191,7 @@
       }
     },
     "윤유병": {
-      "joinedAt": 1779163642873,
+      "joinedAt": 1779091810168,
       "preRegistered": true,
       "passport": {
         "surname": "YOON",
@@ -201,7 +205,7 @@
       }
     },
     "김철현": {
-      "joinedAt": 1779163642873,
+      "joinedAt": 1779091810168,
       "preRegistered": true,
       "passport": {
         "surname": "KIM",
@@ -221,6 +225,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779176608472,
-  "lastSavedBy": "윤유병"
+  "lastSavedAt": 1779188277891,
+  "lastSavedBy": "김기태"
 }
