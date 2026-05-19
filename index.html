@@ -1292,6 +1292,15 @@ function saveDB() { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); }
 // ============== POLLS ==============
 const POLLS = [
   {
+    id: 'participation',
+    question: '👤 참가 여부 (가장 먼저 결정해 주세요)',
+    options: [
+      '✅ 참가 확정 — 일정 맞춰 출발 가능',
+      '❌ 불참 — 이번 여행 불참',
+      '🤔 미정 — 일정·여건 확인 후 결정'
+    ]
+  },
+  {
     id: 'dates',
     question: '🗓️ 여행 일정 (9월~12월 첫주 — 가능한 주간 모두 선택 가능)',
     options: [
