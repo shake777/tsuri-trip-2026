@@ -1266,12 +1266,21 @@ function saveDB() { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); }
 const POLLS = [
   {
     id: 'dates',
-    question: '🗓️ 여행 일정 (9월~12월 중 선호 주간을 골라주세요)',
+    question: '🗓️ 여행 일정 (9월~12월 첫주 — 가능한 주간 모두 선택 가능)',
     options: [
-      '9월 둘째주 — 오토시코미 초기, 시즌 진입',
-      '10월 셋째주 — 단풍·날씨 좋음 + 다양한 어종',
-      '11월 둘째주 — 오토시코미·아라카부 베스트',
-      '12월 첫째주 — 아라카부·아라 낚시 본격, 가격 저렴'
+      '9월 1주 (9/1~9/6) — 초가을, 시즌 진입',
+      '9월 2주 (9/7~9/13) — 오토시코미 시작',
+      '9월 3주 (9/14~9/20) — 추석 연휴 (9/15~9/17)',
+      '9월 4주 (9/21~9/27) — 추석 후 안정기',
+      '10월 1주 (9/28~10/4) — 개천절 연휴 (10/3 금)',
+      '10월 2주 (10/5~10/11) — 한글날 (10/9 금)',
+      '10월 3주 (10/12~10/18) — 단풍·날씨 좋음 + 다양한 어종',
+      '10월 4주 (10/19~10/25) — 본격 가을 시즌',
+      '11월 1주 (10/26~11/1) — 가을 끝자락',
+      '11월 2주 (11/2~11/8) — 오토시코미·아라카부 베스트',
+      '11월 3주 (11/9~11/15) — 추위 시작, 청물·참돔 호조',
+      '11월 4주 (11/16~11/22) — 늦가을 본격 시즌',
+      '12월 1주 (11/23~11/29) — 초겨울, 아라카부 본격, 가격 저렴'
     ]
   },
   {
@@ -1852,21 +1861,28 @@ function renderPolls() {
   let html = '';
   POLLS.forEach(poll => {
     if (!DB.votes[poll.id]) DB.votes[poll.id] = {};
-    const myVote = DB.votes[poll.id][DB.user];
+    const myVotes = _getUserVotes(poll.id, DB.user);
     const counts = poll.options.map((_, i) => 0);
     const voters = poll.options.map(() => []);
-    Object.entries(DB.votes[poll.id]).forEach(([user, idx]) => {
-      if (typeof idx === 'number' && idx >= 0 && idx < poll.options.length) {
-        counts[idx]++;
-        voters[idx].push(user);
-      }
+    const userCount = new Set();
+    Object.entries(DB.votes[poll.id]).forEach(([user, val]) => {
+      const idxs = (typeof val === 'number') ? [val] : (Array.isArray(val) ? val : []);
+      idxs.forEach(idx => {
+        if (idx >= 0 && idx < poll.options.length) {
+          counts[idx]++;
+          voters[idx].push(user);
+          userCount.add(user);
+        }
+      });
     });
-    const total = counts.reduce((a, b) => a + b, 0);
+    const totalVotes = counts.reduce((a, b) => a + b, 0);
+    const totalUsers = userCount.size;
+    const isMulti = poll.id !== 'participation';
     html += `<div class="card poll-card">
-      <div class="poll-question">${escapeHtml(poll.question)}</div>`;
+      <div class="poll-question">${escapeHtml(poll.question)}${isMulti ? ' <span style="font-size:11px; background:var(--primary-lighter); color:var(--primary); padding:2px 8px; border-radius:8px; font-weight:500; margin-left:6px;">복수선택</span>' : ''}</div>`;
     poll.options.forEach((opt, i) => {
-      const pct = total > 0 ? Math.round(counts[i] / total * 100) : 0;
-      const isMine = myVote === i;
+      const pct = totalUsers > 0 ? Math.round(counts[i] / totalUsers * 100) : 0;
+      const isMine = myVotes.indexOf(i) >= 0;
       html += `
         <div class="poll-option ${isMine ? 'voted' : ''}" onclick="vote('${poll.id}', ${i})">
           <div class="bar" style="width: ${pct}%;"></div>
@@ -1876,18 +1892,39 @@ function renderPolls() {
         ${voters[i].length > 0 ? `<div class="poll-voters" style="background:#f0f7fc;padding:6px 12px;border-radius:6px;margin:2px 0 8px 14px;color:var(--primary);font-weight:500;">👥 투표한 회원: ${voters[i].map(escapeHtml).join(' · ')}</div>` : ''}
       `;
     });
-    const nonVoters = REGISTERED_MEMBERS.filter(n => DB.votes[poll.id][n] === undefined);
-    html += `<div class="poll-total">총 ${total}명 투표${nonVoters.length > 0 ? ` · 미투표: ${nonVoters.map(escapeHtml).join(', ')}` : ''}</div>`;
+    const nonVoters = REGISTERED_MEMBERS.filter(n => DB.votes[poll.id][n] === undefined || (Array.isArray(DB.votes[poll.id][n]) && DB.votes[poll.id][n].length === 0));
+    html += `<div class="poll-total">${isMulti ? '총 ' + totalUsers + '명 / ' + totalVotes + '표' : '총 ' + totalUsers + '명 투표'}${nonVoters.length > 0 ? ` · 미투표: ${nonVoters.map(escapeHtml).join(', ')}` : ''}</div>`;
     html += `</div>`;
   });
   container.innerHTML = html;
 }
 function vote(pollId, optionIdx) {
   if (!DB.user) return;
-  if (DB.votes[pollId][DB.user] === optionIdx) {
-    delete DB.votes[pollId][DB.user];
+  if (!DB.votes[pollId]) DB.votes[pollId] = {};
+  // Participation poll stays SINGLE-CHOICE; others are MULTI-CHOICE
+  if (pollId === 'participation') {
+    if (DB.votes[pollId][DB.user] === optionIdx) {
+      delete DB.votes[pollId][DB.user];
+    } else {
+      DB.votes[pollId][DB.user] = optionIdx;
+    }
   } else {
-    DB.votes[pollId][DB.user] = optionIdx;
+    // Multi-choice: store as array of selected indexes
+    let cur = DB.votes[pollId][DB.user];
+    if (typeof cur === 'number') cur = [cur]; // migrate legacy single-value
+    if (!Array.isArray(cur)) cur = [];
+    const pos = cur.indexOf(optionIdx);
+    if (pos >= 0) {
+      cur.splice(pos, 1);
+    } else {
+      cur.push(optionIdx);
+      cur.sort((a, b) => a - b);
+    }
+    if (cur.length === 0) {
+      delete DB.votes[pollId][DB.user];
+    } else {
+      DB.votes[pollId][DB.user] = cur;
+    }
   }
   saveDB();
   renderPolls();
@@ -1896,6 +1933,15 @@ function vote(pollId, optionIdx) {
   renderMembers();
   renderHomeMemberStatus();
   triggerAutoSave();
+}
+
+// Helper: get list of voted option indexes for a user (handles both single and array formats)
+function _getUserVotes(pollId, user) {
+  const v = (DB.votes[pollId] || {})[user];
+  if (v === undefined || v === null) return [];
+  if (typeof v === 'number') return [v];
+  if (Array.isArray(v)) return v;
+  return [];
 }
 
 // ============== THREADS ==============
@@ -2109,7 +2155,11 @@ function renderMembers() {
   let html = '';
   memberNames.forEach(name => {
     const m = DB.members[name];
-    const voteCount = Object.values(DB.votes).reduce((sum, p) => sum + (p[name] !== undefined ? 1 : 0), 0);
+    const voteCount = Object.values(DB.votes).reduce((sum, p) => {
+      const v = p[name];
+      const cnt = (v === undefined || (Array.isArray(v) && v.length === 0)) ? 0 : 1;
+      return sum + cnt;
+    }, 0);
     const commentCount = DB.threads.reduce((sum, t) =>
       sum + (t.author === name ? 1 : 0) + t.comments.filter(c => c.author === name).length, 0);
     const isMe = name === DB.user;
@@ -2135,7 +2185,7 @@ function renderHomeMemberStatus() {
   // Compute group totals
   let groupVoteSum = 0, groupCheckSum = 0, passportOK = 0;
   REGISTERED_MEMBERS.forEach(name => {
-    const voted = POLLS.filter(p => (DB.votes[p.id] || {})[name] !== undefined).length;
+    const voted = POLLS.filter(p => { const v = (DB.votes[p.id] || {})[name]; return v !== undefined && !(Array.isArray(v) && v.length === 0); }).length;
     groupVoteSum += voted;
     let checked = 0;
     CHECKLISTS.forEach(cl => {
@@ -2177,7 +2227,7 @@ function renderHomeMemberStatus() {
   html += '<th style="text-align:center; min-width:60px;">활동</th>';
   html += '</tr></thead><tbody>';
   REGISTERED_MEMBERS.forEach(name => {
-    const voted = POLLS.filter(p => (DB.votes[p.id] || {})[name] !== undefined).length;
+    const voted = POLLS.filter(p => { const v = (DB.votes[p.id] || {})[name]; return v !== undefined && !(Array.isArray(v) && v.length === 0); }).length;
     const votePct = Math.round(voted / totalVotes * 100);
     let checked = 0;
     CHECKLISTS.forEach(cl => {
@@ -2224,7 +2274,11 @@ function renderHomeLoginGrid() {
   card.style.display = '';
   let html = '';
   REGISTERED_MEMBERS.forEach(name => {
-    const voteCount = Object.values(DB.votes).reduce((sum, p) => sum + (p[name] !== undefined ? 1 : 0), 0);
+    const voteCount = Object.values(DB.votes).reduce((sum, p) => {
+      const v = p[name];
+      const cnt = (v === undefined || (Array.isArray(v) && v.length === 0)) ? 0 : 1;
+      return sum + cnt;
+    }, 0);
     const escName = escapeHtml(name).replace(/'/g, "\\'");
     html += `<button onclick="loginAs('${escName}')" style="background: white; border: 2px solid var(--primary-lighter); color: var(--primary); padding: 14px 12px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600; transition: all 0.15s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">
       ${escapeHtml(name)}
@@ -2262,7 +2316,10 @@ function renderProgress() {
   POLLS.forEach(poll => {
     const v = DB.votes[poll.id] || {};
     const counts = poll.options.map((_, i) => 0);
-    Object.values(v).forEach(idx => { if (counts[idx] !== undefined) counts[idx]++; });
+    Object.values(v).forEach(val => {
+      const idxs = (typeof val === 'number') ? [val] : (Array.isArray(val) ? val : []);
+      idxs.forEach(idx => { if (counts[idx] !== undefined) counts[idx]++; });
+    });
     const top = counts.indexOf(Math.max(...counts));
     const total = counts.reduce((a, b) => a + b, 0);
     if (total > 0) {
@@ -2368,15 +2425,18 @@ function _getPollWinner(pollId) {
   const votes = DB.votes[pollId] || {};
   const counts = poll.options.map(() => 0);
   const voters = poll.options.map(() => []);
-  Object.entries(votes).forEach(([user, idx]) => {
-    if (typeof idx === 'number' && counts[idx] !== undefined) {
-      if (pollId !== 'participation') {
-        const pS = getParticipationStatus(user);
-        if (pS.code === 'no') return;
-      }
-      counts[idx]++;
-      voters[idx].push(user);
+  Object.entries(votes).forEach(([user, val]) => {
+    if (pollId !== 'participation') {
+      const pS = getParticipationStatus(user);
+      if (pS.code === 'no') return;
     }
+    const idxs = (typeof val === 'number') ? [val] : (Array.isArray(val) ? val : []);
+    idxs.forEach(idx => {
+      if (counts[idx] !== undefined) {
+        counts[idx]++;
+        voters[idx].push(user);
+      }
+    });
   });
   const total = counts.reduce((a, b) => a + b, 0);
   const maxCount = Math.max(...counts);
@@ -2677,12 +2737,16 @@ function renderResultByMember() {
     html += `<tr${rowOp}><td style="font-weight: 600; color: var(--primary);">${escapeHtml(name)}${isNo ? ' (불참)' : ''}</td>`;
     topics.forEach(t => {
       const poll = POLLS.find(p => p.id === t.id);
-      const voteIdx = (DB.votes[t.id] || {})[name];
-      if (typeof voteIdx === 'number' && poll && poll.options[voteIdx]) {
+      const voteVal = (DB.votes[t.id] || {})[name];
+      const idxs = (typeof voteVal === 'number') ? [voteVal] : (Array.isArray(voteVal) ? voteVal : []);
+      if (idxs.length > 0 && poll) {
         done++;
-        const opt = poll.options[voteIdx];
-        const short = opt.length > 18 ? opt.substring(0, 16) + '…' : opt;
-        html += `<td title="${escapeHtml(opt)}" style="color: var(--text);">${escapeHtml(short)}</td>`;
+        const opts = idxs.filter(i => poll.options[i]).map(i => poll.options[i]);
+        const fullText = opts.join(' / ');
+        const display = idxs.length === 1
+          ? (opts[0].length > 18 ? opts[0].substring(0,16) + '…' : opts[0])
+          : opts.length + '개 선택';
+        html += `<td title="${escapeHtml(fullText)}" style="color: var(--text);">${escapeHtml(display)}</td>`;
       } else {
         html += `<td style="color: var(--text-muted);">—</td>`;
       }
