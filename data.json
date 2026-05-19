@@ -47,6 +47,9 @@
     "alt_activity": {
       "김철현": [
         0
+      ],
+      "윤유병": [
+        3
       ]
     },
     "participation": {
@@ -201,6 +204,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779168124374,
+  "lastSavedAt": 1779168142088,
   "lastSavedBy": "윤유병"
 }
