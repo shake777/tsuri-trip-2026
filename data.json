@@ -38,7 +38,11 @@
         1
       ]
     },
-    "alt_activity": {}
+    "alt_activity": {
+      "김철현": [
+        0
+      ]
+    }
   },
   "threads": [
     {
@@ -186,6 +190,6 @@
     }
   },
   "departureDate": "2026-09-11",
-  "lastSavedAt": 1779151603026,
+  "lastSavedAt": 1779151686938,
   "lastSavedBy": "김철현"
 }
