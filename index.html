@@ -616,16 +616,13 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
-        <h2>☁️ 클라우드 자동 동기화</h2>
-        <p><strong>자동 저장 활성화됨</strong> — 투표·토론·댓글·일정 변경 시 자동으로 클라우드에 저장됩니다. 다른 회원이 새로고침하면 즉시 반영된 결과를 볼 수 있습니다.</p>
+        <h2>☁️ 클라우드 동기화 상태</h2>
+        <div id="cloud-mode"></div>
         <div class="btn-row">
           <button class="btn" id="cloud-save-btn" onclick="saveToCloud(false)">💾 지금 저장</button>
           <button class="btn secondary" onclick="cloudRefresh()">🔄 새로고침</button>
         </div>
         <div id="cloud-status" style="font-size: 12px; color: var(--text-muted); margin-top: 10px;"></div>
-        <div class="note success" style="margin-top: 12px; font-size: 12px;">
-          ✅ 비밀번호 입력 후 모든 변경사항은 자동으로 클라우드에 저장됩니다. 별도 조작이 필요하지 않습니다.
-        </div>
       </div>
     </section>
 
@@ -713,7 +710,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <div class="card">
           <h2>🗳️ 투표 안내</h2>
           <p><strong>참가 여부만 단일 선택</strong>이고, 나머지는 전부 <strong>복수 선택</strong>입니다. 가능한 날짜·가고 싶은 장소를 여러 개 고르면 겹치는 날로 자동 집계됩니다. 다시 누르면 취소됩니다.</p>
-          <div class="note info">✅ 선택하는 즉시 자동 저장됩니다. 다른 회원이 새로고침하면 바로 보입니다.</div>
+          <div id="vote-cloud-note"></div>
         </div>
         <div id="polls-container"></div>
       </div>
@@ -825,6 +822,7 @@ let _gateSelectedName = null;
 let _lastCloudSync = 0;
 let _autoSaveTimer = null;
 let _autoSaveBusy = false;
+let _cloudWritable = null; // null = 확인 중, true = 저장 가능, false = 저장 불가(토큰 만료 등)
 
 let DB = loadDB();
 
@@ -1197,6 +1195,20 @@ function cloudRefresh() {
   loadFromCloud(false).then(() => alert('☁️ 최신 데이터 불러오기 완료!'));
 }
 
+// 저장용 토큰이 살아 있는지 읽기 전용으로 확인 (쓰기는 하지 않음)
+async function checkCloudWritable() {
+  try {
+    const res = await fetch(CLOUD_API_URL, {
+      headers: { 'Authorization': 'token ' + _getCloudToken(), 'Accept': 'application/vnd.github+json' }
+    });
+    _cloudWritable = res.ok;
+  } catch (e) {
+    _cloudWritable = false;
+  }
+  renderCloudStatus();
+  return _cloudWritable;
+}
+
 async function saveToCloud(silent) {
   if (!DB.user) { if (!silent) alert('로그인 후 저장 가능합니다'); return; }
   const token = _getCloudToken();
@@ -1208,11 +1220,13 @@ async function saveToCloud(silent) {
       headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github+json' }
     });
     if (getRes.status === 401 || getRes.status === 403) {
-      if (!silent) alert('저장 권한이 없습니다. 관리자에게 문의해 주세요.');
+      _cloudWritable = false;
+      renderCloudStatus();
+      if (!silent) alert('⚠️ 클라우드 저장 권한이 만료되었습니다.\n\n지금 누른 내용은 이 브라우저에만 저장됩니다.\n결과를 합치려면 [회원] 탭 → [데이터 내보내기]로 파일을 뽑아 총무에게 보내주세요.');
       if (btn) { btn.disabled = false; btn.textContent = '💾 지금 저장'; }
       return;
     }
-    if (getRes.ok) sha = (await getRes.json()).sha;
+    if (getRes.ok) { sha = (await getRes.json()).sha; _cloudWritable = true; }
     const payload = {
       votes: DB.votes,
       threads: DB.threads,
@@ -1237,11 +1251,14 @@ async function saveToCloud(silent) {
     });
     if (putRes.ok) {
       _lastCloudSync = payload.lastSavedAt;
+      _cloudWritable = true;
       if (!silent) alert('☁️ 클라우드 저장 완료!\n다른 회원이 새로고침하면 동일 데이터를 볼 수 있습니다.');
       renderCloudStatus();
     } else {
       const err = await putRes.text();
       console.error('Save failed:', err);
+      _cloudWritable = false;
+      renderCloudStatus();
       if (!silent) alert('저장 실패: ' + err.substring(0, 200));
     }
   } catch (e) {
@@ -1255,6 +1272,7 @@ async function saveToCloud(silent) {
 
 function triggerAutoSave() {
   if (!DB.user) return;
+  if (_cloudWritable === false) { renderCloudStatus(); return; } // 토큰 만료 시 반복 실패 요청 방지
   if (_autoSaveTimer) clearTimeout(_autoSaveTimer);
   _autoSaveTimer = setTimeout(() => {
     if (_autoSaveBusy) { triggerAutoSave(); return; }
@@ -1267,11 +1285,27 @@ function triggerAutoSave() {
 
 function renderCloudStatus() {
   const el = document.getElementById('cloud-status');
-  if (!el) return;
-  if (_lastCloudSync > 0) {
-    el.textContent = '☁️ 마지막 동기화: ' + new Date(_lastCloudSync).toLocaleString('ko-KR');
-  } else {
-    el.textContent = '☁️ 아직 클라우드에서 불러오지 않음';
+  if (el) {
+    if (_lastCloudSync > 0) {
+      el.textContent = '☁️ 마지막 동기화: ' + new Date(_lastCloudSync).toLocaleString('ko-KR');
+    } else {
+      el.textContent = '☁️ 아직 클라우드에서 불러오지 않음';
+    }
+  }
+  const OFFLINE_NOTE = '<div class="note warn"><strong>⚠️ 지금은 내 브라우저에만 저장됩니다.</strong> ' +
+    '클라우드 저장 권한(토큰)이 만료되어 투표·댓글이 다른 회원에게 자동으로 전달되지 않습니다. ' +
+    '읽기(다른 사람이 올려둔 내용 보기)는 정상입니다.<br>' +
+    '👉 결과를 합치려면 <strong>[👥 회원] 탭 → [📥 데이터 내보내기]</strong>로 파일을 뽑아 총무에게 보내주세요. ' +
+    '(관리자: 새 토큰 발급 또는 별도 저장소 연결 필요)</div>';
+  const ONLINE_NOTE = '<div class="note success"><strong>✅ 자동 저장 정상</strong> — 투표·토론·댓글·체크 변경 시 자동으로 클라우드에 저장됩니다. 다른 회원이 새로고침하면 즉시 반영됩니다.</div>';
+  const CHECKING_NOTE = '<div class="note info">☁️ 클라우드 저장 가능 여부 확인 중...</div>';
+  const note = _cloudWritable === true ? ONLINE_NOTE : _cloudWritable === false ? OFFLINE_NOTE : CHECKING_NOTE;
+  const mode = document.getElementById('cloud-mode');
+  if (mode) mode.innerHTML = note;
+  const voteNote = document.getElementById('vote-cloud-note');
+  if (voteNote) {
+    voteNote.innerHTML = _cloudWritable === false ? OFFLINE_NOTE
+      : '<div class="note info">✅ 선택하는 즉시 자동 저장됩니다. 다른 회원이 새로고침하면 바로 보입니다.</div>';
   }
 }
 
@@ -1292,6 +1326,7 @@ function init() {
   renderResult();
   renderCloudStatus();
   loadFromCloud(false);
+  checkCloudWritable();
   document.getElementById('departure-date').addEventListener('change', e => {
     DB.departureDate = e.target.value;
     saveDB();
