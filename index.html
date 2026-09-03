@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>北九州 釣りいこか倶楽部 — 여행 계획 사이트</title>
+<title>🦑 서해 워킹 쭈꾸미 원정 2026 — 10월 차박 낚시 계획</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="googlebot" content="noindex, nofollow, noarchive">
 <meta name="bingbot" content="noindex, nofollow, noarchive">
@@ -415,14 +415,50 @@ body.gated header, body.gated main, body.gated footer { display: none; }
   .brand h1 { font-size: 17px; }
   th, td { padding: 7px 8px; font-size: 12px; }
 }
+/* ============ SPOT CARDS (후보지) ============ */
+.spot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.spot-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column;
+}
+.spot-card .spot-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.spot-card .spot-emoji { font-size: 26px; line-height: 1; }
+.spot-card .spot-name { font-size: 15px; font-weight: 700; color: var(--primary); }
+.spot-card .spot-region { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.spot-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.spot-meta span {
+  font-size: 11px; background: #f0f7fc; color: var(--primary);
+  padding: 3px 8px; border-radius: 10px; font-weight: 500;
+}
+.spot-card .spot-desc { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 8px; }
+.pc-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; }
+.pc-list > div { font-size: 11.5px; border-radius: 8px; padding: 8px 10px; }
+.pc-pros { background: #e6f7ec; color: #155f3a; }
+.pc-cons { background: #fdf0e6; color: #8a4500; }
+.pc-list ul { padding-left: 14px; margin: 4px 0 0; }
+.pc-list li { margin-bottom: 2px; color: inherit; font-size: 11.5px; }
+.spot-memo {
+  margin-top: 10px; font-size: 11.5px; background: #fffbe6; color: #7a5c00;
+  border-left: 3px solid #f0c040; padding: 7px 10px; border-radius: 4px;
+}
+.chat-log { display: flex; flex-direction: column; gap: 6px; }
+.chat-row { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; }
+.chat-who {
+  flex: 0 0 62px; font-weight: 600; color: var(--primary); font-size: 11.5px;
+  text-align: right; padding-top: 1px;
+}
+.chat-msg { background: #f5f8fc; border-radius: 8px; padding: 6px 10px; color: var(--text-secondary); }
+@media (max-width: 700px) {
+  .pc-list { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
 <div id="auth-gate" style="display:none;">
   <div class="gate-card">
-    <div class="gate-title">🎣 北九州 釣りいこか倶楽部</div>
-    <div class="gate-subtitle">키타큐슈 바다낚시 여행 회원 전용 페이지</div>
+    <div class="gate-title">🦑 서해 워킹 쭈꾸미 원정 2026</div>
+    <div class="gate-subtitle">10월 차박 낚시 — 회원 전용 계획 페이지</div>
 
     <div class="gate-step-label">STEP 1 · 본인 이름 선택</div>
     <div class="gate-name-grid" id="gate-name-grid"></div>
@@ -449,18 +485,19 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 <header>
   <div class="header-top">
     <div class="brand">
-      <h1>北九州 釣りいこか倶楽部 — 여행 계획</h1>
-      <div class="subtitle">키타큐슈 바다낚시 여행 회원 전용 페이지</div>
+      <h1>🦑 서해 워킹 쭈꾸미 원정 2026</h1>
+      <div class="subtitle">10월 · 2박3일 · 차박/좌대 — 날짜와 장소를 투표로 정합시다</div>
     </div>
     <div class="member-area" id="member-area-content"></div>
   </div>
   <div class="tabs">
     <button class="tab active" data-section="home">🏠 홈</button>
-    <button class="tab" data-section="info">📋 여행정보</button>
+    <button class="tab" data-section="spots">📍 후보지</button>
     <button class="tab" data-section="schedule">📅 일정</button>
     <button class="tab" data-section="vote">🗳️ 투표</button>
-    <button class="tab" data-section="result">✅ 확정 일정</button>
+    <button class="tab" data-section="result">✅ 확정</button>
     <button class="tab" data-section="discuss">💬 토론</button>
+    <button class="tab" data-section="prep">🎒 준비물</button>
     <button class="tab" data-section="members">👥 회원</button>
   </div>
 </header>
@@ -483,34 +520,60 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
+        <h2>🗳️ 지금 결정해야 할 3가지</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">단톡방에서 나온 이야기를 그대로 투표 항목으로 옮겼습니다. 각자 눌러만 주시면 됩니다.</p>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:10px; margin-top:12px;">
+          <div style="background:#f0f7fc; padding:14px; border-radius:10px; border-left:4px solid var(--primary);">
+            <div style="font-size:11px; color:var(--text-muted);">1️⃣ 날짜</div>
+            <div style="font-size:15px; font-weight:700; color:var(--primary); margin-top:3px;">10월 언제 갈까?</div>
+            <div style="font-size:11.5px; color:var(--text-secondary); margin-top:4px;">9월 주말은 이미 마감 · 10/1~3 vs 연휴 등 9개 후보</div>
+          </div>
+          <div style="background:#f0f7fc; padding:14px; border-radius:10px; border-left:4px solid var(--primary);">
+            <div style="font-size:11px; color:var(--text-muted);">2️⃣ 장소</div>
+            <div style="font-size:15px; font-weight:700; color:var(--primary); margin-top:3px;">어디로 갈까?</div>
+            <div style="font-size:11.5px; color:var(--text-secondary); margin-top:4px;">안면도·태안·무창포·석모도·궁평항·영흥도 7곳 비교</div>
+          </div>
+          <div style="background:#fef3e6; padding:14px; border-radius:10px; border-left:4px solid var(--accent);">
+            <div style="font-size:11px; color:var(--text-muted);">3️⃣ 회비</div>
+            <div style="font-size:15px; font-weight:700; color:#b35c00; margin-top:3px;">회비는 어떻게?</div>
+            <div style="font-size:11.5px; color:var(--text-secondary); margin-top:4px;">인하 / 유지 / 불출 — 감정 빼고 다수결로</div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn" onclick="switchTab('vote')">🗳️ 지금 투표하기 →</button>
+          <button class="btn secondary" onclick="switchTab('spots')">📍 후보지 먼저 보기</button>
+        </div>
+      </div>
+
+      <div class="card">
         <h2>📊 회원별 준비 현황</h2>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: -4px; margin-bottom: 12px;">출발 전 모든 회원의 투표·체크리스트·여권 상태를 한눈에 확인하세요. 클릭하면 해당 회원의 상세를 볼 수 있습니다.</p>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: -4px; margin-bottom: 12px;">누가 투표했고 누가 안 했는지 한눈에 보입니다. 재촉은 여기 보고 하세요 😄</p>
         <div id="home-member-status"></div>
       </div>
 
       <div class="card">
-        <h2>🎣 여행 개요</h2>
-        <p>일본 후쿠오카현 키타큐슈시(北九州市)에 위치한 바다낚시 종합 클럽 <strong>「釣りいこか倶楽部」</strong>에서 운영하는 올인원 바다낚시 패키지를 이용하는 여행입니다. 9개 항구의 24척 등록 유어선과 제휴하여 초보자부터 전문가까지 즐길 수 있습니다.</p>
+        <h2>🦑 이번 원정 개요</h2>
+        <p>9월 주말이 이미 다 차서 <strong>10월</strong>로 넘긴 서해 <strong>워킹 쭈꾸미</strong> 원정입니다. 배 타는 선상 출조 대신 <strong>방파제·갯바위에서 걸어 다니며</strong> 던지고, 밤에는 <strong>차박 또는 텐트</strong>로 자면서 고기 굽고 잡은 거 먹자는 게 원안입니다. 해상좌대(방갈로 제공) 안도 후보에 올라와 있습니다.</p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px;">
           <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
             <div style="font-size: 11px; color: var(--text-muted);">예상 일정</div>
-            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">3박 4일</div>
-            <div style="font-size: 11px; color: var(--text-muted);">선상 1박 + 코쿠라 2박 (낚시 + 온천)</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">2박 3일</div>
+            <div style="font-size: 11px; color: var(--text-muted);">목/금 출발 → 토요일 귀가</div>
           </div>
           <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
-            <div style="font-size: 11px; color: var(--text-muted);">권장 시기</div>
-            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">9월~12월</div>
-            <div style="font-size: 11px; color: var(--text-muted);">가을·겨울 시즌</div>
+            <div style="font-size: 11px; color: var(--text-muted);">시기</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">2026년 10월</div>
+            <div style="font-size: 11px; color: var(--text-muted);">쭈꾸미·갑오징어 피크 시즌</div>
           </div>
           <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
-            <div style="font-size: 11px; color: var(--text-muted);">출국</div>
-            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">부산→하카타</div>
-            <div style="font-size: 11px; color: var(--text-muted);">뉴카멜리아 야간 페리</div>
+            <div style="font-size: 11px; color: var(--text-muted);">방식</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">워킹 + 차박</div>
+            <div style="font-size: 11px; color: var(--text-muted);">좌대·선상은 투표 결과에 따라</div>
           </div>
           <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
-            <div style="font-size: 11px; color: var(--text-muted);">귀국</div>
-            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">FUK→ICN/GMP</div>
-            <div style="font-size: 11px; color: var(--text-muted);">항공편 1시간 29분</div>
+            <div style="font-size: 11px; color: var(--text-muted);">이동</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--primary); margin-top: 2px;">자차 카풀</div>
+            <div style="font-size: 11px; color: var(--text-muted);">차량 보유자 등록 후 조 편성</div>
           </div>
         </div>
       </div>
@@ -522,13 +585,28 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
+        <h2>💬 단톡방 논의 요약</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px; margin-bottom:12px;">지금까지 나온 의견을 사람별로 정리했습니다. 빠진 게 있으면 토론 탭에 남겨주세요.</p>
+        <div class="chat-log">
+          <div class="chat-row"><div class="chat-who">김기태</div><div class="chat-msg">9월 주말은 이미 꽉 참 → <strong>10월 1·2·3일 가능</strong>. 무창포는 너무 멀다, 다른 데 알아보자. 좌대(무지개좌대)도 괜찮을 듯 — 고기 사가서 굽고, 잡은 것도 먹고.</div></div>
+          <div class="chat-row"><div class="chat-who">박중산</div><div class="chat-msg">일정 올려봐야 안다 → <strong>10월로 진행</strong>. 무창포·석모도 알아봤고, 워킹이나 차에서 자는 장소를 더 찾아보자. 회비 건은 <strong>공지 후 결정</strong>하자.</div></div>
+          <div class="chat-row"><div class="chat-who">윤유병</div><div class="chat-msg"><strong>10월 1·2·3일 가능</strong>. 2박 하고 토요일 귀가. 굳이 좌대 말고 <strong>텐트나 차에서 자면서 워킹 쭈꾸미</strong> 하자는 게 원안.</div></div>
+          <div class="chat-row"><div class="chat-who">최근호</div><div class="chat-msg"><strong>태안 쪽이 편하다</strong>, 안면도 많이 간다.</div></div>
+          <div class="chat-row"><div class="chat-who">최진원</div><div class="chat-msg"><strong>10월 2일 출발 가능</strong>. 회비가 세 군데 중 여기가 제일 비싸니 <strong>월 5만원 정도로 인하</strong> 제안 (다수결로 결정하자).</div></div>
+        </div>
+        <div class="note info" style="margin-top:12px;">
+          🔧 미해결 쟁점: ① 최종 날짜 ② 장소 ③ 회비(인하 / 유지 / 불출) — 세 가지 모두 <strong>투표 탭</strong>에 올려두었습니다.
+        </div>
+      </div>
+
+      <div class="card">
         <h2>📌 진행 현황</h2>
         <div id="progress-summary"></div>
       </div>
 
       <div class="card">
-        <h2>✅ 현재까지의 확정 일정 (홈 요약)</h2>
-        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px; margin-bottom:12px;">투표 진행 중인 1위 항목 미리보기 — 자세히 보려면 상단 "✅ 확정 일정" 탭 클릭</p>
+        <h2>✅ 현재까지의 집계 (홈 요약)</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px; margin-bottom:12px;">투표 진행 중인 1위 항목 미리보기 — 자세히 보려면 상단 "✅ 확정" 탭 클릭</p>
         <div id="home-result-summary"></div>
         <div id="home-result-itinerary" style="margin-top:14px;"></div>
         <div class="btn-row" style="margin-top:14px;">
@@ -542,606 +620,100 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <p><strong>자동 저장 활성화됨</strong> — 투표·토론·댓글·일정 변경 시 자동으로 클라우드에 저장됩니다. 다른 회원이 새로고침하면 즉시 반영된 결과를 볼 수 있습니다.</p>
         <div class="btn-row">
           <button class="btn" id="cloud-save-btn" onclick="saveToCloud(false)">💾 지금 저장</button>
-          <button class="btn secondary" onclick="loadFromCloud(false).then(()=>alert('☁️ 최신 데이터 불러오기 완료!'))">🔄 새로고침</button>
+          <button class="btn secondary" onclick="cloudRefresh()">🔄 새로고침</button>
         </div>
         <div id="cloud-status" style="font-size: 12px; color: var(--text-muted); margin-top: 10px;"></div>
         <div class="note success" style="margin-top: 12px; font-size: 12px;">
-          ✅ 본인 비밀번호 (111111) 입력 후 모든 변경사항은 자동으로 클라우드에 저장됩니다. 별도 토큰 입력이 필요하지 않습니다.
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>🔗 빠른 메뉴</h2>
-        <div class="btn-row">
-          <button class="btn" onclick="switchTab('vote')">투표 참여하기</button>
-          <button class="btn secondary" onclick="switchTab('result')">확정 일정</button>
-          <button class="btn secondary" onclick="switchTab('discuss')">토론 게시판</button>
-          <button class="btn secondary" onclick="switchTab('info')">여행 정보 보기</button>
-          <button class="btn secondary" onclick="window.open('https://tsuri-ikoka.com/general', '_blank')">원본 클럽 사이트</button>
+          ✅ 비밀번호 입력 후 모든 변경사항은 자동으로 클라우드에 저장됩니다. 별도 조작이 필요하지 않습니다.
         </div>
       </div>
     </section>
 
-    <!-- ============ INFO ============ -->
-    <section class="section" id="section-info">
+    <!-- ============ SPOTS ============ -->
+    <section class="section" id="section-spots">
       <div class="card">
-        <h2>🏢 클럽 소개</h2>
-        <p>키타큐슈시는 시 중심부에서 유어선이 출항할 수 있는 편리한 지리적 이점과 사계절 다양한 어종이 잡히는 풍부한 어장을 보유한 도시입니다. 釣りいこか倶楽部는 9개 항구의 24척의 유어선과 제휴하여 운영되며, 낚시 가이드·도구 렌탈·생선 손질·요리·숙박까지 통합 서비스를 제공합니다.</p>
-        <h3>5단계 올인원 패키지</h3>
-        <ul>
-          <li>① 낚시터·낚시일정·낚시방법 검토</li>
-          <li>② 어떤 유어선을 탈 것인지 선택</li>
-          <li>③ 8가지 부가 서비스 신청</li>
-          <li>④ 잡은 생선 요리·식당 안내</li>
-          <li>⑤ 숙박 시설 안내</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>🌊 낚시 가능 해역</h2>
-        <table>
-          <thead><tr><th>해역</th><th>특징</th><th>유어요금</th></tr></thead>
-          <tbody>
-            <tr><td>관문해협 (関門海峡)</td><td>날씨 강함, 사계절 운영</td><td>6,000 ~ 10,000엔</td></tr>
-            <tr><td>하쿠시마·향탄 해역</td><td>대형어 노림, 중급자 이상</td><td>8,000 ~ 15,000엔</td></tr>
-            <tr><td>겐카이나다 (玄界灘)</td><td>GT게임 등 본격 외양</td><td>15,000 ~ 18,000엔</td></tr>
-            <tr><td>GT게임 종일</td><td>특수 종일 코스</td><td>18,000엔 이상</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card">
-        <h2>🐟 7가지 낚시 방법</h2>
-        <h3>① 오토시코미 (落とし込み)</h3>
-        <p>가을~겨울 시즌. 사비키 채비로 전갱이를 미끼로 걸어 대형 청물·참돔·광어 노림.</p>
-        <h3>② 타이고모쿠 도즈키 (鯛五目胴突き)</h3>
-        <p>심플한 채비, 초보자에게 적합. 참돔·옥돔·근어 다양한 어종.</p>
-        <h3>③ 텐빈고모쿠 (天秤五目)</h3>
-        <p>봄~여름 시즌. 오키아미 미끼로 이사키·참돔·청물 노림.</p>
-        <h3>④ 타이라바 / SLJ / 히토츠텐야</h3>
-        <p>연중 가능. 모조 미끼와 일정 속도 감기로 참돔·청물·광어 노림. 초보자도 도전하기 좋음.</p>
-        <h3>⑤ 이카요타키 (イカ夜焚き)</h3>
-        <p>야간 출항. 배의 등불로 오징어를 모으고 슛테 채비로 노림. 봄~늦가을 시즌.</p>
-        <h3>⑥ 지깅 (ジギング)</h3>
-        <p>메탈지그로 청물·참돔 노림. 연중 가능, 전동지깅도 가능.</p>
-        <h3>⑦ 관문 아라카부 (関門アラカブ)</h3>
-        <p>도즈키 카부라 채비에 오징어 미끼로 쏨뱅이 노림. 늦가을~이른 봄이 베스트.</p>
-      </div>
-
-      <div class="card">
-        <h2>📅 월별 시즌 캘린더</h2>
-        <div class="legend">
-          <span class="legend-item"><span class="legend-swatch" style="background:#1f4e79;"></span>베스트 시즌</span>
-          <span class="legend-item"><span class="legend-swatch" style="background:#85b7eb;"></span>낚시 가능</span>
-          <span class="legend-item"><span class="legend-swatch" style="border: 1px solid var(--border);"></span>비시즌</span>
+        <h2>📍 장소 후보 7곳</h2>
+        <p>단톡방에서 언급된 곳(무창포·석모도·안면도·태안)과, 수도권에서 가깝게 다녀올 수 있는 워킹 쭈꾸미 포인트를 함께 정리했습니다. 아래 카드를 보고 <strong>투표 탭 → 📍 장소</strong>에서 원하는 곳을 <strong>여러 개</strong> 고르시면 됩니다.</p>
+        <div class="note warn" style="margin-top:10px;">
+          ⚠️ 거리·소요시간은 서울 기준 대략치입니다. 요금은 무지개좌대만 공식 안내 기준이고, 나머지는 무료 워킹 포인트라 별도 입장료가 없습니다. 주차·차박 가능 여부와 현지 규정은 <strong>출발 전 현장 확인이 필요</strong>합니다.
         </div>
+      </div>
+      <div class="spot-grid" id="spot-grid"></div>
+      <div class="card" style="margin-top:16px;">
+        <h2>🐙 서해 어종 시즌 캘린더</h2>
         <div class="fish-calendar" id="fish-calendar"></div>
-      </div>
-
-      <div class="card">
-        <h2>🏨 숙박 옵션</h2>
-        <h3>테리하 스파리조트 모지점 (照葉スパリゾート門司店)</h3>
-        <p>대형 입욕시설 병설. 大里港·大里漁港에서 도보권. 객실 손님은 입욕시설 무료.</p>
-        <table>
-          <thead><tr><th>객실</th><th>금/토/축전일</th><th>그 외</th></tr></thead>
-          <tbody>
-            <tr><td>스탠더드 싱글</td><td>6,500엔</td><td>5,500엔</td></tr>
-            <tr><td>스탠더드 더블</td><td>7,500엔</td><td>6,500엔</td></tr>
-            <tr><td>스탠더드 트윈</td><td>12,000엔</td><td>10,000엔</td></tr>
-            <tr><td>수페리어 트윈</td><td>16,000엔</td><td>14,000엔</td></tr>
-          </tbody>
-        </table>
-        <h3>컴포트호텔 코쿠라 (コンフォートホテル小倉)</h3>
-        <p>JR小倉駅 도보 3분, 小倉港까지 도보 3분. 1박 조식 포함.</p>
-        <table>
-          <thead><tr><th>객실</th><th>요금</th></tr></thead>
-          <tbody>
-            <tr><td>더블 이코노미 (베드 1대 1인)</td><td>4,700엔</td></tr>
-            <tr><td>트윈 스탠더드 (베드 2대 2인)</td><td>8,000엔</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card">
-        <h2>🍴 제휴 식당 (잡은 생선 요리 제공)</h2>
-        <table>
-          <thead><tr><th>식당명</th><th>특징</th><th>코스</th><th>요금</th></tr></thead>
-          <tbody>
-            <tr><td>廻転寿司 平四郎 코쿠라점</td><td>회전초밥, 아뮤플라자</td><td>만푸쿠 / 특상스시</td><td>3,850 / 5,000엔</td></tr>
-            <tr><td>네오 대중주점 우초우텐</td><td>닭요리 전문점</td><td>오마카세</td><td>4,500엔</td></tr>
-            <tr><td>旬のとろ箱 시키마루</td><td>참돔 전문 유어선 운영</td><td>오마카세</td><td>4,500엔</td></tr>
-            <tr><td>식선 와뇨야 (食膳 和んや)</td><td>모지역 인근 해산물</td><td>오마카세</td><td>4,500엔</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card">
-        <h2>♨️ 온천 여행지 비교 (DAY 2 오후 추가)</h2>
-        <p>일본에서의 하루 — 키타큐슈 베이스에서 다녀올 수 있는 온천지 6곳을 정리했습니다. 거리·소요시간·비용을 비교해 그룹에서 투표해 주세요.</p>
-        <table>
-          <thead><tr><th>온천지</th><th>편도 소요</th><th>특징</th><th>왕복 교통비</th><th>비고</th></tr></thead>
-          <tbody>
-            <tr><td>벳푸 (別府)</td><td>특급 1.5h</td><td>지옥순례 8곳 + 온천</td><td>약 5,500엔</td><td>반나절 가능, 가장 접근성 좋음</td></tr>
-            <tr><td>유후인 (湯布院)</td><td>특급 2h</td><td>스위츠·료칸 거리·금린호</td><td>약 6,000엔</td><td>반나절~풀데이</td></tr>
-            <tr><td>쿠로카와 (黒川)</td><td>고속버스 3h</td><td>노천온천 마을, 료칸 입욕</td><td>약 6,000엔</td><td>풀데이 권장</td></tr>
-            <tr><td>기리시마 (霧島)</td><td>신칸센+버스 2.5h</td><td>산악온천, 신사·자연</td><td>약 10,000엔</td><td>풀데이, 가고시마현</td></tr>
-            <tr><td>이부스키 (指宿)</td><td>신칸센+특급 4h</td><td>모래찜질 명소</td><td>약 16,000엔</td><td>풀데이, 가고시마현 / 낚시일정과 조정 필요</td></tr>
-            <tr><td>모지 테리하 스파</td><td>버스 30분</td><td>도시 스파, 저녁에 간편</td><td>버스비 약 400엔</td><td>입욕료 990~1,090엔, 이미 일정 포함</td></tr>
-          </tbody>
-        </table>
-        <div class="note info">
-          💡 <strong>DAY 2 오후 활용:</strong> 페리로 07:30 하카타 도착 → 코쿠라 09:30 도착 후 호텔 체크인. 오전 11시 출발해 벳푸·유후인 등 인근 온천으로 반나절 다녀올 수 있습니다. 가고시마(기리시마·이부스키)는 풀데이가 필요해 출조 일정 조정이 필요할 수 있습니다.
+        <div class="legend">
+          <div class="legend-item"><div class="legend-swatch" style="background: var(--primary);"></div> 피크 시즌</div>
+          <div class="legend-item"><div class="legend-swatch" style="background: #85b7eb;"></div> 조황 가능</div>
+          <div class="legend-item"><div class="legend-swatch" style="background: #f0f0f0; border:1px solid var(--border);"></div> 비시즌</div>
         </div>
-      </div>
-
-      <div class="card">
-        <h2>🏯 키타큐슈 관광 명소</h2>
-        <p>출조 전후로 짬을 내 다녀올 만한 키타큐슈 주요 관광지입니다. 모두 코쿠라역 기준 도보 또는 시내버스로 30분 이내 접근 가능합니다.</p>
-        <h3>코쿠라성 (小倉城)</h3>
-        <p>1602년 호소카와 타다오키가 축성한 키타큐슈의 상징. 5층 천수각이 4층보다 크게 만들어진 독특한 구조. 코쿠라역 도보 10분. 입장료 350엔, 09:00~20:00.</p>
-        <h3>모지코 레트로 (門司港レトロ)</h3>
-        <p>1889년 개항한 옛 국제무역항을 복원한 거리. 메이지·다이쇼 시대 건축물과 카페·미술관·상점이 모여 있습니다. 모지코 레트로 전망대(약 100m 높이, 입장 300엔)와 연인의 성지 '블루윙 모지'가 명소. JR코쿠라에서 모지코까지 약 15분.</p>
-        <h3>사라쿠라야마 전망대 (皿倉山)</h3>
-        <p>일본 신(新) 3대 야경 중 하나. 케이블카·슬로프카로 산정상까지 이동 (왕복 1,230엔). 야간 운행은 토요일·휴일·여름철 한정이므로 사전 확인 필요.</p>
-        <h3>탄가시장 (旦過市場)</h3>
-        <p>키타큐슈의 부엌이라 불리는 100년 역사의 재래시장. 신선한 해산물·과일·간식을 저렴하게 맛볼 수 있어 현지인 분위기 체험에 좋습니다. 코쿠라역 도보 10분.</p>
-        <h3>시모노세키 + 칸몬해저터널 (간단 당일치기)</h3>
-        <p>JR모지코역 → 버스 → 메카리신사 → 칸몬해저터널(보행자용, 무료, 약 15분 도보) → 시모노세키. 한일 페리·복어 요리 명소. 모지코 일정과 묶으면 반나절로 충분.</p>
-      </div>
-
-      <div class="card">
-        <h2>✈️ 입국 준비 (Visit Japan Web)</h2>
-        <p>2026년 현재 일본 입국 시 <strong>Visit Japan Web (VJW)</strong> 등록이 사실상 필수입니다. 등록 후 QR 코드로 입국심사·세관 절차를 빠르게 통과할 수 있습니다.</p>
-        <h3>등록 절차</h3>
-        <ul>
-          <li>출국 1~2주 전 <a href="https://services.digital.go.jp/visit-japan-web/" target="_blank">vjw.digital.go.jp</a> 접속 → 계정 생성</li>
-          <li>여권 정보·항공편(또는 페리편)·일본 내 숙소 주소 입력</li>
-          <li>"입국심사" QR + "세관신고" QR 두 가지 발급</li>
-          <li>스크린샷 저장 (현지 와이파이 없을 때 대비)</li>
-        </ul>
-        <h3>페리 입국 시 주의사항</h3>
-        <p>뉴카멜리아 페리는 항공편과 달리 도착 항구(하카타)에서 직접 입국심사를 받습니다. VJW 등록은 동일하게 가능하며, 페리 탑승 시 외국인 출입국 카드를 미리 작성해두면 좋습니다.</p>
-        <h3>휴대품·반입 한도</h3>
-        <ul>
-          <li>주류: 1인 3병 (760ml 이하)까지 면세</li>
-          <li>담배: 가열식 200개비·일반담배 200개비까지</li>
-          <li>현금 100만엔 상당 이상 휴대 시 신고</li>
-          <li>육류·과일·식물 반입 금지</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>💳 환전 · 결제 · 통신</h2>
-        <h3>환전 (1인 기준 예산)</h3>
-        <p>3박 4일 + 온천 일정 포함 기준 1인 약 <strong>8~15만 엔</strong> 권장 (낚시·식사·교통·온천·기념품 포함). 국내 은행 앱 우대 환전이 가장 저렴하며, 부산항 환전소도 이용 가능합니다.</p>
-        <h3>결제 수단</h3>
-        <ul>
-          <li><strong>현금</strong>: 유어선·재래시장·소규모 식당은 현금만 받는 곳이 다수 (페리 사무국, 키타큐슈 어시장 등)</li>
-          <li><strong>신용카드</strong>: 호텔·신칸센·관광지·체인점은 대부분 가능 (VISA/Master 권장)</li>
-          <li><strong>QR결제</strong>: PayPay·라쿠텐페이는 한국 카드 연동 어렵, 비추천</li>
-          <li><strong>교통카드</strong>: SUGOCA·ICOCA·Suica로 JR·지하철·버스 결제 가능. 코쿠라역 매표소에서 발급 (2,000엔, 보증금 500엔)</li>
-        </ul>
-        <h3>통신 (3박 4일 기준)</h3>
-        <ul>
-          <li><strong>eSIM</strong>: Holafly·Airalo 등, 4G 무제한 3일 약 1.5~2만원 (가장 추천)</li>
-          <li><strong>유심</strong>: 인천공항·하카타항 도착 후 구매 가능. 4G 무제한 3일 약 2~3만원</li>
-          <li><strong>포켓와이파이</strong>: 국내 사전 대여, 그룹용 (4~5명 공유 시 1인 1만원대)</li>
-          <li><strong>로밍</strong>: SKT·KT 일 11,000원, 단기에는 비싼 편</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>🚢 페리 뉴카멜리아 상세 정보</h2>
-        <p>부산-하카타를 잇는 유일한 정기 카페리. 카멜리아라인 운영. 야간 운항으로 선상 1박 가능.</p>
-        <h3>객실 등급 (편도 기준, 대략)</h3>
-        <table>
-          <thead><tr><th>등급</th><th>특징</th><th>요금</th></tr></thead>
-          <tbody>
-            <tr><td>이코노미 (다다미실)</td><td>공용 다다미, 가장 저렴</td><td>약 8~10만원</td></tr>
-            <tr><td>스탠다드 트윈/패밀리</td><td>2~4인용 침대 객실, 욕실 공용</td><td>약 12~18만원</td></tr>
-            <tr><td>디럭스 트윈</td><td>전용 욕실 + 창</td><td>약 20~30만원</td></tr>
-            <tr><td>로얄 스위트</td><td>최상위 객실</td><td>약 35만원~</td></tr>
-          </tbody>
-        </table>
-        <h3>선내 시설</h3>
-        <ul>
-          <li>대욕장 (남녀 분리, 22시까지 운영)</li>
-          <li>레스토랑 (일식·양식 뷔페, 약 2,500엔)</li>
-          <li>면세점 (담배·주류 위주, 출항 후 1시간 운영)</li>
-          <li>오락실·노래방·자판기</li>
-        </ul>
-        <h3>예약·체크인</h3>
-        <ul>
-          <li>예약: <a href="https://www.koreaferry.kr/" target="_blank">고려훼리 koreaferry.kr</a> 또는 인터파크/네이버 예약</li>
-          <li>체크인: 출항 1시간 30분 전까지 (18:30 마감)</li>
-          <li>여권 + 예약확인서(또는 e-티켓) 지참</li>
-          <li>수하물: 1인 30kg 무료 (낚시 도구 대형 가방 가능)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>🍜 키타큐슈 추천 음식 & 식당 (낚시 제공 식당 외)</h2>
-        <h3>키타큐슈 명물</h3>
-        <ul>
-          <li><strong>야키 우동 (코쿠라식)</strong>: 코쿠라 발상지의 두꺼운 면 야키 우동. 다누키(たぬき) 등 노포 다수</li>
-          <li><strong>야키 카레</strong>: 모지코 명물. 그라탕 형태로 굽는 카레라이스. 베어후르츠 등이 유명</li>
-          <li><strong>복어 요리</strong>: 시모노세키·키타큐슈 권역 특산</li>
-          <li><strong>하카타 라멘</strong>: JR하카타역 환승 시 잇푸도(一風堂)·잇란(一蘭) 본점 추천</li>
-        </ul>
-        <h3>코쿠라역 인근 식당</h3>
-        <ul>
-          <li>스시잔마이 코쿠라점 — 신선한 회·스시, 24시간 운영</li>
-          <li>야키니쿠 한큐쇼쿠도 — 화로구이 야키니쿠, 가성비 좋음</li>
-          <li>이치란 라멘 코쿠라점 — 한국인 친숙, 한국어 주문 가능</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>🐟 한국 반입 시 주의사항 (생선)</h2>
-        <p>잡은 생선을 한국으로 가져가실 때 검역·반입 규정을 반드시 확인하셔야 합니다.</p>
-        <h3>페리 귀국 (수하물로 운반)</h3>
-        <ul>
-          <li>일본 수산물 반입은 1인 5kg 이내 권장 (개인 소비량)</li>
-          <li>진공포장 + 아이스팩 + 스티로폼 권장 (雅々丸 수산에서 유료 서비스)</li>
-          <li>일본·한국 양국 출국·입국 시 신고 (자진 신고가 안전)</li>
-          <li>2011년 후쿠시마 사고 이후 일부 어종(특정 해역산)은 방사능 검사 대상</li>
-        </ul>
-        <h3>항공편 귀국</h3>
-        <ul>
-          <li>위탁수하물 가능하나 액체·드라이아이스 규정 확인 필수</li>
-          <li>아이스팩(겔타입)은 100ml 이하만 기내 반입, 위탁 시 무제한</li>
-          <li>드라이아이스 위탁은 항공사별로 2.5kg 이하 (사전 신고)</li>
-          <li><strong>국제 EMS 쿨택배</strong>가 안전한 대안 — 雅々丸 수산에서 발송 (5kg 약 5,000엔, 2~3일 도착)</li>
-        </ul>
-        <h3>한국 입국 시 검역</h3>
-        <p>수산물 자가소비 목적 5kg 이하는 일반적으로 검역 통과. 단, 양적 또는 상업적 용도로 의심되면 검역 절차 필요. 인천·김포·김해 모두 농림축산검역본부 검역대 통과.</p>
-      </div>
-
-      <div class="card">
-        <h2>🎫 예약 바로가기 (Quick Booking)</h2>
-        <p>예약이 필요한 모든 단계의 직접 링크입니다. 클릭 시 새 탭에서 열립니다. 가격 비교 후 예약 진행하세요.</p>
-
-        <h3>🚢 부산 → 후쿠오카 페리 (뉴카멜리아)</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:14px;">
-          <a class="btn" href="https://www.koreaferry.kr/booking/booking.php" target="_blank" style="text-align:center;">🎫 고려훼리 공식 예약</a>
-          <a class="btn secondary" href="https://www.directferries.co.kr/camellia_line.htm" target="_blank" style="text-align:center;">📅 다이렉트페리스 시간표</a>
-          <a class="btn secondary" href="https://experiences.myrealtrip.com/products/4308007" target="_blank" style="text-align:center;">🛒 마이리얼트립 페리 상품</a>
-          <a class="btn secondary" href="https://www.kkday.com/ko/product/138770" target="_blank" style="text-align:center;">🛒 KKday 페리 상품</a>
+        <div class="note info" style="margin-top:12px;">
+          🦑 <strong>10월은 쭈꾸미와 갑오징어가 같이 붙는 최적기</strong>입니다. 10월 말로 갈수록 쭈꾸미 씨알이 커지고 갑오징어 비중이 늘어납니다.
         </div>
-
-        <h3>✈️ 후쿠오카(FUK) → 서울(ICN/GMP) 항공권</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:14px;">
-          <a class="btn" href="https://www.skyscanner.co.kr/transport/flights/fuk/icn/" target="_blank" style="text-align:center;">🔍 스카이스캐너 (FUK→ICN)</a>
-          <a class="btn secondary" href="https://flight.naver.com/" target="_blank" style="text-align:center;">🔍 네이버 항공권</a>
-          <a class="btn secondary" href="https://kr.trip.com/flights/show/?dcity=FUK&acity=ICN" target="_blank" style="text-align:center;">🔍 트립닷컴 (FUK→SEL)</a>
-          <a class="btn secondary" href="https://www.kayak.co.kr/flights/FUK-ICN" target="_blank" style="text-align:center;">🔍 KAYAK</a>
-        </div>
-        <details style="margin-bottom:14px;"><summary style="cursor:pointer; font-size:12px; color:var(--text-secondary); padding:6px 0;">개별 항공사 직접 예약</summary>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:6px; padding:8px 0; font-size:12px;">
-          <a class="btn secondary" href="https://www.koreanair.com/" target="_blank">대한항공</a>
-          <a class="btn secondary" href="https://flyasiana.com/" target="_blank">아시아나항공</a>
-          <a class="btn secondary" href="https://www.airbusan.com/" target="_blank">에어부산</a>
-          <a class="btn secondary" href="https://www.jejuair.net/" target="_blank">제주항공</a>
-          <a class="btn secondary" href="https://www.twayair.com/" target="_blank">티웨이</a>
-          <a class="btn secondary" href="https://www.jinair.com/" target="_blank">진에어</a>
-          <a class="btn secondary" href="https://www.eastarjet.com/" target="_blank">이스타항공</a>
-        </div></details>
-
-        <h3>🚄 신칸센 / JR (하카타·코쿠라·온천지)</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:14px;">
-          <a class="btn" href="https://www.jrkyushu.co.jp/korean/" target="_blank" style="text-align:center;">🎫 JR큐슈 인터넷예약</a>
-          <a class="btn secondary" href="https://smart-ex.jp/" target="_blank" style="text-align:center;">🎫 smartEX (신칸센 한국어)</a>
-          <a class="btn secondary" href="https://www.klook.com/ko/activity/2371-jr-kyushu-jr-pass/" target="_blank" style="text-align:center;">🎫 Klook JR큐슈 패스</a>
-          <a class="btn secondary" href="https://www.kkday.com/ko/product/3494-jr-kyushu-rail-pass" target="_blank" style="text-align:center;">🎫 KKday JR큐슈 패스</a>
-        </div>
-
-        <h3>🏨 코쿠라 호텔 예약</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:8px;">
-          <a class="btn" href="https://www.booking.com/searchresults.ko.html?ss=Kokura%2C+Kitakyushu%2C+Japan" target="_blank" style="text-align:center;">🔍 Booking.com 코쿠라</a>
-          <a class="btn secondary" href="https://www.agoda.com/ko-kr/city/kitakyushu-jp.html" target="_blank" style="text-align:center;">🔍 Agoda 키타큐슈</a>
-          <a class="btn secondary" href="https://kr.hotels.com/de1632456/hotels-kitakyushu-japan/" target="_blank" style="text-align:center;">🔍 호텔스닷컴</a>
-          <a class="btn secondary" href="https://travel.rakuten.com/kor/ko-kr/" target="_blank" style="text-align:center;">🔍 라쿠텐 트래블</a>
-        </div>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:14px;">
-          <a class="btn secondary" href="https://www.choicehotels.com/japan/kitakyushu/comfort-inn-hotels/jp075" target="_blank" style="text-align:center;">🏨 컴포트호텔 코쿠라 공식</a>
-          <a class="btn secondary" href="https://terihaspa.jp/moji/" target="_blank" style="text-align:center;">🏨 테리하 스파리조트 모지 공식</a>
-        </div>
-
-        <h3>♨️ 온천 료칸·당일치기 (벳푸/유후인/가고시마)</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:14px;">
-          <a class="btn" href="https://travel.rakuten.com/kor/ko-kr/" target="_blank" style="text-align:center;">♨️ 라쿠텐 트래블 — 벳푸 료칸</a>
-          <a class="btn secondary" href="https://travel.rakuten.com/kor/ko-kr/" target="_blank" style="text-align:center;">♨️ 라쿠텐 — 유후인 료칸</a>
-          <a class="btn secondary" href="https://travel.rakuten.com/kor/ko-kr/" target="_blank" style="text-align:center;">♨️ 라쿠텐 — 이부스키 (가고시마)</a>
-          <a class="btn secondary" href="https://www.jalan.net/onsen/" target="_blank" style="text-align:center;">♨️ Jalan 일본 온천 검색</a>
-          <a class="btn secondary" href="https://www.gltjp.com/ko/" target="_blank" style="text-align:center;">♨️ Good Luck Trip 료칸 가이드</a>
-        </div>
-
-        <h3>🎟️ 액티비티·관광·식사 예약</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:14px;">
-          <a class="btn" href="https://www.kkday.com/ko/city/fukuoka" target="_blank" style="text-align:center;">🎫 KKday 후쿠오카·키타큐슈</a>
-          <a class="btn secondary" href="https://www.klook.com/ko/city/53-fukuoka-things-to-do/" target="_blank" style="text-align:center;">🎫 Klook 후쿠오카</a>
-          <a class="btn secondary" href="https://www.myrealtrip.com/search?keyword=%ED%9B%84%EC%BF%A0%EC%98%A4%EC%B9%B4" target="_blank" style="text-align:center;">🎫 마이리얼트립 후쿠오카</a>
-          <a class="btn secondary" href="https://tabelog.com/kr/fukuoka/" target="_blank" style="text-align:center;">🍴 다베로그 후쿠오카</a>
-        </div>
-
-        <h3>🚨 보험·통신·환전</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:14px;">
-          <a class="btn" href="https://esim.holafly.com/ko/" target="_blank" style="text-align:center;">📱 Holafly eSIM (일본)</a>
-          <a class="btn secondary" href="https://www.airalo.com/ko/japan-esim" target="_blank" style="text-align:center;">📱 Airalo eSIM</a>
-          <a class="btn secondary" href="https://www.skroaming.com/" target="_blank" style="text-align:center;">📱 SK 로밍·포켓와이파이</a>
-          <a class="btn secondary" href="https://www.directinsure.co.kr/insurance/travel/main.do" target="_blank" style="text-align:center;">🛡️ 다이렉트 여행자보험</a>
-          <a class="btn secondary" href="https://bank.shinhan.com/" target="_blank" style="text-align:center;">💱 신한은행 환전</a>
-        </div>
-
-        <h3>🛫 공항 교통 (인천·김포)</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:8px;">
-          <a class="btn secondary" href="https://www.airportlimousine.co.kr/" target="_blank" style="text-align:center;">🚌 공항버스 노선·시간</a>
-          <a class="btn secondary" href="https://www.arex.or.kr/" target="_blank" style="text-align:center;">🚇 공항철도 AREX</a>
-          <a class="btn secondary" href="https://www.ex.co.kr/" target="_blank" style="text-align:center;">🚗 통행료 안내</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>🔗 추천 블로그·사이트·앱</h2>
-        <h3>키타큐슈·후쿠오카 여행 가이드 (한국어)</h3>
-        <ul>
-          <li><a href="https://tourcast.co.kr/ko/japan/kyushu/kitakyushu-travel-guide-kokura-and-mojiko-retro" target="_blank">투어캐스트 — 키타큐슈 완벽 가이드</a> (고쿠라성·모지코·사라쿠라야마)</li>
-          <li><a href="https://kr.trip.com/blog/kitakyushu-weather-tours-ko/" target="_blank">트립닷컴 — 키타큐슈 날씨·기온 가이드</a> (월별 옷차림)</li>
-          <li><a href="https://kr.trip.com/guide/transport/%ED%9B%84%EC%BF%A0%EC%98%A4%EC%B9%B4%EC%97%90%EC%84%9C+%EA%B8%B0%ED%83%80%ED%81%90%EC%8A%88.html" target="_blank">트립닷컴 — 후쿠오카·키타큐슈 이동 가이드</a></li>
-          <li><a href="https://www.kkday.com/ko/blog/35295/asia-japan-fukuoka-ship" target="_blank">KKday — 부산-후쿠오카 페리 총정리</a></li>
-          <li><a href="https://www.kkday.com/ko/blog/7235/asia-japan-fukuoka-travel" target="_blank">KKday — 후쿠오카 여행 가이드 2026</a></li>
-          <li><a href="https://kr.hotels.com/go/japan/blog-best-kitakyushu-things-to-do" target="_blank">호텔스닷컴 — 키타큐슈 베스트 5</a></li>
-          <li><a href="https://www.travie.com/news/articleList.html" target="_blank">트래비 — 키타큐슈 놓치면 안 될 볼거리</a></li>
-          <li><a href="https://gofukuoka.jp/ko/" target="_blank">후쿠오카 공식 관광 가이드 (한국어)</a></li>
-          <li><a href="https://www.japan.travel/ko/" target="_blank">일본 정부관광국 한국어 사이트</a></li>
-        </ul>
-
-        <h3>온천·료칸 정보</h3>
-        <ul>
-          <li><a href="https://www.gltjp.com/ko/" target="_blank">Good Luck Trip — 큐슈 온천 가이드</a></li>
-          <li><a href="https://www.japan-guide.com/e/e4500.html" target="_blank">Japan Guide — 벳푸 온천 안내 (영문)</a></li>
-          <li><a href="https://www.yufuin.gr.jp/" target="_blank">유후인 관광협회 공식</a></li>
-          <li><a href="https://www.kurokawaonsen.or.jp/" target="_blank">쿠로카와 온천 공식</a></li>
-        </ul>
-
-        <h3>유어선·낚시 정보 (일본어)</h3>
-        <ul>
-          <li><a href="https://tsuri-ikoka.com/general" target="_blank">釣りいこか倶楽部 공식 사이트</a></li>
-          <li><a href="https://tsuri-ikoka.com/tyouka/index.html" target="_blank">釣りいこか — 최근 釣果(낚시 결과) 사진</a></li>
-          <li><a href="https://tsuri-ikoka.com/blog" target="_blank">釣りいこか — 클럽 블로그</a></li>
-          <li><a href="https://www.facebook.com/tsuriikoka" target="_blank">釣りいこか Facebook</a></li>
-          <li><a href="https://www.instagram.com/tsuri.ikoka/" target="_blank">釣りいこか Instagram</a></li>
-        </ul>
-
-        <h3>필수 앱 (출국 전 설치 권장)</h3>
-        <ul>
-          <li>📱 <a href="https://services.digital.go.jp/visit-japan-web/" target="_blank"><strong>Visit Japan Web</strong></a> — 입국 QR 발급 (필수)</li>
-          <li>📱 <strong>Google Maps</strong> 또는 <strong>Apple Maps</strong> — 오프라인 지도 다운로드 추천</li>
-          <li>📱 <strong>Yahoo!乗換案内</strong> — 일본 대중교통 환승 검색 최강</li>
-          <li>📱 <strong>Papago / Google 번역</strong> — 카메라 일본어 OCR 매우 유용</li>
-          <li>📱 <strong>tenki.jp</strong> 또는 <strong>Yahoo!天気</strong> — 해상 풍속 확인 (출조용)</li>
-          <li>📱 <strong>食べログ</strong> (Tabelog) — 일본 식당 평점·예약</li>
-          <li>📱 <strong>JR West Japan Train Reservation</strong> 또는 <strong>smartEX</strong> — 신칸센 예약</li>
-          <li>📱 <strong>카카오맵</strong> — 일본 데이터망에서 한국 길안내</li>
-          <li>📱 <strong>네이버 환율</strong> — 실시간 엔화 환율 확인</li>
-          <li>📱 <strong>커넥트(KONEST)</strong> 또는 <strong>Trip.com</strong> — 일본 여행 종합 정보</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>🎣 일본 낚시 매너 & 주의사항</h2>
-        <h3>매너</h3>
-        <ul>
-          <li>선장·동승자에게 출항·입항 시 인사 ("오하이오 고자이마스" / "오츠카레사마")</li>
-          <li>다른 사람의 채비·릴에 손대지 않기, 캐스팅 방향 주의</li>
-          <li>잡은 생선은 즉시 활어조 또는 얼음에 보관 (선장이 도와줌)</li>
-          <li>쓰레기는 모두 가지고 내리기 (낚싯줄·미끼 봉지 등)</li>
-          <li>음주는 출항 전·중에는 자제</li>
-        </ul>
-        <h3>준비물 체크리스트</h3>
-        <ul>
-          <li>구명조끼 (대여 가능, 자동 팽창식 권장)</li>
-          <li>방수 자켓·바지·논슬립 신발 (반사장갑)</li>
-          <li>장갑·모자·선글라스 (자외선·바람 차단)</li>
-          <li>멀미약 (출항 30분 전 복용)</li>
-          <li>휴대용 보온병 (따뜻한 차)</li>
-          <li>방수팩 (휴대폰·여권 보호)</li>
-          <li>현지 낚시도구는 클럽 렌탈 활용 (2,000~5,000엔)</li>
-        </ul>
-        <h3>안전</h3>
-        <ul>
-          <li>황천(거친 날씨)일 경우 사무국이 자동 출항 취소 안내</li>
-          <li>10~12월은 한겨울 수준의 보온 필요 (해상 체감 -5도)</li>
-          <li>응급 시 선장 지시 우선, 일본 응급은 119</li>
-          <li>여행자 보험 가입 권장 (낚시 활동 포함 확인)</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>📞 긴급 연락처</h2>
-        <table>
-          <thead><tr><th>구분</th><th>전화번호</th><th>비고</th></tr></thead>
-          <tbody>
-            <tr><td>釣りいこか 사무국</td><td>080-9067-5833</td><td>평일 9~18시, SMS 24시간</td></tr>
-            <tr><td>주후쿠오카 한국 총영사관</td><td>+81-92-771-0461</td><td>비상시 영사 콜센터 24h</td></tr>
-            <tr><td>외교부 영사 콜센터</td><td>+82-2-3210-0404</td><td>24시간, 무료 통화 앱 추천</td></tr>
-            <tr><td>일본 경찰</td><td>110</td><td>긴급</td></tr>
-            <tr><td>일본 구급차/소방</td><td>119</td><td>긴급</td></tr>
-            <tr><td>고려훼리 (페리)</td><td>051-466-7799</td><td>부산 본사</td></tr>
-            <tr><td>카멜리아라인 (페리)</td><td>+81-92-262-2323</td><td>하카타 본사</td></tr>
-          </tbody>
-        </table>
       </div>
     </section>
 
     <!-- ============ SCHEDULE ============ -->
     <section class="section" id="section-schedule">
       <div class="card">
-        <h2>🚢 DAY 1 — 출국 (부산항)</h2>
+        <h2>📅 2박 3일 표준 일정 (초안)</h2>
+        <p>"2박 하고 토요일 올라온다"는 안을 기준으로 짠 표준 타임라인입니다. 최종 날짜·장소가 확정되면 시간만 바꿔 쓰면 됩니다.</p>
         <ul class="timeline">
           <li>
-            <div class="timeline-time">~19:00</div>
-            <div class="timeline-title">부산 국제여객터미널 체크인</div>
-            <div class="timeline-detail">탑승 수속 마감 18:30 / 출국심사</div>
+            <div class="timeline-time">DAY 1 · 목(또는 금) 오후</div>
+            <div class="timeline-title">퇴근 후 출발 → 카풀 집결 → 현지 도착</div>
+            <div class="timeline-detail">집결지에서 차량별 인원·짐 배분 · 마트에서 고기/술/얼음 구매 · 도착 후 차박·텐트 자리 잡기</div>
           </li>
           <li>
-            <div class="timeline-time">22:30 출항</div>
-            <div class="timeline-title">뉴카멜리아 부산항 출항 (선상 1박)</div>
-            <div class="timeline-detail">선내 식당·대욕장 이용 후 취침</div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>🚢 DAY 2 — 일본 도착 & 키타큐슈 이동 + 온천 (선택)</h2>
-        <ul class="timeline">
-          <li>
-            <div class="timeline-time">07:30 도착</div>
-            <div class="timeline-title">하카타항 도착 → 입국심사·세관</div>
-            <div class="timeline-detail">짐 찾기 30~45분</div>
+            <div class="timeline-time">DAY 1 · 밤</div>
+            <div class="timeline-title">첫 물때 워킹 낚시 + 바베큐</div>
+            <div class="timeline-detail">밀물·썰물 시간에 맞춰 방파제 워킹 · 잡은 건 바로 손질 · 고기 굽고 한잔 (음주 후에는 물가 접근 금지)</div>
           </li>
           <li>
-            <div class="timeline-time">~09:00</div>
-            <div class="timeline-title">하카타항 → JR하카타역</div>
-            <div class="timeline-detail">시내버스 약 15분</div>
+            <div class="timeline-time">DAY 2 · 새벽~오전</div>
+            <div class="timeline-title">해 뜰 무렵 본 게임</div>
+            <div class="timeline-detail">쭈꾸미는 이른 아침·해질녘이 승부처 · 조과 안 나오면 근처 포인트로 이동</div>
           </li>
           <li>
-            <div class="timeline-time">~09:30</div>
-            <div class="timeline-title">JR하카타 → JR코쿠라 (신칸센 15분)</div>
-            <div class="timeline-detail">4,000엔 / 재래선 70~80분 1,310엔도 가능</div>
+            <div class="timeline-time">DAY 2 · 낮</div>
+            <div class="timeline-title">휴식 / 자유시간</div>
+            <div class="timeline-detail">낮잠·해장·근처 항구 구경 · 낚시 쉬는 분들은 시장·카페 자유 일정</div>
           </li>
           <li>
-            <div class="timeline-time">~10:30</div>
-            <div class="timeline-title">호텔 체크인 또는 짐 보관</div>
-            <div class="timeline-detail">컴포트호텔 코쿠라 또는 테리하 스파리조트 모지</div>
+            <div class="timeline-time">DAY 2 · 저녁~밤</div>
+            <div class="timeline-title">2차 출조 + 뒤풀이</div>
+            <div class="timeline-detail">잡은 쭈꾸미 라면·볶음 · 남은 고기 정리 · 다음 원정 이야기</div>
           </li>
           <li>
-            <div class="timeline-time">11:00 ~ 18:00</div>
-            <div class="timeline-title">♨️ 온천 여행 (선택 — 투표로 결정)</div>
-            <div class="timeline-detail">벳푸·유후인 등 반나절 코스 / 사무국 브리핑은 저녁 합류 가능</div>
+            <div class="timeline-time">DAY 3 · 토요일 오전</div>
+            <div class="timeline-title">아침 조과 마무리 → 철수 → 귀가</div>
+            <div class="timeline-detail">쓰레기 전량 수거 · 장비 정리 · 점심 전후 출발해 오후 서울 도착</div>
           </li>
-          <li>
-            <div class="timeline-time">저녁</div>
-            <div class="timeline-title">사무국 브리핑 / 도구 점검 / 다음날 출조 준비</div>
-            <div class="timeline-detail">취침 22시 권장 (DAY 3 새벽 출항)</div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>♨️ DAY 2 온천 옵션별 상세 일정</h2>
-        <h3>벳푸 (別府) — 반나절 코스 ⭐ 추천</h3>
-        <ul class="timeline">
-          <li><div class="timeline-time">11:00</div><div class="timeline-title">JR코쿠라 → JR벳푸 (특급 소닉)</div><div class="timeline-detail">약 1시간 30분 / 편도 2,750엔</div></li>
-          <li><div class="timeline-time">12:30</div><div class="timeline-title">지옥순례 (海·血の池 등 주요 3~4곳)</div><div class="timeline-detail">공통 입장권 2,200엔 / 셔틀버스 또는 시내버스</div></li>
-          <li><div class="timeline-time">15:00</div><div class="timeline-title">온천 입욕 (다케가와라·효탄 등)</div><div class="timeline-detail">1,000~1,500엔, 모래찜질·노천온천 가능</div></li>
-          <li><div class="timeline-time">17:00</div><div class="timeline-title">JR벳푸 → JR코쿠라 복귀</div><div class="timeline-detail">~18:30 코쿠라 도착, 저녁식사 후 휴식</div></li>
-        </ul>
-        <h3>유후인 (湯布院) — 반나절·풀데이</h3>
-        <ul class="timeline">
-          <li><div class="timeline-time">11:00</div><div class="timeline-title">JR코쿠라 → JR유후인 (특급 유후 또는 환승)</div><div class="timeline-detail">약 2시간 / 편도 3,000엔</div></li>
-          <li><div class="timeline-time">13:00</div><div class="timeline-title">긴린호(金鱗湖) 산책 + 료칸거리 관광</div><div class="timeline-detail">무료, 스위츠·아트갤러리 다수</div></li>
-          <li><div class="timeline-time">15:00</div><div class="timeline-title">당일치기 입욕 (료칸 외탕)</div><div class="timeline-detail">700~1,500엔</div></li>
-          <li><div class="timeline-time">17:00</div><div class="timeline-title">유후인 → 코쿠라 복귀</div><div class="timeline-detail">~19:00 코쿠라 도착</div></li>
-        </ul>
-        <h3>가고시마 (기리시마/이부스키) — 풀데이 (낚시일정 조정 시)</h3>
-        <ul class="timeline">
-          <li><div class="timeline-time">07:00</div><div class="timeline-title">JR코쿠라 → JR가고시마중앙 (신칸센 사쿠라)</div><div class="timeline-detail">약 1시간 30분 / 편도 11,000엔</div></li>
-          <li><div class="timeline-time">09:00</div><div class="timeline-title">가고시마중앙 → 이부스키 (특급 이부스키노타마테바코)</div><div class="timeline-detail">약 50분 / 편도 2,500엔, 또는 기리시마 환승</div></li>
-          <li><div class="timeline-time">10:00 ~ 14:00</div><div class="timeline-title">이부스키 모래찜질 + 점심</div><div class="timeline-detail">모래찜질 1,100엔 (15분 코스)</div></li>
-          <li><div class="timeline-time">15:00 ~ 18:30</div><div class="timeline-title">이부스키 → 가고시마 → 신칸센 → 코쿠라</div><div class="timeline-detail">총 약 3시간 30분</div></li>
-        </ul>
-        <div class="note warn">
-          ⚠️ 가고시마 코스는 편도 4시간 이상이라 DAY 2 오후 출발이 어렵습니다. 가고시마를 선택하시려면 DAY 3 출조 일정을 다른 날로 조정하거나, 4박 5일로 일정 연장이 필요합니다.
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>🚌 DAY 3 (대안) — 비낚시 회원 관광 코스</h2>
-        <p>낚시에 참여하지 않는 회원분들을 위한 DAY 3 대안 활동입니다. 투표를 통해 그룹 선호 코스를 정합니다.</p>
-        <ul>
-          <li><strong>🏯 코쿠라 시내 관광</strong> (반나절): 코쿠라성 → 탄가시장 → 카쓰리타이지 박물관 → 리버워크 코쿠라 쇼핑</li>
-          <li><strong>🚢 모지코 레트로 + 시모노세키</strong> (풀데이): 모지코 역사 거리 → 야키카레 점심 → 칸몬해저터널 도보 → 시모노세키 카라토 시장 (복어 시식)</li>
-          <li><strong>🌃 사라쿠라야마 야경</strong> (오후~저녁): 일본 신 3대 야경, 케이블카 1,230엔 왕복</li>
-          <li><strong>♨️ 벳푸 지옥순례 + 온천</strong> (풀데이): JR 특급 1.5시간 → 지옥 8곳 순례 → 온천 입욕 → 저녁 복귀</li>
-          <li><strong>♨️ 유후인 료칸거리</strong> (풀데이): 특급 유후 2시간 → 긴린호 산책 → 료칸 외탕 → 스위츠</li>
-          <li><strong>🍜 후쿠오카 쇼핑</strong> (풀데이): 신칸센 15분 → 캐널시티 → 텐진 지하상가 → 라멘 거리</li>
-          <li><strong>⛩️ 다자이후 텐만구</strong> (반나절): 학문의 신 신사, 우메가에 모찌 명물</li>
-          <li><strong>⛳ 골프 라운딩</strong> (풀데이): 키타큐슈 권역 골프장 사전 예약 필요</li>
-          <li><strong>🛌 자유 휴식 + 호텔 온천</strong>: 테리하 스파 입욕, 코쿠라 산책, 카페 투어</li>
         </ul>
         <div class="note info">
-          💡 <strong>그룹 분리 운영:</strong> DAY 3 새벽 낚시 그룹 출항 후, 비낚시 그룹은 호텔에서 늦은 아침 식사 후 각자 또는 그룹으로 활동. 저녁에 호텔/식당에서 다시 합류해 함께 식사.
+          📅 확정 일정: <span id="schedule-confirmed-date">(투표 진행 중)</span>
         </div>
       </div>
 
       <div class="card">
-        <h2>🎣 DAY 3 — 출조 (메인 낚시일)</h2>
-        <ul class="timeline">
-          <li>
-            <div class="timeline-time">새벽</div>
-            <div class="timeline-title">유어선 출항 (낚시)</div>
-            <div class="timeline-detail">새벽 출항 → 오후 귀항</div>
-          </li>
-          <li>
-            <div class="timeline-time">오후</div>
-            <div class="timeline-title">잡은 생선 손질 + 쿨택배 발송</div>
-            <div class="timeline-detail">국제 EMS로 한국 자택 발송 가능</div>
-          </li>
-          <li>
-            <div class="timeline-time">저녁</div>
-            <div class="timeline-title">테리하 스파 입욕 + 회·스시 디너</div>
-            <div class="timeline-detail">제휴 식당 (3,850~5,000엔)</div>
-          </li>
+        <h2>🌊 물때 · 안전 체크</h2>
+        <ul>
+          <li><strong>물때가 전부입니다.</strong> 출발일이 확정되면 그 날짜의 만조·간조 시간을 확인해서 낚시 시간을 잡습니다. (국립해양조사원 조석예보)</li>
+          <li><strong>구명조끼</strong>는 방파제·좌대 모두 필수입니다. 밤에는 헤드랜턴 + 여분 건전지 필수.</li>
+          <li><strong>기상·풍랑특보</strong>는 출발 전날 반드시 재확인. 특보가 뜨면 일정 순연을 원칙으로 합니다.</li>
+          <li><strong>쓰레기는 전량 수거.</strong> 다음에 또 가려면 이게 제일 중요합니다.</li>
         </ul>
-      </div>
-
-      <div class="card">
-        <h2>✈️ DAY 4 — 귀국 (FUK → ICN/GMP)</h2>
-        <ul class="timeline">
-          <li>
-            <div class="timeline-time">~10:00</div>
-            <div class="timeline-title">호텔 체크아웃 → JR코쿠라역</div>
-            <div class="timeline-detail">도보 3분</div>
-          </li>
-          <li>
-            <div class="timeline-time">~10:30</div>
-            <div class="timeline-title">JR코쿠라 → JR하카타 (신칸센 15분)</div>
-            <div class="timeline-detail">4,000엔</div>
-          </li>
-          <li>
-            <div class="timeline-time">~10:50</div>
-            <div class="timeline-title">JR하카타 → 후쿠오카공항 (지하철 5분)</div>
-            <div class="timeline-detail">공항선 2정거장 / 260엔</div>
-          </li>
-          <li>
-            <div class="timeline-time">~11:30</div>
-            <div class="timeline-title">FUK 국제선 청사 도착·체크인</div>
-            <div class="timeline-detail">출국심사 2시간 전 권장</div>
-          </li>
-          <li>
-            <div class="timeline-time">13:30~14:30</div>
-            <div class="timeline-title">FUK → ICN/GMP 항공편 (약 1시간 29분)</div>
-            <div class="timeline-detail">ICN: 7개 항공사 / GMP: 대한항공·ANA</div>
-          </li>
-          <li>
-            <div class="timeline-time">~16:00</div>
-            <div class="timeline-title">서울 공항 도착·입국심사</div>
-            <div class="timeline-detail">귀가</div>
-          </li>
-        </ul>
-        <div class="note warn">
-          ⚠️ 신선 생선은 항공 위탁수하물 제약 있음. 키타큐슈 사무국에서 진공 포장 + 국제 EMS 쿨택배 발송 권장.
-        </div>
       </div>
     </section>
 
     <!-- ============ VOTE ============ -->
     <section class="section" id="section-vote">
       <div id="vote-login-check"></div>
-      <div id="vote-content" style="display:none;">
-        <div class="note info">
-          🗳️ 4가지 주제에 투표해 주세요. 다른 회원들이 선택한 결과를 실시간으로 확인할 수 있습니다.
+      <div id="vote-content">
+        <div class="card">
+          <h2>🗳️ 투표 안내</h2>
+          <p><strong>참가 여부만 단일 선택</strong>이고, 나머지는 전부 <strong>복수 선택</strong>입니다. 가능한 날짜·가고 싶은 장소를 여러 개 고르면 겹치는 날로 자동 집계됩니다. 다시 누르면 취소됩니다.</p>
+          <div class="note info">✅ 선택하는 즉시 자동 저장됩니다. 다른 회원이 새로고침하면 바로 보입니다.</div>
         </div>
         <div id="polls-container"></div>
       </div>
@@ -1150,40 +722,57 @@ body.gated header, body.gated main, body.gated footer { display: none; }
     <!-- ============ RESULT ============ -->
     <section class="section" id="section-result">
       <div class="card">
-        <h2>✅ 투표 기반 확정 일정 (현재 1위)</h2>
-        <p>각 투표 주제별로 가장 많은 표를 받은 항목과 투표한 회원 명단을 표시합니다. 출발 전까지 투표가 진행되어 최종 결정이 됩니다.</p>
+        <h2>✅ 투표 집계 결과</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">불참(❌)으로 표시한 분의 표는 집계에서 제외됩니다. 동률이면 재투표 안내가 뜹니다.</p>
         <div id="result-summary"></div>
       </div>
       <div class="card">
-        <h2>🗓️ 종합 추천 일정 (투표 결과 반영)</h2>
+        <h2>🗺️ 현재 1위 기준 원정 계획</h2>
         <div id="result-itinerary"></div>
       </div>
       <div class="card">
-        <h2>👥 회원별 투표 현황</h2>
-        <p>각 회원이 어떤 항목을 선택했는지 한눈에 확인할 수 있습니다.</p>
-        <div id="result-by-member" style="overflow-x:auto;"></div>
-      </div>
-
-      <div class="card">
-        <h2>✅ 출발 준비 체크리스트</h2>
-        <p>각 단계별 준비물·해야할 일 체크리스트입니다. 본인 로그인 후 체크하면 회원별로 저장되며, 다른 회원들도 모두의 진행 상황을 볼 수 있습니다.</p>
-        <div id="checklist-summary" style="margin-bottom: 14px;"></div>
-        <div id="checklist-container"></div>
+        <h2>👥 회원별 선택 현황</h2>
+        <div style="overflow-x: auto;">
+          <div id="result-by-member"></div>
+        </div>
       </div>
     </section>
 
     <!-- ============ DISCUSS ============ -->
     <section class="section" id="section-discuss">
       <div id="discuss-login-check"></div>
-      <div id="discuss-content" style="display:none;">
-        <div class="card">
-          <h2>💬 토론 게시판</h2>
-          <div class="new-thread">
-            <input type="text" id="new-thread-title" placeholder="새 토론 제목" maxlength="60">
-            <textarea id="new-thread-body" placeholder="내용을 입력하세요"></textarea>
-            <button onclick="addThread()">새 토론 등록</button>
-          </div>
-          <div id="thread-list" class="thread-list"></div>
+      <div id="discuss-content">
+        <div class="card new-thread">
+          <h2>✍️ 새 토론 시작</h2>
+          <input type="text" id="new-thread-title" placeholder="제목 (예: 궁평항 주차 되는지 아는 사람?)" maxlength="80">
+          <textarea id="new-thread-body" placeholder="내용을 입력하세요"></textarea>
+          <button onclick="addThread()">등록</button>
+        </div>
+        <div class="thread-list" id="thread-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ PREP ============ -->
+    <section class="section" id="section-prep">
+      <div class="card">
+        <h2>🎒 준비물 체크리스트</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">본인 칸만 체크할 수 있습니다. 서로 뭐가 없는지 보이면 빌려주기 편합니다.</p>
+        <div id="checklist-summary" style="margin-top:12px;"></div>
+      </div>
+      <div class="card">
+        <h2>📋 항목별 체크</h2>
+        <div id="checklist-container"></div>
+      </div>
+      <div class="card">
+        <h2>💰 회비 안건 정리</h2>
+        <p>단톡방에서 정리되지 않은 부분이라 <strong>원문 그대로</strong> 옮겨둡니다. 최종 결정은 투표 탭 <strong>💰 회비 안건</strong>의 다수결로 합니다.</p>
+        <div class="chat-log" style="margin-top:10px;">
+          <div class="chat-row"><div class="chat-who">최진원</div><div class="chat-msg">"회비 좀 줄이는 건 어때? 세 군데 회비 내는데 요새 빡세다. 여기가 제일 비싸. 한 5만원씩 걷으면 괜찮을 듯 해서 의견 들어보려 한 것."</div></div>
+          <div class="chat-row"><div class="chat-who">김기태</div><div class="chat-msg">"회비 누적 800 이상이라 인당 100씩 불출. 회비만 계속 쌓이면 뭐해, 추진 자체가 안 되니까 8명 인당 100씩 불출하고 다시 누적한다는 소리."</div></div>
+          <div class="chat-row"><div class="chat-who">박중산</div><div class="chat-msg">"공지도 안 하고 혼자 정하지 말고, 무슨 소리인지 다 알게 정리부터 하자."</div></div>
+        </div>
+        <div class="note warn" style="margin-top:12px;">
+          📌 정리 필요: ① "누적 800 / 인당 100"의 <strong>단위(만원 여부)</strong> 명확화 ② 인하할 경우 <strong>적용 시점</strong>(9월분부터인지 10월분부터인지) ③ 이번 원정 경비를 회비에서 얼마나 쓸지. 이 3가지를 총무가 숫자로 올려주면 투표가 깔끔해집니다.
         </div>
       </div>
     </section>
@@ -1191,43 +780,40 @@ body.gated header, body.gated main, body.gated footer { display: none; }
     <!-- ============ MEMBERS ============ -->
     <section class="section" id="section-members">
       <div class="card">
-        <h2>🛂 여권 정보 & 여행 가능 여부</h2>
-        <p>회원별 여권 정보와 출발일 기준 유효기간을 자동 검토합니다. 일본 입국 시 권장 잔여 유효기간은 <strong>6개월 이상</strong>입니다.</p>
-        <div id="passport-list"></div>
+        <h2>🎣 장비 · 차량 현황</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">본인 정보만 수정할 수 있습니다. 차량과 여유 장비를 등록해두면 카풀 조 편성과 장비 빌려주기가 쉬워집니다. ("스피닝 릴 있어?" 는 여기서 바로 확인)</p>
+        <div id="gear-table" style="overflow-x:auto; margin-top:12px;"></div>
       </div>
+
       <div class="card">
         <h2>👥 참여 회원</h2>
-        <p>현재 사이트에 로그인한 회원 목록입니다. 출발일 전까지 의견·투표를 모아 함께 결정해요!</p>
-        <div id="member-list" class="member-list"></div>
+        <div class="member-list" id="member-list"></div>
+      </div>
+
+      <div class="card">
+        <h2>💾 데이터 관리</h2>
+        <p>클라우드 자동 저장이 켜져 있어 평소에는 쓸 일이 없습니다. 백업이 필요할 때만 사용하세요.</p>
         <div class="btn-row">
-          <button class="btn danger" onclick="resetAll()">🗑️ 본인 로컬 데이터 초기화</button>
+          <button class="btn" onclick="exportData()">📥 데이터 내보내기</button>
+          <button class="btn secondary" onclick="importData()">📤 데이터 가져오기</button>
+          <button class="btn danger" onclick="resetAll()">🗑️ 내 브라우저 데이터 초기화</button>
         </div>
-        <div class="note success" style="margin-top: 14px;">
-          ✅ <strong>자동 동기화:</strong> 모든 회원의 투표·체크리스트·여권 정보는 클라우드(GitHub)에 자동 저장되며, 사이트 접속 시 자동으로 최신 데이터를 불러옵니다. 회원 간 데이터를 따로 공유하실 필요 없습니다.
-        </div>
+        <input type="file" id="import-file" accept=".json" style="display:none" onchange="handleImport(event)">
       </div>
     </section>
 
   </div>
 </main>
 
-<footer>
-  © 2026 北九州 釣りいこか倶楽部 여행 모임 | 원본 클럽 정보: <a href="https://tsuri-ikoka.com/general" target="_blank" style="color: var(--primary-light);">tsuri-ikoka.com</a>
+<footer style="text-align:center; padding: 24px 16px 40px; color: var(--text-muted); font-size: 12px;">
+  🦑 서해 워킹 쭈꾸미 원정 2026 · 회원 전용 · 검색엔진 비공개<br>
+  좌대 정보 출처: <a href="https://gomugomu.pro/" target="_blank" style="color:var(--primary-light);">무지개좌대 (gomugomu.pro)</a>
 </footer>
-
 <script>
-// ============== DATA STORE ==============
-const STORAGE_KEY = 'tsuri_trip_planner_v4';
+// ============== CONFIG ==============
+const STORAGE_KEY = 'jjukkumi_trip_2026_v1';
 const REGISTERED_MEMBERS = ['박중산', '최근호', '김석', '김기태', '조성화', '최진원', '윤유병', '김철현'];
 const ACCESS_PASSWORD = '111111';
-const INITIAL_PASSPORTS = {
-  '박중산': { surname: 'PARK', givenNames: 'JUNG SAN', passportNo: 'M99330806', dob: '1973-09-09', sex: 'M', issueDate: '2016-10-18', expiryDate: '2026-10-18', nationality: 'KOR' },
-  '김석':   { surname: 'KIM',  givenNames: 'SUK',      passportNo: 'M538A2730', dob: '1974-02-22', sex: 'M', issueDate: '2023-03-03', expiryDate: '2033-03-03', nationality: 'KOR' },
-  '김철현': { surname: 'KIM',  givenNames: 'CHUL HYUN', passportNo: 'M798G5857', dob: '1973-10-06', sex: 'M', issueDate: '2023-03-03', expiryDate: '2033-03-03', nationality: 'KOR' },
-  '조성화': { surname: 'CHO',  givenNames: 'SUNG HWA', passportNo: 'M26303355', dob: '1973-04-28', sex: 'M', issueDate: '2020-09-04', expiryDate: '2030-09-04', nationality: 'KOR' },
-  '최진원': { surname: 'CHOI', givenNames: 'JIN WON',  passportNo: 'M94163217', dob: '1974-03-01', sex: 'M', issueDate: '2019-08-01', expiryDate: '2029-08-01', nationality: 'KOR' },
-  '윤유병': { surname: 'YOON', givenNames: 'YOO BYUNG', passportNo: 'M70489169', dob: '1974-01-28', sex: 'M', issueDate: '2019-01-08', expiryDate: '2029-01-08', nationality: 'KOR' }
-};
 const CLOUD_REPO = 'shake777/tsuri-trip-2026';
 const CLOUD_FILE = 'data.json';
 const CLOUD_RAW_URL = 'https://raw.githubusercontent.com/' + CLOUD_REPO + '/main/' + CLOUD_FILE;
@@ -1246,7 +832,6 @@ function defaultDB() {
   const members = {};
   REGISTERED_MEMBERS.forEach(name => {
     members[name] = { joinedAt: Date.now(), preRegistered: true };
-    if (INITIAL_PASSPORTS[name]) members[name].passport = INITIAL_PASSPORTS[name];
   });
   return {
     user: null,
@@ -1256,8 +841,8 @@ function defaultDB() {
     checklists: {},
     threads: [
       {
-        id: 't1', title: '환영합니다 🎉', author: '관리자',
-        body: '키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 박중산·최근호·김석·김기태·조성화·최진원·윤유병·김철현 8분이 등록되어 있습니다. 자유롭게 의견 남겨주세요!',
+        id: 'w1', title: '🦑 10월 서해 워킹 쭈꾸미 원정 — 여기서 정합시다', author: '관리자',
+        body: '단톡방에서 나온 이야기(10월 1·2·3일 / 태안·안면도 / 무창포 / 석모도 / 좌대 / 차박·텐트 / 회비 조정)를 전부 투표 항목으로 옮겨두었습니다.\n\n1) 투표 탭에서 가능한 날짜를 여러 개 골라주세요. 겹치는 날로 자동 집계됩니다.\n2) 후보지 탭에서 7곳을 비교해보고 가고 싶은 곳을 골라주세요.\n3) 회비 안건도 감정 빼고 다수결로 정합시다.\n\n의견은 이 게시판에 남겨주세요.',
         ts: Date.now(), comments: []
       }
     ]
@@ -1271,16 +856,10 @@ function loadDB() {
       const def = defaultDB();
       const merged = Object.assign(def, saved);
       if (!merged.checklists) merged.checklists = {};
+      if (!merged.votes) merged.votes = {};
+      if (!Array.isArray(merged.threads)) merged.threads = def.threads;
       REGISTERED_MEMBERS.forEach(name => {
         if (!merged.members[name]) merged.members[name] = { joinedAt: Date.now(), preRegistered: true };
-        if (INITIAL_PASSPORTS[name] && !merged.members[name].passport) {
-          merged.members[name].passport = INITIAL_PASSPORTS[name];
-        }
-        // Safety: validate passport date format; remove if invalid (e.g., "20230310" should be "2023-03-10")
-        const p = merged.members[name].passport;
-        if (p && p.expiryDate && !/^\d{4}-\d{2}-\d{2}$/.test(p.expiryDate)) {
-          delete merged.members[name].passport;
-        }
       });
       return merged;
     }
@@ -1289,228 +868,266 @@ function loadDB() {
 }
 function saveDB() { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); }
 
-// ============== POLLS ==============
+// ============== 후보지 데이터 ==============
+const SPOTS = [
+  {
+    emoji: '🌈', name: '안면도 무지개좌대 (고남 구매항)',
+    region: '충남 태안군 고남면 고남리 26-6 · 구매항',
+    meta: ['서울 약 3시간', '야간 1박 5만원/인', '방갈로 무료', '예약 필수'],
+    desc: '야간 해상좌대. 오후 2시 입장 ~ 다음날 오전 11시 퇴실이고, 야간 이용객에게는 방갈로가 무료로 제공됩니다. 주꾸미·갑오징어·우럭·백조기·아나고 등이 대상어입니다. 김기태 님이 링크를 올린 곳.',
+    pros: ['잠자리 해결 (방갈로 무료 제공)', '밤새 낚시 + 고기 + 술 한 번에', '초보도 앉아서 가능', '주간 3만원 / 야간 5만원 명확'],
+    cons: ['1인 5만원 비용 발생', '좌대라 포인트 이동이 안 됨', '부탄가스·숯·석쇠 직접 지참', '인원수 맞춰 사전 예약·입금 필요'],
+    memo: '김기태: "고기 사가지고 술도 먹고 고기도 먹고 잡은것도 먹고 자다가 또 먹고"',
+    link: 'https://gomugomu.pro/'
+  },
+  {
+    emoji: '🏖️', name: '안면도 백사장항 · 영목항 워킹',
+    region: '충남 태안군 안면읍 / 고남면',
+    meta: ['서울 약 2시간 40분', '무료 워킹', '차박 여지 있음', '최근호 추천 권역'],
+    desc: '안면도 남·북단 항구 권역. 방파제에서 걸어 다니며 쭈꾸미·갑오징어를 노릴 수 있고, 주변에 식당·마트·화장실이 있어 차박 베이스로 삼기 좋습니다. 최근호 님이 "태안 쪽이 편하다, 안면도 많이 간다"고 추천한 곳.',
+    pros: ['비용 거의 없음 (주차·워킹 무료)', '포인트가 여러 곳이라 조황 따라 이동 가능', '식당·마트·편의시설 접근성 좋음', '차박·텐트 모두 무난'],
+    cons: ['성수기 주말엔 사람이 몰림', '방파제 자리싸움 있음', '항구별 주차·야영 규정 사전 확인 필요'],
+    memo: '최근호: "태안쪽이 편하지 않나 · 안면도 많이 가구"',
+    link: ''
+  },
+  {
+    emoji: '⚓', name: '태안 신진도 · 안흥항 권역',
+    region: '충남 태안군 근흥면',
+    meta: ['서울 약 2시간 30분', '무료 워킹', '선상 연계 쉬움', '방파제 넓음'],
+    desc: '태안 서편 대표 항구. 방파제 규모가 커서 워킹 자리 확보가 비교적 수월하고, 마음이 바뀌어 선상 쭈꾸미로 갈아타고 싶을 때 출조선 선택지도 가장 많은 권역입니다.',
+    pros: ['방파제가 넓어 인원 8명도 소화', '워킹 실패 시 선상으로 전환 가능', '주변 숙박·식당 인프라 충분'],
+    cons: ['안면도보다 조금 더 멀게 느껴질 수 있음', '주말 차량 정체', '선상 전환 시 1인 출조비 별도'],
+    memo: '워킹이 안 될 때 대안이 가장 많은 권역',
+    link: ''
+  },
+  {
+    emoji: '🌊', name: '보령 무창포',
+    region: '충남 보령시 웅천읍',
+    meta: ['서울 약 3시간', '무료 워킹', '해수욕장 인접', '거리 이슈'],
+    desc: '박중산 님이 처음 제안한 곳. 방파제·해변 워킹과 신비의 바닷길로 유명합니다. 다만 김기태 님이 "무창포는 너무 멀다"며 반대 의견을 냈기 때문에, 다른 후보와 비교해서 결정할 필요가 있습니다.',
+    pros: ['워킹 포인트와 편의시설이 함께 있음', '숙소·식당 선택지가 많음', '가족·비낚시 인원도 시간 보내기 좋음'],
+    cons: ['⚠️ "너무 멀다"는 반대 의견이 이미 나온 상태', '왕복 이동시간이 일정의 상당 부분을 차지', '주말 정체 심함'],
+    memo: '박중산 제안 → 김기태 "무창포 넘 멀어 다른데 잘 나오는데 알아봐"',
+    link: ''
+  },
+  {
+    emoji: '🛶', name: '강화 석모도',
+    region: '인천 강화군 삼산면',
+    meta: ['서울 약 1시간 30분', '가장 가까운 편', '연륙교 진입', '조황 확인 필요'],
+    desc: '박중산 님이 언급한 수도권 최근접 후보. 다리로 바로 들어가고 거리가 짧아 부담이 적습니다. 다만 "석모도는 지금 안 된다"는 현지 조황 제보가 있어서, 가기 전에 최근 조황을 반드시 확인해야 합니다.',
+    pros: ['이동시간이 압도적으로 짧음', '기름값·피로도 최소', '급하게 날짜를 잡아도 부담 없음'],
+    cons: ['⚠️ 최근 조황 부진 제보 있음 (출발 전 재확인 필수)', '쭈꾸미 포인트로는 서산·태안권보다 약함', '주차·야영 가능 구역이 제한적'],
+    memo: '박중산: "강화도에서도 많이 하던데 석모도에서 · 진원이는 오늘 거기 안됐다고 하드만"',
+    link: ''
+  },
+  {
+    emoji: '🚗', name: '화성 궁평항 · 전곡항',
+    region: '경기 화성시 서신면 / 전곡항',
+    meta: ['서울 약 1시간 20분', '수도권 최근접', '주차장 넓음', '무료 워킹'],
+    desc: '수도권에서 가장 접근성이 좋은 서해 항구. 궁평항은 주차장과 방파제가 넓고 편의시설이 잘 갖춰져 있어, "멀리는 못 가겠고 1박만 하자"가 되면 가장 현실적인 선택지입니다.',
+    pros: ['이동 1시간대 — 퇴근 후 출발해도 여유', '주차장·화장실·수산시장 완비', '차 안 가져오는 인원도 합류 쉬움'],
+    cons: ['사람이 아주 많음 (주말 특히)', '조황 기복이 큼', '야영·차박 규정이 까다로울 수 있음'],
+    memo: '"멀리 가긴 부담" 의견이 많으면 1순위 대안',
+    link: ''
+  },
+  {
+    emoji: '🌅', name: '인천 영흥도 (진두선착장 · 십리포)',
+    region: '인천 옹진군 영흥면',
+    meta: ['서울 약 1시간 30분', '연륙교 진입', '워킹 포인트 다수', '캠핑장 있음'],
+    desc: '영흥대교로 차로 바로 들어가는 섬. 선착장·방파제·갯바위 워킹 포인트가 여러 곳이고 주변에 캠핑장·펜션이 많아, 차박이 애매하면 캠핑장으로 전환하기 좋습니다.',
+    pros: ['수도권에서 가깝고 섬 분위기까지', '워킹 포인트 선택지가 많음', '캠핑장·펜션 대안이 풍부'],
+    cons: ['주말 진입 정체', '포인트별 조황 편차 큼', '유료 캠핑장 이용 시 비용 발생'],
+    memo: '차박이 애매할 때 캠핑장으로 갈아타기 가장 쉬운 후보',
+    link: ''
+  }
+];
+
+// ============== 투표 항목 ==============
 const POLLS = [
   {
     id: 'participation',
-    question: '👤 참가 여부 (가장 먼저 결정해 주세요)',
+    question: '👤 참가 여부 (가장 먼저 눌러주세요 · 단일선택)',
     options: [
-      '✅ 참가 확정 — 일정 맞춰 출발 가능',
-      '❌ 불참 — 이번 여행 불참 (일정 무관)',
-      '🟢 일정 맞으면 가능 — 본인 일정 OK 시 출발',
-      '🔴 일정 안 맞으면 불가 — 본인 일정 충돌 시 불참'
+      '✅ 참가 확정 — 날짜만 정해지면 무조건 간다',
+      '❌ 불참 — 이번 원정은 빠짐',
+      '🟢 조건부 가능 — 내 일정과 맞으면 참가',
+      '🤔 아직 미정 — 회사·집 일정 확인 중'
     ]
   },
   {
     id: 'dates',
-    question: '🗓️ 여행 일정 (9월~12월 첫주 — 가능한 주간 모두 선택 가능)',
+    question: '🗓️ 출발 일정 (가능한 날짜를 모두 선택)',
     options: [
-      '9월 1주 (9/1~9/6) — 초가을, 시즌 진입',
-      '9월 2주 (9/7~9/13) — 오토시코미 시작',
-      '9월 3주 (9/14~9/20) — 추석 연휴 (9/15~9/17)',
-      '9월 4주 (9/21~9/27) — 추석 후 안정기',
-      '10월 1주 (9/28~10/4) — 개천절 연휴 (10/3 금)',
-      '10월 2주 (10/5~10/11) — 한글날 (10/9 금)',
-      '10월 3주 (10/12~10/18) — 단풍·날씨 좋음 + 다양한 어종',
-      '10월 4주 (10/19~10/25) — 본격 가을 시즌',
-      '11월 1주 (10/26~11/1) — 가을 끝자락',
-      '11월 2주 (11/2~11/8) — 오토시코미·아라카부 베스트',
-      '11월 3주 (11/9~11/15) — 추위 시작, 청물·참돔 호조',
-      '11월 4주 (11/16~11/22) — 늦가을 본격 시즌',
-      '12월 1주 (11/23~11/29) — 초겨울, 아라카부 본격, 가격 저렴'
+      '10/1(목)~10/3(토) 2박3일 — 목요일 출발·토요일 귀가',
+      '10/2(금)~10/3(토) 1박2일 — 금요일 퇴근 후 출발',
+      '10/2(금)~10/4(일) 2박3일 — 주말 활용',
+      '10/3(토)~10/5(월) 2박3일 — 개천절 대체공휴일(10/5) 연휴',
+      '10/9(금)~10/11(일) 2박3일 — 한글날 연휴',
+      '10/16(금)~10/18(일) 2박3일',
+      '10/23(금)~10/25(일) 2박3일',
+      '10/30(금)~11/1(일) 2박3일 — 갑오징어 씨알 좋아지는 시기',
+      '11월로 연기 — 10월은 도저히 안 됨'
+    ]
+  },
+  {
+    id: 'place',
+    question: '📍 장소 (가고 싶은 곳 모두 선택 · 후보지 탭에 상세 비교 있음)',
+    options: [
+      '🌈 안면도 무지개좌대 (고남 구매항) — 야간좌대 5만원/인, 방갈로 무료',
+      '🏖️ 안면도 백사장항·영목항 워킹 — 무료, 차박 베이스 좋음',
+      '⚓ 태안 신진도·안흥항 권역 — 방파제 넓고 선상 전환 쉬움',
+      '🌊 보령 무창포 — 인프라 좋음, 다만 거리 이슈 있음',
+      '🛶 강화 석모도 — 가장 가깝지만 최근 조황 확인 필요',
+      '🚗 화성 궁평항·전곡항 — 서울 1시간대, 1박이면 최적',
+      '🌅 인천 영흥도 (진두선착장·십리포) — 가깝고 캠핑장 대안 풍부'
+    ]
+  },
+  {
+    id: 'stay',
+    question: '🛏️ 숙박 방식 (가능한 것 모두 선택)',
+    options: [
+      '🚙 차박 — 차에서 잔다, 비용 0원',
+      '⛺ 텐트 — 노지 또는 캠핑장',
+      '🌈 해상좌대 + 방갈로 — 무지개좌대 선택 시',
+      '🏠 펜션·민박 — 돈 조금 더 쓰고 편하게',
+      '🌙 무박 — 밤새 낚시하고 아침에 그냥 철수'
     ]
   },
   {
     id: 'fishing',
-    question: '🎣 낚시 방법 (DAY 3 출조 - 관심 있는 모두 선택)',
+    question: '🎣 낚시 방식 (관심 있는 것 모두 선택)',
     options: [
-      '🐟 오토시코미 (落とし込み) — 대형 청물·참돔·광어, 가을~겨울',
-      '🐟 타이라바 (タイラバ) — 참돔 전용, 연중 가능',
-      '🐟 SLJ 슈퍼라이트지깅 — 청물·참돔, 가벼운 태클',
-      '🦐 히토츠텐야 (一つテンヤ) — 새우 미끼, 참돔',
-      '🪨 아라카부 (쏨뱅이) — 가볍게 즐기기, 초보자 OK',
-      '🪨 관문 아라카부 — 칸몬해협 쏨뱅이 본격',
-      '🐠 도즈키 (鯛五目胴突き) — 참돔·옥돔·근어 다양',
-      '🐠 텐빈고모쿠 (天秤五目) — 봄·여름, 이사키·참돔',
-      '⚙️ 지깅 (메탈지그) — 청물 정통 루어',
-      '⚙️ 전동 지깅 — 편한 지깅 (체력 부담 적음)',
-      '🦑 이카요타키 (야간 오징어 낚시)',
-      '🦑 이카메탈 — 라이트 태클 오징어'
+      '🦑 워킹 쭈꾸미 — 방파제·갯바위 도보 (원안)',
+      '🚤 선상 쭈꾸미·갑오징어 — 출조비 별도 발생',
+      '🌈 해상좌대 밤낚시 — 앉아서 편하게',
+      '🐟 원투·생활낚시 — 우럭·백조기·광어',
+      '🍺 낚시는 거들 뿐 — 고기·술·수다가 메인'
     ]
   },
   {
-    id: 'alt_activity',
-    question: '🚌 DAY 3 비낚시 활동 (낚시 안 가시는 분 — 관심 있는 모두 선택)',
+    id: 'fee',
+    question: '💰 회비 안건 (단톡방 쟁점 — 다수결로 정합시다)',
     options: [
-      '🏯 코쿠라성 + 탄가시장 + 시내 산책 (도보 반나절)',
-      '🚢 모지코 레트로 + 시모노세키 + 해저터널 (풀데이)',
-      '🌃 사라쿠라야마 케이블카 + 야경 (반나절~저녁)',
-      '♨️ 벳푸 지옥순례 + 온천 (풀데이)',
-      '♨️ 유후인 료칸거리 + 긴린호 (풀데이)',
-      '🍜 후쿠오카 시내 쇼핑 (캐널시티·텐진, 풀데이)',
-      '⛩️ 다자이후 텐만구 + 학문의 신 (반나절)',
-      '⛳ 골프 라운딩 (키타큐슈 권역, 풀데이)',
-      '🚄 가고시마 당일치기 (이부스키 모래찜질, 풀데이)',
-      '🎨 키타큐슈 만화박물관 + 아쿠아리움 (반나절)',
-      '🛌 호텔 휴식 + 온천 입욕 + 코쿠라 산책 (자유)'
+      '💵 현행 유지 — 지금 회비 그대로 간다',
+      '📉 월 5만원으로 인하 — 최진원 제안',
+      '🎁 누적분에서 인당 100 불출 후 재적립 — 김기태 제안',
+      '🧾 회비액은 유지하되, 이번 원정 경비를 회비에서 집행',
+      '⏸️ 지금 결정 말고 총무가 숫자 공지 후 다음 달 정식 안건 — 박중산 의견'
     ]
   },
   {
-    id: 'hotel',
-    question: '🏨 숙박 호텔 (1박 기준)',
+    id: 'food',
+    question: '🍖 먹거리 방식 (원하는 것 모두 선택)',
     options: [
-      '컴포트호텔 코쿠라 — 트윈 8,000엔, 역세권',
-      '컴포트호텔 코쿠라 — 더블 4,700엔, 1인실',
-      '테리하 스파리조트 — 트윈 10,000~12,000엔, 온천 포함',
-      '테리하 스파리조트 — 싱글 5,500~6,500엔, 온천 포함'
-    ]
-  },
-  {
-    id: 'restaurant',
-    question: '🍴 잡은 생선을 어디서 먹을까?',
-    options: [
-      '廻転寿司 平四郎 — 회전초밥 만푸쿠 코스 3,850엔',
-      '廻転寿司 平四郎 — 특상 스시 코스 5,000엔',
-      '네오 대중주점 우초우텐 — 닭요리+회 4,500엔',
-      '旬のとろ箱 시키마루 — 참돔 전문 오마카세 4,500엔',
-      '식선 와뇨야 — 해산물+닭요리 4,500엔'
-    ]
-  },
-  {
-    id: 'onsen',
-    question: '♨️ 온천 여행지 (DAY 2 오후 또는 풀데이)',
-    options: [
-      '벳푸 (別府) — 코쿠라 1.5h, 지옥순례+온천, 약 9,000엔/인 (반나절)',
-      '유후인 (湯布院) — 코쿠라 2h, 료칸요리+산골온천, 약 10,000엔/인 (반나절~풀데이)',
-      '쿠로카와 (黒川, 쿠마모토) — 3h, 노천온천 마을, 약 9,000엔/인 (풀데이)',
-      '기리시마 (霧島, 가고시마) — 신칸센 2.5h, 산악온천, 약 13,000엔/인 (풀데이)',
-      '이부스키 (指宿, 가고시마) — 신칸센+특급 4h, 모래찜질 명소, 약 17,000엔/인 (풀데이, 낚시일정 변경 필요)',
-      '모지 테리하 스파 — 코쿠라 인근 30분, 평일 990엔/토일축 1,090엔 (저녁 단시간)'
+      '🥩 고기 사가서 직접 굽기 — 숯·불판 지참',
+      '🐙 잡은 쭈꾸미로 라면·볶음 현장 요리',
+      '🍚 한 끼는 근처 식당에서 해결',
+      '🍺 술·안주 위주, 밥은 간단히',
+      '🍜 각자 먹을 것 알아서 (공동 준비 최소화)'
     ]
   }
 ];
 
-// ============== CHECKLISTS ==============
+// ============== 체크리스트 ==============
 const CHECKLISTS = [
   {
-    id: 'booking',
-    title: '🎫 예약 (D-90 ~ D-14) - 가장 먼저 처리',
+    id: 'plan',
+    title: '🗓️ 사전 준비 (D-14 ~ D-3)',
     color: '#0c447c',
     items: [
-      { text: '부산→후쿠오카 페리 (뉴카멜리아) 예약 — 고려훼리', deadline: 60 },
-      { text: '후쿠오카→인천/김포 항공권 예약 (귀국)', deadline: 60 },
-      { text: '코쿠라 호텔 예약 (컴포트호텔 또는 테리하 스파리조트)', deadline: 45 },
-      { text: 'JR큐슈 신칸센 좌석 예약 (smartEX 또는 JR큐슈 인터넷예약)', deadline: 30 },
-      { text: '유어선 (釣りいこか) 출조일 예약 — 사무국 통해', deadline: 60 },
-      { text: '낚시 가이드·도구 렌탈 신청 (필요시)', deadline: 30 },
-      { text: '비낚시 회원: DAY 3 관광·온천·골프 일정 예약', deadline: 14 },
-      { text: '온천지 교통편 예약 (벳푸·유후인 특급 좌석)', deadline: 14 },
-      { text: '제휴 식당 단체 예약 (廻転寿司 平四郎 등)', deadline: 14 },
-      { text: '여행자 보험 가입 (가족 단위 가능)', deadline: 14 },
-      { text: '부산행 KTX/SRT 또는 버스 예약 (수도권 출발 시)', deadline: 21 },
-      { text: '공항버스/공항철도 (귀국 후) 예약 또는 확인', deadline: 7 }
+      { text: '참가 여부·날짜·장소 투표 완료', deadline: 14 },
+      { text: '회비 안건 투표 완료', deadline: 14 },
+      { text: '카풀 조 편성 확인 (차량·탑승자)', deadline: 7 },
+      { text: '좌대 또는 선상 예약 (해당 시 입금까지)', deadline: 7 },
+      { text: '출발일 물때(만조·간조) 시간 확인', deadline: 3 },
+      { text: '기상·풍랑특보 최종 확인', deadline: 1 },
+      { text: '집결 장소·시간 단톡방 공지 확인', deadline: 1 }
     ]
   },
   {
-    id: 'predeparture',
-    title: '🧳 출국 전 준비 (D-30 ~ D-1)',
+    id: 'gear',
+    title: '🎣 낚시 장비',
     color: '#1f4e79',
     items: [
-      { text: '여권 유효기간 6개월 이상 확인', deadline: 90 },
-      { text: '국제운전면허증 발급 (필요시)', deadline: 30 },
-      { text: '여행자 보험 증서 출력 / 모바일 저장', deadline: 7 },
-      { text: 'Visit Japan Web (VJW) 사전등록 + QR 캡처', deadline: 7 },
-      { text: '예약 확인서 출력 (페리·항공·호텔·신칸센)', deadline: 7 },
-      { text: '방한복 + 방수 자켓 + 모자·장갑 준비', deadline: 7 },
-      { text: '낚시도구 점검 (또는 현지 렌탈 확정)', deadline: 7 },
-      { text: '엔화 환전 (1인 8~15만 엔 권장)', deadline: 3 },
-      { text: 'eSIM 또는 유심 준비', deadline: 3 },
-      { text: '멀미약 · 비상약 · 진통제 구입', deadline: 3 },
-      { text: '카메라 / 보조배터리 / 충전기·변환플러그', deadline: 3 },
-      { text: '여권 사본 / 비상연락처 메모', deadline: 1 },
-      { text: '캐리어 짐 무게 확인 (페리 30kg / 항공사별)', deadline: 1 }
+      { text: '로드 (에깅대 또는 루어대)', deadline: 3 },
+      { text: '스피닝 릴 (없으면 미리 빌릴 것)', deadline: 7 },
+      { text: '합사 원줄 + 쇼크리더', deadline: 3 },
+      { text: '쭈꾸미 에기·애자 채비 (여유분 포함)', deadline: 3 },
+      { text: '봉돌·스냅 등 소품', deadline: 3 },
+      { text: '뜰채 또는 집게', deadline: 3 },
+      { text: '아이스박스 + 아이스팩', deadline: 1 },
+      { text: '헤드랜턴 + 여분 건전지', deadline: 3 },
+      { text: '장화 또는 갯바위화', deadline: 3 },
+      { text: '목장갑·수건·물티슈', deadline: 1 }
     ]
   },
   {
-    id: 'arrival',
-    title: '🚢 일본 도착 당일 (DAY 2)',
-    color: '#2e75b6',
-    items: [
-      { text: '하카타항 입국심사·세관 통과', deadline: 0 },
-      { text: '시내버스로 JR하카타역 이동', deadline: 0 },
-      { text: '신칸센 또는 재래선으로 코쿠라 이동', deadline: 0 },
-      { text: '호텔 체크인 또는 짐 보관', deadline: 0 },
-      { text: 'IC카드 (SUGOCA) 발급 (선택)', deadline: 0 },
-      { text: '사무국 (釣りいこか) 미팅·브리핑', deadline: 0 },
-      { text: '낚시 도구 점검·렌탈 수령', deadline: 0 },
-      { text: '저녁 식사 + 휴식 (22시 취침 권장)', deadline: 0 }
-    ]
-  },
-  {
-    id: 'fishing',
-    title: '🎣 출조일 (DAY 3) 준비물',
+    id: 'car',
+    title: '🚗 차량 · 차박 장비',
     color: '#185fa5',
     items: [
-      { text: '구명조끼 착용 (자동팽창식)', deadline: 0 },
-      { text: '방수 자켓·바지', deadline: 7 },
-      { text: '논슬립 신발', deadline: 7 },
-      { text: '장갑·모자·선글라스', deadline: 3 },
-      { text: '멀미약 (출항 30분 전 복용)', deadline: 0 },
-      { text: '보온병 + 따뜻한 차', deadline: 1 },
-      { text: '간단한 간식 (김밥·삼각김밥 등)', deadline: 0 },
-      { text: '휴대폰 방수팩', deadline: 3 },
-      { text: '아이스박스 또는 보냉백', deadline: 3 },
-      { text: '낚싯대·릴 (개인 또는 렌탈)', deadline: 7 },
-      { text: '미끼·채비 (현지 낚시점 또는 사무국)', deadline: 0 },
-      { text: '잡은 생선 손질 / 택배 발송 의뢰', deadline: 0 }
+      { text: '주유·타이어 공기압 점검', deadline: 1 },
+      { text: '차박 매트 또는 에어매트', deadline: 3 },
+      { text: '침낭 또는 이불 (10월 밤은 춥습니다)', deadline: 3 },
+      { text: '보조배터리·파워뱅크 (또는 인버터)', deadline: 3 },
+      { text: '타프 또는 방수포', deadline: 3 },
+      { text: '접이식 의자·테이블', deadline: 3 },
+      { text: '쓰레기봉투 (전량 수거용)', deadline: 1 },
+      { text: '구급함·상비약', deadline: 3 }
     ]
   },
   {
-    id: 'onsen',
-    title: '♨️ 온천 일정 (DAY 2 오후)',
-    color: '#e67e22',
+    id: 'food',
+    title: '🍖 먹거리 · 취사',
+    color: '#c0703a',
     items: [
-      { text: '갈아입을 속옷·양말', deadline: 3 },
-      { text: '수건 (호텔/온천 제공 확인)', deadline: 3 },
-      { text: '슬리퍼 또는 워킹슈즈', deadline: 3 },
-      { text: '기초 화장품·세면도구', deadline: 3 },
-      { text: '여권 (이동 시 필요)', deadline: 0 },
-      { text: '교통편 예약 확인 (특급·신칸센)', deadline: 7 },
-      { text: '입욕료 + 식사비 현금 준비', deadline: 1 },
-      { text: '온천 마을 지도·관광 코스 확인', deadline: 3 }
+      { text: '고기·양념 (담당자 확정)', deadline: 1 },
+      { text: '숯 또는 부탄가스 + 토치', deadline: 1 },
+      { text: '석쇠·불판 (좌대는 반드시 지참)', deadline: 1 },
+      { text: '코펠·버너·칼·도마', deadline: 1 },
+      { text: '물·음료·주류', deadline: 1 },
+      { text: '라면·햇반·간식', deadline: 1 },
+      { text: '수저·컵·집게·호일', deadline: 1 }
     ]
   },
   {
-    id: 'return',
-    title: '✈️ 귀국 (DAY 4)',
-    color: '#27ae60',
+    id: 'safety',
+    title: '⚠️ 안전 수칙 (전원 확인)',
+    color: '#c0392b',
     items: [
-      { text: '호텔 체크아웃 (~10:00 권장)', deadline: 0 },
-      { text: '신칸센 코쿠라→하카타 예약 확인', deadline: 14 },
-      { text: '지하철 하카타→후쿠오카공항', deadline: 0 },
-      { text: '국제선 청사 셔틀버스 (15분)', deadline: 0 },
-      { text: '출국심사 2시간 전 도착', deadline: 0 },
-      { text: '잡은 생선 진공포장·EMS 발송 (전날)', deadline: 0 },
-      { text: '면세품 휴대 한도 확인 (주류 3병·담배 등)', deadline: 0 },
-      { text: '면세 환급 (TAX FREE)', deadline: 0 },
-      { text: '비행기 탑승 / 입국심사 (한국)', deadline: 0 },
-      { text: '검역대 통과 (수산물 5kg 이하)', deadline: 0 }
+      { text: '구명조끼 준비 (방파제·좌대 모두 필수)', deadline: 3 },
+      { text: '미끄럼 방지 신발 확인', deadline: 3 },
+      { text: '야간 안전등·발광 소품 준비', deadline: 3 },
+      { text: '조위·간조 시간 숙지 (갯벌 고립 주의)', deadline: 1 },
+      { text: '음주 후 물가 접근 금지 규칙 동의', deadline: 0 },
+      { text: '비상 연락망·위치 공유 확인', deadline: 0 }
     ]
   }
 ];
 
-// ============== FISH CALENDAR DATA ==============
+// ============== 어종 시즌 ==============
 const FISH_DATA = [
-  { name: '관문 텐야', months: ['','','','','P','P','P','P','P','P','A',''] },
-  { name: '아라카부 (쏨뱅이)', months: ['P','P','P','A','','','','','','A','P','P'] },
-  { name: '오토시코미', months: ['A','A','','','','','','','P','P','P','A'] },
-  { name: '아지오요가세', months: ['A','A','A','A','A','A','A','A','A','A','A','A'] },
-  { name: '타이고모쿠 도즈키', months: ['A','P','P','P','P','P','P','A','A','A','A','A'] },
-  { name: '텐빈고모쿠', months: ['A','A','A','A','P','P','P','P','A','A','A','A'] },
-  { name: '타이라바·SLJ', months: ['A','A','A','P','P','P','P','P','P','P','A','A'] },
-  { name: '이카요타키 (야간)', months: ['','','','','A','P','P','P','P','P','A',''] },
-  { name: '이카메탈', months: ['','','','','P','P','P','P','P','P','A',''] },
-  { name: '지깅', months: ['A','A','A','A','A','A','A','A','A','A','A','A'] }
+  { name: '주꾸미', months: ['A','A','A','','','','','A','P','P','P','A'] },
+  { name: '갑오징어', months: ['','','','','','','','A','P','P','P','A'] },
+  { name: '우럭', months: ['P','A','A','A','A','P','P','P','P','P','P','P'] },
+  { name: '광어', months: ['','','','A','A','P','P','P','P','A','','' ] },
+  { name: '백조기(보구치)', months: ['','','','','A','P','P','P','A','','',''] },
+  { name: '삼치', months: ['','','','','','','','A','P','P','A',''] },
+  { name: '문어', months: ['P','P','A','A','','','','','','A','P','P'] },
+  { name: '감성돔', months: ['','','','A','A','A','','A','P','P','P','A'] },
+  { name: '학공치', months: ['A','','','','','','','','A','P','P','P'] },
+  { name: '농어', months: ['','','','A','P','P','P','P','A','','',''] }
+];
+
+// ============== 장비/차량 항목 ==============
+const GEAR_FIELDS = [
+  { key: 'depart', label: '🏠 출발지', type: 'text', placeholder: '예: 서울 강서' },
+  { key: 'car', label: '🚗 차량', type: 'select', options: ['미정', '없음', '가능 (2인)', '가능 (3인)', '가능 (4인)', '가능 (5인 이상)'] },
+  { key: 'rod', label: '🎣 로드', type: 'bool' },
+  { key: 'reel', label: '🌀 스피닝 릴', type: 'bool' },
+  { key: 'camp', label: '⛺ 차박/텐트 장비', type: 'bool' },
+  { key: 'cooler', label: '🧊 아이스박스', type: 'bool' },
+  { key: 'grill', label: '🔥 버너/불판', type: 'bool' }
 ];
 
 // ============== CLOUD SYNC ==============
@@ -1519,7 +1136,6 @@ async function loadFromCloud(silent) {
     const res = await fetch(CLOUD_RAW_URL + '?t=' + Date.now());
     if (!res.ok) return null;
     const cloud = await res.json();
-    // Merge cloud data into DB
     if (cloud.votes) {
       Object.entries(cloud.votes).forEach(([pid, votes]) => {
         if (!DB.votes[pid]) DB.votes[pid] = {};
@@ -1531,6 +1147,7 @@ async function loadFromCloud(silent) {
       cloud.threads.forEach(t => {
         if (existingIds.has(t.id)) {
           const ex = DB.threads.find(x => x.id === t.id);
+          if (!ex.comments) ex.comments = [];
           const exKeys = new Set(ex.comments.map(c => c.author + '|' + c.ts));
           (t.comments || []).forEach(c => {
             if (!exKeys.has(c.author + '|' + c.ts)) ex.comments.push(c);
@@ -1544,15 +1161,8 @@ async function loadFromCloud(silent) {
       Object.entries(cloud.members).forEach(([name, m]) => {
         if (!DB.members[name]) {
           DB.members[name] = m;
-        } else {
-          // Cloud is authoritative for passport: if cloud has it, use cloud's version;
-          // if cloud explicitly does NOT have it, remove local passport too
-          if (m && m.passport) {
-            DB.members[name].passport = m.passport;
-          } else if (REGISTERED_MEMBERS.includes(name)) {
-            // Only remove for registered members; if cloud says no passport, sync that
-            delete DB.members[name].passport;
-          }
+        } else if (m && m.gear) {
+          DB.members[name].gear = m.gear;
         }
       });
     }
@@ -1568,12 +1178,13 @@ async function loadFromCloud(silent) {
       renderPolls();
       renderThreads();
       renderMembers();
+      renderGear();
       renderProgress();
       renderResult();
       renderHomeLoginGrid();
-      renderPassports();
       renderHomeMemberStatus();
       renderCloudStatus();
+      renderCountdown();
     }
     return cloud;
   } catch (e) {
@@ -1582,8 +1193,12 @@ async function loadFromCloud(silent) {
   }
 }
 
+function cloudRefresh() {
+  loadFromCloud(false).then(() => alert('☁️ 최신 데이터 불러오기 완료!'));
+}
+
 async function saveToCloud(silent) {
-  if (!DB.user) { if(!silent) alert('로그인 후 저장 가능합니다'); return; }
+  if (!DB.user) { if (!silent) alert('로그인 후 저장 가능합니다'); return; }
   const token = _getCloudToken();
   const btn = document.getElementById('cloud-save-btn');
   if (btn && !silent) { btn.disabled = true; btn.textContent = '☁️ 저장 중...'; }
@@ -1594,12 +1209,10 @@ async function saveToCloud(silent) {
     });
     if (getRes.status === 401 || getRes.status === 403) {
       if (!silent) alert('저장 권한이 없습니다. 관리자에게 문의해 주세요.');
-      if (btn) { btn.disabled = false; btn.textContent = '💾 클라우드에 저장'; }
+      if (btn) { btn.disabled = false; btn.textContent = '💾 지금 저장'; }
       return;
     }
-    if (getRes.ok) {
-      sha = (await getRes.json()).sha;
-    }
+    if (getRes.ok) sha = (await getRes.json()).sha;
     const payload = {
       votes: DB.votes,
       threads: DB.threads,
@@ -1611,10 +1224,7 @@ async function saveToCloud(silent) {
     };
     const json = JSON.stringify(payload, null, 2);
     const content = btoa(unescape(encodeURIComponent(json)));
-    const body = {
-      message: '저장: ' + DB.user + ' (' + new Date().toLocaleString('ko-KR') + ')',
-      content
-    };
+    const body = { message: '저장: ' + DB.user + ' (' + new Date().toLocaleString('ko-KR') + ')', content };
     if (sha) body.sha = sha;
     const putRes = await fetch(CLOUD_API_URL, {
       method: 'PUT',
@@ -1638,12 +1248,11 @@ async function saveToCloud(silent) {
     console.error(e);
     if (!silent) alert('저장 오류: ' + e.message);
   } finally {
-    if (btn) { btn.disabled = false; btn.textContent = '💾 클라우드에 저장'; }
+    if (btn) { btn.disabled = false; btn.textContent = '💾 지금 저장'; }
     _autoSaveBusy = false;
   }
 }
 
-// Auto-save with debounce
 function triggerAutoSave() {
   if (!DB.user) return;
   if (_autoSaveTimer) clearTimeout(_autoSaveTimer);
@@ -1652,9 +1261,7 @@ function triggerAutoSave() {
     _autoSaveBusy = true;
     const el = document.getElementById('cloud-status');
     if (el) el.textContent = '☁️ 자동 저장 중...';
-    saveToCloud(true).then(() => {
-      renderCloudStatus();
-    });
+    saveToCloud(true).then(() => { renderCloudStatus(); });
   }, 1500);
 }
 
@@ -1662,8 +1269,7 @@ function renderCloudStatus() {
   const el = document.getElementById('cloud-status');
   if (!el) return;
   if (_lastCloudSync > 0) {
-    const dt = new Date(_lastCloudSync);
-    el.textContent = '☁️ 마지막 동기화: ' + dt.toLocaleString('ko-KR');
+    el.textContent = '☁️ 마지막 동기화: ' + new Date(_lastCloudSync).toLocaleString('ko-KR');
   } else {
     el.textContent = '☁️ 아직 클라우드에서 불러오지 않음';
   }
@@ -1674,29 +1280,26 @@ function init() {
   renderAuthGate();
   renderMemberArea();
   renderFishCalendar();
+  renderSpots();
   renderCountdown();
   renderPolls();
   renderThreads();
   renderMembers();
+  renderGear();
   renderProgress();
   renderHomeLoginGrid();
-  renderPassports();
   renderHomeMemberStatus();
   renderResult();
   renderCloudStatus();
-  // Auto-load from cloud on startup (async)
   loadFromCloud(false);
   document.getElementById('departure-date').addEventListener('change', e => {
     DB.departureDate = e.target.value;
     saveDB();
     renderCountdown();
-    renderPassports();
     renderChecklists();
     triggerAutoSave();
   });
-  if (DB.departureDate) {
-    document.getElementById('departure-date').value = DB.departureDate;
-  }
+  if (DB.departureDate) document.getElementById('departure-date').value = DB.departureDate;
   document.querySelectorAll('.tab').forEach(t => {
     t.onclick = () => switchTab(t.dataset.section);
   });
@@ -1711,8 +1314,10 @@ function switchTab(name) {
   });
   if (name === 'vote') renderPolls();
   if (name === 'discuss') renderThreads();
-  if (name === 'members') { renderMembers(); renderPassports(); }
+  if (name === 'members') { renderMembers(); renderGear(); }
   if (name === 'result') renderResult();
+  if (name === 'prep') renderChecklists();
+  if (name === 'schedule') renderScheduleDate();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1720,71 +1325,26 @@ function switchTab(name) {
 function renderMemberArea() {
   const el = document.getElementById('member-area-content');
   if (DB.user) {
-    el.innerHTML = `
-      <span>안녕하세요, <span id="current-user">${escapeHtml(DB.user)}</span> 님!</span>
-      <button onclick="logout()">로그아웃</button>
-    `;
+    el.innerHTML = '<span>안녕하세요, <span id="current-user">' + escapeHtml(DB.user) + '</span> 님!</span>' +
+      '<button onclick="logout()">로그아웃</button>';
   } else {
-    const options = REGISTERED_MEMBERS.map(n => `<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join('');
-    el.innerHTML = `
-      <select id="login-select" onchange="onLoginSelectChange()" style="padding:6px 8px;border-radius:6px;border:none;background:rgba(255,255,255,0.95);color:var(--primary);font-size:13px;font-weight:600;min-width:130px;">
-        <option value="">이름 선택 ▾</option>
-        ${options}
-        <option value="__other__">기타 (직접입력)</option>
-      </select>
-      <input type="text" id="login-name" placeholder="이름 입력" maxlength="20" style="display:none;">
-      <button onclick="login()">참여하기</button>
-    `;
-    setTimeout(() => {
-      const input = document.getElementById('login-name');
-      if (input) input.addEventListener('keypress', e => { if (e.key === 'Enter') login(); });
-    }, 0);
-  }
-}
-function onLoginSelectChange() {
-  const sel = document.getElementById('login-select');
-  const input = document.getElementById('login-name');
-  if (sel.value === '__other__') {
-    input.style.display = '';
-    input.focus();
-  } else {
-    input.style.display = 'none';
-    input.value = '';
-    if (sel.value) { login(); }
+    const options = REGISTERED_MEMBERS.map(n => '<option value="' + escapeHtml(n) + '">' + escapeHtml(n) + '</option>').join('');
+    el.innerHTML = '<select id="login-select" style="padding:6px 8px;border-radius:6px;border:none;background:rgba(255,255,255,0.95);color:var(--primary);font-size:13px;font-weight:600;min-width:130px;">' +
+      '<option value="">이름 선택</option>' + options + '</select>' +
+      '<button onclick="login()">참여</button>';
   }
 }
 function login() {
   const sel = document.getElementById('login-select');
-  const input = document.getElementById('login-name');
-  let name = '';
-  if (sel && sel.value && sel.value !== '__other__') name = sel.value.trim();
-  else if (input) name = input.value.trim();
-  if (!name) { alert('이름을 선택하거나 입력해주세요'); return; }
-  if (name.length > 20) { alert('이름은 20자 이내로 입력해주세요'); return; }
-  loginAs(name);
-}
-function _gateRetry() {
-  document.body.classList.add('gated');
-  document.getElementById('auth-gate').style.display = 'flex';
+  if (!sel || !sel.value) { alert('이름을 선택해주세요'); return; }
+  loginAs(sel.value);
 }
 function loginAs(name) {
-  // When called from gate, password already verified.
-  if (!DB.user) {
-    _gateSelectedName = name;
-    showGateStep2();
-    return;
-  }
-  DB.user = name;
-  if (!DB.members[name]) DB.members[name] = { joinedAt: Date.now() };
+  _gateSelectedName = name;
+  DB.user = null;
   saveDB();
-  renderMemberArea();
-  renderPolls();
-  renderThreads();
-  renderMembers();
-  renderProgress();
-  renderHomeLoginGrid();
-  renderHomeMemberStatus();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderAuthGate();
+  gateSelectName(name);
 }
 function _completeLogin(name) {
   DB.user = name;
@@ -1795,10 +1355,11 @@ function _completeLogin(name) {
   renderPolls();
   renderThreads();
   renderMembers();
+  renderGear();
   renderProgress();
   renderHomeLoginGrid();
-  renderPassports();
   renderHomeMemberStatus();
+  renderChecklists();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function logout() {
@@ -1810,6 +1371,7 @@ function logout() {
   renderPolls();
   renderThreads();
   renderMembers();
+  renderGear();
   renderProgress();
   renderHomeLoginGrid();
 }
@@ -1830,13 +1392,11 @@ function renderAuthGate() {
     let html = '';
     REGISTERED_MEMBERS.forEach(name => {
       const cls = _gateSelectedName === name ? 'gate-name-btn selected' : 'gate-name-btn';
-      html += `<button class="${cls}" onclick="gateSelectName('${escapeHtml(name).replace(/'/g, "\\'")}')">${escapeHtml(name)}</button>`;
+      html += '<button class="' + cls + '" onclick="gateSelectName(\'' + escapeHtml(name).replace(/'/g, "\\'") + '\')">' + escapeHtml(name) + '</button>';
     });
     grid.innerHTML = html;
   }
-  if (_gateSelectedName) {
-    showGateStep2();
-  }
+  if (_gateSelectedName) showGateStep2();
 }
 function gateSelectName(name) {
   _gateSelectedName = name;
@@ -1878,7 +1438,6 @@ function gateSubmit() {
     pwd.focus();
     return;
   }
-  // Success
   _completeLogin(_gateSelectedName);
   _gateSelectedName = null;
 }
@@ -1894,32 +1453,56 @@ function renderCountdown() {
   const dateStr = DB.departureDate;
   const dateEl = document.getElementById('countdown-date');
   const daysEl = document.getElementById('countdown-days');
+  const inp = document.getElementById('departure-date');
+  if (inp && dateStr && inp.value !== dateStr) inp.value = dateStr;
   if (!dateStr) {
-    dateEl.textContent = '출발일을 설정하세요';
+    dateEl.textContent = '출발일을 설정하세요 (투표로 정해지면 총무가 입력)';
     daysEl.innerHTML = '--<span>일</span>';
     return;
   }
   const target = new Date(dateStr + 'T00:00:00');
-  const now = new Date(); now.setHours(0,0,0,0);
+  const now = new Date(); now.setHours(0, 0, 0, 0);
   const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
-  const formatted = target.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
-  dateEl.textContent = '출발일: ' + formatted;
-  if (diff > 0) daysEl.innerHTML = `D-${diff}<span>일</span>`;
-  else if (diff === 0) daysEl.innerHTML = `<span style="font-size: 22px;">D-DAY!</span>`;
-  else daysEl.innerHTML = `<span style="font-size: 18px;">여행 ${-diff}일 경과</span>`;
+  dateEl.textContent = '출발일: ' + target.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
+  if (diff > 0) daysEl.innerHTML = 'D-' + diff + '<span>일</span>';
+  else if (diff === 0) daysEl.innerHTML = '<span style="font-size: 22px;">D-DAY!</span>';
+  else daysEl.innerHTML = '<span style="font-size: 18px;">출발 ' + (-diff) + '일 경과</span>';
 }
 
 // ============== FISH CALENDAR ==============
 function renderFishCalendar() {
   const el = document.getElementById('fish-calendar');
   let html = '<div class="head"></div>';
-  for (let i = 1; i <= 12; i++) html += `<div class="head">${i}월</div>`;
+  for (let i = 1; i <= 12; i++) html += '<div class="head">' + i + '월</div>';
   FISH_DATA.forEach(row => {
-    html += `<div class="name">${row.name}</div>`;
+    html += '<div class="name">' + escapeHtml(row.name) + '</div>';
     row.months.forEach(v => {
       const cls = v === 'P' ? 'cell peak' : v === 'A' ? 'cell avail' : 'cell';
-      html += `<div class="${cls}"></div>`;
+      html += '<div class="' + cls + '"></div>';
     });
+  });
+  el.innerHTML = html;
+}
+
+// ============== SPOTS ==============
+function renderSpots() {
+  const el = document.getElementById('spot-grid');
+  if (!el) return;
+  let html = '';
+  SPOTS.forEach((s, i) => {
+    html += '<div class="spot-card">';
+    html += '<div class="spot-head"><div class="spot-emoji">' + s.emoji + '</div><div>';
+    html += '<div class="spot-name">' + (i + 1) + '. ' + escapeHtml(s.name) + '</div>';
+    html += '<div class="spot-region">' + escapeHtml(s.region) + '</div></div></div>';
+    html += '<div class="spot-meta">' + s.meta.map(m => '<span>' + escapeHtml(m) + '</span>').join('') + '</div>';
+    html += '<div class="spot-desc">' + escapeHtml(s.desc) + '</div>';
+    html += '<div class="pc-list">';
+    html += '<div class="pc-pros"><strong>👍 장점</strong><ul>' + s.pros.map(p => '<li>' + escapeHtml(p) + '</li>').join('') + '</ul></div>';
+    html += '<div class="pc-cons"><strong>👎 단점</strong><ul>' + s.cons.map(c => '<li>' + escapeHtml(c) + '</li>').join('') + '</ul></div>';
+    html += '</div>';
+    if (s.memo) html += '<div class="spot-memo">💬 ' + escapeHtml(s.memo) + '</div>';
+    if (s.link) html += '<div class="btn-row"><button class="btn secondary" style="padding:6px 12px;font-size:12px;" onclick="window.open(\'' + s.link + '\',\'_blank\')">🔗 사이트 열기</button></div>';
+    html += '</div>';
   });
   el.innerHTML = html;
 }
@@ -1929,7 +1512,7 @@ function renderPolls() {
   const loginCheck = document.getElementById('vote-login-check');
   const content = document.getElementById('vote-content');
   if (!DB.user) {
-    loginCheck.innerHTML = `<div class="login-required">🔒 투표하려면 상단에서 이름을 입력하고 참여해주세요</div>`;
+    loginCheck.innerHTML = '<div class="login-required">🔒 투표하려면 상단에서 이름을 선택하고 참여해주세요</div>';
     content.style.display = 'none';
     return;
   }
@@ -1940,7 +1523,7 @@ function renderPolls() {
   POLLS.forEach(poll => {
     if (!DB.votes[poll.id]) DB.votes[poll.id] = {};
     const myVotes = _getUserVotes(poll.id, DB.user);
-    const counts = poll.options.map((_, i) => 0);
+    const counts = poll.options.map(() => 0);
     const voters = poll.options.map(() => []);
     const userCount = new Set();
     Object.entries(DB.votes[poll.id]).forEach(([user, val]) => {
@@ -1956,53 +1539,47 @@ function renderPolls() {
     const totalVotes = counts.reduce((a, b) => a + b, 0);
     const totalUsers = userCount.size;
     const isMulti = poll.id !== 'participation';
-    html += `<div class="card poll-card">
-      <div class="poll-question">${escapeHtml(poll.question)}${isMulti ? ' <span style="font-size:11px; background:var(--primary-lighter); color:var(--primary); padding:2px 8px; border-radius:8px; font-weight:500; margin-left:6px;">복수선택</span>' : ''}</div>`;
+    html += '<div class="card poll-card">' +
+      '<div class="poll-question">' + escapeHtml(poll.question) +
+      (isMulti ? ' <span style="font-size:11px; background:var(--primary-lighter); color:var(--primary); padding:2px 8px; border-radius:8px; font-weight:500; margin-left:6px;">복수선택</span>' : '') +
+      '</div>';
     poll.options.forEach((opt, i) => {
       const pct = totalUsers > 0 ? Math.round(counts[i] / totalUsers * 100) : 0;
       const isMine = myVotes.indexOf(i) >= 0;
-      html += `
-        <div class="poll-option ${isMine ? 'voted' : ''}" onclick="vote('${poll.id}', ${i})">
-          <div class="bar" style="width: ${pct}%;"></div>
-          <span class="label">${isMine ? '✓ ' : ''}${escapeHtml(opt)}</span>
-          <span class="count">${counts[i]}표 (${pct}%)</span>
-        </div>
-        ${voters[i].length > 0 ? `<div class="poll-voters" style="background:#f0f7fc;padding:6px 12px;border-radius:6px;margin:2px 0 8px 14px;color:var(--primary);font-weight:500;">👥 투표한 회원: ${voters[i].map(escapeHtml).join(' · ')}</div>` : ''}
-      `;
+      html += '<div class="poll-option ' + (isMine ? 'voted' : '') + '" onclick="vote(\'' + poll.id + '\', ' + i + ')">' +
+        '<div class="bar" style="width: ' + pct + '%;"></div>' +
+        '<span class="label">' + (isMine ? '✓ ' : '') + escapeHtml(opt) + '</span>' +
+        '<span class="count">' + counts[i] + '표 (' + pct + '%)</span>' +
+        '</div>';
+      if (voters[i].length > 0) {
+        html += '<div class="poll-voters" style="background:#f0f7fc;padding:6px 12px;border-radius:6px;margin:2px 0 8px 14px;color:var(--primary);font-weight:500;">👥 ' + voters[i].map(escapeHtml).join(' · ') + '</div>';
+      }
     });
-    const nonVoters = REGISTERED_MEMBERS.filter(n => DB.votes[poll.id][n] === undefined || (Array.isArray(DB.votes[poll.id][n]) && DB.votes[poll.id][n].length === 0));
-    html += `<div class="poll-total">${isMulti ? '총 ' + totalUsers + '명 / ' + totalVotes + '표' : '총 ' + totalUsers + '명 투표'}${nonVoters.length > 0 ? ` · 미투표: ${nonVoters.map(escapeHtml).join(', ')}` : ''}</div>`;
-    html += `</div>`;
+    const nonVoters = REGISTERED_MEMBERS.filter(n => {
+      const v = DB.votes[poll.id][n];
+      return v === undefined || (Array.isArray(v) && v.length === 0);
+    });
+    html += '<div class="poll-total">' + (isMulti ? '총 ' + totalUsers + '명 / ' + totalVotes + '표' : '총 ' + totalUsers + '명 투표') +
+      (nonVoters.length > 0 ? ' · 미투표: ' + nonVoters.map(escapeHtml).join(', ') : ' · 전원 투표 완료 🎉') + '</div>';
+    html += '</div>';
   });
   container.innerHTML = html;
 }
 function vote(pollId, optionIdx) {
   if (!DB.user) return;
   if (!DB.votes[pollId]) DB.votes[pollId] = {};
-  // Participation poll stays SINGLE-CHOICE; others are MULTI-CHOICE
   if (pollId === 'participation') {
-    if (DB.votes[pollId][DB.user] === optionIdx) {
-      delete DB.votes[pollId][DB.user];
-    } else {
-      DB.votes[pollId][DB.user] = optionIdx;
-    }
+    if (DB.votes[pollId][DB.user] === optionIdx) delete DB.votes[pollId][DB.user];
+    else DB.votes[pollId][DB.user] = optionIdx;
   } else {
-    // Multi-choice: store as array of selected indexes
     let cur = DB.votes[pollId][DB.user];
-    if (typeof cur === 'number') cur = [cur]; // migrate legacy single-value
+    if (typeof cur === 'number') cur = [cur];
     if (!Array.isArray(cur)) cur = [];
     const pos = cur.indexOf(optionIdx);
-    if (pos >= 0) {
-      cur.splice(pos, 1);
-    } else {
-      cur.push(optionIdx);
-      cur.sort((a, b) => a - b);
-    }
-    if (cur.length === 0) {
-      delete DB.votes[pollId][DB.user];
-    } else {
-      DB.votes[pollId][DB.user] = cur;
-    }
+    if (pos >= 0) cur.splice(pos, 1);
+    else { cur.push(optionIdx); cur.sort((a, b) => a - b); }
+    if (cur.length === 0) delete DB.votes[pollId][DB.user];
+    else DB.votes[pollId][DB.user] = cur;
   }
   saveDB();
   renderPolls();
@@ -2012,8 +1589,6 @@ function vote(pollId, optionIdx) {
   renderHomeMemberStatus();
   triggerAutoSave();
 }
-
-// Helper: get list of voted option indexes for a user (handles both single and array formats)
 function _getUserVotes(pollId, user) {
   const v = (DB.votes[pollId] || {})[user];
   if (v === undefined || v === null) return [];
@@ -2027,7 +1602,7 @@ function renderThreads() {
   const loginCheck = document.getElementById('discuss-login-check');
   const content = document.getElementById('discuss-content');
   if (!DB.user) {
-    loginCheck.innerHTML = `<div class="login-required">🔒 토론에 참여하려면 상단에서 이름을 입력하고 참여해주세요</div>`;
+    loginCheck.innerHTML = '<div class="login-required">🔒 토론에 참여하려면 상단에서 이름을 선택하고 참여해주세요</div>';
     content.style.display = 'none';
     return;
   }
@@ -2041,30 +1616,22 @@ function renderThreads() {
   let html = '';
   const sorted = [...DB.threads].sort((a, b) => b.ts - a.ts);
   sorted.forEach(t => {
-    html += `<div class="thread">
-      <div class="thread-header">
-        <div class="thread-title">${escapeHtml(t.title)}</div>
-        <div class="thread-meta">${escapeHtml(t.author)} · ${formatTime(t.ts)}</div>
-      </div>
-      <div class="thread-body">${escapeHtml(t.body).replace(/\n/g, '<br>')}</div>
-      <div class="comments">
-        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">댓글 ${t.comments.length}개</div>
-        ${t.comments.map(c => `
-          <div class="comment">
-            <div class="comment-meta">
-              <span class="comment-author">${escapeHtml(c.author)}</span>
-              <span>${formatTime(c.ts)}</span>
-            </div>
-            <div class="comment-body">${escapeHtml(c.body)}</div>
-          </div>
-        `).join('')}
-        <div class="comment-form">
-          <input type="text" placeholder="댓글 입력" id="comment-input-${t.id}" onkeypress="if(event.key==='Enter') addComment('${t.id}')">
-          <button onclick="addComment('${t.id}')">등록</button>
-        </div>
-        ${t.author === DB.user ? `<div style="margin-top: 6px;"><button class="btn danger" style="padding: 4px 10px; font-size: 11px;" onclick="deleteThread('${t.id}')">삭제</button></div>` : ''}
-      </div>
-    </div>`;
+    const comments = t.comments || [];
+    html += '<div class="thread">' +
+      '<div class="thread-header">' +
+      '<div class="thread-title">' + escapeHtml(t.title) + '</div>' +
+      '<div class="thread-meta">' + escapeHtml(t.author) + ' · ' + formatTime(t.ts) + '</div>' +
+      '</div>' +
+      '<div class="thread-body">' + escapeHtml(t.body).replace(/\n/g, '<br>') + '</div>' +
+      '<div class="comments">' +
+      '<div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">댓글 ' + comments.length + '개</div>' +
+      comments.map(c => '<div class="comment"><div class="comment-meta"><span class="comment-author">' + escapeHtml(c.author) + '</span><span>' + formatTime(c.ts) + '</span></div><div class="comment-body">' + escapeHtml(c.body) + '</div></div>').join('') +
+      '<div class="comment-form">' +
+      '<input type="text" placeholder="댓글 입력" id="comment-input-' + t.id + '" onkeypress="if(event.key===\'Enter\') addComment(\'' + t.id + '\')">' +
+      '<button onclick="addComment(\'' + t.id + '\')">등록</button>' +
+      '</div>' +
+      (t.author === DB.user ? '<div style="margin-top: 6px;"><button class="btn danger" style="padding: 4px 10px; font-size: 11px;" onclick="deleteThread(\'' + t.id + '\')">삭제</button></div>' : '') +
+      '</div></div>';
   });
   list.innerHTML = html;
 }
@@ -2074,9 +1641,7 @@ function addThread() {
   const body = document.getElementById('new-thread-body').value.trim();
   if (!title) { alert('제목을 입력해주세요'); return; }
   if (!body) { alert('내용을 입력해주세요'); return; }
-  DB.threads.push({
-    id: 't' + Date.now(), title, body, author: DB.user, ts: Date.now(), comments: []
-  });
+  DB.threads.push({ id: 't' + Date.now(), title, body, author: DB.user, ts: Date.now(), comments: [] });
   saveDB();
   document.getElementById('new-thread-title').value = '';
   document.getElementById('new-thread-body').value = '';
@@ -2092,6 +1657,7 @@ function addComment(threadId) {
   if (!body) return;
   const t = DB.threads.find(x => x.id === threadId);
   if (!t) return;
+  if (!t.comments) t.comments = [];
   t.comments.push({ author: DB.user, body, ts: Date.now() });
   saveDB();
   input.value = '';
@@ -2108,113 +1674,93 @@ function deleteThread(threadId) {
   triggerAutoSave();
 }
 
-// ============== MEMBERS ==============
-function checkPassportStatus(passport, tripDate) {
-  if (!passport || !passport.expiryDate) {
-    return { status: 'missing', label: '⚠️ 여권 정보 없음', color: '#888', detail: '여권 사진을 등록해주세요' };
-  }
-  const expiry = new Date(passport.expiryDate);
-  const today = new Date(); today.setHours(0,0,0,0);
-  if (isNaN(expiry.getTime())) {
-    return { status: 'invalid', label: '⚠️ 만료일 오류', color: '#e67e22', detail: '만료일 형식 확인 필요' };
-  }
-  // Calculate months remaining from trip date (or today if no trip date)
-  const refDate = tripDate ? new Date(tripDate) : today;
-  if (isNaN(refDate.getTime())) { return checkPassportStatus(passport, null); }
-  const monthsLeft = (expiry - refDate) / (1000 * 60 * 60 * 24 * 30.44);
-  const ymd = expiry.toLocaleDateString('ko-KR');
-  if (monthsLeft < 0) {
-    return { status: 'expired', label: '❌ 만료됨', color: '#e74c3c', detail: '만료일: ' + ymd + ' · 즉시 갱신 필요' };
-  }
-  if (monthsLeft < 6) {
-    return { status: 'risk', label: '⚠️ 유효기간 부족 (6개월 미만)', color: '#e67e22', detail: '만료일: ' + ymd + ' · 일본 입국 시 6개월 잔여기간 권장, 갱신 권장' };
-  }
-  return { status: 'ok', label: '✅ 정상', color: '#27ae60', detail: '만료일: ' + ymd + ' · 여행에 문제 없음' };
+// ============== GEAR (장비·차량) ==============
+function getGear(name) {
+  const m = DB.members[name];
+  return (m && m.gear) ? m.gear : {};
 }
-
-function renderPassports() {
-  const el = document.getElementById('passport-list');
-  if (!el) return;
-  const tripDate = DB.departureDate;
-  let html = '';
-  if (!tripDate) {
-    html += '<div class="note warn" style="margin-bottom: 14px;">📅 출발일이 설정되지 않았습니다. 홈 화면에서 출발일을 입력하면 여권 유효기간을 더 정확히 검토합니다. 현재는 오늘 날짜 기준으로 표시됩니다.</div>';
-  }
-  REGISTERED_MEMBERS.forEach(name => {
-    const m = DB.members[name] || {};
-    const p = m.passport;
-    const check = checkPassportStatus(p, tripDate);
-    html += '<div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;">';
-    html += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">';
-    html += '<div style="font-weight:600; font-size:15px; color:var(--primary);">' + escapeHtml(name) + (p ? ' (' + escapeHtml(p.surname || '') + ' ' + escapeHtml(p.givenNames || '') + ')' : '') + '</div>';
-    html += '<span style="background:' + check.color + '20; color:' + check.color + '; font-size:11px; padding:4px 10px; border-radius:12px; font-weight:600;">' + check.label + '</span>';
-    html += '</div>';
-    if (p) {
-      html += '<table style="width:100%; font-size:12px; margin:0;"><tr>';
-      html += '<td style="padding:4px 0; color:var(--text-muted); width:90px;">여권번호</td><td style="font-family: monospace; font-weight:500;">' + escapeHtml(p.passportNo || '-') + '</td>';
-      html += '<td style="padding:4px 0; color:var(--text-muted); width:60px;">성별</td><td>' + escapeHtml(p.sex || '-') + '</td>';
-      html += '</tr><tr>';
-      html += '<td style="padding:4px 0; color:var(--text-muted);">생년월일</td><td>' + escapeHtml(p.dob || '-') + '</td>';
-      html += '<td style="padding:4px 0; color:var(--text-muted);">국적</td><td>' + escapeHtml(p.nationality || '-') + '</td>';
-      html += '</tr><tr>';
-      html += '<td style="padding:4px 0; color:var(--text-muted);">발급일</td><td>' + escapeHtml(p.issueDate || '-') + '</td>';
-      html += '<td style="padding:4px 0; color:var(--text-muted);">만료일</td><td><strong>' + escapeHtml(p.expiryDate || '-') + '</strong></td>';
-      html += '</tr></table>';
-      html += '<div style="font-size:11px; color:' + check.color + '; margin-top:8px; padding-top:8px; border-top:1px solid var(--border);">' + escapeHtml(check.detail) + '</div>';
-    } else {
-      html += '<div style="font-size:13px; color:var(--text-muted); padding:10px 0;">여권 사진을 단톡방에 공유해 주세요. 관리자가 등록 후 자동 검토됩니다.</div>';
-    }
-    if (DB.user === name || DB.user) {
-      html += '<div style="margin-top:8px;"><button class="btn secondary" style="font-size:11px; padding: 4px 10px;" onclick="editPassport(\'' + escapeHtml(name).replace(/\\/g, "\\\\").replace(/\'/g, "\\\'") + '\')">' + (p ? '✏️ 수정' : '✏️ 등록') + '</button></div>';
-    }
-    html += '</div>';
-  });
-  // Summary
-  const issues = REGISTERED_MEMBERS.filter(n => {
-    const c = checkPassportStatus(DB.members[n] && DB.members[n].passport, tripDate);
-    return c.status !== 'ok';
-  });
-  if (issues.length > 0) {
-    html = '<div class="note warn" style="margin-bottom:14px;">⚠️ <strong>주의 필요 회원 ' + issues.length + '명:</strong> ' + issues.map(escapeHtml).join(', ') + '</div>' + html;
-  } else {
-    html = '<div class="note success" style="margin-bottom:14px;">✅ <strong>전 회원 여권 정상</strong> — 여행에 문제 없습니다.</div>' + html;
-  }
-  el.innerHTML = html;
+function gearScore(name) {
+  const g = getGear(name);
+  const boolFields = GEAR_FIELDS.filter(f => f.type === 'bool');
+  const done = boolFields.filter(f => g[f.key]).length;
+  return { done, total: boolFields.length };
 }
-
-function editPassport(name) {
-  const current = (DB.members[name] && DB.members[name].passport) || {};
-  const passportNo = prompt('여권번호 (Passport No.)', current.passportNo || '');
-  if (passportNo === null) return;
-  const surname = prompt('영문 성 (Surname)', current.surname || '');
-  if (surname === null) return;
-  const givenNames = prompt('영문 이름 (Given Names)', current.givenNames || '');
-  if (givenNames === null) return;
-  const dob = prompt('생년월일 (YYYY-MM-DD)', current.dob || '');
-  if (dob === null) return;
-  const issueDate = prompt('발급일 (YYYY-MM-DD)', current.issueDate || '');
-  if (issueDate === null) return;
-  const expiryDate = prompt('만료일 (YYYY-MM-DD)', current.expiryDate || '');
-  if (expiryDate === null) return;
-  const sex = prompt('성별 (M/F)', current.sex || 'M');
-  if (sex === null) return;
-  if (!DB.members[name]) DB.members[name] = { joinedAt: Date.now(), preRegistered: true };
-  DB.members[name].passport = {
-    surname: surname.trim().toUpperCase(),
-    givenNames: givenNames.trim().toUpperCase(),
-    passportNo: passportNo.trim().toUpperCase(),
-    dob: dob.trim(),
-    sex: sex.trim().toUpperCase(),
-    issueDate: issueDate.trim(),
-    expiryDate: expiryDate.trim(),
-    nationality: 'KOR'
-  };
+function setGear(name, key, value) {
+  if (DB.user !== name) return;
+  if (!DB.members[name]) DB.members[name] = { joinedAt: Date.now() };
+  if (!DB.members[name].gear) DB.members[name].gear = {};
+  DB.members[name].gear[key] = value;
   saveDB();
-  renderPassports();
+  renderGear();
   renderHomeMemberStatus();
   triggerAutoSave();
 }
+function toggleGear(name, key) {
+  setGear(name, key, !getGear(name)[key]);
+}
+function renderGear() {
+  const el = document.getElementById('gear-table');
+  if (!el) return;
+  let html = '<table style="font-size:12px; min-width:720px;"><thead><tr>';
+  html += '<th style="text-align:left; min-width:80px;">회원</th>';
+  GEAR_FIELDS.forEach(f => {
+    html += '<th style="text-align:center; min-width:' + (f.type === 'bool' ? '70' : '110') + 'px;">' + f.label + '</th>';
+  });
+  html += '</tr></thead><tbody>';
+  REGISTERED_MEMBERS.forEach(name => {
+    const g = getGear(name);
+    const isMe = DB.user === name;
+    const escName = escapeHtml(name).replace(/'/g, "\\'");
+    html += '<tr style="' + (isMe ? 'background:#f0f7fc;' : '') + '">';
+    html += '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:var(--primary);">' + escapeHtml(name) + (isMe ? ' ✓' : '') + '</td>';
+    GEAR_FIELDS.forEach(f => {
+      html += '<td style="text-align:center; padding:6px 8px;">';
+      if (f.type === 'bool') {
+        const on = !!g[f.key];
+        if (isMe) {
+          html += '<span onclick="toggleGear(\'' + escName + '\',\'' + f.key + '\')" style="cursor:pointer; display:inline-block; width:24px; height:24px; line-height:24px; border-radius:5px; font-size:13px; ' +
+            (on ? 'background:var(--primary); color:white;' : 'background:white; border:1.5px solid var(--primary-lighter);') + '">' + (on ? '✓' : '') + '</span>';
+        } else {
+          html += on ? '<span style="color:var(--success); font-weight:700;">✓</span>' : '<span style="color:var(--text-muted);">—</span>';
+        }
+      } else if (f.type === 'select') {
+        if (isMe) {
+          html += '<select onchange="setGear(\'' + escName + '\',\'' + f.key + '\', this.value)" style="font-size:11.5px; padding:4px 6px; border-radius:6px; border:1px solid var(--border);">' +
+            f.options.map(o => '<option value="' + escapeHtml(o) + '"' + ((g[f.key] || f.options[0]) === o ? ' selected' : '') + '>' + escapeHtml(o) + '</option>').join('') + '</select>';
+        } else {
+          const v = g[f.key] || '미정';
+          const isCar = v.indexOf('가능') === 0;
+          html += '<span style="font-size:11.5px; color:' + (isCar ? 'var(--success)' : 'var(--text-muted)') + '; font-weight:' + (isCar ? '600' : '400') + ';">' + escapeHtml(v) + '</span>';
+        }
+      } else {
+        if (isMe) {
+          html += '<input type="text" value="' + escapeHtml(g[f.key] || '') + '" placeholder="' + escapeHtml(f.placeholder || '') + '" onchange="setGear(\'' + escName + '\',\'' + f.key + '\', this.value)" style="font-size:11.5px; padding:4px 6px; width:100px; border-radius:6px; border:1px solid var(--border);">';
+        } else {
+          html += '<span style="font-size:11.5px; color:var(--text-secondary);">' + escapeHtml(g[f.key] || '—') + '</span>';
+        }
+      }
+      html += '</td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  // 카풀 요약
+  const drivers = REGISTERED_MEMBERS.filter(n => (getGear(n).car || '').indexOf('가능') === 0);
+  let seats = 0;
+  drivers.forEach(n => {
+    const m = (getGear(n).car || '').match(/(\d+)/);
+    if (m) seats += parseInt(m[1], 10);
+  });
+  const reelless = REGISTERED_MEMBERS.filter(n => !getGear(n).reel);
+  html += '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:10px; margin-top:14px;">';
+  html += '<div style="background:#f0f7fc; padding:12px; border-radius:8px;"><div style="font-size:11px; color:var(--text-muted);">🚗 운행 가능 차량</div><div style="font-size:16px; font-weight:700; color:var(--primary);">' + drivers.length + '대 · 총 ' + seats + '석</div><div style="font-size:11px; color:var(--text-muted);">' + (drivers.length ? drivers.map(escapeHtml).join(' · ') : '아직 등록 없음') + '</div></div>';
+  html += '<div style="background:#fef3e6; padding:12px; border-radius:8px;"><div style="font-size:11px; color:var(--text-muted);">🌀 스피닝 릴 없는 인원</div><div style="font-size:16px; font-weight:700; color:#b35c00;">' + reelless.length + '명</div><div style="font-size:11px; color:var(--text-muted);">' + (reelless.length ? reelless.map(escapeHtml).join(' · ') : '전원 보유 🎉') + '</div></div>';
+  html += '</div>';
+  if (!DB.user) html += '<div class="note info" style="margin-top:12px;">🔒 로그인하면 본인 행을 직접 수정할 수 있습니다.</div>';
+  el.innerHTML = html;
+}
 
+// ============== MEMBERS ==============
 function renderMembers() {
   const list = document.getElementById('member-list');
   const memberNames = Object.keys(DB.members);
@@ -2223,131 +1769,101 @@ function renderMembers() {
     return;
   }
   memberNames.sort((a, b) => {
-    const aIsReg = REGISTERED_MEMBERS.indexOf(a);
-    const bIsReg = REGISTERED_MEMBERS.indexOf(b);
-    if (aIsReg !== -1 && bIsReg !== -1) return aIsReg - bIsReg;
-    if (aIsReg !== -1) return -1;
-    if (bIsReg !== -1) return 1;
+    const ai = REGISTERED_MEMBERS.indexOf(a), bi = REGISTERED_MEMBERS.indexOf(b);
+    if (ai !== -1 && bi !== -1) return ai - bi;
+    if (ai !== -1) return -1;
+    if (bi !== -1) return 1;
     return a.localeCompare(b);
   });
   let html = '';
   memberNames.forEach(name => {
-    const m = DB.members[name];
-    const voteCount = Object.values(DB.votes).reduce((sum, p) => {
-      const v = p[name];
-      const cnt = (v === undefined || (Array.isArray(v) && v.length === 0)) ? 0 : 1;
-      return sum + cnt;
-    }, 0);
+    const voteCount = POLLS.filter(p => {
+      const v = (DB.votes[p.id] || {})[name];
+      return v !== undefined && !(Array.isArray(v) && v.length === 0);
+    }).length;
     const commentCount = DB.threads.reduce((sum, t) =>
-      sum + (t.author === name ? 1 : 0) + t.comments.filter(c => c.author === name).length, 0);
+      sum + (t.author === name ? 1 : 0) + (t.comments || []).filter(c => c.author === name).length, 0);
     const isMe = name === DB.user;
-    const canSwitch = !isMe && (!DB.user);
-    const chipStyle = canSwitch ? 'cursor:pointer;' : '';
+    const canSwitch = !isMe && !DB.user;
     const escName = escapeHtml(name).replace(/'/g, "\\'");
-    const clickHandler = canSwitch ? `onclick="loginAs('${escName}')"` : '';
-    html += `<div class="member-chip" style="${chipStyle}" ${clickHandler}>
-      <div class="name">${escapeHtml(name)}${isMe ? ' ✓ (나)' : ''}</div>
-      <div class="meta">투표 ${voteCount}/4 · 활동 ${commentCount}${canSwitch ? ' · 👆 클릭해서 로그인' : ''}</div>
-    </div>`;
+    html += '<div class="member-chip" style="' + (canSwitch ? 'cursor:pointer;' : '') + '" ' + (canSwitch ? 'onclick="loginAs(\'' + escName + '\')"' : '') + '>' +
+      '<div class="name">' + escapeHtml(name) + (isMe ? ' ✓ (나)' : '') + '</div>' +
+      '<div class="meta">투표 ' + voteCount + '/' + POLLS.length + ' · 활동 ' + commentCount + (canSwitch ? ' · 👆 클릭해서 로그인' : '') + '</div>' +
+      '</div>';
   });
   list.innerHTML = html;
 }
 
-// ============== HOME LOGIN GRID ==============
 function renderHomeMemberStatus() {
   const el = document.getElementById('home-member-status');
   if (!el) return;
-  const tripDate = DB.departureDate;
   const totalVotes = POLLS.length;
   const totalChecks = CHECKLISTS.reduce((s, cl) => s + cl.items.length, 0);
-  // Compute group totals
-  let groupVoteSum = 0, groupCheckSum = 0, passportOK = 0;
+  let groupVoteSum = 0, groupCheckSum = 0, gearReady = 0;
+  const boolFieldCount = GEAR_FIELDS.filter(f => f.type === 'bool').length;
   REGISTERED_MEMBERS.forEach(name => {
-    const voted = POLLS.filter(p => { const v = (DB.votes[p.id] || {})[name]; return v !== undefined && !(Array.isArray(v) && v.length === 0); }).length;
+    const voted = POLLS.filter(p => {
+      const v = (DB.votes[p.id] || {})[name];
+      return v !== undefined && !(Array.isArray(v) && v.length === 0);
+    }).length;
     groupVoteSum += voted;
     let checked = 0;
-    CHECKLISTS.forEach(cl => {
-      cl.items.forEach((_, idx) => {
-        if (DB.checklists && DB.checklists[name + '__' + cl.id + '__' + idx]) checked++;
-      });
-    });
+    CHECKLISTS.forEach(cl => cl.items.forEach((_, idx) => {
+      if (DB.checklists && DB.checklists[name + '__' + cl.id + '__' + idx]) checked++;
+    }));
     groupCheckSum += checked;
-    const p = DB.members[name] && DB.members[name].passport;
-    const pCheck = checkPassportStatus(p, tripDate);
-    if (pCheck.status === 'ok') passportOK++;
+    if (gearScore(name).done >= Math.ceil(boolFieldCount / 2)) gearReady++;
   });
   const groupVotePct = Math.round(groupVoteSum / (REGISTERED_MEMBERS.length * totalVotes) * 100);
   const groupCheckPct = Math.round(groupCheckSum / (REGISTERED_MEMBERS.length * totalChecks) * 100);
-  // Group summary banner
   let html = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:10px; margin-bottom:14px;">';
-  html += '<div style="background: var(--primary); color:white; padding:14px; border-radius:10px; text-align:center;">';
-  html += '<div style="font-size:11px; opacity:0.9;">📊 그룹 투표 진행률</div>';
-  html += '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + groupVotePct + '%</div>';
-  html += '<div style="font-size:11px; opacity:0.8;">' + groupVoteSum + ' / ' + (REGISTERED_MEMBERS.length * totalVotes) + ' 투표</div>';
+  html += '<div style="background: var(--primary); color:white; padding:14px; border-radius:10px; text-align:center;"><div style="font-size:11px; opacity:0.9;">📊 그룹 투표 진행률</div><div style="font-size:24px; font-weight:700; margin-top:4px;">' + groupVotePct + '%</div><div style="font-size:11px; opacity:0.8;">' + groupVoteSum + ' / ' + (REGISTERED_MEMBERS.length * totalVotes) + ' 투표</div></div>';
+  html += '<div style="background: #185fa5; color:white; padding:14px; border-radius:10px; text-align:center;"><div style="font-size:11px; opacity:0.9;">🎒 준비물 진행률</div><div style="font-size:24px; font-weight:700; margin-top:4px;">' + groupCheckPct + '%</div><div style="font-size:11px; opacity:0.8;">' + groupCheckSum + ' / ' + (REGISTERED_MEMBERS.length * totalChecks) + ' 항목</div></div>';
+  html += '<div style="background: ' + (gearReady === REGISTERED_MEMBERS.length ? 'var(--success)' : '#e67e22') + '; color:white; padding:14px; border-radius:10px; text-align:center;"><div style="font-size:11px; opacity:0.9;">🎣 장비 등록</div><div style="font-size:24px; font-weight:700; margin-top:4px;">' + gearReady + '/' + REGISTERED_MEMBERS.length + '</div><div style="font-size:11px; opacity:0.8;">' + (gearReady === REGISTERED_MEMBERS.length ? '전원 등록' : '미등록 ' + (REGISTERED_MEMBERS.length - gearReady) + '명') + '</div></div>';
   html += '</div>';
-  html += '<div style="background: #185fa5; color:white; padding:14px; border-radius:10px; text-align:center;">';
-  html += '<div style="font-size:11px; opacity:0.9;">✅ 그룹 체크리스트</div>';
-  html += '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + groupCheckPct + '%</div>';
-  html += '<div style="font-size:11px; opacity:0.8;">' + groupCheckSum + ' / ' + (REGISTERED_MEMBERS.length * totalChecks) + ' 항목</div>';
-  html += '</div>';
-  html += '<div style="background: ' + (passportOK === REGISTERED_MEMBERS.length ? 'var(--success)' : '#e67e22') + '; color:white; padding:14px; border-radius:10px; text-align:center;">';
-  html += '<div style="font-size:11px; opacity:0.9;">🛂 여권 정상</div>';
-  html += '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + passportOK + '/' + REGISTERED_MEMBERS.length + '</div>';
-  html += '<div style="font-size:11px; opacity:0.8;">' + (passportOK === REGISTERED_MEMBERS.length ? '전원 정상' : '주의 ' + (REGISTERED_MEMBERS.length - passportOK) + '명') + '</div>';
-  html += '</div>';
-  html += '</div>';
-  // Per-member table
-  html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:680px;"><thead><tr>';
+  html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:660px;"><thead><tr>';
   html += '<th style="text-align:left; min-width:80px;">회원</th>';
   html += '<th style="text-align:center; min-width:80px;">참가</th>';
   html += '<th style="text-align:center; min-width:90px;">🗳️ 투표</th>';
-  html += '<th style="text-align:center; min-width:120px;">✅ 체크리스트</th>';
-  html += '<th style="text-align:center; min-width:100px;">🛂 여권</th>';
+  html += '<th style="text-align:center; min-width:110px;">🎒 준비물</th>';
+  html += '<th style="text-align:center; min-width:80px;">🎣 장비</th>';
   html += '<th style="text-align:center; min-width:60px;">활동</th>';
   html += '</tr></thead><tbody>';
   REGISTERED_MEMBERS.forEach(name => {
-    const voted = POLLS.filter(p => { const v = (DB.votes[p.id] || {})[name]; return v !== undefined && !(Array.isArray(v) && v.length === 0); }).length;
+    const voted = POLLS.filter(p => {
+      const v = (DB.votes[p.id] || {})[name];
+      return v !== undefined && !(Array.isArray(v) && v.length === 0);
+    }).length;
     const votePct = Math.round(voted / totalVotes * 100);
     let checked = 0;
-    CHECKLISTS.forEach(cl => {
-      cl.items.forEach((_, idx) => {
-        if (DB.checklists && DB.checklists[name + '__' + cl.id + '__' + idx]) checked++;
-      });
-    });
+    CHECKLISTS.forEach(cl => cl.items.forEach((_, idx) => {
+      if (DB.checklists && DB.checklists[name + '__' + cl.id + '__' + idx]) checked++;
+    }));
     const checkPct = Math.round(checked / totalChecks * 100);
-    const p = DB.members[name] && DB.members[name].passport;
-    const pCheck = checkPassportStatus(p, tripDate);
-    const commentCount = DB.threads.reduce((s, t) => s + (t.author === name ? 1 : 0) + t.comments.filter(c => c.author === name).length, 0);
+    const gs = gearScore(name);
+    const commentCount = DB.threads.reduce((s, t) => s + (t.author === name ? 1 : 0) + (t.comments || []).filter(c => c.author === name).length, 0);
     const isMe = DB.user === name;
     const partStatus = getParticipationStatus(name);
-    const isNotParticipating = partStatus.code === 'no';
-    const rowBg = isMe ? 'background: #f0f7fc;' : '';
-    const rowExtra = isNotParticipating ? 'opacity:0.45; background: repeating-linear-gradient(45deg, #f5f5f5, #f5f5f5 6px, #fafafa 6px, #fafafa 12px);' : '';
-    html += '<tr style="' + rowBg + rowExtra + '">';
-    html += '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:' + (isNotParticipating ? 'var(--text-muted)' : 'var(--primary)') + ';">' + escapeHtml(name) + (isMe ? ' ✓' : '') + (isNotParticipating ? ' <span style="text-decoration:line-through;color:var(--text-muted);font-size:10px;">(불참)</span>' : '') + '</td>';
-    // Participation badge
+    const isNo = partStatus.code === 'no';
+    html += '<tr style="' + (isMe ? 'background:#f0f7fc;' : '') + (isNo ? 'opacity:0.45;' : '') + '">';
+    html += '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:' + (isNo ? 'var(--text-muted)' : 'var(--primary)') + ';">' + escapeHtml(name) + (isMe ? ' ✓' : '') + '</td>';
     html += '<td style="text-align:center; padding:6px 10px;"><span style="background:' + partStatus.bg + '; color:' + partStatus.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600; white-space:nowrap;">' + partStatus.label + '</span></td>';
-    if (isNotParticipating) {
-      // Hide other columns - 불참은 다른 항목 표시 안 함
+    if (isNo) {
       html += '<td colspan="4" style="text-align:center; padding:8px 10px; color:var(--text-muted); font-size:11px; font-style:italic;">— 불참 — 준비 항목 해당 없음 —</td>';
     } else {
-      // Vote bar
-      html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + votePct + '%; background:var(--primary);"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (votePct > 50 ? 'white' : 'var(--text)') + ';">' + voted + '/' + totalVotes + ' (' + votePct + '%)</div></div></td>';
-      // Checklist bar
-      html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + checkPct + '%; background:#185fa5;"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (checkPct > 50 ? 'white' : 'var(--text)') + ';">' + checked + '/' + totalChecks + ' (' + checkPct + '%)</div></div></td>';
-      // Passport status
-      html += '<td style="text-align:center; padding:6px 10px;"><span style="background:' + pCheck.color + '20; color:' + pCheck.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600;">' + pCheck.label.replace(/\s*\([^)]*\)/, '') + '</span></td>';
-      // Activity (comments + threads)
+      html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + votePct + '%; background:var(--primary);"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (votePct > 50 ? 'white' : 'var(--text)') + ';">' + voted + '/' + totalVotes + '</div></div></td>';
+      html += '<td style="padding:6px 10px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + checkPct + '%; background:#185fa5;"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (checkPct > 50 ? 'white' : 'var(--text)') + ';">' + checked + '/' + totalChecks + '</div></div></td>';
+      const gearColor = gs.done === gs.total ? 'var(--success)' : gs.done === 0 ? 'var(--text-muted)' : '#e67e22';
+      html += '<td style="text-align:center; padding:6px 10px;"><span style="color:' + gearColor + '; font-size:12px; font-weight:600;">' + gs.done + '/' + gs.total + '</span></td>';
       html += '<td style="text-align:center; padding:8px 10px; font-size:12px; color:var(--text-secondary);">💬 ' + commentCount + '</td>';
     }
     html += '</tr>';
   });
   html += '</tbody></table></div>';
-  // Quick links
   html += '<div class="btn-row" style="margin-top:14px;">';
   html += '<button class="btn" onclick="switchTab(\'vote\')">🗳️ 투표하러 가기</button>';
-  html += '<button class="btn secondary" onclick="switchTab(\'result\')">✅ 체크리스트 보기</button>';
-  html += '<button class="btn secondary" onclick="switchTab(\'members\')">🛂 여권 정보 보기</button>';
+  html += '<button class="btn secondary" onclick="switchTab(\'prep\')">🎒 준비물 보기</button>';
+  html += '<button class="btn secondary" onclick="switchTab(\'members\')">🎣 장비·차량 등록</button>';
   html += '</div>';
   el.innerHTML = html;
 }
@@ -2356,23 +1872,17 @@ function renderHomeLoginGrid() {
   const card = document.getElementById('home-login-card');
   const grid = document.getElementById('home-login-grid');
   if (!card || !grid) return;
-  if (DB.user) {
-    card.style.display = 'none';
-    return;
-  }
+  if (DB.user) { card.style.display = 'none'; return; }
   card.style.display = '';
   let html = '';
   REGISTERED_MEMBERS.forEach(name => {
-    const voteCount = Object.values(DB.votes).reduce((sum, p) => {
-      const v = p[name];
-      const cnt = (v === undefined || (Array.isArray(v) && v.length === 0)) ? 0 : 1;
-      return sum + cnt;
-    }, 0);
+    const voteCount = POLLS.filter(p => {
+      const v = (DB.votes[p.id] || {})[name];
+      return v !== undefined && !(Array.isArray(v) && v.length === 0);
+    }).length;
     const escName = escapeHtml(name).replace(/'/g, "\\'");
-    html += `<button onclick="loginAs('${escName}')" style="background: white; border: 2px solid var(--primary-lighter); color: var(--primary); padding: 14px 12px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600; transition: all 0.15s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">
-      ${escapeHtml(name)}
-      <div style="font-size: 11px; font-weight: 400; margin-top: 3px; opacity: 0.7;">투표 ${voteCount}/4</div>
-    </button>`;
+    html += '<button onclick="loginAs(\'' + escName + '\')" style="background: white; border: 2px solid var(--primary-lighter); color: var(--primary); padding: 14px 12px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600;" onmouseover="this.style.background=\'var(--primary)\'; this.style.color=\'white\';" onmouseout="this.style.background=\'white\'; this.style.color=\'var(--primary)\';">' +
+      escapeHtml(name) + '<div style="font-size: 11px; font-weight: 400; margin-top: 3px; opacity: 0.7;">투표 ' + voteCount + '/' + POLLS.length + '</div></button>';
   });
   grid.innerHTML = html;
 }
@@ -2382,59 +1892,42 @@ function renderProgress() {
   const el = document.getElementById('progress-summary');
   const totalMembers = Object.keys(DB.members).length;
   const totalThreads = DB.threads.length;
-  const totalComments = DB.threads.reduce((s, t) => s + t.comments.length, 0);
+  const totalComments = DB.threads.reduce((s, t) => s + (t.comments || []).length, 0);
   const totalVotes = Object.values(DB.votes).reduce((s, p) => s + Object.keys(p).length, 0);
-  let html = `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
-    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
-      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalMembers}</div>
-      <div style="font-size: 11px; color: var(--text-muted);">참여 회원</div>
-    </div>
-    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
-      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalVotes}</div>
-      <div style="font-size: 11px; color: var(--text-muted);">총 투표 수</div>
-    </div>
-    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
-      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalThreads}</div>
-      <div style="font-size: 11px; color: var(--text-muted);">토론 주제</div>
-    </div>
-    <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
-      <div style="font-size: 22px; font-weight: 700; color: var(--primary);">${totalComments}</div>
-      <div style="font-size: 11px; color: var(--text-muted);">댓글</div>
-    </div>
-  </div>`;
+  let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">' +
+    '<div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;"><div style="font-size: 22px; font-weight: 700; color: var(--primary);">' + totalMembers + '</div><div style="font-size: 11px; color: var(--text-muted);">참여 회원</div></div>' +
+    '<div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;"><div style="font-size: 22px; font-weight: 700; color: var(--primary);">' + totalVotes + '</div><div style="font-size: 11px; color: var(--text-muted);">총 투표 수</div></div>' +
+    '<div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;"><div style="font-size: 22px; font-weight: 700; color: var(--primary);">' + totalThreads + '</div><div style="font-size: 11px; color: var(--text-muted);">토론 주제</div></div>' +
+    '<div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;"><div style="font-size: 22px; font-weight: 700; color: var(--primary);">' + totalComments + '</div><div style="font-size: 11px; color: var(--text-muted);">댓글</div></div>' +
+    '</div>';
   POLLS.forEach(poll => {
     const v = DB.votes[poll.id] || {};
-    const counts = poll.options.map((_, i) => 0);
+    const counts = poll.options.map(() => 0);
     Object.values(v).forEach(val => {
       const idxs = (typeof val === 'number') ? [val] : (Array.isArray(val) ? val : []);
       idxs.forEach(idx => { if (counts[idx] !== undefined) counts[idx]++; });
     });
-    const top = counts.indexOf(Math.max(...counts));
     const total = counts.reduce((a, b) => a + b, 0);
     if (total > 0) {
-      html += `<div style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid var(--primary); border-radius: 4px; font-size: 12px;">
-        <strong>${escapeHtml(poll.question.split(' ').slice(0, 3).join(' '))}</strong>
-        — 현재 1위: ${escapeHtml(poll.options[top])} (${counts[top]}/${total}표)
-      </div>`;
+      const top = counts.indexOf(Math.max(...counts));
+      html += '<div style="margin-top: 10px; padding: 8px 12px; background: #f8fafc; border-left: 3px solid var(--primary); border-radius: 4px; font-size: 12px;">' +
+        '<strong>' + escapeHtml(poll.question.split('(')[0].trim()) + '</strong> — 현재 1위: ' + escapeHtml(poll.options[top]) + ' (' + counts[top] + '/' + total + '표)</div>';
     }
   });
   el.innerHTML = html;
 }
 
-// ============== DATA EXPORT / IMPORT ==============
+// ============== EXPORT / IMPORT ==============
 function exportData() {
-  const data = JSON.stringify(DB, null, 2);
-  const blob = new Blob([data], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify(DB, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'tsuri_trip_planner_data_' + new Date().toISOString().split('T')[0] + '.json';
+  a.download = 'jjukkumi_trip_2026_' + new Date().toISOString().split('T')[0] + '.json';
   a.click();
   URL.revokeObjectURL(url);
 }
-function importData() {
-  document.getElementById('import-file').click();
-}
+function importData() { document.getElementById('import-file').click(); }
 function handleImport(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -2442,35 +1935,28 @@ function handleImport(event) {
   reader.onload = e => {
     try {
       const imported = JSON.parse(e.target.result);
-      if (!confirm('가져온 데이터와 현재 데이터를 병합하시겠습니까? (회원, 투표, 토론 모두 병합)')) return;
-      // Merge members
+      if (!confirm('가져온 데이터와 현재 데이터를 병합하시겠습니까?')) return;
       Object.entries(imported.members || {}).forEach(([name, m]) => {
         if (!DB.members[name]) DB.members[name] = m;
+        else if (m && m.gear) DB.members[name].gear = m.gear;
       });
-      // Merge votes
       Object.entries(imported.votes || {}).forEach(([pid, v]) => {
         if (!DB.votes[pid]) DB.votes[pid] = {};
-        Object.entries(v).forEach(([user, idx]) => {
-          DB.votes[pid][user] = idx;
-        });
+        Object.entries(v).forEach(([user, idx]) => { DB.votes[pid][user] = idx; });
       });
-      // Merge threads (avoid duplicates by id)
       const existingIds = new Set(DB.threads.map(t => t.id));
       (imported.threads || []).forEach(t => {
         if (existingIds.has(t.id)) {
-          // Merge comments
-          const existing = DB.threads.find(x => x.id === t.id);
-          const existingCommentKeys = new Set(existing.comments.map(c => c.author + '|' + c.ts));
-          (t.comments || []).forEach(c => {
-            if (!existingCommentKeys.has(c.author + '|' + c.ts)) existing.comments.push(c);
-          });
-        } else {
-          DB.threads.push(t);
-        }
+          const ex = DB.threads.find(x => x.id === t.id);
+          if (!ex.comments) ex.comments = [];
+          const keys = new Set(ex.comments.map(c => c.author + '|' + c.ts));
+          (t.comments || []).forEach(c => { if (!keys.has(c.author + '|' + c.ts)) ex.comments.push(c); });
+        } else DB.threads.push(t);
       });
+      if (imported.checklists) Object.assign(DB.checklists, imported.checklists);
       if (imported.departureDate && !DB.departureDate) DB.departureDate = imported.departureDate;
       saveDB();
-      alert('데이터가 성공적으로 병합되었습니다.');
+      alert('데이터가 병합되었습니다.');
       location.reload();
     } catch (err) {
       alert('파일 읽기 오류: ' + err.message);
@@ -2479,8 +1965,7 @@ function handleImport(event) {
   reader.readAsText(file);
 }
 function resetAll() {
-  if (!confirm('모든 데이터를 정말로 초기화하시겠습니까?\n(회원, 투표, 토론, 출발일 모두 삭제됩니다)')) return;
-  if (!confirm('정말로 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) return;
+  if (!confirm('이 브라우저에 저장된 데이터를 초기화하시겠습니까?\n(클라우드 데이터는 지워지지 않습니다)')) return;
   localStorage.removeItem(STORAGE_KEY);
   location.reload();
 }
@@ -2488,12 +1973,11 @@ function resetAll() {
 // ============== UTILS ==============
 function escapeHtml(s) {
   if (s == null) return '';
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 }
 function formatTime(ts) {
   const d = new Date(ts);
-  const now = new Date();
-  const diff = (now - d) / 1000;
+  const diff = (new Date() - d) / 1000;
   if (diff < 60) return '방금 전';
   if (diff < 3600) return Math.floor(diff / 60) + '분 전';
   if (diff < 86400) return Math.floor(diff / 3600) + '시간 전';
@@ -2501,7 +1985,7 @@ function formatTime(ts) {
   return d.toLocaleDateString('ko-KR');
 }
 
-// ============== RESULT (확정 일정) ==============
+// ============== RESULT ==============
 function renderResult() {
   renderResultSummary();
   renderResultSummary('home-result-summary', true);
@@ -2509,28 +1993,16 @@ function renderResult() {
   renderResultItinerary('home-result-itinerary', true);
   renderResultByMember();
   renderChecklists();
-}
-function renderHomeResultMini() {
-  renderResultSummary('home-result-summary', true);
-  renderResultItinerary('home-result-itinerary', true);
+  renderScheduleDate();
 }
 function getParticipationStatus(name) {
   const v = (DB.votes['participation'] || {})[name];
   if (v === 0) return { code: 'yes', label: '✅ 참가', color: '#27ae60', bg: '#e6f7ec' };
   if (v === 1) return { code: 'no', label: '❌ 불참', color: '#e74c3c', bg: '#fdebec' };
-  if (v === 2) return { code: 'maybe', label: '🟢 일정맞으면 가능', color: '#27ae60', bg: '#e6f7ec' };
-  if (v === 3) return { code: 'cond_no', label: '🔴 일정안맞으면 불가', color: '#e67e22', bg: '#fef3e6' };
+  if (v === 2) return { code: 'maybe', label: '🟢 조건부', color: '#27ae60', bg: '#e6f7ec' };
+  if (v === 3) return { code: 'undecided', label: '🤔 미정', color: '#e67e22', bg: '#fef3e6' };
   return { code: 'none', label: '⏳ 미투표', color: '#888', bg: '#f0f0f0' };
 }
-function getActiveMembers() {
-  // 'no' (1) is the only definitive non-attendance.
-  // 'cond_no' (3) is still potentially attending if dates work out
-  return REGISTERED_MEMBERS.filter(n => {
-    const v = (DB.votes['participation'] || {})[n];
-    return v !== 1;
-  });
-}
-
 function _getPollWinner(pollId) {
   const poll = POLLS.find(p => p.id === pollId);
   if (!poll) return null;
@@ -2538,32 +2010,17 @@ function _getPollWinner(pollId) {
   const counts = poll.options.map(() => 0);
   const voters = poll.options.map(() => []);
   Object.entries(votes).forEach(([user, val]) => {
-    if (pollId !== 'participation') {
-      const pS = getParticipationStatus(user);
-      if (pS.code === 'no') return;
-    }
+    if (pollId !== 'participation' && getParticipationStatus(user).code === 'no') return;
     const idxs = (typeof val === 'number') ? [val] : (Array.isArray(val) ? val : []);
     idxs.forEach(idx => {
-      if (counts[idx] !== undefined) {
-        counts[idx]++;
-        voters[idx].push(user);
-      }
+      if (counts[idx] !== undefined) { counts[idx]++; voters[idx].push(user); }
     });
   });
   const total = counts.reduce((a, b) => a + b, 0);
-  const maxCount = Math.max(...counts);
-  if (maxCount === 0) return { poll, total, winners: [], winnerVoters: [], counts, voters };
+  const maxCount = Math.max.apply(null, counts);
+  if (maxCount === 0) return { poll, total, winners: [], winnerIdxs: [], counts, voters, maxCount: 0 };
   const winnerIdxs = counts.map((c, i) => c === maxCount ? i : -1).filter(i => i >= 0);
-  return {
-    poll,
-    total,
-    winnerIdxs,
-    winners: winnerIdxs.map(i => poll.options[i]),
-    winnerVoters: winnerIdxs.flatMap(i => voters[i]),
-    counts,
-    voters,
-    maxCount
-  };
+  return { poll, total, winnerIdxs, winners: winnerIdxs.map(i => poll.options[i]), counts, voters, maxCount };
 }
 function renderResultSummary(targetId, compact) {
   const el = document.getElementById(targetId || 'result-summary');
@@ -2571,142 +2028,125 @@ function renderResultSummary(targetId, compact) {
   let html = '';
   POLLS.forEach(poll => {
     const r = _getPollWinner(poll.id);
-    if (r.total === 0) {
-      html += `<div style="padding: 14px 16px; background: #f8fafc; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #ccc;">
-        <div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px;">${escapeHtml(poll.question)}</div>
-        <div style="font-size: 13px; color: var(--text-muted);">⏳ 아직 투표가 없습니다</div>
-      </div>`;
+    if (!r || r.total === 0) {
+      html += '<div style="padding: 14px 16px; background: #f8fafc; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #ccc;">' +
+        '<div style="font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px;">' + escapeHtml(poll.question) + '</div>' +
+        '<div style="font-size: 13px; color: var(--text-muted);">⏳ 아직 투표가 없습니다</div></div>';
       return;
     }
     const tied = r.winnerIdxs.length > 1;
-    html += `<div style="padding: 14px 16px; background: white; border: 1.5px solid var(--primary-lighter); border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary);">
-      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 6px;">${escapeHtml(poll.question)}</div>
-      ${r.winners.map((w, idx) => `
-        <div style="margin-bottom: 6px;">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 3px;">
-            <span style="background: var(--primary); color: white; font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600;">${tied ? '공동 ' : ''}1위</span>
-            <span style="font-size: 14px; font-weight: 600; color: var(--text);">${escapeHtml(w)}</span>
-            <span style="font-size: 12px; color: var(--text-muted);">(${r.maxCount}표)</span>
-          </div>
-          <div style="font-size: 12px; color: var(--text-secondary); margin-left: 8px;">
-            👥 투표자: ${r.voters[r.winnerIdxs[idx]].length > 0 ? r.voters[r.winnerIdxs[idx]].map(escapeHtml).join(' · ') : '없음'}
-          </div>
-        </div>
-      `).join('')}
-      <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);">
-        총 ${r.total}명 투표 · ${tied ? '동률 발생, 재투표 권장' : '단독 1위'}
-      </div>
-    </div>`;
+    html += '<div style="padding: 14px 16px; background: white; border: 1.5px solid var(--primary-lighter); border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary);">' +
+      '<div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 6px;">' + escapeHtml(poll.question) + '</div>';
+    r.winners.forEach((w, idx) => {
+      html += '<div style="margin-bottom: 6px;">' +
+        '<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 3px; flex-wrap:wrap;">' +
+        '<span style="background: var(--primary); color: white; font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 600;">' + (tied ? '공동 ' : '') + '1위</span>' +
+        '<span style="font-size: 14px; font-weight: 600; color: var(--text);">' + escapeHtml(w) + '</span>' +
+        '<span style="font-size: 12px; color: var(--text-muted);">(' + r.maxCount + '표)</span></div>' +
+        '<div style="font-size: 12px; color: var(--text-secondary); margin-left: 8px;">👥 ' + (r.voters[r.winnerIdxs[idx]].length ? r.voters[r.winnerIdxs[idx]].map(escapeHtml).join(' · ') : '없음') + '</div></div>';
+    });
+    html += '<div style="font-size: 11px; color: var(--text-muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);">총 ' + r.total + '표 · ' + (tied ? '동률 발생, 재투표 권장' : '단독 1위') + '</div></div>';
   });
   el.innerHTML = html;
+}
+function _pick(r, withTie) {
+  if (!r || !r.total || r.total === 0 || !r.winners.length) return null;
+  if (r.winners.length === 1) return r.winners[0];
+  if (withTie) return r.winners[0] + ' (외 ' + (r.winners.length - 1) + '개 동률)';
+  return r.winners.join(' · ');
+}
+function renderScheduleDate() {
+  const el = document.getElementById('schedule-confirmed-date');
+  if (!el) return;
+  const d = _pick(_getPollWinner('dates'), true);
+  el.textContent = d || '(투표 진행 중)';
 }
 function renderResultItinerary(targetId, compact) {
   const el = document.getElementById(targetId || 'result-itinerary');
   if (!el) return;
-  const datesR = _getPollWinner('dates');
-  const fishingR = _getPollWinner('fishing');
-  const hotelR = _getPollWinner('hotel');
-  const restR = _getPollWinner('restaurant');
-  const onsenR = _getPollWinner('onsen');
-  const altR = _getPollWinner('alt_activity');
-  // Show top option(s) even when partial / tied
-  const pick = (r, withTie) => {
-    if (!r || !r.total || r.total === 0) return null;
-    if (!r.winners || r.winners.length === 0) return null;
-    if (r.winners.length === 1) return r.winners[0];
-    if (withTie) return r.winners[0] + ' (외 ' + (r.winners.length - 1) + '개 동률)';
-    return r.winners.join(' · ');
-  };
-  const datesPick = pick(datesR, true);
-  const fishingPick = pick(fishingR, true);
-  const hotelPick = pick(hotelR, true);
-  const restPick = pick(restR, true);
-  const onsenPick = pick(onsenR, true);
-  const altPickInner = pick(altR, true);
-  // Count actively voted participants to inform whether everyone has voted
-  const totalActive = REGISTERED_MEMBERS.filter(n => getParticipationStatus(n).code !== 'no').length || 1;
-  const pendingPolls = [];
-  if (!datesR || datesR.total < totalActive) pendingPolls.push('일정');
-  if (!fishingR || fishingR.total < totalActive) pendingPolls.push('낚시');
-  if (!hotelR || hotelR.total < totalActive) pendingPolls.push('숙박');
-  if (!restR || restR.total < totalActive) pendingPolls.push('식당');
-  if (!onsenR || onsenR.total < totalActive) pendingPolls.push('온천');
-  let html = '';
-  if (pendingPolls.length > 0) {
-    html += `<div class="note info" style="margin-bottom: 14px;">💡 아직 투표 진행 중인 항목: <strong>${pendingPolls.join(', ')}</strong>. 현재까지의 1위는 아래와 같이 표시됩니다 (투표 추가 시 자동 갱신).</div>`;
-  } else {
-    html += `<div class="note success" style="margin-bottom: 14px;">✅ 전체 회원이 모든 항목에 투표 완료했습니다. 아래가 최종 확정 일정입니다.</div>`;
+  const datesPick = _pick(_getPollWinner('dates'), true);
+  const placePick = _pick(_getPollWinner('place'), true);
+  const stayPick = _pick(_getPollWinner('stay'), true);
+  const fishPick = _pick(_getPollWinner('fishing'), true);
+  const foodPick = _pick(_getPollWinner('food'), true);
+  const feePick = _pick(_getPollWinner('fee'), true);
+  const active = REGISTERED_MEMBERS.filter(n => getParticipationStatus(n).code !== 'no');
+  const confirmed = REGISTERED_MEMBERS.filter(n => getParticipationStatus(n).code === 'yes');
+  const rows = [
+    { icon: '📅', label: '날짜', val: datesPick },
+    { icon: '📍', label: '장소', val: placePick },
+    { icon: '🛏️', label: '숙박', val: stayPick },
+    { icon: '🎣', label: '낚시', val: fishPick },
+    { icon: '🍖', label: '먹거리', val: foodPick },
+    { icon: '💰', label: '회비', val: feePick }
+  ];
+  let html = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:10px;">';
+  rows.forEach(r => {
+    const has = !!r.val;
+    html += '<div style="background:' + (has ? '#f0f7fc' : '#f8fafc') + '; padding:12px 14px; border-radius:10px; border-left:4px solid ' + (has ? 'var(--primary)' : '#ccc') + ';">' +
+      '<div style="font-size:11px; color:var(--text-muted);">' + r.icon + ' ' + r.label + '</div>' +
+      '<div style="font-size:13.5px; font-weight:600; color:' + (has ? 'var(--primary)' : 'var(--text-muted)') + '; margin-top:3px;">' + escapeHtml(r.val || '투표 진행 중') + '</div></div>';
+  });
+  html += '</div>';
+  html += '<div style="margin-top:12px; display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:10px;">' +
+    '<div style="background:#e6f7ec; padding:12px; border-radius:10px;"><div style="font-size:11px; color:#155f3a;">✅ 참가 확정</div><div style="font-size:16px; font-weight:700; color:#155f3a;">' + confirmed.length + '명</div><div style="font-size:11px; color:#155f3a;">' + (confirmed.length ? confirmed.map(escapeHtml).join(' · ') : '아직 없음') + '</div></div>' +
+    '<div style="background:#f0f7fc; padding:12px; border-radius:10px;"><div style="font-size:11px; color:var(--text-muted);">👥 집계 대상 (불참 제외)</div><div style="font-size:16px; font-weight:700; color:var(--primary);">' + active.length + '명</div><div style="font-size:11px; color:var(--text-muted);">' + active.map(escapeHtml).join(' · ') + '</div></div>' +
+    '</div>';
+  if (!compact) {
+    html += '<div class="note info" style="margin-top:14px;">📌 위 항목이 모두 단독 1위로 정리되면 총무가 홈 화면의 <strong>출발일</strong>을 입력하고 D-DAY 카운트다운을 시작합니다.</div>';
   }
-  const altPick = altPickInner;
-  html += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 16px;">
-    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
-      <div style="font-size: 11px; color: var(--text-muted);">📅 여행 일정</div>
-      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${datesPick ? escapeHtml(datesPick) : '미확정'}</div>
-    </div>
-    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
-      <div style="font-size: 11px; color: var(--text-muted);">🎣 낚시 방법</div>
-      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${fishingPick ? escapeHtml(fishingPick) : '미확정'}</div>
-    </div>
-    <div style="background: #fef3e6; padding: 12px; border-radius: 8px;">
-      <div style="font-size: 11px; color: var(--text-muted);">🚌 비낚시 대안</div>
-      <div style="font-size: 13px; font-weight: 600; color: var(--accent); margin-top: 4px;">${altPick ? escapeHtml(altPick) : '미확정'}</div>
-    </div>
-    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
-      <div style="font-size: 11px; color: var(--text-muted);">🏨 숙박 호텔</div>
-      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${hotelPick ? escapeHtml(hotelPick) : '미확정'}</div>
-    </div>
-    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
-      <div style="font-size: 11px; color: var(--text-muted);">🍴 식당</div>
-      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${restPick ? escapeHtml(restPick) : '미확정'}</div>
-    </div>
-    <div style="background: #f0f7fc; padding: 12px; border-radius: 8px;">
-      <div style="font-size: 11px; color: var(--text-muted);">♨️ 온천</div>
-      <div style="font-size: 13px; font-weight: 600; color: var(--primary); margin-top: 4px;">${onsenPick ? escapeHtml(onsenPick) : '미확정'}</div>
-    </div>
-  </div>
-  <h3 style="font-size: 14px; color: var(--primary); margin-top: 16px; margin-bottom: 8px;">📋 종합 일정 시뮬레이션</h3>
-  <ul class="timeline">
-    <li>
-      <div class="timeline-time">DAY 1 (출국일 저녁)</div>
-      <div class="timeline-title">부산 국제여객터미널 → 뉴카멜리아 페리 22:30 출항</div>
-      <div class="timeline-detail">선상 1박</div>
-    </li>
-    <li>
-      <div class="timeline-time">DAY 2 오전</div>
-      <div class="timeline-title">하카타항 07:30 도착 → 코쿠라 이동 (신칸센 15분)</div>
-      <div class="timeline-detail">호텔: ${hotelPick ? escapeHtml(hotelPick) : '(미확정)'}</div>
-    </li>
-    <li>
-      <div class="timeline-time">DAY 2 오후</div>
-      <div class="timeline-title">♨️ 온천 여행: ${onsenPick ? escapeHtml(onsenPick) : '(미확정 — 투표 후 결정)'}</div>
-      <div class="timeline-detail">호텔 체크인 후 출발, 저녁 코쿠라 복귀</div>
-    </li>
-    <li>
-      <div class="timeline-time">DAY 3 새벽~오후 (낚시 그룹)</div>
-      <div class="timeline-title">🎣 출조: ${fishingPick ? escapeHtml(fishingPick) : '(미확정)'}</div>
-      <div class="timeline-detail">유어선 출항, 잡은 생선 손질·택배</div>
-    </li>
-    <li>
-      <div class="timeline-time">DAY 3 (비낚시 그룹 대안)</div>
-      <div class="timeline-title">🚌 관광: ${(function(){const r = _getPollWinner('alt_activity'); if (r && r.total > 0 && r.winners.length === 1) return escapeHtml(r.winners[0]); return '(투표 진행 중)';})()}</div>
-      <div class="timeline-detail">비낚시 회원들은 관광·온천·골프 등 자유 활동</div>
-    </li>
-    <li>
-      <div class="timeline-time">DAY 3 저녁</div>
-      <div class="timeline-title">🍴 디너: ${restPick ? escapeHtml(restPick) : '(미확정)'}</div>
-      <div class="timeline-detail">테리하 스파 입욕 후 식사</div>
-    </li>
-    <li>
-      <div class="timeline-time">DAY 4 (귀국)</div>
-      <div class="timeline-title">코쿠라 → 후쿠오카공항 → FUK→ICN/GMP 항공편</div>
-      <div class="timeline-detail">약 13:30~14:30 출발, 15~16시 서울 도착</div>
-    </li>
-  </ul>
-  <div class="note info">
-    📅 확정 일정: ${datesPick ? escapeHtml(datesPick) : '(투표 진행 중)'}
-  </div>`;
   el.innerHTML = html;
 }
+function renderResultByMember() {
+  const el = document.getElementById('result-by-member');
+  if (!el) return;
+  const memberNames = Object.keys(DB.members).sort((a, b) => {
+    const ai = REGISTERED_MEMBERS.indexOf(a), bi = REGISTERED_MEMBERS.indexOf(b);
+    if (ai !== -1 && bi !== -1) return ai - bi;
+    if (ai !== -1) return -1;
+    if (bi !== -1) return 1;
+    return a.localeCompare(b);
+  });
+  const topics = [
+    { id: 'participation', label: '👤 참가' },
+    { id: 'dates', label: '📅 날짜' },
+    { id: 'place', label: '📍 장소' },
+    { id: 'stay', label: '🛏️ 숙박' },
+    { id: 'fishing', label: '🎣 낚시' },
+    { id: 'fee', label: '💰 회비' },
+    { id: 'food', label: '🍖 먹거리' }
+  ];
+  let html = '<table style="font-size: 12px; min-width: 720px;"><thead><tr><th style="min-width: 80px;">회원</th>' +
+    topics.map(t => '<th>' + t.label + '</th>').join('') + '<th>완료율</th></tr></thead><tbody>';
+  memberNames.forEach(name => {
+    const partS = getParticipationStatus(name);
+    const isNo = partS.code === 'no';
+    let done = 0;
+    html += '<tr' + (isNo ? ' style="opacity:0.5;"' : '') + '><td style="font-weight: 600; color: var(--primary);">' + escapeHtml(name) + (isNo ? ' (불참)' : '') + '</td>';
+    topics.forEach(t => {
+      const poll = POLLS.find(p => p.id === t.id);
+      const voteVal = (DB.votes[t.id] || {})[name];
+      const idxs = (typeof voteVal === 'number') ? [voteVal] : (Array.isArray(voteVal) ? voteVal : []);
+      if (idxs.length > 0 && poll) {
+        done++;
+        const opts = idxs.filter(i => poll.options[i]).map(i => poll.options[i]);
+        const display = idxs.length === 1
+          ? (opts[0].length > 16 ? opts[0].substring(0, 14) + '…' : opts[0])
+          : opts.length + '개 선택';
+        html += '<td title="' + escapeHtml(opts.join(' / ')) + '" style="color: var(--text);">' + escapeHtml(display) + '</td>';
+      } else {
+        html += '<td style="color: var(--text-muted);">—</td>';
+      }
+    });
+    const pct = Math.round(done / topics.length * 100);
+    const color = pct === 100 ? '#27ae60' : pct >= 60 ? '#e67e22' : '#888';
+    html += '<td style="font-weight: 600; color: ' + color + ';">' + done + '/' + topics.length + ' (' + pct + '%)</td></tr>';
+  });
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+// ============== CHECKLISTS ==============
 function renderChecklistSummary() {
   const summary = document.getElementById('checklist-summary');
   if (!summary) return;
@@ -2718,45 +2158,35 @@ function renderChecklistSummary() {
     cl.items.forEach((_, idx) => {
       REGISTERED_MEMBERS.forEach(name => {
         totalItems++;
-        const key = name + '__' + cl.id + '__' + idx;
-        if (DB.checklists[key]) { totalChecked++; clChecked++; }
+        if (DB.checklists[name + '__' + cl.id + '__' + idx]) { totalChecked++; clChecked++; }
       });
     });
     const clTotal = cl.items.length * REGISTERED_MEMBERS.length;
     const pct = clTotal > 0 ? Math.round(clChecked / clTotal * 100) : 0;
-    summaryHtml += '<div style="background: ' + cl.color + '10; padding:10px; border-radius:8px; border-left:3px solid ' + cl.color + ';">';
-    summaryHtml += '<div style="font-size:11px; color:var(--text-muted);">' + escapeHtml(cl.title.substring(0, 14)) + '</div>';
-    summaryHtml += '<div style="font-size:18px; font-weight:700; color:' + cl.color + ';">' + pct + '%</div>';
-    summaryHtml += '<div style="font-size:10px; color:var(--text-muted);">' + clChecked + '/' + clTotal + ' 완료</div>';
-    summaryHtml += '</div>';
+    summaryHtml += '<div style="background: ' + cl.color + '10; padding:10px; border-radius:8px; border-left:3px solid ' + cl.color + ';">' +
+      '<div style="font-size:11px; color:var(--text-muted);">' + escapeHtml(cl.title) + '</div>' +
+      '<div style="font-size:18px; font-weight:700; color:' + cl.color + ';">' + pct + '%</div>' +
+      '<div style="font-size:10px; color:var(--text-muted);">' + clChecked + '/' + clTotal + ' 완료</div></div>';
   });
   summaryHtml += '</div>';
   const overallPct = totalItems > 0 ? Math.round(totalChecked / totalItems * 100) : 0;
-  summaryHtml = '<div style="margin-bottom:10px; padding:12px 14px; background: var(--primary-lighter); border-radius:8px; font-size:14px;"><strong>전체 진행률:</strong> ' + overallPct + '% (' + totalChecked + '/' + totalItems + ')</div>' + summaryHtml;
-  summary.innerHTML = summaryHtml;
+  summary.innerHTML = '<div style="margin-bottom:10px; padding:12px 14px; background: var(--primary-lighter); border-radius:8px; font-size:14px;"><strong>전체 진행률:</strong> ' + overallPct + '% (' + totalChecked + '/' + totalItems + ')</div>' + summaryHtml;
 }
-
 function renderChecklists() {
   const container = document.getElementById('checklist-container');
   if (!container) return;
   if (!DB.checklists) DB.checklists = {};
-  // Save which details are currently open
   const openSet = new Set();
-  container.querySelectorAll('details[open]').forEach(d => {
-    if (d.dataset.clId) openSet.add(d.dataset.clId);
-  });
+  container.querySelectorAll('details[open]').forEach(d => { if (d.dataset.clId) openSet.add(d.dataset.clId); });
   renderChecklistSummary();
   let html = '';
   CHECKLISTS.forEach(cl => {
-    const isOpen = openSet.has(cl.id);
-    html += '<details data-cl-id="' + cl.id + '"' + (isOpen ? ' open' : '') + ' style="margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px; overflow:hidden;">';
+    html += '<details data-cl-id="' + cl.id + '"' + (openSet.has(cl.id) ? ' open' : '') + ' style="margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px; overflow:hidden;">';
     html += '<summary style="padding: 12px 16px; cursor: pointer; background: ' + cl.color + '10; font-weight:600; color:' + cl.color + ';">' + escapeHtml(cl.title) + ' (' + cl.items.length + '개 항목)</summary>';
-    html += '<div style="padding: 14px 16px; background: white;">';
-    html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:600px;"><thead><tr>';
+    html += '<div style="padding: 14px 16px; background: white;"><div style="overflow-x:auto;"><table style="font-size:12px; min-width:600px;"><thead><tr>';
     html += '<th style="background: ' + cl.color + '20; color:' + cl.color + '; text-align:left; padding:8px;">항목</th>';
     REGISTERED_MEMBERS.forEach(n => {
-      const short = n.length > 3 ? n.substring(0,3) : n;
-      html += '<th style="background: ' + cl.color + '20; color:' + cl.color + '; text-align:center; padding:8px; min-width:40px;" title="' + escapeHtml(n) + '">' + escapeHtml(short) + '</th>';
+      html += '<th style="background: ' + cl.color + '20; color:' + cl.color + '; text-align:center; padding:8px; min-width:40px;" title="' + escapeHtml(n) + '">' + escapeHtml(n.length > 3 ? n.substring(0, 3) : n) + '</th>';
     });
     html += '</tr></thead><tbody>';
     cl.items.forEach((itemObj, idx) => {
@@ -2767,21 +2197,17 @@ function renderChecklists() {
         if (deadlineDays === 0) {
           deadlineHtml = '<span style="font-size:10px; background:#f0f0f0; color:#666; padding:2px 6px; border-radius:8px; margin-left:6px;">당일</span>';
         } else {
-          let dueLabel = 'D-' + deadlineDays;
-          let dueColor = '#666';
-          let dueBg = '#f0f0f0';
-          let dueDateStr = '';
+          let dueLabel = 'D-' + deadlineDays, dueColor = '#666', dueBg = '#f0f0f0', dueDateStr = '';
           if (DB.departureDate) {
-            const dep = new Date(DB.departureDate);
-            const due = new Date(dep);
+            const due = new Date(DB.departureDate);
             due.setDate(due.getDate() - deadlineDays);
-            const today = new Date(); today.setHours(0,0,0,0);
-            const daysToDue = Math.ceil((due - today) / (1000*60*60*24));
-            dueDateStr = ' (' + due.toLocaleDateString('ko-KR', {month:'numeric', day:'numeric'}) + ')';
+            const today = new Date(); today.setHours(0, 0, 0, 0);
+            const daysToDue = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+            dueDateStr = ' (' + due.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' }) + ')';
             if (daysToDue < 0) { dueColor = '#e74c3c'; dueBg = '#fdebec'; dueLabel = '⚠️ 지났음 D-' + deadlineDays; }
             else if (daysToDue <= 3) { dueColor = '#e67e22'; dueBg = '#fef3e6'; dueLabel = '🔥 임박 D-' + deadlineDays; }
-            else if (daysToDue <= 14) { dueColor = '#185fa5'; dueBg = '#e6f1fb'; dueLabel = 'D-' + deadlineDays; }
-            else { dueColor = '#27ae60'; dueBg = '#e6f7ec'; dueLabel = 'D-' + deadlineDays; }
+            else if (daysToDue <= 14) { dueColor = '#185fa5'; dueBg = '#e6f1fb'; }
+            else { dueColor = '#27ae60'; dueBg = '#e6f7ec'; }
           }
           deadlineHtml = '<span style="font-size:10px; background:' + dueBg + '; color:' + dueColor + '; padding:2px 6px; border-radius:8px; margin-left:6px; white-space:nowrap;">' + dueLabel + dueDateStr + '</span>';
         }
@@ -2791,114 +2217,38 @@ function renderChecklists() {
         const key = name + '__' + cl.id + '__' + idx;
         const checked = !!DB.checklists[key];
         const canEdit = DB.user === name;
-        const cursor = canEdit ? 'pointer' : 'default';
         const onclick = canEdit ? "toggleChecklist('" + escapeHtml(name).replace(/'/g, "\\'") + "', '" + cl.id + "', " + idx + ", event)" : '';
-        html += '<td data-cl-cell="' + escapeHtml(key) + '" data-cl-color="' + cl.color + '" data-cl-edit="' + (canEdit?1:0) + '" style="text-align:center; padding:6px; cursor:' + cursor + ';" onclick="' + onclick + '">';
-        if (checked) {
-          html += '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:' + cl.color + '; color:white; border-radius:4px; font-size:13px;">✓</span>';
-        } else if (canEdit) {
-          html += '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:white; border:1.5px solid ' + cl.color + '; border-radius:4px;"></span>';
-        } else {
-          html += '<span style="color:var(--text-muted); font-size:10px;">—</span>';
-        }
+        html += '<td data-cl-cell="' + escapeHtml(key) + '" data-cl-color="' + cl.color + '" data-cl-edit="' + (canEdit ? 1 : 0) + '" style="text-align:center; padding:6px; cursor:' + (canEdit ? 'pointer' : 'default') + ';" onclick="' + onclick + '">';
+        if (checked) html += '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:' + cl.color + '; color:white; border-radius:4px; font-size:13px;">✓</span>';
+        else if (canEdit) html += '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:white; border:1.5px solid ' + cl.color + '; border-radius:4px;"></span>';
+        else html += '<span style="color:var(--text-muted); font-size:10px;">—</span>';
         html += '</td>';
       });
       html += '</tr>';
     });
-    html += '</tbody></table></div>';
-    html += '</div></details>';
+    html += '</tbody></table></div></div></details>';
   });
   container.innerHTML = html;
 }
-
 function toggleChecklist(name, clId, idx, event) {
   if (event) { event.stopPropagation(); event.preventDefault(); }
   if (DB.user !== name) return;
   if (!DB.checklists) DB.checklists = {};
   const key = name + '__' + clId + '__' + idx;
   const wasChecked = !!DB.checklists[key];
-  if (wasChecked) {
-    delete DB.checklists[key];
-  } else {
-    DB.checklists[key] = { ts: Date.now() };
-  }
+  if (wasChecked) delete DB.checklists[key];
+  else DB.checklists[key] = { ts: Date.now() };
   saveDB();
-  // Incremental update: only the changed cell, no full re-render
-  const cells = document.querySelectorAll('[data-cl-cell="' + key + '"]');
-  cells.forEach(cell => {
+  document.querySelectorAll('[data-cl-cell="' + key + '"]').forEach(cell => {
     const color = cell.dataset.clColor;
     const canEdit = cell.dataset.clEdit === '1';
-    if (!wasChecked) {
-      cell.innerHTML = '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:' + color + '; color:white; border-radius:4px; font-size:13px;">✓</span>';
-    } else if (canEdit) {
-      cell.innerHTML = '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:white; border:1.5px solid ' + color + '; border-radius:4px;"></span>';
-    } else {
-      cell.innerHTML = '<span style="color:var(--text-muted); font-size:10px;">—</span>';
-    }
+    if (!wasChecked) cell.innerHTML = '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:' + color + '; color:white; border-radius:4px; font-size:13px;">✓</span>';
+    else if (canEdit) cell.innerHTML = '<span style="display:inline-block; width:22px; height:22px; line-height:22px; background:white; border:1.5px solid ' + color + '; border-radius:4px;"></span>';
+    else cell.innerHTML = '<span style="color:var(--text-muted); font-size:10px;">—</span>';
   });
-  // Update only the summary numbers, not the entire checklist
   renderChecklistSummary();
   renderHomeMemberStatus();
   triggerAutoSave();
-}
-
-function renderResultByMember() {
-  const el = document.getElementById('result-by-member');
-  if (!el) return;
-  const memberNames = Object.keys(DB.members).sort((a, b) => {
-    const ai = REGISTERED_MEMBERS.indexOf(a);
-    const bi = REGISTERED_MEMBERS.indexOf(b);
-    if (ai !== -1 && bi !== -1) return ai - bi;
-    if (ai !== -1) return -1;
-    if (bi !== -1) return 1;
-    return a.localeCompare(b);
-  });
-  const topics = [
-    { id: 'participation', label: '👤 참가' },
-    { id: 'dates', label: '📅 일정' },
-    { id: 'fishing', label: '🎣 낚시' },
-    { id: 'alt_activity', label: '🚌 대안' },
-    { id: 'hotel', label: '🏨 숙박' },
-    { id: 'restaurant', label: '🍴 식당' },
-    { id: 'onsen', label: '♨️ 온천' }
-  ];
-  let html = `<table style="font-size: 12px; min-width: 700px;">
-    <thead>
-      <tr>
-        <th style="min-width: 80px;">회원</th>
-        ${topics.map(t => `<th>${t.label}</th>`).join('')}
-        <th>완료율</th>
-      </tr>
-    </thead>
-    <tbody>`;
-  memberNames.forEach(name => {
-    const partS = getParticipationStatus(name);
-    const isNo = partS.code === 'no';
-    const rowOp = isNo ? ' style="opacity:0.5;"' : '';
-    let done = 0;
-    html += `<tr${rowOp}><td style="font-weight: 600; color: var(--primary);">${escapeHtml(name)}${isNo ? ' (불참)' : ''}</td>`;
-    topics.forEach(t => {
-      const poll = POLLS.find(p => p.id === t.id);
-      const voteVal = (DB.votes[t.id] || {})[name];
-      const idxs = (typeof voteVal === 'number') ? [voteVal] : (Array.isArray(voteVal) ? voteVal : []);
-      if (idxs.length > 0 && poll) {
-        done++;
-        const opts = idxs.filter(i => poll.options[i]).map(i => poll.options[i]);
-        const fullText = opts.join(' / ');
-        const display = idxs.length === 1
-          ? (opts[0].length > 18 ? opts[0].substring(0,16) + '…' : opts[0])
-          : opts.length + '개 선택';
-        html += `<td title="${escapeHtml(fullText)}" style="color: var(--text);">${escapeHtml(display)}</td>`;
-      } else {
-        html += `<td style="color: var(--text-muted);">—</td>`;
-      }
-    });
-    const pct = Math.round(done / topics.length * 100);
-    const color = pct === 100 ? '#27ae60' : pct >= 60 ? '#e67e22' : '#888';
-    html += `<td style="font-weight: 600; color: ${color};">${done}/${topics.length} (${pct}%)</td></tr>`;
-  });
-  html += `</tbody></table>`;
-  el.innerHTML = html;
 }
 
 // ============== START ==============

@@ -1,234 +1,59 @@
 {
-  "votes": {
-    "dates": {
-      "박중산": [
-        0,
-        2,
-        6
-      ],
-      "최진원": 2,
-      "김기태": [
-        1,
-        6,
-        9,
-        11
-      ],
-      "김석": 2,
-      "김철현": [
-        2,
-        6
-      ],
-      "윤유병": [
-        3,
-        8
-      ],
-      "최근호": 2
-    },
-    "fishing": {
-      "박중산": 0,
-      "최진원": 1,
-      "김석": 0,
-      "윤유병": [
-        1
-      ]
-    },
-    "hotel": {
-      "박중산": 2,
-      "최진원": 2,
-      "김석": 2,
-      "김기태": 2,
-      "김철현": [
-        2
-      ],
-      "윤유병": [
-        2
-      ]
-    },
-    "restaurant": {
-      "박중산": 1,
-      "최진원": 1,
-      "김석": 1,
-      "김철현": [
-        1
-      ],
-      "윤유병": [
-        1
-      ]
-    },
-    "onsen": {
-      "박중산": 0,
-      "최진원": 1,
-      "김석": 0,
-      "김기태": 3,
-      "김철현": [
-        1
-      ],
-      "윤유병": [
-        3
-      ]
-    },
-    "alt_activity": {
-      "김철현": [
-        0
-      ],
-      "윤유병": [
-        3
-      ],
-      "김기태": [
-        0,
-        3
-      ]
-    },
-    "participation": {
-      "박중산": 0,
-      "조성화": 1,
-      "윤유병": 3,
-      "최근호": 3,
-      "김기태": 2
-    }
-  },
+  "votes": {},
   "threads": [
     {
-      "id": "t1",
-      "title": "환영합니다 🎉",
+      "id": "w2",
+      "title": "💰 회비 안건 — 감정 빼고 숫자로 정리합시다",
       "author": "관리자",
-      "body": "키타큐슈 낚시 여행을 함께 준비할 회원 전용 페이지입니다. 박중산·최근호·김석·김기태·조성화·최진원·윤유병·김철현 8분이 등록되어 있습니다. 자유롭게 의견 남겨주세요!",
-      "ts": 1779068095888,
+      "body": "단톡방에서 정리가 안 된 부분입니다. 투표 탭 '💰 회비 안건'에서 다수결로 정하되, 그 전에 아래 3가지를 총무가 숫자로 올려주시면 깔끔합니다.\n\n1) 현재 누적 회비 잔액 (정확한 금액)\n2) 현재 월 회비 금액\n3) '인당 100 불출'의 단위와 총액\n\n최진원 님 제안: 월 5만원으로 인하\n김기태 님 제안: 누적분에서 인당 100 불출 후 재적립\n박중산 님 의견: 공지 후 정식 안건으로\n\n의견 있으시면 댓글로 남겨주세요.",
+      "ts": 1788393601000,
       "comments": []
     },
     {
-      "id": "t1779063673089",
-      "title": "바쁜 시간 이지만 투표를 해서 일정등을 결정 할 수 있도록 해보자고",
-      "body": "씨부레",
-      "author": "박중산",
-      "ts": 1779063673089,
+      "id": "w3",
+      "title": "📍 장소 후보 7곳 올렸습니다 — 아는 정보 있으면 댓글로",
+      "author": "관리자",
+      "body": "후보지 탭에 7곳을 정리했습니다.\n\n1. 안면도 무지개좌대 (김기태 님 링크 — 야간 5만원/인, 방갈로 무료)\n2. 안면도 백사장항·영목항 워킹 (최근호 님 추천 권역)\n3. 태안 신진도·안흥항 권역\n4. 보령 무창포 (거리 이슈로 반대 의견 있음)\n5. 강화 석모도 (조황 부진 제보 있음 — 확인 필요)\n6. 화성 궁평항·전곡항 (서울 1시간대)\n7. 인천 영흥도\n\n주차·차박 가능 여부, 최근 조황 등 아는 정보 있으면 댓글로 부탁드립니다.",
+      "ts": 1788393602000,
       "comments": []
-    },
-    {
-      "id": "t1779105447582",
-      "title": "날짜",
-      "body": "11월은 첫째주 가능",
-      "author": "김기태",
-      "ts": 1779105447582,
-      "comments": [
-        {
-          "author": "박중산",
-          "body": "일정을 중복으로 할 수 있도록 변경 할께 그래야 많이 가는 사람들 일정으로 정리 하제",
-          "ts": 1779149167764
-        }
-      ]
-    },
-    {
-      "id": "t1779105545249",
-      "title": "낚시",
-      "body": "낚시 비용이 포함된 가격이면 낚시 안하는 사람은 어찌해야하나 낚시비용을 보전해주나?",
-      "author": "김기태",
-      "ts": 1779105545249,
-      "comments": [
-        {
-          "author": "박중산",
-          "body": "일단은 9월 회비 까지 걷힌것으로 정리 하고 의견을 청취 해야지",
-          "ts": 1779149207415
-        }
-      ]
     }
   ],
   "members": {
     "박중산": {
-      "joinedAt": 1779068095888,
-      "preRegistered": true,
-      "passport": {
-        "surname": "PARK",
-        "givenNames": "JUNG SAN",
-        "passportNo": "M99330806",
-        "dob": "1973-09-09",
-        "sex": "M",
-        "issueDate": "2016-10-18",
-        "expiryDate": "2026-10-18",
-        "nationality": "KOR"
-      }
+      "joinedAt": 1788393600000,
+      "preRegistered": true
     },
     "최근호": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1788393600000,
       "preRegistered": true
     },
     "김석": {
-      "joinedAt": 1779068095888,
-      "preRegistered": true,
-      "passport": {
-        "surname": "KIM",
-        "givenNames": "SUK",
-        "passportNo": "M538A2730",
-        "dob": "1974-02-22",
-        "sex": "M",
-        "issueDate": "2023-03-03",
-        "expiryDate": "2033-03-03",
-        "nationality": "KOR"
-      }
+      "joinedAt": 1788393600000,
+      "preRegistered": true
     },
     "김기태": {
-      "joinedAt": 1779068095888,
+      "joinedAt": 1788393600000,
       "preRegistered": true
     },
     "조성화": {
-      "joinedAt": 1779068095888,
-      "preRegistered": true,
-      "passport": {
-        "surname": "CHO",
-        "givenNames": "SUNG HWA",
-        "passportNo": "M26303355",
-        "dob": "1973-04-28",
-        "sex": "M",
-        "issueDate": "2020-09-04",
-        "expiryDate": "2030-09-04",
-        "nationality": "KOR"
-      }
+      "joinedAt": 1788393600000,
+      "preRegistered": true
     },
     "최진원": {
-      "joinedAt": 1779068095888,
-      "preRegistered": true,
-      "passport": {
-        "surname": "CHOI",
-        "givenNames": "JIN WON",
-        "passportNo": "M94163217",
-        "dob": "1974-03-01",
-        "sex": "M",
-        "issueDate": "2019-08-01",
-        "expiryDate": "2029-08-01",
-        "nationality": "KOR"
-      }
+      "joinedAt": 1788393600000,
+      "preRegistered": true
     },
     "윤유병": {
-      "joinedAt": 1779068095888,
-      "preRegistered": true,
-      "passport": {
-        "surname": "YOON",
-        "givenNames": "YOO BYUNG",
-        "passportNo": "M70489169",
-        "dob": "1974-01-28",
-        "sex": "M",
-        "issueDate": "2019-01-08",
-        "expiryDate": "2029-01-08",
-        "nationality": "KOR"
-      }
+      "joinedAt": 1788393600000,
+      "preRegistered": true
     },
     "김철현": {
-      "joinedAt": 1779068095888,
-      "preRegistered": true,
-      "passport": {
-        "surname": "KIM",
-        "givenNames": "CHUL HYUN",
-        "passportNo": "M798G5857",
-        "dob": "1973-10-06",
-        "sex": "M",
-        "issueDate": "2023-03-03",
-        "expiryDate": "2033-03-03",
-        "nationality": "KOR"
-      }
+      "joinedAt": 1788393600000,
+      "preRegistered": true
     }
   },
   "checklists": {},
-  "departureDate": "2026-09-11",
-  "lastSavedAt": 1779330990008,
-  "lastSavedBy": "박중산"
+  "departureDate": null,
+  "lastSavedAt": 1788393600000,
+  "lastSavedBy": "관리자"
 }
