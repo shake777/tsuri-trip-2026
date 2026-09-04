@@ -45,13 +45,27 @@
 > 주기적으로 저장이 끊겼습니다. Firebase는 URL이 공개되는 것을 전제로 설계된 서비스라
 > 같은 문제가 생기지 않습니다.
 
-## ⚙️ Firebase 연결 (최초 1회, 약 10분, 무료)
+## ⚙️ Firebase 연결 — **설정 완료** ✅
+
+| 항목 | 값 |
+|---|---|
+| 프로젝트 | `tsuri-trip-2026` (Spark 무료 요금제, 결제수단 미등록) |
+| DB 위치 | 싱가포르 (asia-southeast1) |
+| DB 주소 | `https://tsuri-trip-2026-default-rtdb.asia-southeast1.firebasedatabase.app` |
+| 데이터 경로 | `trip2026` |
+| 규칙 | `trip2026`만 읽기/쓰기 허용, 나머지 전부 차단 |
+
+Google 애널리틱스 · Gemini · 개발자 프로그램은 모두 **꺼둔** 상태입니다.
+
+<details>
+<summary>처음부터 다시 설정하는 방법 (펼치기)</summary>
+
 
 1. [console.firebase.google.com](https://console.firebase.google.com/) → **프로젝트 만들기**
    (이름 예: `tsuri-trip-2026`, Google 애널리틱스는 사용 안 함)
 2. 왼쪽 메뉴 **빌드 → Realtime Database → 데이터베이스 만들기**
    - 위치: **asia-southeast1 (싱가포르)**
-   - 보안 규칙: **테스트 모드로 시작**
+   - 보안 규칙: **잠금 모드로 시작** (테스트 모드는 30일 뒤 만료되므로 피할 것)
 3. 생성 후 표시되는 **주소 복사**
    `https://○○○-default-rtdb.asia-southeast1.firebasedatabase.app`
 4. **규칙** 탭 → 아래로 교체 후 **게시**
@@ -72,7 +86,9 @@
    const FIREBASE_DB_URL = 'https://○○○-default-rtdb.asia-southeast1.firebasedatabase.app';
    ```
 
-설정 전까지는 사이트에 "⚙️ 실시간 공유가 아직 켜지지 않았습니다" 경고가 뜨고,
+</details>
+
+설정이 풀리면 사이트에 "⚙️ 실시간 공유가 아직 켜지지 않았습니다" 경고가 뜨고,
 각자 브라우저에만 저장됩니다. 같은 안내는 사이트 **[👥 회원] 탭 → 실시간 동기화 설정**에도 있습니다.
 
 ### 보안 참고
