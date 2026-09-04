@@ -788,6 +788,40 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
+        <h2>⚙️ 실시간 동기화 설정 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(관리자용 · 최초 1회)</span></h2>
+        <div id="sync-setup-status"></div>
+        <details style="margin-top:10px; border:1px solid var(--border); border-radius:10px; overflow:hidden;">
+          <summary style="padding:12px 16px; cursor:pointer; background:#f0f7fc; font-weight:600; color:var(--primary);">
+            📖 Firebase 연결 방법 (약 10분, 무료)
+          </summary>
+          <div style="padding:14px 16px;">
+            <p style="font-size:12.5px;">Firebase는 <strong>주소·키가 공개되는 것을 전제로</strong> 만들어진 서비스라, 이 페이지에 주소를 그대로 적어도 안전합니다. 접근 제어는 Firebase 쪽 "규칙"으로 합니다. (이전 GitHub 토큰 방식이 계속 만료되던 문제가 해결됩니다.)</p>
+            <ol style="font-size:12.5px; padding-left:20px; color:var(--text-secondary);">
+              <li style="margin-bottom:8px;"><a href="https://console.firebase.google.com/" target="_blank" style="color:var(--primary-light);">console.firebase.google.com</a> 접속 → 구글 계정 로그인 → <strong>프로젝트 만들기</strong> (이름은 아무거나, 예: <code>tsuri-trip-2026</code>). Google 애널리틱스는 <strong>사용 안 함</strong>으로 두면 더 빠릅니다.</li>
+              <li style="margin-bottom:8px;">왼쪽 메뉴 <strong>빌드 → Realtime Database</strong> → <strong>데이터베이스 만들기</strong>. 위치는 <strong>asia-southeast1 (싱가포르)</strong> 선택. 보안 규칙은 <strong>테스트 모드</strong>로 시작.</li>
+              <li style="margin-bottom:8px;">만들어지면 화면 위에 나오는 <strong>주소를 복사</strong>합니다.<br>
+                <code style="font-size:11.5px; background:#f5f8fc; padding:2px 6px; border-radius:4px;">https://○○○-default-rtdb.asia-southeast1.firebasedatabase.app</code></li>
+              <li style="margin-bottom:8px;"><strong>규칙</strong> 탭으로 가서 아래 내용으로 바꾸고 <strong>게시</strong>. (이 페이지가 쓰는 <code>trip2026</code> 칸만 열고 나머지는 잠급니다)
+                <pre style="font-size:11.5px; background:#f5f8fc; padding:10px 12px; border-radius:6px; overflow-x:auto; margin-top:6px;">{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "trip2026": { ".read": true, ".write": true }
+  }
+}</pre></li>
+              <li style="margin-bottom:8px;">복사한 주소를 <code>index.html</code> 상단 <code>const FIREBASE_DB_URL = '';</code> 의 따옴표 안에 붙여넣고 저장 → GitHub에 커밋하면 끝. 1~2분 뒤 전 회원 화면이 실시간으로 연결됩니다.</li>
+            </ol>
+            <div class="note info" style="font-size:12px;">
+              💡 3단계까지만 하고 <strong>주소만 알려주셔도</strong> 나머지(4·5단계)는 대신 넣어드릴 수 있습니다.
+            </div>
+            <div class="note warn" style="font-size:12px;">
+              ⚠️ 위 규칙은 <strong>주소를 아는 사람은 누구나 읽고 쓸 수 있는</strong> 설정입니다. 이 페이지는 검색엔진에 노출되지 않고 주소도 단톡방에만 공유하므로 이 정도면 충분하지만, 더 잠그고 싶으면 알려주세요.
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div class="card">
         <h2>💾 데이터 관리</h2>
         <p>클라우드 자동 저장이 켜져 있어 평소에는 쓸 일이 없습니다. 백업이 필요할 때만 사용하세요.</p>
         <div class="btn-row">
@@ -811,18 +845,23 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 const STORAGE_KEY = 'jjukkumi_trip_2026_v1';
 const REGISTERED_MEMBERS = ['박중산', '최근호', '김석', '김기태', '조성화', '최진원', '윤유병', '김철현'];
 const ACCESS_PASSWORD = '111111';
-const CLOUD_REPO = 'shake777/tsuri-trip-2026';
-const CLOUD_FILE = 'data.json';
-const CLOUD_RAW_URL = 'https://raw.githubusercontent.com/' + CLOUD_REPO + '/main/' + CLOUD_FILE;
-const CLOUD_API_URL = 'https://api.github.com/repos/' + CLOUD_REPO + '/contents/' + CLOUD_FILE;
-const _ek = 0x5A;
-const _ev = [61,50,42,5,31,20,62,61,20,51,35,98,108,28,63,48,53,54,49,29,19,42,109,27,32,2,40,3,54,52,24,98,27,29,107,25,106,8,18,31];
-function _getCloudToken() { return _ev.map(function(c){return String.fromCharCode(c^_ek);}).join(''); }
+// ============== 실시간 동기화 설정 ==============
+// ⚙️ 아래 FIREBASE_DB_URL 한 줄만 채우면 전 회원 실시간 공유가 켜집니다.
+//    예) 'https://tsuri-trip-2026-default-rtdb.asia-southeast1.firebasedatabase.app'
+//    설정 방법: README.md 또는 사이트 [👥 회원] 탭 → "실시간 동기화 설정"
+const FIREBASE_DB_URL = '';
+const CLOUD_ROOT = 'trip2026';
+// 최초 1회 시드용 (Firebase가 비어 있을 때만 읽음)
+const SEED_URL = 'https://raw.githubusercontent.com/shake777/tsuri-trip-2026/main/data.json';
+const POLL_INTERVAL_MS = 15000;
 let _gateSelectedName = null;
 let _lastCloudSync = 0;
 let _autoSaveTimer = null;
 let _autoSaveBusy = false;
-let _cloudWritable = null; // null = 확인 중, true = 저장 가능, false = 저장 불가(토큰 만료 등)
+let _cloudWritable = null; // null = 확인 중, true = 정상, false = 저장 불가
+let _cloudError = null;
+let _suppressPollUntil = 0;
+let _seedLoaded = false;
 
 let DB = loadDB();
 
@@ -1128,159 +1167,289 @@ const GEAR_FIELDS = [
   { key: 'grill', label: '🔥 버너/불판', type: 'bool' }
 ];
 
-// ============== CLOUD SYNC ==============
-async function loadFromCloud(silent) {
+// ============== 실시간 동기화 (Firebase Realtime Database) ==============
+// Firebase는 URL·키가 공개되는 것을 전제로 설계된 서비스라, 이 파일에 그대로 적어도 됩니다.
+// 접근 제어는 Firebase 콘솔의 "규칙(Rules)"으로 합니다. 설정 방법은 README.md 참고.
+function fbUrl(path) {
+  const base = FIREBASE_DB_URL.replace(/\/+$/, '');
+  const segs = [CLOUD_ROOT].concat(path || []).map(s => encodeURIComponent(String(s))).join('/');
+  return base + '/' + segs + '.json';
+}
+function cloudEnabled() { return !!FIREBASE_DB_URL; }
+
+async function fbGet(path) {
+  const res = await fetch(fbUrl(path) + '?t=' + Date.now(), { cache: 'no-store' });
+  if (!res.ok) throw new Error('GET ' + res.status);
+  return await res.json();
+}
+async function fbPut(path, value) {
+  const res = await fetch(fbUrl(path), {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(value === undefined ? null : value)
+  });
+  if (!res.ok) throw new Error('PUT ' + res.status + ' ' + (await res.text()).substring(0, 120));
+  return true;
+}
+
+// ---- 저장 형식 변환 (배열 ↔ 맵) ----
+function commentKey(c) {
+  return String(c.ts) + '_' + String(c.author || '').replace(/[.$#\[\]\/]/g, '_');
+}
+function threadToCloud(t) {
+  const c = {};
+  (t.comments || []).forEach(x => { c[commentKey(x)] = x; });
+  return {
+    id: t.id, title: t.title, body: t.body, author: t.author, ts: t.ts,
+    comments: Object.keys(c).length ? c : null
+  };
+}
+function threadsFromCloud(obj) {
+  if (!obj) return [];
+  return Object.keys(obj).map(id => {
+    const raw = obj[id];
+    if (!raw) return null;
+    const t = Object.assign({}, raw);
+    t.id = t.id || id;
+    let c = t.comments;
+    if (c && !Array.isArray(c)) c = Object.keys(c).map(k => c[k]);
+    t.comments = Array.isArray(c) ? c.filter(Boolean) : [];
+    t.comments.sort((a, b) => (a.ts || 0) - (b.ts || 0));
+    return t;
+  }).filter(Boolean);
+}
+function normalizeVotes(v) {
+  const out = {};
+  Object.keys(v || {}).forEach(pid => {
+    out[pid] = {};
+    Object.keys(v[pid] || {}).forEach(user => {
+      let val = v[pid][user];
+      if (val && typeof val === 'object' && !Array.isArray(val)) {
+        val = Object.keys(val).sort((a, b) => a - b).map(k => val[k]);
+      }
+      if (Array.isArray(val)) val = val.filter(x => typeof x === 'number');
+      out[pid][user] = val;
+    });
+  });
+  return out;
+}
+
+// ---- 클라우드 → 로컬 반영 ----
+function applyCloud(cloud) {
+  if (!cloud) return;
+  DB.votes = normalizeVotes(cloud.votes);
+  DB.checklists = cloud.checklists || {};
+  const cloudThreads = threadsFromCloud(cloud.threads);
+  if (cloudThreads.length) DB.threads = cloudThreads.sort((a, b) => a.ts - b.ts);
+  if (cloud.members) {
+    Object.keys(cloud.members).forEach(name => {
+      const m = cloud.members[name] || {};
+      if (!DB.members[name]) DB.members[name] = { joinedAt: m.joinedAt || Date.now() };
+      DB.members[name].gear = m.gear || {};
+    });
+    // 클라우드에 없는 회원의 장비 정보는 비움 (다른 사람이 지운 경우 반영)
+    REGISTERED_MEMBERS.forEach(name => {
+      if (!cloud.members[name] && DB.members[name]) delete DB.members[name].gear;
+    });
+  }
+  const dep = cloud.meta && cloud.meta.departureDate;
+  DB.departureDate = dep || null;
+}
+
+function _snapshot() {
+  return JSON.stringify([DB.votes, DB.checklists, DB.threads, DB.departureDate,
+    REGISTERED_MEMBERS.map(n => (DB.members[n] || {}).gear || null)]);
+}
+
+// ---- 최초 1회: Firebase가 비어 있으면 GitHub의 data.json으로 시드 ----
+async function seedCloudIfEmpty() {
+  const cur = await fbGet([]);
+  if (cur && Object.keys(cur).length > 0) return cur;
   try {
-    const res = await fetch(CLOUD_RAW_URL + '?t=' + Date.now());
-    if (!res.ok) return null;
-    const cloud = await res.json();
-    if (cloud.votes) {
-      Object.entries(cloud.votes).forEach(([pid, votes]) => {
-        if (!DB.votes[pid]) DB.votes[pid] = {};
-        Object.assign(DB.votes[pid], votes);
-      });
+    const r = await fetch(SEED_URL + '?t=' + Date.now(), { cache: 'no-store' });
+    if (r.ok) {
+      const seed = await r.json();
+      const map = {};
+      (seed.threads || []).forEach(t => { map[t.id] = threadToCloud(t); });
+      DB.threads.forEach(t => { if (!map[t.id]) map[t.id] = threadToCloud(t); });
+      const payload = {
+        votes: seed.votes || {},
+        threads: map,
+        members: seed.members || DB.members,
+        checklists: seed.checklists || {},
+        meta: { departureDate: seed.departureDate || null, seededAt: Date.now() }
+      };
+      await fbPut([], payload);
+      return payload;
     }
-    if (cloud.threads && Array.isArray(cloud.threads)) {
-      const existingIds = new Set(DB.threads.map(t => t.id));
-      cloud.threads.forEach(t => {
-        if (existingIds.has(t.id)) {
-          const ex = DB.threads.find(x => x.id === t.id);
-          if (!ex.comments) ex.comments = [];
-          const exKeys = new Set(ex.comments.map(c => c.author + '|' + c.ts));
-          (t.comments || []).forEach(c => {
-            if (!exKeys.has(c.author + '|' + c.ts)) ex.comments.push(c);
-          });
-        } else {
-          DB.threads.push(t);
-        }
-      });
-    }
-    if (cloud.members) {
-      Object.entries(cloud.members).forEach(([name, m]) => {
-        if (!DB.members[name]) {
-          DB.members[name] = m;
-        } else if (m && m.gear) {
-          DB.members[name].gear = m.gear;
-        }
-      });
-    }
-    if (cloud.checklists) {
-      if (!DB.checklists) DB.checklists = {};
-      Object.assign(DB.checklists, cloud.checklists);
-    }
-    if (cloud.departureDate && !DB.departureDate) DB.departureDate = cloud.departureDate;
-    _lastCloudSync = cloud.lastSavedAt || Date.now();
+  } catch (e) { console.error('seed failed', e); }
+  const payload = {
+    votes: DB.votes,
+    threads: (function () { const m = {}; DB.threads.forEach(t => { m[t.id] = threadToCloud(t); }); return m; })(),
+    members: DB.members,
+    checklists: DB.checklists || {},
+    meta: { departureDate: DB.departureDate || null, seededAt: Date.now() }
+  };
+  await fbPut([], payload);
+  return payload;
+}
+
+// ---- 불러오기 ----
+async function loadFromCloud(silent) {
+  if (!cloudEnabled()) {
+    _cloudWritable = false;
+    await loadSeedOnly();
+    if (!silent) refreshViews();
+    renderCloudStatus();
+    return null;
+  }
+  try {
+    const before = _snapshot();
+    const cloud = await seedCloudIfEmpty();
+    applyCloud(cloud);
+    _cloudWritable = true;
+    _lastCloudSync = Date.now();
     saveDB();
-    if (!silent) {
-      renderMemberArea();
-      renderPolls();
-      renderThreads();
-      renderMembers();
-      renderGear();
-      renderProgress();
-      renderResult();
-      renderHomeLoginGrid();
-      renderHomeMemberStatus();
-      renderCloudStatus();
-      renderCountdown();
-    }
+    const changed = _snapshot() !== before;
+    if (!silent || changed) refreshViews();
+    renderCloudStatus();
     return cloud;
   } catch (e) {
     console.error('Cloud load failed:', e);
+    _cloudWritable = false;
+    _cloudError = e.message;
+    renderCloudStatus();
     return null;
   }
 }
 
-function cloudRefresh() {
-  loadFromCloud(false).then(() => alert('☁️ 최신 데이터 불러오기 완료!'));
-}
-
-// 저장용 토큰이 살아 있는지 읽기 전용으로 확인 (쓰기는 하지 않음)
-async function checkCloudWritable() {
+// Firebase 미설정 상태에서도 초기 게시글은 보이도록 GitHub data.json만 읽어옴 (읽기 전용)
+async function loadSeedOnly() {
+  if (_seedLoaded) return;
+  _seedLoaded = true;
   try {
-    const res = await fetch(CLOUD_API_URL, {
-      headers: { 'Authorization': 'token ' + _getCloudToken(), 'Accept': 'application/vnd.github+json' }
-    });
-    _cloudWritable = res.ok;
-  } catch (e) {
-    _cloudWritable = false;
-  }
-  renderCloudStatus();
-  return _cloudWritable;
+    const r = await fetch(SEED_URL + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) return;
+    const seed = await r.json();
+    const ids = new Set(DB.threads.map(t => t.id));
+    (seed.threads || []).forEach(t => { if (!ids.has(t.id)) DB.threads.push(t); });
+    DB.threads.sort((a, b) => a.ts - b.ts);
+    saveDB();
+  } catch (e) { /* 오프라인이면 무시 */ }
 }
 
+function cloudRefresh() {
+  loadFromCloud(false).then(() => {
+    alert(cloudEnabled()
+      ? (_cloudWritable ? '☁️ 최신 데이터 불러오기 완료!' : '⚠️ 동기화 서버에 연결하지 못했습니다.')
+      : '⚠️ 실시간 동기화가 아직 설정되지 않았습니다. (관리자 설정 필요)');
+  });
+}
+
+// ---- 저장 (변경된 항목만 즉시 기록) ----
+async function cloudSet(path, value) {
+  if (!cloudEnabled()) { _cloudWritable = false; renderCloudStatus(); return false; }
+  _suppressPollUntil = Date.now() + 4000;
+  const el = document.getElementById('cloud-status');
+  if (el) el.textContent = '☁️ 저장 중...';
+  try {
+    await fbPut(path, value === undefined ? null : value);
+    _cloudWritable = true;
+    _cloudError = null;
+    _lastCloudSync = Date.now();
+    renderCloudStatus();
+    return true;
+  } catch (e) {
+    console.error('Cloud save failed:', e);
+    _cloudWritable = false;
+    _cloudError = e.message;
+    renderCloudStatus();
+    return false;
+  }
+}
+
+// 수동 "지금 저장" — 내 로컬 상태 전체를 클라우드에 올림
 async function saveToCloud(silent) {
   if (!DB.user) { if (!silent) alert('로그인 후 저장 가능합니다'); return; }
-  const token = _getCloudToken();
+  if (!cloudEnabled()) {
+    if (!silent) alert('⚠️ 실시간 동기화가 아직 설정되지 않았습니다.\n\n지금 누른 내용은 이 브라우저에만 저장됩니다.\n관리자가 Firebase 설정을 마치면 자동으로 공유됩니다.');
+    return;
+  }
   const btn = document.getElementById('cloud-save-btn');
   if (btn && !silent) { btn.disabled = true; btn.textContent = '☁️ 저장 중...'; }
   try {
-    let sha = null;
-    const getRes = await fetch(CLOUD_API_URL, {
-      headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github+json' }
+    _suppressPollUntil = Date.now() + 4000;
+    const map = {};
+    DB.threads.forEach(t => { map[t.id] = threadToCloud(t); });
+    const members = {};
+    Object.keys(DB.members).forEach(n => {
+      members[n] = { joinedAt: DB.members[n].joinedAt || Date.now(), gear: DB.members[n].gear || null };
     });
-    if (getRes.status === 401 || getRes.status === 403) {
-      _cloudWritable = false;
-      renderCloudStatus();
-      if (!silent) alert('⚠️ 클라우드 저장 권한이 만료되었습니다.\n\n지금 누른 내용은 이 브라우저에만 저장됩니다.\n결과를 합치려면 [회원] 탭 → [데이터 내보내기]로 파일을 뽑아 총무에게 보내주세요.');
-      if (btn) { btn.disabled = false; btn.textContent = '💾 지금 저장'; }
-      return;
-    }
-    if (getRes.ok) { sha = (await getRes.json()).sha; _cloudWritable = true; }
-    const payload = {
+    await fbPut([], {
       votes: DB.votes,
-      threads: DB.threads,
-      members: DB.members,
+      threads: map,
+      members: members,
       checklists: DB.checklists || {},
-      departureDate: DB.departureDate,
-      lastSavedAt: Date.now(),
-      lastSavedBy: DB.user
-    };
-    const json = JSON.stringify(payload, null, 2);
-    const content = btoa(unescape(encodeURIComponent(json)));
-    const body = { message: '저장: ' + DB.user + ' (' + new Date().toLocaleString('ko-KR') + ')', content };
-    if (sha) body.sha = sha;
-    const putRes = await fetch(CLOUD_API_URL, {
-      method: 'PUT',
-      headers: {
-        'Authorization': 'token ' + token,
-        'Content-Type': 'application/json',
-        'Accept': 'application/vnd.github+json'
-      },
-      body: JSON.stringify(body)
+      meta: { departureDate: DB.departureDate || null, savedAt: Date.now(), savedBy: DB.user }
     });
-    if (putRes.ok) {
-      _lastCloudSync = payload.lastSavedAt;
-      _cloudWritable = true;
-      if (!silent) alert('☁️ 클라우드 저장 완료!\n다른 회원이 새로고침하면 동일 데이터를 볼 수 있습니다.');
-      renderCloudStatus();
-    } else {
-      const err = await putRes.text();
-      console.error('Save failed:', err);
-      _cloudWritable = false;
-      renderCloudStatus();
-      if (!silent) alert('저장 실패: ' + err.substring(0, 200));
-    }
+    _cloudWritable = true;
+    _cloudError = null;
+    _lastCloudSync = Date.now();
+    renderCloudStatus();
+    if (!silent) alert('☁️ 저장 완료!\n다른 회원 화면에도 곧 반영됩니다.');
   } catch (e) {
-    console.error(e);
-    if (!silent) alert('저장 오류: ' + e.message);
+    _cloudWritable = false;
+    _cloudError = e.message;
+    renderCloudStatus();
+    if (!silent) alert('저장 실패: ' + e.message);
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = '💾 지금 저장'; }
-    _autoSaveBusy = false;
   }
 }
 
-function triggerAutoSave() {
-  if (!DB.user) return;
-  if (_cloudWritable === false) { renderCloudStatus(); return; } // 토큰 만료 시 반복 실패 요청 방지
-  if (_autoSaveTimer) clearTimeout(_autoSaveTimer);
-  _autoSaveTimer = setTimeout(() => {
-    if (_autoSaveBusy) { triggerAutoSave(); return; }
-    _autoSaveBusy = true;
-    const el = document.getElementById('cloud-status');
-    if (el) el.textContent = '☁️ 자동 저장 중...';
-    saveToCloud(true).then(() => { renderCloudStatus(); });
-  }, 1500);
+// ---- 주기적 폴링 ----
+function startCloudPolling() {
+  if (!cloudEnabled()) return;
+  setInterval(() => {
+    if (document.hidden) return;
+    if (Date.now() < _suppressPollUntil) return;
+    loadFromCloud(true);
+  }, POLL_INTERVAL_MS);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) loadFromCloud(true);
+  });
+}
+
+// ---- 화면 갱신 (입력 중인 내용 보존) ----
+function refreshViews() {
+  const active = document.activeElement;
+  const activeId = active && active.id ? active.id : null;
+  let caret = null;
+  try { caret = active ? active.selectionStart : null; } catch (e) { caret = null; }
+  const drafts = {};
+  document.querySelectorAll('input[id^="comment-input-"]').forEach(i => { if (i.value) drafts[i.id] = i.value; });
+  renderMemberArea();
+  renderPolls();
+  renderThreads();
+  renderMembers();
+  renderGear();
+  renderProgress();
+  renderResult();
+  renderHomeLoginGrid();
+  renderHomeMemberStatus();
+  renderCountdown();
+  renderCloudStatus();
+  Object.keys(drafts).forEach(id => {
+    const e = document.getElementById(id);
+    if (e) e.value = drafts[id];
+  });
+  if (activeId) {
+    const e = document.getElementById(activeId);
+    if (e && typeof e.focus === 'function') {
+      e.focus();
+      if (caret !== null) { try { e.setSelectionRange(caret, caret); } catch (_) {} }
+    }
+  }
 }
 
 function renderCloudStatus() {
@@ -1289,23 +1458,40 @@ function renderCloudStatus() {
     if (_lastCloudSync > 0) {
       el.textContent = '☁️ 마지막 동기화: ' + new Date(_lastCloudSync).toLocaleString('ko-KR');
     } else {
-      el.textContent = '☁️ 아직 클라우드에서 불러오지 않음';
+      el.textContent = '☁️ 아직 동기화되지 않음';
     }
   }
-  const OFFLINE_NOTE = '<div class="note warn"><strong>⚠️ 지금은 내 브라우저에만 저장됩니다.</strong> ' +
-    '클라우드 저장 권한(토큰)이 만료되어 투표·댓글이 다른 회원에게 자동으로 전달되지 않습니다. ' +
-    '읽기(다른 사람이 올려둔 내용 보기)는 정상입니다.<br>' +
-    '👉 결과를 합치려면 <strong>[👥 회원] 탭 → [📥 데이터 내보내기]</strong>로 파일을 뽑아 총무에게 보내주세요. ' +
-    '(관리자: 새 토큰 발급 또는 별도 저장소 연결 필요)</div>';
-  const ONLINE_NOTE = '<div class="note success"><strong>✅ 자동 저장 정상</strong> — 투표·토론·댓글·체크 변경 시 자동으로 클라우드에 저장됩니다. 다른 회원이 새로고침하면 즉시 반영됩니다.</div>';
-  const CHECKING_NOTE = '<div class="note info">☁️ 클라우드 저장 가능 여부 확인 중...</div>';
-  const note = _cloudWritable === true ? ONLINE_NOTE : _cloudWritable === false ? OFFLINE_NOTE : CHECKING_NOTE;
+  const SETUP_NOTE = '<div class="note warn"><strong>⚙️ 실시간 공유가 아직 켜지지 않았습니다.</strong> ' +
+    '지금 누르는 투표·댓글은 <strong>내 브라우저에만</strong> 저장되고 다른 회원에게 전달되지 않습니다.<br>' +
+    '관리자: <strong>[👥 회원] 탭 → "실시간 동기화 설정"</strong> 안내를 따라 Firebase 주소를 넣어주세요. ' +
+    '그 전까지는 [📥 데이터 내보내기]로 파일을 뽑아 총무에게 보내면 됩니다.</div>';
+  const FAIL_NOTE = '<div class="note warn"><strong>⚠️ 동기화 서버에 연결하지 못했습니다.</strong> ' +
+    '지금 누르는 내용은 이 브라우저에만 저장됩니다. 잠시 후 자동으로 다시 시도합니다.' +
+    (_cloudError ? '<br><span style="font-size:11px; opacity:0.8;">(' + escapeHtml(_cloudError) + ')</span>' : '') +
+    '</div>';
+  const OK_NOTE = '<div class="note success"><strong>✅ 실시간 공유 정상</strong> — 투표·토론·댓글·체크 변경 시 즉시 저장되고, ' +
+    '다른 회원 화면에도 15초 안에 자동 반영됩니다.</div>';
+  const CHECKING_NOTE = '<div class="note info">☁️ 동기화 상태 확인 중...</div>';
+  let note;
+  if (!cloudEnabled()) note = SETUP_NOTE;
+  else if (_cloudWritable === true) note = OK_NOTE;
+  else if (_cloudWritable === false) note = FAIL_NOTE;
+  else note = CHECKING_NOTE;
   const mode = document.getElementById('cloud-mode');
   if (mode) mode.innerHTML = note;
   const voteNote = document.getElementById('vote-cloud-note');
   if (voteNote) {
-    voteNote.innerHTML = _cloudWritable === false ? OFFLINE_NOTE
-      : '<div class="note info">✅ 선택하는 즉시 자동 저장됩니다. 다른 회원이 새로고침하면 바로 보입니다.</div>';
+    voteNote.innerHTML = (cloudEnabled() && _cloudWritable !== false)
+      ? '<div class="note info">✅ 선택하는 즉시 저장됩니다. 다른 회원 화면에도 자동 반영됩니다.</div>'
+      : note;
+  }
+  const setup = document.getElementById('sync-setup-status');
+  if (setup) {
+    setup.innerHTML = !cloudEnabled()
+      ? '<div class="note warn" style="font-size:12.5px;"><strong>🔴 미설정</strong> — 아래 안내를 따라 Firebase 주소를 넣기 전까지는 각자 브라우저에만 저장됩니다.</div>'
+      : (_cloudWritable === false
+        ? '<div class="note warn" style="font-size:12.5px;"><strong>🟠 연결 실패</strong> — 주소는 설정되어 있으나 서버에 연결하지 못했습니다. 주소와 규칙(Rules)을 확인해 주세요.' + (_cloudError ? ' <span style="font-size:11px;">(' + escapeHtml(_cloudError) + ')</span>' : '') + '</div>'
+        : '<div class="note success" style="font-size:12.5px;"><strong>🟢 연결됨</strong> — 전 회원 실시간 공유가 켜져 있습니다. 추가 설정이 필요 없습니다.</div>');
   }
 }
 
@@ -1326,13 +1512,13 @@ function init() {
   renderResult();
   renderCloudStatus();
   loadFromCloud(false);
-  checkCloudWritable();
+  startCloudPolling();
   document.getElementById('departure-date').addEventListener('change', e => {
     DB.departureDate = e.target.value;
     saveDB();
     renderCountdown();
     renderChecklists();
-    triggerAutoSave();
+    cloudSet(['meta', 'departureDate'], DB.departureDate || null);
   });
   if (DB.departureDate) document.getElementById('departure-date').value = DB.departureDate;
   document.querySelectorAll('.tab').forEach(t => {
@@ -1622,7 +1808,7 @@ function vote(pollId, optionIdx) {
   renderResult();
   renderMembers();
   renderHomeMemberStatus();
-  triggerAutoSave();
+  cloudSet(['votes', pollId, DB.user], DB.votes[pollId][DB.user]);
 }
 function _getUserVotes(pollId, user) {
   const v = (DB.votes[pollId] || {})[user];
@@ -1676,14 +1862,15 @@ function addThread() {
   const body = document.getElementById('new-thread-body').value.trim();
   if (!title) { alert('제목을 입력해주세요'); return; }
   if (!body) { alert('내용을 입력해주세요'); return; }
-  DB.threads.push({ id: 't' + Date.now(), title, body, author: DB.user, ts: Date.now(), comments: [] });
+  const nt = { id: 't' + Date.now(), title, body, author: DB.user, ts: Date.now(), comments: [] };
+  DB.threads.push(nt);
   saveDB();
   document.getElementById('new-thread-title').value = '';
   document.getElementById('new-thread-body').value = '';
   renderThreads();
   renderProgress();
   renderHomeMemberStatus();
-  triggerAutoSave();
+  cloudSet(['threads', nt.id], threadToCloud(nt));
 }
 function addComment(threadId) {
   if (!DB.user) return;
@@ -1693,12 +1880,13 @@ function addComment(threadId) {
   const t = DB.threads.find(x => x.id === threadId);
   if (!t) return;
   if (!t.comments) t.comments = [];
-  t.comments.push({ author: DB.user, body, ts: Date.now() });
+  const c = { author: DB.user, body, ts: Date.now() };
+  t.comments.push(c);
   saveDB();
   input.value = '';
   renderThreads();
   renderProgress();
-  triggerAutoSave();
+  cloudSet(['threads', threadId, 'comments', commentKey(c)], c);
 }
 function deleteThread(threadId) {
   if (!confirm('이 토론을 삭제하시겠습니까?')) return;
@@ -1706,7 +1894,7 @@ function deleteThread(threadId) {
   saveDB();
   renderThreads();
   renderProgress();
-  triggerAutoSave();
+  cloudSet(['threads', threadId], null);
 }
 
 // ============== GEAR (장비·차량) ==============
@@ -1728,7 +1916,7 @@ function setGear(name, key, value) {
   saveDB();
   renderGear();
   renderHomeMemberStatus();
-  triggerAutoSave();
+  cloudSet(['members', name, 'gear'], DB.members[name].gear);
 }
 function toggleGear(name, key) {
   setGear(name, key, !getGear(name)[key]);
@@ -1742,7 +1930,7 @@ function renderGear() {
     html += '<th style="text-align:center; min-width:' + (f.type === 'bool' ? '70' : '110') + 'px;">' + f.label + '</th>';
   });
   html += '</tr></thead><tbody>';
-  REGISTERED_MEMBERS.forEach(name => {
+  REGISTERED_MEMBERS.forEach((name, mi) => {
     const g = getGear(name);
     const isMe = DB.user === name;
     const escName = escapeHtml(name).replace(/'/g, "\\'");
@@ -1760,7 +1948,7 @@ function renderGear() {
         }
       } else if (f.type === 'select') {
         if (isMe) {
-          html += '<select onchange="setGear(\'' + escName + '\',\'' + f.key + '\', this.value)" style="font-size:11.5px; padding:4px 6px; border-radius:6px; border:1px solid var(--border);">' +
+          html += '<select id="gear-' + mi + '-' + f.key + '" onchange="setGear(\'' + escName + '\',\'' + f.key + '\', this.value)" style="font-size:11.5px; padding:4px 6px; border-radius:6px; border:1px solid var(--border);">' +
             f.options.map(o => '<option value="' + escapeHtml(o) + '"' + ((g[f.key] || f.options[0]) === o ? ' selected' : '') + '>' + escapeHtml(o) + '</option>').join('') + '</select>';
         } else {
           const v = g[f.key] || '미정';
@@ -1769,7 +1957,7 @@ function renderGear() {
         }
       } else {
         if (isMe) {
-          html += '<input type="text" value="' + escapeHtml(g[f.key] || '') + '" placeholder="' + escapeHtml(f.placeholder || '') + '" onchange="setGear(\'' + escName + '\',\'' + f.key + '\', this.value)" style="font-size:11.5px; padding:4px 6px; width:100px; border-radius:6px; border:1px solid var(--border);">';
+          html += '<input type="text" id="gear-' + mi + '-' + f.key + '" value="' + escapeHtml(g[f.key] || '') + '" placeholder="' + escapeHtml(f.placeholder || '') + '" onchange="setGear(\'' + escName + '\',\'' + f.key + '\', this.value)" style="font-size:11.5px; padding:4px 6px; width:100px; border-radius:6px; border:1px solid var(--border);">';
         } else {
           html += '<span style="font-size:11.5px; color:var(--text-secondary);">' + escapeHtml(g[f.key] || '—') + '</span>';
         }
@@ -2283,7 +2471,7 @@ function toggleChecklist(name, clId, idx, event) {
   });
   renderChecklistSummary();
   renderHomeMemberStatus();
-  triggerAutoSave();
+  cloudSet(['checklists', key], DB.checklists[key] || null);
 }
 
 // ============== START ==============

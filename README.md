@@ -33,9 +33,54 @@
 
 ## 데이터 저장 방식
 
-- 각 회원 브라우저의 `localStorage` + 이 저장소의 `data.json` 자동 동기화
-- 투표·댓글·체크 변경 시 1.5초 뒤 자동으로 `data.json`에 커밋
-- 다른 회원이 새로고침하면 즉시 반영
+**Firebase Realtime Database** + 각 회원 브라우저의 `localStorage`.
+
+- 투표·댓글·체크·장비 변경 시 **바뀐 항목만** 즉시 기록 (예: `trip2026/votes/dates/홍길동`)
+  → 여러 명이 동시에 눌러도 서로 덮어쓰지 않습니다
+- 다른 회원 화면은 **15초마다 자동 반영** (탭을 다시 열면 즉시 갱신)
+- Firebase가 비어 있으면 이 저장소의 `data.json`을 최초 1회 시드로 읽어옵니다
+- 연결 실패 시 화면에 경고가 뜨고 `localStorage`에만 저장됩니다 (조용히 유실되지 않음)
+
+> 이전에 쓰던 GitHub 토큰 방식은 GitHub이 공개 저장소의 토큰을 자동 폐기하기 때문에
+> 주기적으로 저장이 끊겼습니다. Firebase는 URL이 공개되는 것을 전제로 설계된 서비스라
+> 같은 문제가 생기지 않습니다.
+
+## ⚙️ Firebase 연결 (최초 1회, 약 10분, 무료)
+
+1. [console.firebase.google.com](https://console.firebase.google.com/) → **프로젝트 만들기**
+   (이름 예: `tsuri-trip-2026`, Google 애널리틱스는 사용 안 함)
+2. 왼쪽 메뉴 **빌드 → Realtime Database → 데이터베이스 만들기**
+   - 위치: **asia-southeast1 (싱가포르)**
+   - 보안 규칙: **테스트 모드로 시작**
+3. 생성 후 표시되는 **주소 복사**
+   `https://○○○-default-rtdb.asia-southeast1.firebasedatabase.app`
+4. **규칙** 탭 → 아래로 교체 후 **게시**
+
+   ```json
+   {
+     "rules": {
+       ".read": false,
+       ".write": false,
+       "trip2026": { ".read": true, ".write": true }
+     }
+   }
+   ```
+
+5. `index.html` 상단 한 줄에 주소를 붙여넣고 커밋
+
+   ```js
+   const FIREBASE_DB_URL = 'https://○○○-default-rtdb.asia-southeast1.firebasedatabase.app';
+   ```
+
+설정 전까지는 사이트에 "⚙️ 실시간 공유가 아직 켜지지 않았습니다" 경고가 뜨고,
+각자 브라우저에만 저장됩니다. 같은 안내는 사이트 **[👥 회원] 탭 → 실시간 동기화 설정**에도 있습니다.
+
+### 보안 참고
+
+- 위 규칙은 **주소를 아는 사람은 누구나 읽고 쓸 수 있는** 설정입니다.
+  이 사이트는 `robots.txt` + `noindex`로 검색에 안 잡히고 주소도 단톡방에만 공유하므로
+  친목 모임용으로는 충분하지만, 더 잠그려면 Firebase 익명 인증을 추가하면 됩니다.
+- Firebase URL은 비밀이 아닙니다. 페이지에 그대로 적어도 되는 값입니다.
 
 ## 후보지 요약
 
