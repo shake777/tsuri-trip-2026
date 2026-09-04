@@ -1347,13 +1347,27 @@ function cloudRefresh() {
 }
 
 // ---- 저장 (변경된 항목만 즉시 기록) ----
+// 같은 경로에 대한 쓰기는 순서를 보장하고 최신 값만 남긴다.
+// (같은 항목을 빠르게 연속 클릭했을 때 요청이 뒤바뀌어 옛 값이 마지막에 저장되는 것을 방지)
+const _cloudPending = {};
+const _cloudInflight = {};
+
 async function cloudSet(path, value) {
   if (!cloudEnabled()) { _cloudWritable = false; renderCloudStatus(); return false; }
+  const key = path.join(' ');
+  _cloudPending[key] = { path: path, value: value === undefined ? null : value };
   _suppressPollUntil = Date.now() + 4000;
+  if (_cloudInflight[key]) return true; // 이미 전송 중이면 최신 값만 남겨두고 그 작업이 이어서 보냄
+  _cloudInflight[key] = true;
   const el = document.getElementById('cloud-status');
   if (el) el.textContent = '☁️ 저장 중...';
   try {
-    await fbPut(path, value === undefined ? null : value);
+    while (_cloudPending[key]) {
+      const job = _cloudPending[key];
+      delete _cloudPending[key];
+      await fbPut(job.path, job.value);
+      _suppressPollUntil = Date.now() + 4000;
+    }
     _cloudWritable = true;
     _cloudError = null;
     _lastCloudSync = Date.now();
@@ -1361,10 +1375,13 @@ async function cloudSet(path, value) {
     return true;
   } catch (e) {
     console.error('Cloud save failed:', e);
+    delete _cloudPending[key];
     _cloudWritable = false;
     _cloudError = e.message;
     renderCloudStatus();
     return false;
+  } finally {
+    delete _cloudInflight[key];
   }
 }
 
