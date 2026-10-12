@@ -1415,7 +1415,7 @@ const POLLS = [
   {
     group: 'ny',
     id: 'ny_stay',
-    question: '🛏️ 숙박 구성 — 료칸에서 잘지 (모두 선택)',
+    question: '🛏️ 숙박 구성 (료칸 끼울지 · 모두 선택)',
     options: [
       '🏙️ 하카타 호텔 3박 — 온천은 당일치기로만 (가장 단순)',
       '🏠 아파트 독채 8인 3박 — 다 같이 한 집, 1인 비용 최저',
@@ -2271,7 +2271,7 @@ function _pendingMembers(group) {
 }
 
 function _shortLabel(poll) {
-  let t = poll.question.replace(/^\S+\s/, '').replace(/\s*\([^)]*\)\s*$/, '').trim();
+  let t = poll.question.replace(/^\S+\s/, '').replace(/\s*\([^)]*\)\s*$/, '').split(' — ')[0].trim();
   const a = agendaOf(poll.group);
   if (a && t.indexOf(a.name) === 0) t = t.substring(a.name.length).replace(/^(에서|에|의)\s*/, '').trim();
   return t || poll.id;
