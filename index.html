@@ -972,6 +972,57 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         </div>
       </div>
 
+      <div class="card">
+        <h2>💰 경비 계산기 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(1인 기준)</span></h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">조사한 시세의 중간값을 넣어뒀습니다. 숫자는 직접 고칠 수 있으니 실제 견적이 나오면 바꿔서 쓰세요.</p>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap:10px; margin-top:12px;">
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">환율 (100엔 = ?원)</label>
+            <input type="number" id="cost-rate" value="900" step="10" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">가는 편</label>
+            <select id="cost-go" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+              <option value="air">✈️ 김포·인천 항공 왕복</option>
+              <option value="ferry">🚢 갈 때 배 + 올 때 항공</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">숙소 구성</label>
+            <select id="cost-stay" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+              <option value="apt3">🏠 아파트 독채 3박</option>
+              <option value="hotel3">🏙️ 호텔 3박</option>
+              <option value="apt2r1">🏠 아파트 2박 + ♨️ 료칸 1박</option>
+              <option value="hotel2r1">🏙️ 호텔 2박 + ♨️ 료칸 1박</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">온천</label>
+            <select id="cost-onsen" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+              <option value="beppu">♨️ 벳푸 당일</option>
+              <option value="yufuin">🏞️ 유후인 당일</option>
+              <option value="none">안 감 (료칸만)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">식비·잡비 (3박4일)</label>
+            <input type="number" id="cost-food" value="250000" step="10000" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+          </div>
+        </div>
+        <div id="cost-result" style="margin-top:14px;"></div>
+        <div class="note info" style="margin-top:12px; font-size:12px;">
+          <strong>기준값 근거</strong> — 뉴카멜리아 2등실 편도 6~9만원(중간 7.5만) + 유류세·항만세 1.7~3만원 ·
+          후쿠오카 직항 왕복 18~30만원대 · 상급 료칸 1인 30~45만원(중간 38만) ·
+          벳푸 고속버스 왕복 6,500엔 + 지옥순례 2,400엔 · 유후인노모리 왕복 12,260엔 ·
+          아파트는 8인 1채를 나눈 값.
+        </div>
+        <div class="note warn" style="margin-top:8px; font-size:12px;">
+          ⚠️ <strong>확정 견적이 아니라 자릿수를 잡기 위한 추정</strong>입니다. 환율 기본값 900원은 2026년 7월 기준(888~908원)이라
+          지금 시세로 고쳐 쓰세요. 항공·숙소는 날짜를 넣어야 실제 금액이 나오고, <strong>설 연휴 주간은 크게 뜁니다.</strong>
+          주간이 정해지면 실제 견적을 뽑아 이 숫자를 갱신하겠습니다.
+        </div>
+      </div>
+
       <div id="ny-login-check"></div>
       <div id="polls-ny"></div>
     </section>
@@ -1853,6 +1904,7 @@ function init() {
   renderMemberArea();
   renderFishCalendar();
   renderSpots();
+  wireCost();
   renderCountdown();
   renderPolls();
   renderThreads();
@@ -1896,7 +1948,7 @@ function switchTab(name) {
     s.classList.toggle('active', s.id === 'section-' + name);
   });
   if (name === 'ye' || name === 'ny') renderPolls();
-  if (name === 'ny') renderPassports();
+  if (name === 'ny') { renderPassports(); wireCost(); }
   if (name === 'discuss') renderThreads();
   if (name === 'members') { renderMembers(); renderGear(); renderPassports(); }
   if (name === 'result') renderResult();
@@ -2325,6 +2377,94 @@ function copySummary() {
   const prev = document.getElementById('share-preview');
   if (prev) { prev.value = txt; prev.style.display = 'block'; prev.rows = Math.min(24, txt.split('\n').length + 1); }
   _copyText(txt, '📋 복사했습니다. 카톡방에 붙여넣으세요.');
+}
+
+// ============== 신년회 경비 계산기 ==============
+// 기준값은 조사한 시세의 중간값. 화면에서 직접 고칠 수 있게 해 둔다.
+const COST = {
+  rate: 900,          // 100엔당 원 (2026-07 기준 888~908원)
+  ferryKrw: 98000,    // 뉴카멜리아 2등실 편도 75,000 + 유류세·항만세 23,000
+  ktxKrw: 60000,      // 서울 → 부산 KTX 편도
+  busanKrw: 40000,    // 배 조 전날 부산 저녁
+  flyOneKrw: 120000,  // 후쿠오카 → 김포/인천 편도
+  flyRtKrw: 240000,   // 김포/인천 ↔ 후쿠오카 왕복 (직항 LCC)
+  hotelKrw: 65000,    // 비즈니스 호텔 1인 1박
+  aptKrw: 45000,      // 아파트 독채 1인 1박 (8인 분할)
+  ryokanKrw: 380000,  // 상급 료칸 1인 1박 (30~45만 중간)
+  beppuJpy: 8900,     // 고속버스 왕복 6,500 + 지옥순례 2,400
+  yufuinJpy: 14260,   // 열차 왕복 12,260 + 현지 2,000
+  foodKrw: 250000     // 3박4일 식비·잡비
+};
+const won = n => Math.round(n / 1000) * 1000;
+const fmt = n => won(n).toLocaleString('ko-KR') + '원';
+
+function costInputs() {
+  const g = id => document.getElementById(id);
+  return {
+    rate: Number((g('cost-rate') || {}).value || COST.rate),
+    go: (g('cost-go') || {}).value || 'air',
+    stay: (g('cost-stay') || {}).value || 'apt3',
+    onsen: (g('cost-onsen') || {}).value || 'beppu',
+    food: Number((g('cost-food') || {}).value || COST.foodKrw)
+  };
+}
+
+function renderCost() {
+  const el = document.getElementById('cost-result');
+  if (!el) return;
+  const i = costInputs();
+  const jpy = v => v * i.rate / 100;
+  const rows = [];
+
+  if (i.go === 'ferry') {
+    rows.push(['🚄 서울 → 부산 KTX (편도)', COST.ktxKrw]);
+    rows.push(['🍻 전날 부산 저녁', COST.busanKrw]);
+    rows.push(['🚢 뉴카멜리아 2등실 (편도, 제세공과금 포함)', COST.ferryKrw]);
+    rows.push(['🛬 후쿠오카 → 김포·인천 (편도)', COST.flyOneKrw]);
+  } else {
+    rows.push(['✈️ 김포·인천 ↔ 후쿠오카 왕복 (직항 LCC)', COST.flyRtKrw]);
+  }
+
+  if (i.stay === 'hotel3') rows.push(['🏙️ 비즈니스 호텔 3박', COST.hotelKrw * 3]);
+  else if (i.stay === 'apt3') rows.push(['🏠 아파트 독채 3박 (8인 분할)', COST.aptKrw * 3]);
+  else if (i.stay === 'apt2r1') {
+    rows.push(['🏠 아파트 독채 2박 (8인 분할)', COST.aptKrw * 2]);
+    rows.push(['♨️ 상급 료칸 1박 (1박2식)', COST.ryokanKrw]);
+  } else if (i.stay === 'hotel2r1') {
+    rows.push(['🏙️ 비즈니스 호텔 2박', COST.hotelKrw * 2]);
+    rows.push(['♨️ 상급 료칸 1박 (1박2식)', COST.ryokanKrw]);
+  }
+
+  if (i.onsen === 'beppu') rows.push(['♨️ 벳푸 당일 (버스 왕복 + 지옥순례)', jpy(COST.beppuJpy)]);
+  else if (i.onsen === 'yufuin') rows.push(['🏞️ 유후인 당일 (유후인노모리 왕복 + 현지)', jpy(COST.yufuinJpy)]);
+
+  rows.push(['🍢 현지 식비·교통·잡비 (3박4일)', i.food]);
+
+  const total = rows.reduce((a, r) => a + r[1], 0);
+  let html = '<div style="overflow-x:auto;"><table style="font-size:12.5px; min-width:420px;">';
+  html += '<thead><tr><th style="text-align:left;">항목</th><th style="text-align:right; min-width:96px;">1인</th></tr></thead><tbody>';
+  rows.forEach(r => {
+    html += '<tr><td style="padding:7px 10px;">' + r[0] + '</td>' +
+      '<td style="padding:7px 10px; text-align:right; white-space:nowrap;">' + fmt(r[1]) + '</td></tr>';
+  });
+  html += '</tbody></table></div>';
+  html += '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap:10px; margin-top:12px;">' +
+    '<div style="background:var(--primary); color:white; padding:14px; border-radius:10px; text-align:center;">' +
+    '<div style="font-size:11px; opacity:0.9;">👤 1인 예상</div>' +
+    '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + fmt(total) + '</div></div>' +
+    '<div style="background:#185fa5; color:white; padding:14px; border-radius:10px; text-align:center;">' +
+    '<div style="font-size:11px; opacity:0.9;">👥 8명 총액</div>' +
+    '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + fmt(total * 8) + '</div></div>' +
+    '</div>';
+  el.innerHTML = html;
+}
+
+function wireCost() {
+  ['cost-rate', 'cost-go', 'cost-stay', 'cost-onsen', 'cost-food'].forEach(id => {
+    const e = document.getElementById(id);
+    if (e && !e._wired) { e._wired = true; e.addEventListener('change', renderCost); e.addEventListener('input', renderCost); }
+  });
+  renderCost();
 }
 
 // ============== RESULT ==============
