@@ -576,6 +576,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <div id="home-result-summary"></div>
         <div class="btn-row" style="margin-top:14px;">
           <button class="btn" onclick="switchTab('result')">✅ 집계 상세 보기 →</button>
+          <button class="btn secondary" onclick="shareSummary()">💬 카톡으로 현황 보내기</button>
         </div>
       </div>
 
@@ -764,6 +765,15 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       <div class="card">
         <h2>✅ 집계 결과</h2>
         <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">불참(❌)으로 표시한 분의 표는 해당 안건 집계에서 제외됩니다. 동률이면 재투표 안내가 뜹니다.</p>
+        <div class="btn-row">
+          <button class="btn" onclick="shareSummary()">💬 카톡으로 현황 보내기</button>
+          <button class="btn secondary" onclick="copySummary()">📋 요약 텍스트만 복사</button>
+        </div>
+        <textarea id="share-preview" readonly style="display:none; width:100%; margin-top:12px; font-size:12px; font-family:inherit; line-height:1.6; padding:12px; border:1px solid var(--border); border-radius:8px; background:#f8fafc; color:var(--text); resize:vertical;"></textarea>
+        <div class="note info" style="margin-top:10px; font-size:12px;">
+          📱 <strong>폰</strong>에서 누르면 공유창이 떠서 카카오톡 → 단톡방을 고르면 됩니다.
+          💻 <strong>PC</strong>에서는 요약이 복사되니 카톡방에 그대로 붙여넣으세요. 아직 안 누른 사람 명단까지 들어갑니다.
+        </div>
       </div>
       <div class="card">
         <h2>🍻 송년모임</h2>
@@ -1118,7 +1128,7 @@ const POLLS = [
   {
     group: 'ny', single: true,
     id: 'ny_busan',
-    question: '🏨 부산 1박 추가 여부 (수요일 먼저 출발 · 단일선택)',
+    question: '🏨 부산 1박 (수요일 먼저 출발 · 단일선택)',
     options: [
       '✅ 부산 1박 추가 — 수요일에 먼저 내려감',
       '❌ 부산은 패스 — 목요일에 본진 합류',
@@ -1922,6 +1932,148 @@ function renderProgress() {
     '<div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;"><div style="font-size: 22px; font-weight: 700; color: var(--primary);">' + totalThreads + '</div><div style="font-size: 11px; color: var(--text-muted);">토론 주제</div></div>' +
     '<div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;"><div style="font-size: 22px; font-weight: 700; color: var(--primary);">' + totalComments + '</div><div style="font-size: 11px; color: var(--text-muted);">댓글</div></div>' +
     '</div>';
+}
+
+// ============== 카톡용 현황 요약 ==============
+const SITE_URL = 'https://shake777.github.io/tsuri-trip-2026/';
+
+function _copyText(txt, okMsg) {
+  const fallback = function () { prompt('아래 내용을 복사해서 붙여넣으세요', txt); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function () { alert(okMsg); }, fallback);
+  } else { fallback(); }
+}
+
+function _joinBreakdown(group) {
+  const agenda = agendaOf(group);
+  const v = DB.votes[agenda.joinPoll] || {};
+  const c = { yes: 0, no: 0, maybe: 0, undecided: 0, none: 0 };
+  REGISTERED_MEMBERS.forEach(function (n) { c[getParticipationStatus(n, group).code]++; });
+  const parts = [];
+  if (c.yes) parts.push('✅참가 ' + c.yes);
+  if (c.maybe) parts.push('🟢조건부 ' + c.maybe);
+  if (c.undecided) parts.push('🤔미정 ' + c.undecided);
+  if (c.no) parts.push('❌불참 ' + c.no);
+  if (c.none) parts.push('⏳미투표 ' + c.none);
+  return parts.join(' / ') || '아직 없음';
+}
+
+// 해당 안건에서 아직 다 안 누른 사람 (불참 선택자는 제외)
+function _pendingMembers(group) {
+  const list = pollsOf(group);
+  return REGISTERED_MEMBERS.filter(function (n) {
+    if (getParticipationStatus(n, group).code === 'no') return false;
+    return list.some(function (p) {
+      const v = (DB.votes[p.id] || {})[n];
+      return v === undefined || (Array.isArray(v) && v.length === 0);
+    });
+  });
+}
+
+function _shortLabel(poll) {
+  let t = poll.question.replace(/^\S+\s/, '').replace(/\s*\([^)]*\)\s*$/, '').trim();
+  const a = agendaOf(poll.group);
+  if (a && t.indexOf(a.name) === 0) t = t.substring(a.name.length).replace(/^(에서|에|의)\s*/, '').trim();
+  return t || poll.id;
+}
+
+// 긴 보기 문구는 설명 부분을 잘라 톡에 붙이기 좋게
+function _shortOption(txt) {
+  let t = String(txt).split(' — ')[0].trim();
+  if (t.length > 40) t = t.substring(0, 39) + '…';
+  return t;
+}
+
+// 단일선택 항목은 1위 대신 전체 분포를 보여준다
+function _singleBreakdown(poll) {
+  const v = DB.votes[poll.id] || {};
+  const counts = poll.options.map(function () { return 0; });
+  Object.keys(v).forEach(function (u) {
+    const i = v[u];
+    if (typeof i === 'number' && counts[i] !== undefined) counts[i]++;
+  });
+  const parts = [];
+  counts.forEach(function (c, i) {
+    if (c > 0) parts.push(_shortOption(poll.options[i]) + ' ' + c);
+  });
+  return parts.join(' / ');
+}
+
+function buildSummaryText() {
+  const now = new Date();
+  const stamp = (now.getMonth() + 1) + '/' + now.getDate();
+  const L = [];
+  L.push('📋 송년모임 · 신년회 현황 (' + stamp + ' 기준)');
+
+  AGENDAS.forEach(function (a) {
+    L.push('');
+    L.push(a.emoji + ' ' + a.name);
+    L.push('· 참가: ' + _joinBreakdown(a.group));
+    const dateStr = a.group === 'ye' ? DB.departureDate : DB.nyDate;
+    if (dateStr) L.push('· 📅 확정일: ' + dateStr);
+    pollsOf(a.group).forEach(function (p) {
+      if (p.id === a.joinPoll) return;
+      if (p.single) {
+        const bd = _singleBreakdown(p);
+        if (bd) L.push('· ' + _shortLabel(p) + ': ' + bd);
+        return;
+      }
+      const r = _getPollWinner(p.id);
+      if (!r || r.total === 0) return;
+      const tie = r.winnerIdxs.length > 1;
+      L.push('· ' + _shortLabel(p) + ': ' + _shortOption(r.winners[0]) +
+        (tie ? ' 외 ' + (r.winners.length - 1) + '개 동률' : '') +
+        ' (' + r.maxCount + '표)');
+    });
+    if (a.group === 'ny') {
+      const bad = [];
+      REGISTERED_MEMBERS.forEach(function (n) {
+        if (getParticipationStatus(n, 'ny').code === 'no') return;
+        const st = checkPassportStatus(getPassport(n), DB.nyDate);
+        if (st.code === 'expired') bad.push(n + '(만료)');
+        else if (st.code === 'short') bad.push(n + '(6개월부족)');
+      });
+      if (bad.length) L.push('· 🛂 여권 재발급 필요: ' + bad.join(', '));
+    }
+  });
+
+  const pend = [];
+  AGENDAS.forEach(function (a) {
+    const p = _pendingMembers(a.group);
+    if (p.length) pend.push(a.emoji + ' ' + a.name + ': ' + p.join(', '));
+  });
+  if (pend.length) {
+    L.push('');
+    L.push('⏳ 아직 다 안 누르셨어요');
+    pend.forEach(function (x) { L.push(x); });
+  } else {
+    L.push('');
+    L.push('🎉 전원 투표 완료!');
+  }
+
+  L.push('');
+  L.push('👉 ' + SITE_URL);
+  return L.join('\n');
+}
+
+function shareSummary() {
+  const txt = buildSummaryText();
+  const prev = document.getElementById('share-preview');
+  if (prev) { prev.value = txt; prev.style.display = 'block'; prev.rows = Math.min(24, txt.split('\n').length + 1); }
+  if (navigator.share) {
+    navigator.share({ text: txt }).catch(function () {
+      _copyText(txt, '📋 복사했습니다. 카톡방에 붙여넣으세요.');
+    });
+  } else {
+    _copyText(txt, '📋 복사했습니다. 카톡방에 붙여넣으세요.');
+  }
+}
+
+function copySummary() {
+  const txt = buildSummaryText();
+  const prev = document.getElementById('share-preview');
+  if (prev) { prev.value = txt; prev.style.display = 'block'; prev.rows = Math.min(24, txt.split('\n').length + 1); }
+  _copyText(txt, '📋 복사했습니다. 카톡방에 붙여넣으세요.');
 }
 
 // ============== RESULT ==============
