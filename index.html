@@ -2842,9 +2842,31 @@ function handleImport(event) {
       });
       if (imported.checklists) Object.assign(DB.checklists, imported.checklists);
       if (imported.departureDate && !DB.departureDate) DB.departureDate = imported.departureDate;
+      if (imported.nyDate && !DB.nyDate) DB.nyDate = imported.nyDate;
+      if (imported.meta) {
+        if (imported.meta.departureDate && !DB.departureDate) DB.departureDate = imported.meta.departureDate;
+        if (imported.meta.nyDate && !DB.nyDate) DB.nyDate = imported.meta.nyDate;
+      }
       saveDB();
-      alert('데이터가 병합되었습니다.');
-      location.reload();
+      // 중요: 바로 새로고침하면 클라우드 데이터가 덮어써서 방금 가져온 내용이 날아간다.
+      // 반드시 클라우드에 먼저 올린 뒤 새로고침한다.
+      if (cloudEnabled()) {
+        if (!DB.user) {
+          alert('⚠️ 로그인 후 가져오기를 해주세요.\n로그인하지 않으면 클라우드에 저장되지 않아 새로고침 시 사라집니다.');
+          return;
+        }
+        saveToCloud(true).then(function () {
+          if (_cloudWritable === false) {
+            alert('⚠️ 병합은 됐지만 클라우드 저장에 실패했습니다.\n새로고침하면 사라질 수 있으니 [💾 지금 저장]을 눌러 주세요.');
+          } else {
+            alert('✅ 데이터를 병합하고 클라우드에 저장했습니다.');
+            location.reload();
+          }
+        });
+      } else {
+        alert('데이터가 병합되었습니다. (이 브라우저에만 저장)');
+        location.reload();
+      }
     } catch (err) {
       alert('파일 읽기 오류: ' + err.message);
     }
