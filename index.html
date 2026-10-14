@@ -2432,13 +2432,23 @@ function _joinBreakdown(group) {
 
 // 참석 의향 / 미참석 이름 목록
 function _joinNames(group) {
-  const go = [], no = [];
+  const out = { go: [], yes: [], maybe: [], undecided: [], no: [], none: [] };
   REGISTERED_MEMBERS.forEach(function (n) {
     const c = getParticipationStatus(n, group).code;
-    if (c === 'yes' || c === 'maybe') go.push(n);
-    else if (c === 'no') no.push(n);
+    if (c === 'yes' || c === 'maybe') out.go.push(n);
+    if (out[c]) out[c].push(n);
   });
-  return { go: go, no: no };
+  return out;
+}
+
+// 이 안건에서 몇 개 눌렀는지 (예: 1/8)
+function _progressOf(name, group) {
+  const list = pollsOf(group);
+  const done = list.filter(function (p) {
+    const v = (DB.votes[p.id] || {})[name];
+    return v !== undefined && !(Array.isArray(v) && v.length === 0);
+  }).length;
+  return done + '/' + list.length;
 }
 
 // 날짜 투표의 "미참석" 줄 — 참가 여부와 연동된다 (따로 저장하지 않음)
@@ -2503,6 +2513,7 @@ function buildSummaryText() {
     L.push('· 참가: ' + _joinBreakdown(a.group));
     const jn = _joinNames(a.group);
     if (jn.go.length) L.push('  🙋 갈 사람: ' + jn.go.join(', '));
+    if (jn.undecided.length) L.push('  🤔 미정: ' + jn.undecided.join(', '));
     if (jn.no.length) L.push('  ❌ 미참석: ' + jn.no.join(', '));
     const dateStr = a.group === 'ye' ? DB.departureDate : DB.nyDate;
     if (dateStr) L.push('· 📅 확정일: ' + dateStr);
@@ -2535,7 +2546,7 @@ function buildSummaryText() {
   const pend = [];
   AGENDAS.forEach(function (a) {
     const p = _pendingMembers(a.group);
-    if (p.length) pend.push(a.emoji + ' ' + a.name + ': ' + p.join(', '));
+    if (p.length) pend.push(a.emoji + ' ' + a.name + ': ' + p.map(function (n) { return n + '(' + _progressOf(n, a.group) + ')'; }).join(', '));
   });
   if (pend.length) {
     L.push('');
@@ -2668,14 +2679,6 @@ const PLAN_ROWS = {
        ['ny_onsen', '♨️', '온천'], ['ny_stay', '🛏️', '숙박'], ['ny_activity', '🎌', '그 외'], ['ny_budget', '💰', '1인 예산']]
 };
 
-function _planVoters(group) {
-  const ids = pollsOf(group).map(p => p.id);
-  return REGISTERED_MEMBERS.filter(n => ids.some(id => {
-    const v = (DB.votes[id] || {})[n];
-    return v !== undefined && !(Array.isArray(v) && v.length === 0);
-  }));
-}
-
 function _planDate(ymd) {
   const d = new Date(ymd + 'T00:00:00');
   if (isNaN(d)) return ymd;
@@ -2711,13 +2714,13 @@ function renderHomePlan() {
     '</div><div class="plan-badge">잠정</div></div>';
 
   AGENDAS.forEach(a => {
-    const voters = _planVoters(a.group);
-    const notYet = REGISTERED_MEMBERS.filter(n => voters.indexOf(n) < 0);
     const jn = _joinNames(a.group);
+    const pend = _pendingMembers(a.group);          // 미참석은 빼고, 하나라도 덜 누른 사람
+    const finished = REGISTERED_MEMBERS.length - pend.length;
     const fixed = a.group === 'ye' ? DB.departureDate : DB.nyDate;
     html += '<div class="plan-agenda">' +
       '<div class="plan-agenda-head"><span>' + a.emoji + ' ' + escapeHtml(a.name) + '</span>' +
-      '<span class="plan-count">투표 ' + voters.length + '/' + REGISTERED_MEMBERS.length + '명</span></div>';
+      '<span class="plan-count">다 누른 사람 ' + finished + '/' + REGISTERED_MEMBERS.length + '명</span></div>';
     PLAN_ROWS[a.group].forEach((row, i) => {
       const cell = (i === 0 && fixed) ? { state: 'fixed', text: _planDate(fixed), sub: '확정' } : _planCell(row[0]);
       html += '<div class="plan-row ' + cell.state + '">' +
@@ -2726,9 +2729,15 @@ function renderHomePlan() {
         (cell.sub ? '<span class="plan-tag">' + escapeHtml(cell.sub) + '</span>' : '') + '</div></div>';
     });
     html += '<div class="plan-people">' +
-      '<div>🙋 <strong>갈 사람</strong> ' + (jn.go.length ? jn.go.map(escapeHtml).join(', ') + ' (' + jn.go.length + '명)' : '아직 없음') + '</div>' +
+      '<div>🙋 <strong>갈 사람</strong> ' + (jn.go.length
+        ? jn.go.map(n => escapeHtml(n) + (jn.maybe.indexOf(n) >= 0 ? '<span style="color:var(--text-muted);">(조건부)</span>' : '')).join(', ') + ' (' + jn.go.length + '명)'
+        : '아직 없음') + '</div>' +
+      (jn.undecided.length ? '<div>🤔 <strong>참가 미정</strong> ' + jn.undecided.map(escapeHtml).join(', ') + '</div>' : '') +
       (jn.no.length ? '<div>❌ <strong>미참석</strong> ' + jn.no.map(escapeHtml).join(', ') + '</div>' : '') +
-      (notYet.length ? '<div>⏳ <strong>아직 안 누른 분</strong> ' + notYet.map(escapeHtml).join(', ') + '</div>' : '<div>🎉 전원 투표 참여</div>') +
+      (jn.none.length ? '<div>❔ <strong>참가 여부 안 누름</strong> ' + jn.none.map(escapeHtml).join(', ') + '</div>' : '') +
+      (pend.length
+        ? '<div>⏳ <strong>아직 다 안 누른 분</strong> ' + pend.map(n => escapeHtml(n) + ' <span style="color:var(--text-muted);">' + _progressOf(n, a.group) + '</span>').join(', ') + '</div>'
+        : '<div>🎉 모두 다 눌렀습니다</div>') +
       '</div></div>';
   });
 
@@ -2837,6 +2846,10 @@ function renderPlan(targetId, group) {
     return c === 'yes' || c === 'maybe';
   });
   const absentees = REGISTERED_MEMBERS.filter(n => getParticipationStatus(n, group).code === 'no');
+  const undecided = REGISTERED_MEMBERS.filter(n => {
+    const c = getParticipationStatus(n, group).code;
+    return c === 'undecided' || c === 'none';
+  });
   let html = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap:10px;">';
   list.forEach(p => {
     const val = _pick(_getPollWinner(p.id), true);
@@ -2849,7 +2862,8 @@ function renderPlan(targetId, group) {
   html += '</div>';
   html += '<div style="margin-top:12px; display:grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap:10px;">' +
     '<div style="background:#e6f7ec; padding:12px; border-radius:10px;"><div style="font-size:11px; color:#155f3a;">✅ 참가 확정</div><div style="font-size:16px; font-weight:700; color:#155f3a;">' + confirmed.length + '명</div><div style="font-size:11px; color:#155f3a;">' + (confirmed.length ? confirmed.map(escapeHtml).join(' · ') : '아직 없음') + '</div></div>' +
-    '<div style="background:#f0f7fc; padding:12px; border-radius:10px;"><div style="font-size:11px; color:var(--text-muted);">👥 집계 대상 (미참석 제외)</div><div style="font-size:16px; font-weight:700; color:var(--primary);">' + active.length + '명</div><div style="font-size:11px; color:var(--text-muted);">' + (active.length ? active.map(escapeHtml).join(' · ') : '없음') + '</div></div>' +
+    '<div style="background:#f0f7fc; padding:12px; border-radius:10px;"><div style="font-size:11px; color:var(--text-muted);">🙋 갈 사람 (참가+조건부)</div><div style="font-size:16px; font-weight:700; color:var(--primary);">' + active.length + '명</div><div style="font-size:11px; color:var(--text-muted);">' + (active.length ? active.map(escapeHtml).join(' · ') : '없음') + '</div></div>' +
+    '<div style="background:#fef3e6; padding:12px; border-radius:10px;"><div style="font-size:11px; color:#8a4500;">🤔 미정 · 아직 안 누름</div><div style="font-size:16px; font-weight:700; color:#8a4500;">' + undecided.length + '명</div><div style="font-size:11px; color:#8a4500;">' + (undecided.length ? undecided.map(escapeHtml).join(' · ') : '없음') + '</div></div>' +
     '<div style="background:#fdebec; padding:12px; border-radius:10px;"><div style="font-size:11px; color:#c0392b;">❌ 미참석</div><div style="font-size:16px; font-weight:700; color:#c0392b;">' + absentees.length + '명</div><div style="font-size:11px; color:#c0392b;">' + (absentees.length ? absentees.map(escapeHtml).join(' · ') : '없음') + '</div></div>' +
     '</div>';
   html += '<div class="note info" style="margin-top:12px;">📌 위 항목이 단독 1위로 정리되면 총무가 홈 화면의 <strong>확정일</strong>을 입력하고 D-DAY가 시작됩니다.</div>';
