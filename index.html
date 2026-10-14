@@ -452,6 +452,34 @@ body.gated header, body.gated main, body.gated footer { display: none; }
   .pc-list { grid-template-columns: 1fr; }
 }
 
+/* ============ 홈 잠정 계획 ============ */
+.plan-card { background: linear-gradient(180deg, #ffffff 0%, #f6faff 100%); border: 2px solid var(--primary); border-radius: 14px; padding: 16px 16px 12px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.plan-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.plan-title { font-size: 18px; font-weight: 800; color: var(--primary); }
+.plan-sub { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+.plan-badge { background: #fef3e6; color: #b35c00; border: 1px solid #f0c890; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.plan-agenda { border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; }
+.plan-agenda-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.plan-count { font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+.plan-row { display: grid; grid-template-columns: 112px 1fr; gap: 8px; padding: 8px 10px; border-radius: 8px; margin-bottom: 4px; align-items: baseline; }
+.plan-row.lead { background: #eef5fc; }
+.plan-row.fixed { background: #e6f7ec; }
+.plan-row.tie, .plan-row.close { background: #fff7e3; }
+.plan-row.none { background: #f5f5f5; }
+.plan-row.info { background: #f4f2fb; }
+.plan-label { font-size: 12.5px; color: var(--text-secondary); }
+.plan-val { font-size: 14px; font-weight: 600; color: var(--text); word-break: keep-all; }
+.plan-row.none .plan-val { font-weight: 400; color: var(--text-muted); font-size: 13px; }
+.plan-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; margin-left: 4px; background: #dbe8f6; color: var(--primary); white-space: nowrap; }
+.plan-row.tie .plan-tag, .plan-row.close .plan-tag { background: #fde6b8; color: #7a5000; }
+.plan-row.fixed .plan-tag { background: #c5ebd3; color: #155f3a; }
+.plan-people { font-size: 12.5px; color: var(--text-secondary); margin-top: 8px; line-height: 1.75; }
+.plan-foot { font-size: 11.5px; color: var(--text-muted); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); }
+@media (max-width: 480px) {
+  .plan-row { grid-template-columns: 1fr; gap: 2px; }
+  .plan-title { font-size: 16px; }
+}
+
 /* ============ D-DAY (2개 안건) ============ */
 .dday-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; margin-bottom: 18px; }
 .dday-card { color: white; padding: 16px 18px; border-radius: 12px; }
@@ -520,6 +548,8 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 
     <!-- ============ HOME ============ -->
     <section class="section active" id="section-home">
+      <div id="home-plan"></div>
+
       <div class="card">
         <h2>📋 회의에서 정해진 것</h2>
         <div class="chat-log" style="margin-top:4px;">
@@ -1392,6 +1422,7 @@ const POLLS = [
   {
     group: 'ny',
     id: 'ny_route',
+    short: ['🚢 배 → 인천 귀국', '🚢 배 → 김포 귀국', '✈️ 김포 왕복', '✈️ 인천 왕복', '🤷 총무 재량'],
     question: '🚢 가는 편 · 오는 편 (귀국은 인천·김포 · 모두 선택)',
     options: [
       '🚢→🛬 갈 때 배(수 22:30 부산) + 올 때 후쿠오카→인천',
@@ -2629,12 +2660,95 @@ function wireCost() {
 }
 
 // ============== RESULT ==============
+// ============== 홈 맨 위 — 지금까지 투표로 본 잠정 계획 ==============
+// 전원이 투표하지 않았어도 현재 1위 기준으로 "계획표"처럼 보여준다. (확정일이 입력되면 그 날짜를 우선)
+const PLAN_ROWS = {
+  ye: [['ye_date', '📅', '날짜'], ['ye_place', '📍', '장소'], ['ye_program', '🎯', '할 것'], ['ye_budget', '💰', '1인 예산']],
+  ny: [['ny_when', '📅', '주간'], ['ny_route', '🚢', '가는·오는 편'], ['ny_busan', '🏨', '수요일 전날'],
+       ['ny_onsen', '♨️', '온천'], ['ny_stay', '🛏️', '숙박'], ['ny_activity', '🎌', '그 외'], ['ny_budget', '💰', '1인 예산']]
+};
+
+function _planVoters(group) {
+  const ids = pollsOf(group).map(p => p.id);
+  return REGISTERED_MEMBERS.filter(n => ids.some(id => {
+    const v = (DB.votes[id] || {})[n];
+    return v !== undefined && !(Array.isArray(v) && v.length === 0);
+  }));
+}
+
+function _planDate(ymd) {
+  const d = new Date(ymd + 'T00:00:00');
+  if (isNaN(d)) return ymd;
+  return (d.getMonth() + 1) + '/' + d.getDate() + '(' + '일월화수목금토'[d.getDay()] + ')';
+}
+
+function _planCell(pid) {
+  const poll = POLLS.find(p => p.id === pid);
+  if (!poll) return { state: 'none', text: '—' };
+  if (poll.single) {
+    const bd = _singleBreakdown(poll);
+    return bd ? { state: 'info', text: bd } : { state: 'none', text: '아직 표 없음' };
+  }
+  const r = _getPollWinner(pid);
+  if (!r || r.total === 0) return { state: 'none', text: '아직 표 없음' };
+  const names = r.winnerIdxs.map(i => (poll.short && poll.short[i]) || _shortOption(poll.options[i]));
+  if (names.length > 1) {
+    return { state: 'tie', text: names.slice(0, 3).join(' · ') + (names.length > 3 ? ' 외 ' + (names.length - 3) + '개' : ''),
+             sub: '동률 각 ' + r.maxCount + '표' };
+  }
+  const sorted = r.counts.slice().sort((a, b) => b - a);
+  const close = sorted[1] > 0 && sorted[0] - sorted[1] <= 1;
+  return { state: close ? 'close' : 'lead', text: names[0], sub: r.maxCount + '표' + (close ? ' · 1표 차' : '') };
+}
+
+function renderHomePlan() {
+  const el = document.getElementById('home-plan');
+  if (!el) return;
+  let html = '<div class="plan-card">' +
+    '<div class="plan-head"><div>' +
+    '<div class="plan-title">📌 지금까지 투표로 본 계획</div>' +
+    '<div class="plan-sub">아직 전원이 투표하지 않아 <strong>잠정</strong>입니다. 항목마다 현재 1위로 정리했고, 표가 들어오면 자동으로 바뀝니다.</div>' +
+    '</div><div class="plan-badge">잠정</div></div>';
+
+  AGENDAS.forEach(a => {
+    const voters = _planVoters(a.group);
+    const notYet = REGISTERED_MEMBERS.filter(n => voters.indexOf(n) < 0);
+    const jn = _joinNames(a.group);
+    const fixed = a.group === 'ye' ? DB.departureDate : DB.nyDate;
+    html += '<div class="plan-agenda">' +
+      '<div class="plan-agenda-head"><span>' + a.emoji + ' ' + escapeHtml(a.name) + '</span>' +
+      '<span class="plan-count">투표 ' + voters.length + '/' + REGISTERED_MEMBERS.length + '명</span></div>';
+    PLAN_ROWS[a.group].forEach((row, i) => {
+      const cell = (i === 0 && fixed) ? { state: 'fixed', text: _planDate(fixed), sub: '확정' } : _planCell(row[0]);
+      html += '<div class="plan-row ' + cell.state + '">' +
+        '<div class="plan-label">' + row[1] + ' ' + row[2] + '</div>' +
+        '<div class="plan-val">' + escapeHtml(cell.text) +
+        (cell.sub ? '<span class="plan-tag">' + escapeHtml(cell.sub) + '</span>' : '') + '</div></div>';
+    });
+    html += '<div class="plan-people">' +
+      '<div>🙋 <strong>갈 사람</strong> ' + (jn.go.length ? jn.go.map(escapeHtml).join(', ') + ' (' + jn.go.length + '명)' : '아직 없음') + '</div>' +
+      (jn.no.length ? '<div>❌ <strong>미참석</strong> ' + jn.no.map(escapeHtml).join(', ') + '</div>' : '') +
+      (notYet.length ? '<div>⏳ <strong>아직 안 누른 분</strong> ' + notYet.map(escapeHtml).join(', ') + '</div>' : '<div>🎉 전원 투표 참여</div>') +
+      '</div></div>';
+  });
+
+  html += '<div class="plan-foot">🟡 노란 줄은 <strong>동률이거나 1표 차</strong>라 아직 뒤집힐 수 있는 항목입니다. ' +
+    '확정되면 총무가 아래 D-DAY의 확정일을 넣고, 그 날짜가 여기 "확정"으로 표시됩니다.</div>' +
+    '<div class="btn-row" style="margin-top:10px;">' +
+    '<button class="btn" onclick="switchTab(\'ye\')">🍻 송년모임 투표</button>' +
+    '<button class="btn" onclick="switchTab(\'ny\')">✈️ 신년회 투표</button>' +
+    '<button class="btn secondary" onclick="shareSummary()">💬 카톡으로 보내기</button>' +
+    '</div></div>';
+  el.innerHTML = html;
+}
+
 function renderResult() {
   AGENDAS.forEach(a => {
     renderResultSummary('result-' + a.group, a.group);
     renderPlan('plan-' + a.group, a.group);
   });
   renderResultSummary('home-result-summary', null);
+  renderHomePlan();
   renderResultByMember();
   renderChecklists();
 }
