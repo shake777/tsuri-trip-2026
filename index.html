@@ -1837,6 +1837,11 @@ async function saveToCloud(silent, opts) {
   opts = opts || {};
   const importMode = opts.mode === 'import';
   const importNames = opts.members || [];
+  // 가져오기일 땐 "파일에 들어 있던 것"만 올린다. 화면에 캐시돼 있던 남의 표까지 올리면
+  // 그 사람이 방금 취소한 표가 되살아날 수 있기 때문이다.
+  const fileVotes = opts.votes || {};
+  const fileChecks = opts.checklists || {};
+  const fileThreads = opts.threadIds || [];
   if (!DB.user) { if (!silent) alert('로그인 후 저장 가능합니다'); return 0; }
   if (!cloudEnabled()) {
     if (!silent) alert('⚠️ 실시간 동기화가 아직 설정되지 않았습니다.\n\n지금 누른 내용은 이 브라우저에만 저장됩니다.');
@@ -1859,7 +1864,7 @@ async function saveToCloud(silent, opts) {
     Object.keys(DB.votes || {}).forEach(function (pid) {
       const local = DB.votes[pid] || {};
       Object.keys(local).forEach(function (u) {
-        if (!importMode && u !== DB.user) return;
+        if (importMode ? !(fileVotes[pid] && fileVotes[pid][u] !== undefined) : u !== DB.user) return;
         if (isNil(local[u])) return;
         if (isNil((lv[pid] || {})[u])) writes.push([['votes', pid, u], local[u]]);
       });
@@ -1867,7 +1872,7 @@ async function saveToCloud(silent, opts) {
 
     const lc = latest.checklists || {};
     Object.keys(DB.checklists || {}).forEach(function (k) {
-      if (!importMode && k.indexOf(DB.user + '__') !== 0) return;
+      if (importMode ? !fileChecks[k] : k.indexOf(DB.user + '__') !== 0) return;
       if (!lc[k]) writes.push([['checklists', k], DB.checklists[k]]);
     });
 
@@ -1887,20 +1892,22 @@ async function saveToCloud(silent, opts) {
     DB.threads.forEach(function (t) {
       const remote = lt[t.id];
       if (!remote) {
-        if (importMode || t.author === DB.user) writes.push([['threads', t.id], threadToCloud(t)]);
+        if (importMode ? fileThreads.indexOf(t.id) >= 0 : t.author === DB.user) writes.push([['threads', t.id], threadToCloud(t)]);
         return;
       }
       const rc = remote.comments || {};
       (t.comments || []).forEach(function (c) {
-        if (!importMode && c.author !== DB.user) return;
+        if (importMode ? fileThreads.indexOf(t.id) < 0 : c.author !== DB.user) return;
         const ck = commentKey(c);
         if (!rc[ck]) writes.push([['threads', t.id, 'comments', ck], c]);
       });
     });
 
     const meta = latest.meta || {};
-    if (DB.departureDate && !meta.departureDate) writes.push([['meta', 'departureDate'], DB.departureDate]);
-    if (DB.nyDate && !meta.nyDate) writes.push([['meta', 'nyDate'], DB.nyDate]);
+    if (!importMode || opts.dates) {
+      if (DB.departureDate && !meta.departureDate) writes.push([['meta', 'departureDate'], DB.departureDate]);
+      if (DB.nyDate && !meta.nyDate) writes.push([['meta', 'nyDate'], DB.nyDate]);
+    }
 
     for (let i = 0; i < writes.length; i++) await fbPut(writes[i][0], writes[i][1]);
     _cloudWritable = true;
@@ -3558,7 +3565,14 @@ function handleImport(event) {
           alert('⚠️ 로그인 후 가져오기를 해주세요.\n로그인하지 않으면 클라우드에 저장되지 않아 새로고침 시 사라집니다.');
           return;
         }
-        saveToCloud(true, { mode: 'import', members: Object.keys(imported.members || {}) }).then(function () {
+        saveToCloud(true, {
+          mode: 'import',
+          members: Object.keys(imported.members || {}),
+          votes: imported.votes || {},
+          checklists: imported.checklists || {},
+          threadIds: (imported.threads || []).map(function (t) { return t.id; }),
+          dates: !!(imported.departureDate || imported.nyDate || imported.meta)
+        }).then(function () {
           if (_cloudWritable === false) {
             alert('⚠️ 병합은 됐지만 클라우드 저장에 실패했습니다.\n새로고침하면 사라질 수 있으니 [💾 지금 저장]을 눌러 주세요.');
           } else {
