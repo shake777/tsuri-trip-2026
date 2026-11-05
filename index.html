@@ -617,8 +617,8 @@ body.gated header, body.gated main, body.gated footer { display: none; }
           👉 <strong>고려훼리 1688-7447</strong> 또는 <a href="https://www.koreaferry.kr/bbs/board.php?bo_table=notice" target="_blank" style="color:var(--primary-light);">공지사항</a>에서 해당 월 휴항일을 확인하세요. 유류할증료·터미널이용료·일본 출국세 불포함 상품이 많습니다.
         </div>
         <div class="note info" style="margin-top:8px;">
-          💡 <strong>귀국은 인천·김포로 확정입니다.</strong> 가는 편만 「배(수요일 밤 부산) vs 비행기(목요일 아침)」를 고르면 됩니다.<br>
-          🚗 <strong>주의 — 배로 가면 편도가 됩니다.</strong> 자차로 부산까지 내려가면 인천·김포로 돌아올 때 차를 부산에 두고 오게 됩니다.
+          💡 <strong>귀국은 인천으로 확정입니다.</strong> 김포 직항은 없습니다. 가는 편만 「배(수요일 밤 부산) vs 비행기(목요일 아침)」를 고르면 됩니다.<br>
+          🚗 <strong>주의 — 배로 가면 편도가 됩니다.</strong> 자차로 부산까지 내려가면 인천으로 돌아올 때 차를 부산에 두고 오게 됩니다.
           배 타실 분은 <strong>KTX</strong>로 내려가시는 걸 권합니다.
         </div>
       </div>
@@ -661,6 +661,16 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <div class="note success" style="margin-top:14px;">
           ✅ <strong>결론: 목~일 중 3/4-3/7이 제일 싸고, 2월 말이 더 비쌉니다.</strong> LCC로 가면 1인 약 36.5만원, 대한항공 A350으로 가면 공식 기준 약 44.2만원입니다.
         </div>
+      </div>
+
+      <div class="card">
+        <h2>✈️ 항공권 사는 법 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">2026-11-05 실측 기준</span></h2>
+        <ul style="font-size:15px; line-height:1.9; padding-left:20px;">
+          <li><strong>비행기로 가는 사람:</strong> 한국 출발 왕복(ICN→FUK→ICN)으로 사는 게 제일 쌉니다. 3/4~3/7 제주 약 36.5만원, 대한항공 A350 공식 44.2만원.</li>
+          <li><strong>배 타고 가는 사람:</strong> 돌아오는 편만 편도로 직접 사세요. FUK→ICN 3/7 제주 편도 약 23.8만원, 대한항공 KE788 편도 약 32.6만원. FUK→PUS 일요일 직항 제주 7C1452 약 16.8~31만원.</li>
+          <li><strong>❌ 하지 말 것:</strong> 일본 출발 왕복(FUK→ICN→FUK)을 사서 한 구간만 쓰고 취소하는 방법 — 왕복 자체가 편도보다 비싸고(3/7 제주 왕복 약 38.2만원), 남은 구간 취소 시 사용한 구간을 편도 정상 운임으로 재산정하고 부분환불 위약금(대한항공 Saver 16만원 등)을 또 빼서 환불이 거의 안 남습니다. 첫 구간을 안 타면 뒷 구간은 자동 취소됩니다.</li>
+        </ul>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:10px;">가격은 2026-11-05 실측 가격대이며 확정 요금이 아닙니다. 예약 전 항공사 공식 사이트에서 재확인하세요.</p>
       </div>
 
       <div class="card">
@@ -2234,7 +2244,7 @@ const COST = {
   ferryKrw: 98000,    // 뉴카멜리아 2등실 편도 75,000 + 유류세·항만세 23,000
   ktxKrw: 60000,      // 서울 → 부산 KTX 편도
   busanKrw: 40000,    // 배 조 전날 부산 저녁
-  flyOneKrw: 120000,  // 후쿠오카 → 김포/인천 편도
+  flyOneKrw: 238000,  // 후쿠오카 → 인천 편도 — 2026-11-05 Duffel 3/7 제주 7C1402 $176.90 기준 (약 23.8만원)
   flyRtKrw: 365000,   // 김포/인천 ↔ 후쿠오카 왕복 — 2026-11-05 Duffel 3/4-3/7 제주항공 $271.90 기준 (약 36.5만원)
   hotelKrw: 65000,    // 비즈니스 호텔 1인 1박
   aptKrw: 45000,      // 아파트 독채 1인 1박 (8인 분할)
@@ -2384,7 +2394,7 @@ function renderCost() {
     rows.push(['🚄 서울 → 부산 KTX (편도)', COST.ktxKrw]);
     rows.push(['🍻 전날 부산 저녁', COST.busanKrw]);
     rows.push(['🚢 뉴카멜리아 2등실 (편도, 제세공과금 포함)', COST.ferryKrw]);
-    rows.push(['🛬 후쿠오카 → 김포·인천 (편도)', COST.flyOneKrw]);
+    rows.push(['🛬 후쿠오카 → 인천 (편도)', COST.flyOneKrw]);
   } else {
     rows.push(['✈️ 김포·인천 ↔ 후쿠오카 왕복 (' + weekLabel + ' · LCC 최저, 2026-11-05 실측)', flyRt]);
   }
