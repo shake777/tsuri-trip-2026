@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🍻 송년모임 &amp; ✈️ 신년회 — 회원 전용 페이지</title>
+<title>✈️ 2027 신년회 — 후쿠오카 · 회원 전용 페이지</title>
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="googlebot" content="noindex, nofollow, noarchive">
 <meta name="bingbot" content="noindex, nofollow, noarchive">
@@ -12,35 +12,38 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --primary: #1f4e79;
-  --primary-light: #2e75b6;
-  --primary-lighter: #d9e2f3;
-  --accent: #e67e22;
-  --bg: #f5f8fc;
+  --primary: #0b5ed7;
+  --primary-dark: #0847a8;
+  --primary-light: #2f7de1;
+  --primary-lighter: #dbeafe;
+  --accent: #0b5ed7;
+  --bg: #eef4ff;
   --card: #ffffff;
-  --text: #1a1a1a;
-  --text-secondary: #555;
-  --text-muted: #888;
-  --border: #e1e8f0;
-  --success: #27ae60;
-  --warning: #e67e22;
-  --danger: #e74c3c;
-  --shadow: 0 2px 8px rgba(31, 78, 121, 0.08);
+  --text: #14213d;
+  --text-secondary: #3d4f6b;
+  --text-muted: #6b7a90;
+  --border: #d7e3f4;
+  --success: #15803d;
+  --warning: #b45309;
+  --danger: #dc2626;
+  --shadow: 0 2px 12px rgba(11, 94, 215, 0.08);
 }
+html { -webkit-text-size-adjust: 100%; }
 body {
   font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
-  font-size: 14px;
+  line-height: 1.65;
+  font-size: 16px;
 }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+.container { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+a { color: var(--primary-light); }
 
 /* ============ HEADER ============ */
 header {
-  background: linear-gradient(135deg, #1f4e79 0%, #2e75b6 100%);
+  background: linear-gradient(135deg, #0847a8 0%, #0b5ed7 55%, #2f7de1 100%);
   color: white;
-  padding: 24px 16px 18px;
+  padding: 22px 16px 0;
   box-shadow: 0 2px 12px rgba(0,0,0,0.15);
   position: sticky;
   top: 0;
@@ -48,458 +51,284 @@ header {
 }
 .header-top {
   display: flex; justify-content: space-between; align-items: center;
-  max-width: 1100px; margin: 0 auto; flex-wrap: wrap; gap: 12px;
+  max-width: 880px; margin: 0 auto; flex-wrap: wrap; gap: 12px;
 }
-.brand h1 { font-size: 20px; font-weight: 700; }
-.brand .subtitle { font-size: 12px; opacity: 0.85; margin-top: 2px; }
-.member-area {
-  display: flex; align-items: center; gap: 10px; font-size: 13px;
+.brand h1 { font-size: 22px; font-weight: 800; line-height: 1.3; }
+.brand .subtitle { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+.member-area { display: flex; align-items: center; gap: 10px; font-size: 14px; flex-wrap: wrap; }
+.member-area input, .member-area select {
+  padding: 10px 12px; border-radius: 10px; border: none;
+  background: rgba(255,255,255,0.2); color: white; font-size: 15px;
+  min-height: 44px;
 }
-.member-area input {
-  padding: 6px 12px; border-radius: 6px; border: none;
-  background: rgba(255,255,255,0.2); color: white; font-size: 13px;
-  width: 130px;
-}
+.member-area select { background: rgba(255,255,255,0.95); color: var(--primary); font-weight: 600; }
 .member-area input::placeholder { color: rgba(255,255,255,0.7); }
 .member-area button {
   background: rgba(255,255,255,0.95); color: var(--primary);
-  border: none; padding: 6px 14px; border-radius: 6px;
-  font-weight: 600; cursor: pointer; font-size: 13px;
+  border: none; padding: 10px 16px; border-radius: 10px;
+  font-weight: 700; cursor: pointer; font-size: 15px; min-height: 44px;
 }
-.member-area button:hover { background: white; }
-#current-user { font-weight: 600; }
+#current-user { font-weight: 700; }
 
 /* ============ NAVIGATION ============ */
 .tabs {
-  display: flex; gap: 4px; max-width: 1100px; margin: 14px auto 0;
-  flex-wrap: wrap;
+  display: flex; gap: 8px; max-width: 880px; margin: 16px auto 0;
+  overflow-x: auto; padding-bottom: 0;
 }
 .tab {
-  padding: 8px 16px; background: rgba(255,255,255,0.15); color: white;
-  border: none; border-radius: 8px 8px 0 0; cursor: pointer;
-  font-size: 13px; font-weight: 500; transition: background 0.2s;
+  padding: 12px 18px; background: rgba(255,255,255,0.15); color: white;
+  border: none; border-radius: 12px 12px 0 0; cursor: pointer;
+  font-size: 15px; font-weight: 600; min-height: 48px; white-space: nowrap;
 }
 .tab:hover { background: rgba(255,255,255,0.25); }
-.tab.active { background: var(--bg); color: var(--primary); font-weight: 700; }
+.tab.active { background: var(--bg); color: var(--primary); font-weight: 800; }
 
 /* ============ MAIN ============ */
-main { padding: 24px 0 60px; }
+main { padding: 24px 0 80px; }
 .section { display: none; }
 .section.active { display: block; }
 .card {
-  background: var(--card); border-radius: 12px; padding: 20px;
+  background: var(--card); border-radius: 16px; padding: 22px;
   margin-bottom: 16px; box-shadow: var(--shadow);
   border: 1px solid var(--border);
 }
 .card h2 {
-  font-size: 18px; color: var(--primary);
+  font-size: 20px; color: var(--primary);
   margin-bottom: 12px; padding-bottom: 10px;
   border-bottom: 2px solid var(--primary-lighter);
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
 }
-.card h3 {
-  font-size: 15px; color: var(--primary-light);
-  margin: 14px 0 8px; font-weight: 600;
-}
-.card p { margin-bottom: 10px; color: var(--text-secondary); }
+.card h3 { font-size: 16px; color: var(--primary-light); margin: 14px 0 8px; font-weight: 700; }
+.card p { margin-bottom: 10px; color: var(--text-secondary); font-size: 15px; }
 .card ul { padding-left: 20px; margin-bottom: 10px; }
-.card li { margin-bottom: 4px; color: var(--text-secondary); }
+.card li { margin-bottom: 6px; color: var(--text-secondary); font-size: 15px; }
 
-/* ============ COUNTDOWN ============ */
-.countdown-banner {
-  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
-  color: white; padding: 18px 20px; border-radius: 12px;
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+/* ============ HERO ============ */
+.hero {
+  background: linear-gradient(135deg, #0847a8 0%, #0b5ed7 100%);
+  color: white; border-radius: 16px; padding: 22px;
+  margin-bottom: 16px; box-shadow: var(--shadow);
 }
-.countdown-label { font-size: 13px; opacity: 0.95; }
-.countdown-date { font-size: 14px; margin-top: 2px; font-weight: 500; }
-.countdown-days {
-  font-size: 32px; font-weight: 700; line-height: 1;
-}
-.countdown-days span { font-size: 14px; font-weight: 400; opacity: 0.9; }
-.date-controls {
-  background: rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 8px;
-  font-size: 12px; display: flex; gap: 6px; align-items: center;
-}
-.date-controls input {
-  background: white; border: none; padding: 4px 6px; border-radius: 4px;
-  font-size: 12px; color: var(--text);
-}
+.hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.hero p { color: rgba(255,255,255,0.92); font-size: 15px; margin-bottom: 6px; }
+.hero .hero-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 14px; }
+.hero .hero-fact { background: rgba(255,255,255,0.14); border-radius: 12px; padding: 12px; }
+.hero .hero-fact .k { font-size: 12px; opacity: 0.85; }
+.hero .hero-fact .v { font-size: 17px; font-weight: 800; margin-top: 2px; }
+.hero .hero-fact .s { font-size: 12px; opacity: 0.85; margin-top: 2px; }
 
-/* ============ TABLES ============ */
-table {
-  width: 100%; border-collapse: collapse;
-  margin: 8px 0 16px; font-size: 13px;
-}
+/* ============ COUNTDOWN / D-DAY ============ */
+.dday-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 18px; }
+.dday-card { color: white; padding: 20px; border-radius: 16px; background: linear-gradient(135deg, #0847a8 0%, #2f7de1 100%); }
+.dday-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.dday-label { font-size: 15px; font-weight: 700; }
+.dday-date { font-size: 14px; margin-top: 3px; opacity: 0.9; }
+.dday-days { font-size: 34px; font-weight: 800; line-height: 1; white-space: nowrap; }
+.dday-days span { font-size: 14px; font-weight: 400; opacity: 0.9; }
+.dday-controls { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.25); flex-wrap: wrap; }
+.dday-controls input { padding: 8px 10px; border-radius: 8px; border: none; font-size: 14px; background: rgba(255,255,255,0.95); color: #1a1a1a; min-height: 44px; }
+
+/* ============ TABLES (no horizontal scroll: wrap) ============ */
+table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 14px; table-layout: auto; }
 th {
   background: var(--primary-lighter); color: var(--primary);
-  text-align: left; padding: 10px 12px; font-weight: 600;
-  border-bottom: 2px solid var(--primary);
+  text-align: left; padding: 10px 12px; font-weight: 700;
+  border-bottom: 2px solid var(--primary); font-size: 14px;
 }
-td {
-  padding: 9px 12px; border-bottom: 1px solid var(--border);
-  color: var(--text-secondary);
-}
-tr:hover td { background: #fafcff; }
-
-/* ============ FISHING CALENDAR ============ */
-.fish-calendar {
-  display: grid; grid-template-columns: 160px repeat(12, 1fr);
-  gap: 3px; font-size: 11px; margin: 10px 0 20px;
-}
-.fish-calendar .head {
-  text-align: center; font-weight: 600; padding: 6px 0;
-  color: var(--text-muted);
-}
-.fish-calendar .name {
-  padding: 8px 8px; color: var(--text); font-size: 12px;
-  display: flex; align-items: center;
-}
-.fish-calendar .cell {
-  height: 24px; border-radius: 3px;
-  background: transparent; border: 1px solid var(--border);
-}
-.fish-calendar .cell.peak { background: var(--primary); border-color: var(--primary); }
-.fish-calendar .cell.avail { background: #85b7eb; border-color: #85b7eb; }
-.legend {
-  display: flex; gap: 14px; font-size: 12px; margin-bottom: 8px;
-  color: var(--text-muted); flex-wrap: wrap;
-}
-.legend-item { display: flex; align-items: center; gap: 5px; }
-.legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+tr:hover td { background: #f5f9ff; }
 
 /* ============ TIMELINE ============ */
-.timeline {
-  margin: 14px 0; padding-left: 0; list-style: none;
-  border-left: 3px solid var(--primary-lighter);
-}
-.timeline li {
-  position: relative; padding: 12px 0 12px 24px;
-  margin-left: 8px;
-}
+.timeline { margin: 14px 0; padding-left: 0; list-style: none; border-left: 3px solid var(--primary-lighter); }
+.timeline li { position: relative; padding: 12px 0 12px 24px; margin-left: 8px; }
 .timeline li::before {
-  content: ''; position: absolute; left: -8px; top: 16px;
+  content: ''; position: absolute; left: -8px; top: 18px;
   width: 12px; height: 12px; border-radius: 50%;
   background: var(--primary-light); border: 3px solid var(--card);
 }
-.timeline-time {
-  font-weight: 600; color: var(--primary); font-size: 13px;
-}
-.timeline-title { font-weight: 500; color: var(--text); margin-top: 2px; }
-.timeline-detail { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.timeline-time { font-weight: 700; color: var(--primary); font-size: 15px; }
+.timeline-title { font-weight: 600; color: var(--text); margin-top: 2px; font-size: 15px; }
+.timeline-detail { font-size: 14px; color: var(--text-muted); margin-top: 2px; }
 
-/* ============ VOTING ============ */
-.poll-card { margin-bottom: 18px; }
-.poll-question {
-  font-size: 15px; font-weight: 600; color: var(--text);
-  margin-bottom: 12px;
+/* ============ PICK CARDS (큰 카드형 선택 UI) ============ */
+.pick-section { margin-bottom: 22px; }
+.pick-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.pick-title { font-size: 18px; font-weight: 800; color: var(--text); }
+.pick-sub { font-size: 13px; color: var(--text-muted); }
+.pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.pick-card {
+  border: 2px solid var(--border); border-radius: 14px; padding: 16px;
+  cursor: pointer; background: #fff; min-height: 108px;
+  display: flex; flex-direction: column; gap: 4px;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
 }
-.poll-option {
-  margin-bottom: 8px; padding: 10px 14px;
-  border: 1.5px solid var(--border); border-radius: 8px;
-  cursor: pointer; transition: all 0.15s;
-  display: flex; justify-content: space-between; align-items: center;
-  position: relative; overflow: hidden;
+.pick-card:hover { border-color: var(--primary-light); }
+.pick-card.sel { border-color: var(--primary); background: #eaf2fe; box-shadow: 0 2px 10px rgba(11,94,215,0.18); }
+.pick-card .pick-name { font-weight: 800; font-size: 16px; color: var(--text); line-height: 1.35; }
+.pick-card .pick-price { font-size: 18px; font-weight: 800; color: var(--primary); }
+.pick-card .pick-sub2 { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.pick-card .pick-votes { font-size: 12px; color: var(--text-muted); margin-top: auto; padding-top: 6px; }
+.pick-badge {
+  display: inline-block; background: #dcfce7; color: #15803d;
+  font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 999px; margin-left: 6px; white-space: nowrap;
 }
-.poll-option:hover { border-color: var(--primary-light); background: #fafcff; }
-.poll-option.voted { border-color: var(--primary); background: #f0f7fc; }
-.poll-option .label {
-  font-weight: 500; font-size: 13px; z-index: 1; position: relative;
-}
-.poll-option .count {
-  font-size: 12px; color: var(--text-muted); z-index: 1; position: relative;
-}
-.poll-option .bar {
-  position: absolute; left: 0; top: 0; bottom: 0;
-  background: var(--primary-lighter); transition: width 0.4s ease;
-}
-.poll-voters {
-  font-size: 11px; color: var(--text-muted); margin-top: 4px; padding-left: 4px;
-}
-.poll-total {
-  text-align: right; font-size: 11px; color: var(--text-muted);
+.pick-badge.blue { background: var(--primary-lighter); color: var(--primary); }
+.total-bar {
+  position: sticky; bottom: 12px; z-index: 50;
+  background: var(--primary); color: white; border-radius: 14px;
+  padding: 16px 18px; box-shadow: 0 6px 20px rgba(11,94,215,0.35);
   margin-top: 6px;
 }
+.total-bar .tb-label { font-size: 13px; opacity: 0.9; }
+.total-bar .tb-value { font-size: 24px; font-weight: 800; margin-top: 2px; }
+.total-bar .tb-sub { font-size: 13px; opacity: 0.9; margin-top: 4px; line-height: 1.5; }
+
+/* ============ VOTING (기존 투표도 큰 카드로) ============ */
+.poll-card { margin-bottom: 18px; }
+.poll-question { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
+.poll-option {
+  margin-bottom: 10px; padding: 16px 18px; min-height: 58px;
+  border: 2px solid var(--border); border-radius: 12px;
+  cursor: pointer; transition: all 0.15s;
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  position: relative; overflow: hidden;
+}
+.poll-option:hover { border-color: var(--primary-light); background: #f5f9ff; }
+.poll-option.voted { border-color: var(--primary); background: #eaf2fe; }
+.poll-option .label { font-weight: 600; font-size: 15px; z-index: 1; position: relative; }
+.poll-option .count { font-size: 13px; color: var(--text-muted); z-index: 1; position: relative; white-space: nowrap; }
+.poll-option .bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--primary-lighter); transition: width 0.4s ease; }
+.poll-voters { font-size: 13px; color: var(--text-muted); margin-top: 4px; padding-left: 4px; }
+.poll-total { text-align: right; font-size: 13px; color: var(--text-muted); margin-top: 6px; }
 
 /* ============ DISCUSSION ============ */
 .thread-list { display: flex; flex-direction: column; gap: 12px; }
-.thread {
-  border: 1px solid var(--border); border-radius: 10px;
-  padding: 14px 16px; background: white;
-}
-.thread-header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 8px;
-}
-.thread-title { font-weight: 600; font-size: 14px; color: var(--primary); }
-.thread-meta { font-size: 11px; color: var(--text-muted); }
-.thread-body { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; }
-.comments {
-  border-top: 1px solid var(--border); padding-top: 10px; margin-top: 8px;
-}
-.comment {
-  padding: 8px 10px; background: #f8fafc; border-radius: 6px;
-  margin-bottom: 6px; font-size: 12px;
-}
-.comment-meta {
-  font-size: 11px; color: var(--text-muted);
-  margin-bottom: 3px; display: flex; justify-content: space-between;
-}
-.comment-author { font-weight: 600; color: var(--primary); }
+.thread { border: 1px solid var(--border); border-radius: 12px; padding: 16px; background: white; }
+.thread-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 8px; flex-wrap: wrap; }
+.thread-title { font-weight: 700; font-size: 16px; color: var(--primary); }
+.thread-meta { font-size: 12px; color: var(--text-muted); }
+.thread-body { font-size: 15px; color: var(--text-secondary); margin-bottom: 10px; }
+.comments { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 8px; }
+.comment { padding: 10px 12px; background: #f5f9ff; border-radius: 8px; margin-bottom: 6px; font-size: 14px; }
+.comment-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 3px; display: flex; justify-content: space-between; }
+.comment-author { font-weight: 700; color: var(--primary); }
 .comment-body { color: var(--text); }
 .comment-form { display: flex; gap: 6px; margin-top: 8px; }
-.comment-form input {
-  flex: 1; padding: 7px 10px; border: 1px solid var(--border);
-  border-radius: 6px; font-size: 12px;
-}
-.comment-form button {
-  background: var(--primary); color: white; border: none;
-  padding: 7px 14px; border-radius: 6px; cursor: pointer;
-  font-size: 12px; font-weight: 500;
-}
-.comment-form button:hover { background: var(--primary-light); }
-.new-thread {
-  background: #f8fafc; border: 2px dashed var(--border);
-  border-radius: 10px; padding: 14px; margin-bottom: 14px;
-}
-.new-thread input, .new-thread textarea {
-  width: 100%; padding: 8px 10px; border: 1px solid var(--border);
-  border-radius: 6px; font-size: 13px; margin-bottom: 8px;
-  font-family: inherit;
-}
-.new-thread textarea { min-height: 60px; resize: vertical; }
-.new-thread button {
-  background: var(--primary); color: white; border: none;
-  padding: 8px 18px; border-radius: 6px; cursor: pointer;
-  font-weight: 500; font-size: 13px;
-}
+.comment-form input { flex: 1; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; min-height: 44px; }
+.comment-form button { background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; min-height: 44px; }
+.new-thread { background: #f5f9ff; border: 2px dashed var(--border); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+.new-thread input, .new-thread textarea { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; margin-bottom: 8px; font-family: inherit; }
+.new-thread textarea { min-height: 70px; resize: vertical; }
+.new-thread button { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 15px; min-height: 48px; }
 
 /* ============ MEMBERS ============ */
-.member-list {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px; margin: 10px 0;
-}
-.member-chip {
-  background: white; border: 1px solid var(--border);
-  border-radius: 8px; padding: 10px 12px; font-size: 13px;
-  display: flex; flex-direction: column; gap: 2px;
-}
-.member-chip .name { font-weight: 600; color: var(--primary); }
-.member-chip .meta { font-size: 11px; color: var(--text-muted); }
+.member-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 10px 0; }
+.member-chip { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px; font-size: 14px; display: flex; flex-direction: column; gap: 2px; }
+.member-chip .name { font-weight: 700; color: var(--primary); }
+.member-chip .meta { font-size: 12px; color: var(--text-muted); }
 
 /* ============ ALERTS / NOTES ============ */
-.note {
-  padding: 10px 14px; border-radius: 8px; font-size: 12px;
-  margin: 10px 0; line-height: 1.6;
-}
-.note.info { background: #e6f1fb; color: #185fa5; border-left: 3px solid #2e75b6; }
-.note.warn { background: #fef3e6; color: #8a4500; border-left: 3px solid #e67e22; }
-.note.success { background: #e6f7ec; color: #155f3a; border-left: 3px solid #27ae60; }
+.note { padding: 12px 14px; border-radius: 10px; font-size: 14px; margin: 10px 0; line-height: 1.6; }
+.note.info { background: #e6f1fb; color: #185fa5; border-left: 3px solid #2f7de1; }
+.note.warn { background: #fef3e6; color: #8a4500; border-left: 3px solid #d97706; }
+.note.success { background: #e6f7ec; color: #155f3a; border-left: 3px solid #22c55e; }
 
 /* ============ BUTTONS ============ */
 .btn {
   background: var(--primary); color: white; border: none;
-  padding: 8px 16px; border-radius: 6px; cursor: pointer;
-  font-size: 13px; font-weight: 500;
+  padding: 12px 20px; border-radius: 10px; cursor: pointer;
+  font-size: 15px; font-weight: 700; min-height: 48px;
 }
 .btn:hover { background: var(--primary-light); }
-.btn.secondary { background: white; color: var(--primary); border: 1px solid var(--primary); }
+.btn.secondary { background: white; color: var(--primary); border: 1.5px solid var(--primary); }
 .btn.danger { background: var(--danger); }
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+input, select, textarea { font-size: 15px; }
 
 /* ============ EMPTY STATE ============ */
-.empty {
-  text-align: center; padding: 40px 20px; color: var(--text-muted);
-  font-size: 13px;
-}
-.login-required {
-  background: #fff8e1; border: 2px dashed #ffc107;
-  padding: 30px; text-align: center; border-radius: 10px;
-  color: #856404; margin: 14px 0;
-}
+.empty { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 15px; }
+.login-required { background: #fff8e1; border: 2px dashed #f0c040; padding: 24px; text-align: center; border-radius: 12px; color: #856404; margin: 14px 0; font-size: 15px; }
 
-footer {
-  text-align: center; padding: 30px 16px;
-  color: var(--text-muted); font-size: 11px;
-  border-top: 1px solid var(--border); margin-top: 40px;
-}
+footer { text-align: center; padding: 30px 16px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px; }
 
 /* ============ AUTH GATE ============ */
 #auth-gate {
   position: fixed; inset: 0; z-index: 9999;
-  background: linear-gradient(135deg, #1f4e79 0%, #2e75b6 50%, #4a90c8 100%);
+  background: linear-gradient(135deg, #0847a8 0%, #0b5ed7 50%, #2f7de1 100%);
   display: flex; align-items: center; justify-content: center;
   padding: 20px; overflow-y: auto;
 }
-.gate-card {
-  background: white; border-radius: 16px;
-  padding: 32px 28px; max-width: 480px; width: 100%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-.gate-title {
-  font-size: 22px; font-weight: 700; color: var(--primary);
-  text-align: center; margin-bottom: 6px;
-}
-.gate-subtitle {
-  font-size: 13px; color: var(--text-secondary);
-  text-align: center; margin-bottom: 22px;
-}
-.gate-step-label {
-  font-size: 12px; font-weight: 600; color: var(--primary-light);
-  margin-bottom: 8px; letter-spacing: 0.5px;
-}
-.gate-name-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
-  margin-bottom: 18px;
-}
-.gate-name-btn {
-  background: white; border: 1.5px solid var(--border);
-  color: var(--text); padding: 12px 6px; border-radius: 8px;
-  cursor: pointer; font-size: 14px; font-weight: 600;
-  transition: all 0.15s;
-}
-.gate-name-btn:hover { border-color: var(--primary-light); background: #f0f7fc; }
-.gate-name-btn.selected {
-  background: var(--primary); color: white; border-color: var(--primary);
-}
+.gate-card { background: white; border-radius: 18px; padding: 32px 28px; max-width: 480px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.gate-title { font-size: 24px; font-weight: 800; color: var(--primary); text-align: center; margin-bottom: 6px; }
+.gate-subtitle { font-size: 14px; color: var(--text-secondary); text-align: center; margin-bottom: 22px; }
+.gate-step-label { font-size: 13px; font-weight: 700; color: var(--primary-light); margin-bottom: 8px; letter-spacing: 0.5px; }
+.gate-name-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
+.gate-name-btn { background: white; border: 2px solid var(--border); color: var(--text); padding: 14px 6px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 700; min-height: 52px; }
+.gate-name-btn:hover { border-color: var(--primary-light); background: #eaf2fe; }
+.gate-name-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
 .gate-other-row { display: flex; gap: 8px; margin-bottom: 18px; }
-.gate-other-row input {
-  flex: 1; padding: 10px 12px; border: 1.5px solid var(--border);
-  border-radius: 8px; font-size: 14px; font-family: inherit;
-}
-.gate-other-row button {
-  background: white; border: 1.5px solid var(--border);
-  color: var(--text-secondary); padding: 10px 14px; border-radius: 8px;
-  cursor: pointer; font-size: 13px;
-}
-.gate-password-row {
-  display: flex; gap: 8px; margin-bottom: 14px;
-}
-.gate-password-row input {
-  flex: 1; padding: 12px 14px; border: 1.5px solid var(--border);
-  border-radius: 8px; font-size: 16px; font-family: inherit;
-  letter-spacing: 4px;
-}
-.gate-password-row input:focus {
-  outline: none; border-color: var(--primary);
-}
-.gate-submit {
-  background: var(--primary); color: white; border: none;
-  padding: 12px 20px; border-radius: 8px; cursor: pointer;
-  font-weight: 600; font-size: 14px;
-}
+.gate-other-row input { flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: 10px; font-size: 15px; font-family: inherit; min-height: 48px; }
+.gate-other-row button { background: white; border: 2px solid var(--border); color: var(--text-secondary); padding: 10px 14px; border-radius: 10px; cursor: pointer; font-size: 14px; min-height: 48px; }
+.gate-password-row { display: flex; gap: 8px; margin-bottom: 14px; }
+.gate-password-row input { flex: 1; padding: 12px 14px; border: 2px solid var(--border); border-radius: 10px; font-size: 18px; font-family: inherit; letter-spacing: 4px; min-height: 48px; }
+.gate-password-row input:focus { outline: none; border-color: var(--primary); }
+.gate-submit { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 15px; min-height: 48px; }
 .gate-submit:hover { background: var(--primary-light); }
 .gate-submit:disabled { background: #ccc; cursor: not-allowed; }
-.gate-error {
-  color: var(--danger); font-size: 13px; margin-bottom: 10px;
-  padding: 8px 12px; background: #fdebec; border-radius: 6px;
-  text-align: center; display: none;
-}
+.gate-error { color: var(--danger); font-size: 14px; margin-bottom: 10px; padding: 10px 12px; background: #fdebec; border-radius: 8px; text-align: center; display: none; }
 .gate-error.show { display: block; }
-.gate-hint {
-  font-size: 11px; color: var(--text-muted); text-align: center;
-  margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
-}
+.gate-hint { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
 body.gated { overflow: hidden; }
 body.gated header, body.gated main, body.gated footer { display: none; }
 
-@media (max-width: 500px) {
-  .gate-name-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 700px) {
-  .fish-calendar { font-size: 10px; grid-template-columns: 100px repeat(12, 1fr); }
-  .fish-calendar .name { font-size: 10.5px; padding: 6px 4px; }
-  .countdown-days { font-size: 26px; }
-  .brand h1 { font-size: 17px; }
-  th, td { padding: 7px 8px; font-size: 12px; }
-}
-/* ============ SPOT CARDS (후보지) ============ */
-.spot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
-.spot-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column;
-}
-.spot-card .spot-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
-.spot-card .spot-emoji { font-size: 26px; line-height: 1; }
-.spot-card .spot-name { font-size: 15px; font-weight: 700; color: var(--primary); }
-.spot-card .spot-region { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-.spot-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
-.spot-meta span {
-  font-size: 11px; background: #f0f7fc; color: var(--primary);
-  padding: 3px 8px; border-radius: 10px; font-weight: 500;
-}
-.spot-card .spot-desc { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 8px; }
-.pc-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; }
-.pc-list > div { font-size: 11.5px; border-radius: 8px; padding: 8px 10px; }
-.pc-pros { background: #e6f7ec; color: #155f3a; }
-.pc-cons { background: #fdf0e6; color: #8a4500; }
-.pc-list ul { padding-left: 14px; margin: 4px 0 0; }
-.pc-list li { margin-bottom: 2px; color: inherit; font-size: 11.5px; }
-.spot-memo {
-  margin-top: 10px; font-size: 11.5px; background: #fffbe6; color: #7a5c00;
-  border-left: 3px solid #f0c040; padding: 7px 10px; border-radius: 4px;
-}
-.chat-log { display: flex; flex-direction: column; gap: 6px; }
-.chat-row { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; }
-.chat-who {
-  flex: 0 0 62px; font-weight: 600; color: var(--primary); font-size: 11.5px;
-  text-align: right; padding-top: 1px;
-}
-.chat-msg { background: #f5f8fc; border-radius: 8px; padding: 6px 10px; color: var(--text-secondary); }
-@media (max-width: 700px) {
-  .pc-list { grid-template-columns: 1fr; }
-}
-
 /* ============ 홈 잠정 계획 ============ */
-.plan-card { background: linear-gradient(180deg, #ffffff 0%, #f6faff 100%); border: 2px solid var(--primary); border-radius: 14px; padding: 16px 16px 12px; margin-bottom: 16px; box-shadow: var(--shadow); }
-.plan-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-.plan-title { font-size: 18px; font-weight: 800; color: var(--primary); }
-.plan-sub { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
-.plan-badge { background: #fef3e6; color: #b35c00; border: 1px solid #f0c890; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.plan-card { background: linear-gradient(180deg, #ffffff 0%, #f2f7ff 100%); border: 2px solid var(--primary); border-radius: 16px; padding: 18px 16px 12px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.plan-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.plan-title { font-size: 19px; font-weight: 800; color: var(--primary); }
+.plan-sub { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+.plan-badge { background: #eaf2fe; color: var(--primary); border: 1px solid #bcd7f7; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
 .plan-agenda { border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; }
-.plan-agenda-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.plan-count { font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
-.plan-row { display: grid; grid-template-columns: 112px 1fr; gap: 8px; padding: 8px 10px; border-radius: 8px; margin-bottom: 4px; align-items: baseline; }
-.plan-row.lead { background: #eef5fc; }
+.plan-agenda-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; flex-wrap: wrap; }
+.plan-count { font-size: 13px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+.plan-row { display: grid; grid-template-columns: 112px 1fr; gap: 8px; padding: 10px; border-radius: 10px; margin-bottom: 4px; align-items: baseline; }
+.plan-row.lead { background: #eaf2fe; }
 .plan-row.fixed { background: #e6f7ec; }
 .plan-row.tie, .plan-row.close { background: #fff7e3; }
 .plan-row.none { background: #f5f5f5; }
-.plan-row.info { background: #f4f2fb; }
-.plan-label { font-size: 12.5px; color: var(--text-secondary); }
-.plan-val { font-size: 14px; font-weight: 600; color: var(--text); word-break: keep-all; }
-.plan-row.none .plan-val { font-weight: 400; color: var(--text-muted); font-size: 13px; }
-.plan-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; margin-left: 4px; background: #dbe8f6; color: var(--primary); white-space: nowrap; }
+.plan-row.info { background: #eef2fb; }
+.plan-label { font-size: 14px; color: var(--text-secondary); }
+.plan-val { font-size: 15px; font-weight: 600; color: var(--text); word-break: keep-all; }
+.plan-row.none .plan-val { font-weight: 400; color: var(--text-muted); font-size: 14px; }
+.plan-tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px; margin-left: 4px; background: #dbeafe; color: var(--primary); white-space: nowrap; }
 .plan-row.tie .plan-tag, .plan-row.close .plan-tag { background: #fde6b8; color: #7a5000; }
 .plan-row.fixed .plan-tag { background: #c5ebd3; color: #155f3a; }
-.plan-people { font-size: 12.5px; color: var(--text-secondary); margin-top: 8px; line-height: 1.75; }
-.plan-foot { font-size: 11.5px; color: var(--text-muted); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); }
-@media (max-width: 480px) {
+.plan-people { font-size: 14px; color: var(--text-secondary); margin-top: 8px; line-height: 1.75; }
+.plan-foot { font-size: 13px; color: var(--text-muted); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); }
+
+.chat-log { display: flex; flex-direction: column; gap: 6px; }
+.chat-row { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; }
+.chat-who { flex: 0 0 62px; font-weight: 700; color: var(--primary); font-size: 13px; text-align: right; padding-top: 1px; }
+.chat-msg { background: #f5f9ff; border-radius: 8px; padding: 8px 10px; color: var(--text-secondary); }
+
+@media (max-width: 700px) {
+  body { font-size: 16px; }
+  .brand h1 { font-size: 19px; }
+  .card { padding: 18px 16px; }
+  .card h2 { font-size: 19px; }
+  th, td { padding: 8px; font-size: 13px; }
+  .gate-name-grid { grid-template-columns: repeat(3, 1fr); }
   .plan-row { grid-template-columns: 1fr; gap: 2px; }
-  .plan-title { font-size: 16px; }
+  .pick-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 }
 
-/* ============ D-DAY (2개 안건) ============ */
-.dday-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; margin-bottom: 18px; }
-.dday-card { color: white; padding: 16px 18px; border-radius: 12px; }
-.dday-card.ye { background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); }
-.dday-card.ny { background: linear-gradient(135deg, #1f4e79 0%, #2e75b6 100%); }
-.dday-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.dday-label { font-size: 13px; font-weight: 600; opacity: 0.95; }
-.dday-date { font-size: 12.5px; margin-top: 3px; opacity: 0.9; }
-.dday-days { font-size: 28px; font-weight: 700; line-height: 1; white-space: nowrap; }
-.dday-days span { font-size: 13px; font-weight: 400; opacity: 0.9; }
-.dday-controls { display: flex; align-items: center; gap: 8px; font-size: 11.5px; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.25); }
-.dday-controls input { padding: 4px 8px; border-radius: 6px; border: none; font-size: 12px; background: rgba(255,255,255,0.95); color: #1a1a1a; }
 </style>
 </head>
 <body>
 
 <div id="auth-gate" style="display:none;">
   <div class="gate-card">
-    <div class="gate-title">🍻 송년모임 &amp; 신년회</div>
-    <div class="gate-subtitle">2026 송년모임 · 2027 신년회(후쿠오카) — 회원 전용 페이지</div>
+    <div class="gate-title">✈️ 2027 신년회 — 후쿠오카</div>
+    <div class="gate-subtitle">2027년 2~3월 · 목~일 3박 · 회원 전용 페이지</div>
 
     <div class="gate-step-label">STEP 1 · 본인 이름 선택</div>
     <div class="gate-name-grid" id="gate-name-grid"></div>
@@ -526,15 +355,14 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 <header>
   <div class="header-top">
     <div class="brand">
-      <h1>🍻 송년모임 &amp; ✈️ 신년회</h1>
-      <div class="subtitle">① 11월 송년모임 (1박2일 또는 당일) &nbsp;·&nbsp; ② 2027 신년회 — 후쿠오카 목~일 3박</div>
+      <h1>✈️ 2027 신년회 — 후쿠오카</h1>
+      <div class="subtitle">2027년 2~3월 · 목~일 3박 · 후쿠오카 · 8명</div>
     </div>
     <div class="member-area" id="member-area-content"></div>
   </div>
   <div class="tabs">
     <button class="tab active" data-section="home">🏠 홈</button>
-    <button class="tab" data-section="ye">🍻 송년모임</button>
-    <button class="tab" data-section="ny">✈️ 신년회</button>
+    <button class="tab" data-section="ny">✈️ 신년회 · 선택하기</button>
     <button class="tab" data-section="result">✅ 집계</button>
     <button class="tab" data-section="discuss">💬 토론</button>
     <button class="tab" data-section="prep">🎒 준비물</button>
@@ -550,93 +378,42 @@ body.gated header, body.gated main, body.gated footer { display: none; }
     <section class="section active" id="section-home">
       <div id="home-plan"></div>
 
-      <div class="card">
-        <h2>📋 회의에서 정해진 것</h2>
-        <div class="chat-log" style="margin-top:4px;">
-          <div class="chat-row"><div class="chat-who">안건 1</div><div class="chat-msg"><strong>송년모임</strong> — 11월 중 <strong>금~토 1박2일</strong> <span style="color:#b35c00;">(→ 당일로 할지 추가 투표 중)</span>. 김포·강화·석모도 쪽에서 저녁(고기·술) 먹고 낚시도 되는 곳으로.</div></div>
-          <div class="chat-row"><div class="chat-who">안건 2</div><div class="chat-msg"><strong>2027 신년회</strong> — <strong>후쿠오카 여행</strong>. 부산 1박 + 후쿠오카 3박 = <strong>4박5일</strong>.</div></div>
-        </div>
-        <div class="note info" style="margin-top:12px;">
-          두 안건 모두 아래 탭에서 <strong>날짜·장소·예산</strong>을 투표로 정합니다. 누르면 바로 저장되고 다른 회원 화면에도 자동 반영됩니다.
+      <div class="hero">
+        <h2>✈️ 2027 신년회 — 후쿠오카, 2~3월 목~일 3박</h2>
+        <p>목요일 아침에 후쿠오카에서 전원 합류해서 3박 하고, 일요일에 귀국합니다.</p>
+        <p>배 타는 사람은 <strong>수요일 밤 뉴카멜리아</strong>(부산 22:30 → 목 07:30 하카타), 비행기 타는 사람은 <strong>목요일 아침 인천·김포 출발</strong>입니다.</p>
+        <div class="hero-facts">
+          <div class="hero-fact"><div class="k">제일 싼 주</div><div class="v">3/4 ~ 3/7</div><div class="s">LCC 왕복 약 36.5만원부터</div></div>
+          <div class="hero-fact"><div class="k">삼일절 4박</div><div class="v">2/25 ~ 3/1</div><div class="s">연차 목·금 2일만</div></div>
+          <div class="hero-fact"><div class="k">온천 메인</div><div class="v">금요일</div><div class="s">벳푸 · 유후인 · 시내 온천</div></div>
+          <div class="hero-fact"><div class="k">인원</div><div class="v">8명</div><div class="s">하카타 거점</div></div>
         </div>
       </div>
 
       <div class="card">
-        <h2>🗓️ 10월 → 2월 로드맵</h2>
-        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">두 안건을 이 순서로 밀면 됩니다. 날짜가 확정되면 아래 D-DAY가 돌아갑니다.</p>
-        <div style="overflow-x:auto; margin-top:12px;">
-          <table style="font-size:12.5px; min-width:560px;">
-            <thead><tr><th style="min-width:104px;">시기</th><th>할 일</th></tr></thead>
-            <tbody>
-              <tr style="background:#fff6e8;">
-                <td style="font-weight:700; color:#b35c00;">10월<br><span style="font-size:11px; font-weight:400;">지금</span></td>
-                <td><strong>두 안건 투표 받기</strong> → 송년모임 날짜·장소 먼저 확정 → 추려진 펜션 1~2곳 전화 확인(8인 가능? 요금?)</td>
-              </tr>
-              <tr>
-                <td style="font-weight:700; color:var(--primary);">10월 말</td>
-                <td>펜션 예약 + 예약금 입금 · 카풀 조 편성 · 물때 확인</td>
-              </tr>
-              <tr style="background:#fdf3e8;">
-                <td style="font-weight:700; color:#b35c00;">11월 초·중순</td>
-                <td>🍻 <strong>송년모임 실행</strong> (11/6 또는 11/13 금~토)</td>
-              </tr>
-              <tr>
-                <td style="font-weight:700; color:var(--primary);">11월 중순</td>
-                <td>신년회 주간 확정 · 🛂 <strong>여권 확인 마감</strong> — 재발급에 2~3주 걸리니 이때가 마지노선</td>
-              </tr>
-              <tr>
-                <td style="font-weight:700; color:var(--primary);">11월 말<br>~12월 초</td>
-                <td>항공권·배편 예약 (설·연말 성수기 전에) · 료칸 끼울지 확정 → 8명 기준 견적</td>
-              </tr>
-              <tr>
-                <td style="font-weight:700; color:var(--primary);">12월 중순</td>
-                <td>숙소 예약 완료 · <strong>유후인 갈 거면 열차 예약</strong> (승차 1개월 전 일본시간 10:00 오픈, 금방 매진)</td>
-              </tr>
-              <tr>
-                <td style="font-weight:700; color:var(--primary);">12월 말</td>
-                <td>환전·여행자보험·유심 · 분담금 정산</td>
-              </tr>
-              <tr style="background:#eef4fb;">
-                <td style="font-weight:700; color:var(--primary);">1월</td>
-                <td>✈️ <strong>신년회 실행</strong> — 1/7 · 1/14 · 1/21 · 1/28 (목~일) 중 하나</td>
-              </tr>
-              <tr style="background:#eef4fb;">
-                <td style="font-weight:700; color:var(--primary);">2월</td>
-                <td>1월이 안 되면 2월로 — 2/11 · 2/18 · 2/25 (목~일)<br>
-                🎌 <strong>2/25(목)~3/1(월)</strong>은 삼일절이 붙어 연차 2일로 4박 5일<br>
-                <span style="font-size:11px; color:var(--text-muted);">※ 설 연휴(2/5~2/9) 주간은 후보에서 제외</span></td>
-              </tr>
-              <tr style="background:#eef4fb;">
-                <td style="font-weight:700; color:var(--primary);">3월 초</td>
-                <td>최후 대안 — 3/4 · 3/11 (목~일). 이보다 미루면 신년회라고 하기 어려움</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h2>🗓️ 2~3월 로드맵</h2>
+        <p style="font-size:14px; color:var(--text-muted); margin-top:-4px;">이 순서로 밀면 됩니다. 날짜가 확정되면 아래 D-DAY가 돌아갑니다.</p>
+        <table style="margin-top:12px;">
+          <thead><tr><th style="min-width:96px;">시기</th><th>할 일</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700; color:var(--primary);">11월 중순</td><td><strong>신년회 주간 확정 · 🛂 여권 확인 마감</strong> — 재발급에 2~3주 걸리니 이때가 마지노선</td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">11월 말~12월 초</td><td>항공권·배편 예약 (연말 성수기 전에) · 료칸 끼울지 확정 → 8명 기준 견적</td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">12월 중순</td><td>숙소 예약 완료 · <strong>유후인 갈 거면 열차 예약</strong> (승차 1개월 전 일본시간 10:00 오픈, 금방 매진)</td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">12월 말</td><td>환전·여행자보험·유심 · 분담금 정산</td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">2~3월</td><td>✈️ <strong>신년회 실행</strong> — 2/11 · 2/18 · 2/25 · 3/4 · 3/11 (목~일) 중 하나<br>🎌 <strong>2/25(목)~3/1(월)</strong>은 삼일절이 붙어 연차 2일로 4박 5일 · 설 연휴(2/5~2/9) 주간은 후보에서 제외</td></tr>
+          </tbody>
+        </table>
         <div class="note info" style="margin-top:12px;">
-          ⏰ <strong>지금 제일 급한 건 송년모임 날짜입니다.</strong> 11/6로 가면 한 달이 채 안 남았고, 펜션은 주말이 빨리 찹니다.
-          그 다음이 여권 — 신년회 가실 분 중 유효기간 모자란 사람이 있으면 11월 중순까지는 재발급을 넣어야 합니다.
+          ⏰ <strong>지금 제일 급한 건 주간 확정과 여권 확인입니다.</strong>
+          주간이 정해지면 항공권·숙소 실측을 그 날짜로 다시 뽑아 공유합니다.
         </div>
       </div>
 
       <div class="dday-grid">
-        <div class="dday-card ye">
-          <div class="dday-top">
-            <div>
-              <div class="dday-label">🍻 송년모임</div>
-              <div class="dday-date" id="ye-countdown-date">날짜 미정</div>
-            </div>
-            <div class="dday-days" id="ye-countdown-days">--<span>일</span></div>
-          </div>
-          <div class="dday-controls">
-            <label>확정일</label>
-            <input type="date" id="departure-date">
-          </div>
-        </div>
         <div class="dday-card ny">
           <div class="dday-top">
             <div>
-              <div class="dday-label">✈️ 신년회 (후쿠오카)</div>
+              <div class="dday-label">✈️ 신년회 (후쿠오카) — 2~3월 목~일</div>
               <div class="dday-date" id="ny-countdown-date">날짜 미정</div>
             </div>
             <div class="dday-days" id="ny-countdown-days">--<span>일</span></div>
@@ -688,80 +465,6 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         </div>
         <div id="cloud-status" style="font-size: 12px; color: var(--text-muted); margin-top: 10px;"></div>
       </div>
-    </section>
-
-    <!-- ============ 송년모임 ============ -->
-    <section class="section" id="section-ye">
-      <div class="card">
-        <h2>🍻 송년모임 — 11월 (1박2일 또는 당일)</h2>
-        <p>김포·강화·석모도 권역에서 <strong>저녁에 고기 구워 먹고 술 마시면서, 낚시도 되는</strong> 펜션을 기준으로 후보를 모았습니다. 전부 수도권에서 1시간~1시간 30분 거리라 금요일 퇴근 후 출발이 가능합니다.</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-top: 14px;">
-          <div style="background:#f0f7fc; padding:12px; border-radius:8px;">
-            <div style="font-size:11px; color:var(--text-muted);">일정</div>
-            <div style="font-size:16px; font-weight:600; color:var(--primary); margin-top:2px;">1박2일 / 당일</div>
-            <div style="font-size:11px; color:var(--text-muted);">투표로 결정 · 11월 중순 전 목표</div>
-          </div>
-          <div style="background:#f0f7fc; padding:12px; border-radius:8px;">
-            <div style="font-size:11px; color:var(--text-muted);">권역</div>
-            <div style="font-size:16px; font-weight:600; color:var(--primary); margin-top:2px;">김포·강화·석모도</div>
-            <div style="font-size:11px; color:var(--text-muted);">서울 1~1.5시간</div>
-          </div>
-          <div style="background:#f0f7fc; padding:12px; border-radius:8px;">
-            <div style="font-size:11px; color:var(--text-muted);">인원</div>
-            <div style="font-size:16px; font-weight:600; color:var(--primary); margin-top:2px;">8명 기준</div>
-            <div style="font-size:11px; color:var(--text-muted);">최대 8인실 1개 또는 2개 방</div>
-          </div>
-          <div style="background:#f0f7fc; padding:12px; border-radius:8px;">
-            <div style="font-size:11px; color:var(--text-muted);">11월 어종</div>
-            <div style="font-size:16px; font-weight:600; color:var(--primary); margin-top:2px;">망둥어·우럭</div>
-            <div style="font-size:11px; color:var(--text-muted);">숭어·학공치도 시즌</div>
-          </div>
-        </div>
-        <div class="note info" style="margin-top:12px;">
-          🕐 <strong>당일로 하자는 의견이 있어 「진행 방식」 투표를 추가했습니다.</strong> 아래 투표에서 골라주세요.
-          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin-top:8px;">
-            <div style="background:rgba(255,255,255,0.6); padding:9px 11px; border-radius:8px;">
-              <strong>🌙 1박2일</strong><br>
-              · 밤낚시·술자리를 여유 있게<br>
-              · 운전한 사람도 같이 마실 수 있음<br>
-              · 대신 숙박비가 들고 하루를 통째로 비워야 함
-            </div>
-            <div style="background:rgba(255,255,255,0.6); padding:9px 11px; border-radius:8px;">
-              <strong>☀️ 당일</strong><br>
-              · 숙박비 없음, 집에 가서 잠<br>
-              · 집안 일정 부담이 적어 참석이 쉬움<br>
-              · 대신 마시면 대리운전이 필요하고, 낮~저녁만 하면 낚시 시간이 짧음 (토요일 종일이면 해결)
-            </div>
-          </div>
-          <div style="margin-top:8px;">
-            당일로 정해지면 날짜 투표에서 고른 주말의 <strong>토요일(종일 또는 낮~저녁)이나 금요일 저녁</strong>으로 진행합니다.
-            <strong>토요일 종일</strong>이면 아침 물때에 맞춰 낚시도 제대로 하고 저녁 술자리까지 할 수 있어서, 자지 않고도 1박2일에 가까운 일정이 됩니다.
-            장소는 서울에서 가까운 <strong>김포 대명항</strong>(수산시장 회 + 선상 출조)이 유리하고,
-            펜션으로 간다면 <strong>숙박 없이 낮에만 쓰는 대실이 되는지</strong> 따로 확인해야 합니다.
-          </div>
-        </div>
-        <div class="note warn" style="margin-top:12px;">
-          ⚠️ 아래 펜션 정보는 <strong>각 업소가 홈페이지·예약사이트에 올린 안내를 정리한 것</strong>입니다. 요금·시설은 바뀌었을 수 있고, <strong>8인 단체 1박 가능 여부와 좌대 대여는 전화 확인이 필요</strong>합니다. 투표로 1~2곳 추리면 그때 전화 돌리면 됩니다.
-        </div>
-      </div>
-
-      <div class="spot-grid" id="spot-grid"></div>
-
-      <div class="card" style="margin-top:16px;">
-        <h2>🐟 11월 서해(경기·인천) 어종</h2>
-        <div class="fish-calendar" id="fish-calendar"></div>
-        <div class="legend">
-          <div class="legend-item"><div class="legend-swatch" style="background: var(--primary);"></div> 피크 시즌</div>
-          <div class="legend-item"><div class="legend-swatch" style="background: #85b7eb;"></div> 조황 가능</div>
-          <div class="legend-item"><div class="legend-swatch" style="background: #f0f0f0; border:1px solid var(--border);"></div> 비시즌</div>
-        </div>
-        <div class="note info" style="margin-top:12px;">
-          🎣 11월 강화·김포 권역은 <strong>망둥어가 막바지, 우럭·숭어·학공치가 제철</strong>입니다. 초보도 망둥어는 잘 나오니 장비 없어도 재미는 봅니다. 다만 <strong>물때(밀물)에 맞춰야</strong> 하므로 날짜가 정해지면 조석표를 확인해 낚시 시간을 잡겠습니다.
-        </div>
-      </div>
-
-      <div id="ye-login-check"></div>
-      <div id="polls-ye"></div>
     </section>
 
     <!-- ============ 신년회 ============ -->
@@ -838,7 +541,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <h2>🗓️ 목~일 일정 메모 — 허리 배려</h2>
         <p style="font-size:12.5px;">위 타임라인은 그대로 두고, 목~일 3박4일을 허리 부담을 줄이는 방향으로 정리한 메모입니다. 3월 초 후쿠오카 평균 9.5도 · 최고 13.4도 · 최저 6도라 겹옷·우산을 챙기세요.</p>
         <div style="overflow-x:auto;">
-          <table style="font-size:12.5px; min-width:560px;">
+          <table style="font-size:12.5px; min-width:0;">
             <thead><tr><th>날짜</th><th>일정</th><th>메모</th></tr></thead>
             <tbody>
               <tr>
@@ -872,7 +575,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       <div class="card">
         <h2>🚢 가는 방법 — 2026년 10월 기준 확인된 내용</h2>
         <div style="overflow-x:auto;">
-          <table style="font-size:12.5px; min-width:560px;">
+          <table style="font-size:12.5px; min-width:0;">
             <thead><tr><th>수단</th><th>소요</th><th>요금(편도, 대략)</th><th>메모</th></tr></thead>
             <tbody>
               <tr>
@@ -901,7 +604,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
               <tr>
                 <td style="font-weight:600; color:var(--primary);">🛫 항공 (김포·인천)<br><span style="font-size:11px; color:var(--text-muted);">갈 때</span></td>
                 <td>약 1시간 20~30분</td>
-                <td>3/4-3/7 Duffel 기준 LCC 약 36.5만원, 대한항공 A350 약 44.2만원(공식) / 2/25-2/28은 약 50만원부터<br><span style="font-size:11px;color:var(--text-muted);">2026-11-05 실측, 확정 요금 아님 — 아래 실측 카드 참고</span></td>
+                <td>주간별 가격은 아래 실측 카드 참고 — 3/4~3/7 LCC 약 36.5만원부터, 2/11~2/14 약 43.1만원부터, 2/25~2/28 약 50.1만원부터, 대한항공 A350 공식 442,200원<br><span style="font-size:11px;color:var(--text-muted);">2026-11-05 실측, 확정 요금 아님 — 아래 실측 카드 참고</span></td>
                 <td>부산을 아예 안 거침. 목요일 오전 출발해서 오전 중 합류.<br>왕복 같은 공항으로 끊으면 주차·교통이 가장 단순</td>
               </tr>
             </tbody>
@@ -921,58 +624,41 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
-        <h2>📊 2026-11-05 실측 — 목~일 주간 항공권</h2>
-        <p style="font-size:12.5px;">인천 ↔ 후쿠오카, 1인 이코노미 왕복, 세금 포함. Duffel 기준(대한항공 공식 사이트는 별도 표기). 환율 1 USD ≈ 1,343원(Finnhub 기준). <strong>확정 요금이 아니라 2026-11-05에 확인한 실측 가격대입니다. 예약 전 항공사 공식 사이트에서 재확인하세요.</strong></p>
-        <div style="overflow-x:auto;">
-          <table style="font-size:12.5px; min-width:640px;">
-            <thead><tr><th>주간 (목~일)</th><th>항공사 · 편명</th><th>1인 왕복</th><th>메모</th></tr></thead>
-            <tbody>
-              <tr style="background:#e6f7ec;">
-                <td style="font-weight:700; color:#155f3a;">3/4(목)-3/7(일) ✅ 가장 쌈</td>
-                <td>제주항공 7C1401 06:30-07:55 / 귀국 7C1402 08:55-10:30</td>
-                <td><strong>$271.90 ≈ 365,000원</strong></td>
-                <td>직항, 약 1시간 25~35분</td>
-              </tr>
-              <tr>
-                <td>3/4(목)-3/7(일)</td>
-                <td>아시아나</td>
-                <td>$309.90 ≈ 416,000원</td>
-                <td>직항</td>
-              </tr>
-              <tr>
-                <td>3/4(목)-3/7(일)</td>
-                <td>대한항공 A350 순수 KE787 07:45-09:15 / KE788 10:30-12:00</td>
-                <td>$340.70 ≈ 458,000원 (Duffel) / <strong>공식 사이트 자사 왕복 442,200원</strong></td>
-                <td>Google Flights·공식 사이트 교차 확인됨. 기종이 가장 큼</td>
-              </tr>
-              <tr>
-                <td>2/25(목)-2/28(일)</td>
-                <td>아시아나</td>
-                <td>$372.90 ≈ 501,000원</td>
-                <td>2월 말이 3월 초보다 비쌈</td>
-              </tr>
-              <tr>
-                <td>2/25(목)-2/28(일)</td>
-                <td>대한항공 KE787 출발</td>
-                <td>$390.30 ≈ 524,000원</td>
-                <td>⚠️ 귀국편은 아시아나 공동운항이 섞인 조합이라 주의</td>
-              </tr>
-              <tr>
-                <td>2/25(목)-3/1(월) 4박</td>
-                <td>아시아나</td>
-                <td>$391.90 ≈ 526,000원</td>
-                <td>삼일절(월) 포함 4박 5일</td>
-              </tr>
-              <tr>
-                <td>2/25(목)-3/1(월) 4박</td>
-                <td>대한항공</td>
-                <td>$401.30 ≈ 539,000원</td>
-                <td>삼일절(월) 포함 4박 5일</td>
-              </tr>
-            </tbody>
-          </table>
+        <h2>📊 2~3월 주간별 항공권 실측 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">2026-11-05 기준</span></h2>
+        <p style="font-size:14px;">인천 ↔ 후쿠오카, 1인 이코노미 왕복, 세금 포함. Duffel 기준(대한항공 공식 사이트는 별도 표기). 환율 1 USD ≈ 1,343원. <strong>확정 요금이 아니라 2026-11-05에 확인한 실측 가격대입니다. 예약 전 항공사 공식 사이트에서 재확인하세요.</strong></p>
+        <div class="pick-grid" style="margin-top:14px;">
+          <div class="pick-card" style="cursor:default;">
+            <div class="pick-name">2/11(목) ~ 2/14(일)</div>
+            <div class="pick-price">LCC 약 43.1만원</div>
+            <div class="pick-sub2">제주 $320.90 · 대한항공 $352.30(진에어 운항 혼합 주의) · 아시아나 $354.90</div>
+          </div>
+          <div class="pick-card" style="cursor:default;">
+            <div class="pick-name">2/18(목) ~ 2/21(일)</div>
+            <div class="pick-price">LCC 약 46.0만원</div>
+            <div class="pick-sub2">LCC $342.90 · 아시아나 $354.90 · 대한항공 $382.30</div>
+          </div>
+          <div class="pick-card" style="cursor:default;">
+            <div class="pick-name">2/25(목) ~ 2/28(일)</div>
+            <div class="pick-price">최저 약 50.1만원</div>
+            <div class="pick-sub2">아시아나 $372.90 · 대한항공 $390.30(귀국 아시아나 혼합 주의) · LCC 미확인</div>
+          </div>
+          <div class="pick-card" style="cursor:default;">
+            <div class="pick-name">2/25(목) ~ 3/1(월) · 삼일절 4박</div>
+            <div class="pick-price">최저 약 52.6만원</div>
+            <div class="pick-sub2">아시아나 $391.90 · 대한항공 $401.30 · 4박이라 숙소 1박 추가</div>
+          </div>
+          <div class="pick-card sel" style="cursor:default;">
+            <div class="pick-name">3/4(목) ~ 3/7(일)<span class="pick-badge">✅ 제일 쌈</span></div>
+            <div class="pick-price">LCC 약 36.5만원</div>
+            <div class="pick-sub2">제주 $271.90 · 아시아나 $309.90 · 대한항공 A350 순수 KE787/KE788 $340.70 / 공식 442,200원</div>
+          </div>
+          <div class="pick-card" style="cursor:default;">
+            <div class="pick-name">3/11(목) ~ 3/14(일)</div>
+            <div class="pick-price">LCC 약 41.2만원</div>
+            <div class="pick-sub2">LCC $306.90 · 아시아나 $309.90 · 대한항공 $341.30(귀국 아시아나 혼합)</div>
+          </div>
         </div>
-        <div class="note success" style="margin-top:12px;">
+        <div class="note success" style="margin-top:14px;">
           ✅ <strong>결론: 목~일 중 3/4-3/7이 제일 싸고, 2월 말이 더 비쌉니다.</strong> LCC로 가면 1인 약 36.5만원, 대한항공 A350으로 가면 공식 기준 약 44.2만원입니다.
         </div>
       </div>
@@ -980,7 +666,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       <div class="card">
         <h2>♨️ 온천 후보 비교 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(금요일 메인)</span></h2>
         <div style="overflow-x:auto;">
-          <table style="font-size:12.5px; min-width:640px;">
+          <table style="font-size:12.5px; min-width:0;">
             <thead><tr><th>후보</th><th>하카타에서</th><th>교통·요금(편도)</th><th>특징 / 주의</th></tr></thead>
             <tbody>
               <tr>
@@ -1076,7 +762,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <h2>🏨 2026-11-05 숙소 실측 — 3/4-3/7, 8인 기준 (Expedia)</h2>
         <p style="font-size:12.5px;">3/4-3/7, 3박, 8인 4실(2인×4), 게스트 기준 세금·수수료 포함 총액. 환율 1 USD ≈ 1,343원 기준. <strong>확정 요금이 아니라 2026-11-05에 확인한 실측 가격대입니다. 예약 전 공식 사이트에서 재확인하세요.</strong></p>
         <div style="overflow-x:auto;">
-          <table style="font-size:12.5px; min-width:560px;">
+          <table style="font-size:12.5px; min-width:0;">
             <thead><tr><th>호텔</th><th>8인 3박 총액</th><th>1인 3박</th><th>메모</th></tr></thead>
             <tbody>
               <tr>
@@ -1107,7 +793,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
           예약 사이트에서 <strong>반드시 실제 인원(8명)으로 검색</strong>해야 맞는 금액이 나옵니다.
         </div>
         <div style="overflow-x:auto; margin-top:12px;">
-          <table style="font-size:12.5px; min-width:560px;">
+          <table style="font-size:12.5px; min-width:0;">
             <thead><tr><th>등급</th><th>1인 1박 2식</th><th>내용</th></tr></thead>
             <tbody>
               <tr>
@@ -1147,6 +833,17 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">조사한 시세의 중간값을 넣어뒀습니다. 숫자는 직접 고칠 수 있으니 실제 견적이 나오면 바꿔서 쓰세요.</p>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap:10px; margin-top:12px;">
           <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">주간 (항공권 가격 반영)</label>
+            <select id="cost-week" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+              <option value="4">2/11(목) ~ 2/14(일)</option>
+              <option value="5">2/18(목) ~ 2/21(일)</option>
+              <option value="6">2/25(목) ~ 2/28(일)</option>
+              <option value="7">2/25(목) ~ 3/1(월) · 삼일절 4박</option>
+              <option value="8" selected>3/4(목) ~ 3/7(일) · 제일 쌈</option>
+              <option value="9">3/11(목) ~ 3/14(일)</option>
+            </select>
+          </div>
+          <div>
             <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">환율 (100엔 = ?원)</label>
             <input type="number" id="cost-rate" value="900" step="10" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
           </div>
@@ -1185,7 +882,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
           후쿠오카 직항 왕복 18~30만원대 · 중급 료칸 1인 20~30만원(중간 25만) ·
           벳푸 고속버스 왕복 6,500엔 + 지옥순례 2,400엔 · 유후인노모리 왕복 12,260엔 ·
           아파트는 8인 1채를 나눈 값.<br>
-          <strong>2026-11-05 실측</strong> — 3/4-3/7 제주항공 $271.90 ≈ 36.5만원, 대한항공 A350 공식 44.2만원, 2/25-2/28은 약 50만원부터 · 숙소 3/4-3/7 8인 3박 Expedia 약 131.4~132.5만원(1인 약 16.4~16.6만원) · 현지 식비 3박4일 1인 18,000~25,000엔, 교통 3,500~4,000엔 (식비·잡비 입력값은 이 범위를 참고해 고쳐 쓰세요).
+          <strong>2026-11-05 실측</strong> — 항공권은 위에서 고른 주간의 LCC 최저가가 들어갑니다(3/4~3/7 기준 365,000원). 3/4-3/7 제주항공 $271.90 ≈ 36.5만원, 대한항공 A350 공식 44.2만원, 2/25-2/28은 약 50만원부터 · 숙소 3/4-3/7 8인 3박 Expedia 약 131.4~132.5만원(1인 약 16.4~16.6만원) · 현지 식비 3박4일 1인 18,000~25,000엔, 교통 3,500~4,000엔 (식비·잡비 입력값은 이 범위를 참고해 고쳐 쓰세요).
         </div>
         <div class="note warn" style="margin-top:8px; font-size:12px;">
           ⚠️ <strong>확정 견적이 아니라 자릿수를 잡기 위한 추정</strong>입니다. 환율 기본값 900원은 2026년 7월 기준(888~908원)이라
@@ -1194,6 +891,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         </div>
       </div>
 
+      <div id="pick-area"></div>
       <div id="ny-login-check"></div>
       <div id="polls-ny"></div>
     </section>
@@ -1201,7 +899,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
     <!-- ============ 집계 ============ -->
     <section class="section" id="section-result">
       <div class="card">
-        <h2>✅ 집계 결과</h2>
+        <h2>✅ 집계 결과 — 신년회</h2>
         <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">미참석(❌)으로 표시한 분의 표는 해당 안건 집계에서 제외됩니다. 동률이면 재투표 안내가 뜹니다.</p>
         <div class="btn-row">
           <button class="btn" onclick="shareSummary()">💬 카톡으로 현황 보내기</button>
@@ -1212,11 +910,6 @@ body.gated header, body.gated main, body.gated footer { display: none; }
           📱 <strong>폰</strong>에서 누르면 공유창이 떠서 카카오톡 → 단톡방을 고르면 됩니다.
           💻 <strong>PC</strong>에서는 요약이 복사되니 카톡방에 그대로 붙여넣으세요. 아직 안 누른 사람 명단까지 들어갑니다.
         </div>
-      </div>
-      <div class="card">
-        <h2>🍻 송년모임</h2>
-        <div id="result-ye"></div>
-        <div id="plan-ye" style="margin-top:14px;"></div>
       </div>
       <div class="card">
         <h2>✈️ 신년회 (후쿠오카)</h2>
@@ -1237,7 +930,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       <div id="discuss-content">
         <div class="card new-thread">
           <h2>✍️ 새 토론 시작</h2>
-          <input type="text" id="new-thread-title" placeholder="제목 (예: 석모도 펜션 8명 되는지 전화해봄)" maxlength="80">
+          <input type="text" id="new-thread-title" placeholder="제목 (예: 후쿠오카 숙소·항공권, 뭘로 정할까요?)" maxlength="80">
           <textarea id="new-thread-body" placeholder="내용을 입력하세요"></textarea>
           <button onclick="addThread()">등록</button>
         </div>
@@ -1277,12 +970,6 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <div class="note warn" style="margin-top:12px; font-size:12px;">
           🔐 <strong>이 페이지는 주소를 아는 사람이면 누구나 볼 수 있습니다.</strong> 여권번호는 민감정보라, 꺼림칙하면 여기엔 <strong>영문 성명·만료일만</strong> 넣고 여권번호는 <strong>[📋 내 여권정보 복사]</strong>로 총무에게 1:1로만 보내세요. 더 잠그고 싶으면 관리자에게 말씀해 주세요 (Firebase 익명 인증 추가로 차단 가능).
         </div>
-      </div>
-
-      <div class="card">
-        <h2>🎣 장비 · 차량 현황</h2>
-        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">본인 정보만 수정할 수 있습니다. 차량과 여유 장비를 등록해두면 카풀 조 편성과 장비 빌려주기가 쉬워집니다.</p>
-        <div id="gear-table" style="overflow-x:auto; margin-top:12px;"></div>
       </div>
 
       <div class="card">
@@ -1342,7 +1029,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 </main>
 
 <footer style="text-align:center; padding: 24px 16px 40px; color: var(--text-muted); font-size: 12px;">
-  🍻 송년모임 &amp; ✈️ 신년회 · 회원 전용 · 검색엔진 비공개
+  ✈️ 2027 신년회 — 후쿠오카 · 회원 전용 · 검색엔진 비공개
 </footer>
 <script>
 // ============== CONFIG ==============
@@ -1399,64 +1086,6 @@ function loadDB() {
   return defaultDB();
 }
 function saveDB() { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); }
-// ============== 송년모임 후보지 ==============
-const SPOTS = [
-  {
-    emoji: '🌊', name: '석모도 바다향기펜션', link: 'http://www.smdbadahgi.com/', linkLabel: '펜션 홈페이지',
-    region: '인천 강화군 삼산면 (석모도)',
-    meta: ['앞 방파제 낚시', '전 객실 오션뷰', '바베큐파티 메뉴'],
-    desc: '펜션 바로 앞 방파제에서 바다낚시를 할 수 있다고 안내된 곳. 전 객실이 바다 전망이고, 따로 바베큐파티 메뉴를 운영합니다. 낚시도구는 직접 준비해야 합니다.',
-    pros: ['방파제가 펜션 앞 — 밤에도 왔다갔다 편함', '전 객실 오션뷰', '바베큐 메뉴가 따로 있어 장보기 부담 줄일 수 있음'],
-    cons: ['낚시도구 개인 지참', '석모도라 강화 본섬보다 20~30분 더 걸림', '바베큐 메뉴 가격 확인 필요'],
-    memo: '"저녁 먹고 바로 앞에서 낚시"에 가장 가까운 그림'
-  },
-  {
-    emoji: '🏖️', name: '석모도 바닷가하얀집펜션', link: 'https://page.yapen.co.kr/27912', linkLabel: '야펜에서 보기',
-    region: '인천 강화군 삼산면 · 민머루해변 앞',
-    meta: ['기준 4인 / 최대 8인', '공용 바베큐장', '갯벌체험'],
-    desc: '민머루해수욕장 모래사장 바로 앞. 갯벌체험·조개캐기·바다낚시를 함께 안내하고 있습니다. 최대 8인 객실이 있어 우리 인원이 방 하나에 들어갈 수 있는 몇 안 되는 후보입니다.',
-    pros: ['✅ 최대 8인 객실 — 8명이 한 방에 모일 수 있음', '해변 바로 앞이라 저녁에 산책·불멍 좋음', '낚시 말고도 갯벌체험 등 거리가 있음'],
-    cons: ['공용 바베큐장이라 다른 팀과 겹칠 수 있음', '11월 해변은 바람이 셉니다 — 방풍 대비 필요', '해변 특성상 본격 낚시 포인트는 아님'],
-    memo: '8명 한 방이 중요하면 1순위'
-  },
-  {
-    emoji: '🎨', name: '강화 파스텔펜션', link: 'https://www.pastelps.com/special1.html', linkLabel: '펜션 홈페이지',
-    region: '인천 강화군',
-    meta: ['둑에서 낚시', '밀물 때만', '장비 지참'],
-    desc: '밀물일 때 둑에서 바다낚시가 가능하다고 안내된 곳. 물때를 맞춰야 한다는 점이 분명히 적혀 있습니다.',
-    pros: ['강화 본섬이라 접근성이 석모도보다 좋음', '둑 낚시라 발판이 안정적'],
-    cons: ['⚠️ 밀물 때만 가능 — 날짜·시간 제약이 큼', '낚시 장비 개인 지참', '썰물이면 낚시 자체가 불가'],
-    memo: '날짜를 물때에 맞출 수 있을 때만 후보'
-  },
-  {
-    emoji: '⚓', name: '석모도 바닷가에서펜션', link: 'http://www.ontheseashore.net/', linkLabel: '펜션 홈페이지',
-    region: '인천 강화군 삼산면 석포리',
-    meta: ['바다낚시', '바베큐장'],
-    desc: '바다낚시와 바베큐장을 함께 안내하고 있는 석포리 소재 펜션. 석모대교를 건너 바로라 석모도 안쪽보다 접근이 빠릅니다.',
-    pros: ['석모대교 건너 바로 — 석모도 후보 중 가장 가까움', '낚시 + 바베큐 둘 다 안내됨'],
-    cons: ['낚시 장비 제공 여부 등 세부 정보가 확인 안 됨', '객실 규모 확인 필요'],
-    memo: '세부 정보가 가장 부족 — 전화 확인 필요'
-  },
-  {
-    emoji: '🚢', name: '석모도 항구펜션', link: 'https://nol.yanolja.com/stay/domestic/10051647', linkLabel: '야놀자에서 보기',
-    region: '인천 강화군 삼산면 어류정길212번길 93',
-    meta: ['전기로스터 2만원', '시간 제한 없음', '주차 무료', '낚시 확인 필요'],
-    desc: '바베큐는 전기로스터 방식으로 1회 2만원(현장결제), 이용 시간 제한이 없습니다. 다만 바다낚시에 대한 안내는 확인되지 않았습니다.',
-    pros: ['바베큐 2만원 — 후보 중 가장 저렴', '시간 제한 없음 → 밤새 먹고 마시기 좋음', '전기라 불 관리 안 해도 됨'],
-    cons: ['⚠️ 낚시 가능 여부 미확인 — 이번 모임 취지와 안 맞을 수 있음', '숯불이 아니라 전기그릴 (고기 맛 호불호)'],
-    memo: '"낚시보다 먹고 마시기"로 기울면 가성비 1순위'
-  },
-  {
-    emoji: '🐟', name: '김포 대명항 권역', link: 'https://map.naver.com/p/search/%EB%8C%80%EB%AA%85%ED%95%AD', linkLabel: '네이버 지도로 보기',
-    region: '경기 김포시 대곶면 대명항',
-    meta: ['서울 최근접', '선상 출조', '수산시장'],
-    desc: '김포 유일의 포구로 강화도 연안을 마주보고 있습니다. 선상낚시 출조와 수산시장이 함께 있어, 낚시가 안 되면 회 떠서 들어가는 식으로 대안이 확실합니다. 숙소는 펜션이 아니라 인근에서 따로 잡아야 합니다.',
-    pros: ['서울에서 가장 가까움 — 금요일 퇴근 후 여유', '수산시장에서 회·조개 바로 조달', '선상 출조 선택지가 있음'],
-    cons: ['⚠️ 숙소가 펜션 패키지가 아님 — 따로 예약 필요', '주차가 성수기엔 복잡', '가을~초겨울은 바람·파고로 출조 취소가 잦음'],
-    memo: '"낚시 제대로 + 회"를 원하면 여기, 대신 숙소를 따로 구해야 함'
-  }
-];
-
 // ============== 보기 번호 고정 (지난 표 보존) ==============
 // 표는 "보기 번호"로 저장된다. 보기를 지우거나 순서를 바꾸면 이미 들어온 표가
 // 엉뚱한 보기로 옮겨가므로, 그럴 땐 poll.keys 배열로 각 보기의 번호를 고정한다.
@@ -1470,84 +1099,6 @@ function _valKeys(val) { return (typeof val === 'number') ? [val] : (Array.isArr
 
 // ============== 투표 항목 ==============
 const POLLS = [
-  // ---------- 송년모임 ----------
-  {
-    group: 'ye', single: true,
-    id: 'ye_join',
-    question: '👤 송년모임 참가 여부 (먼저 눌러주세요 · 단일선택)',
-    options: [
-      '✅ 참가 — 날짜만 맞으면 간다',
-      '❌ 미참석 — 이번 송년모임은 못 감',
-      '🟢 조건부 — 내 일정과 맞으면 참가',
-      '🤔 아직 미정 — 확인 중'
-    ]
-  },
-  {
-    group: 'ye', single: true,
-    id: 'ye_format',
-    question: '🕐 송년모임 진행 방식 — 1박2일 vs 당일 (단일선택)',
-    // 보기 번호 고정: 기존 0~3번은 그대로 두고, 새로 넣은 '토요일 종일'만 4번 (화면 순서는 두 번째)
-    keys: [0, 4, 1, 2, 3],
-    short: ['🌙 1박2일', '🌞 당일 (토 종일)', '☀️ 당일 (토 낮~저녁)', '🌆 당일 (금 저녁만)', '🤷 아무거나 좋음'],
-    options: [
-      '🌙 1박2일 그대로 — 금~토, 펜션에서 자고 오기',
-      '🌞 토요일 종일 — 아침에 출발해 종일 놀고 밤에 귀가, 숙박 없이',
-      '☀️ 당일로 — 토요일 낮~저녁, 숙박 없이',
-      '🌆 당일 저녁만 — 금요일 퇴근 후 저녁·술자리만',
-      '🤷 어느 쪽이든 괜찮음 — 다수 의견 따름'
-    ]
-  },
-  {
-    group: 'ye', absentRow: true,
-    id: 'ye_date',
-    question: '🗓️ 송년모임 날짜 (가능한 주말 모두 선택 · 당일이면 그 주 금 저녁 또는 토)',
-    options: [
-      '11/6(금) ~ 11/7(토)',
-      '11/13(금) ~ 11/14(토)',
-      '11/20(금) ~ 11/21(토) — 중순 넘김, 예비안',
-      '11/27(금) ~ 11/28(토) — 예비안',
-      '11월은 어려움 — 12월 초로 미루자'
-    ]
-  },
-  {
-    group: 'ye',
-    id: 'ye_place',
-    question: '📍 송년모임 장소 (가고 싶은 곳 모두 선택)',
-    options: [
-      '🌊 석모도 바다향기펜션 — 앞 방파제 낚시, 전 객실 오션뷰',
-      '🏖️ 석모도 바닷가하얀집펜션 — 최대 8인 한 방 가능, 해변 앞',
-      '🎨 강화 파스텔펜션 — 둑 낚시(밀물 때만)',
-      '⚓ 석모도 바닷가에서펜션 — 석모대교 건너 바로',
-      '🚢 석모도 항구펜션 — 바베큐 2만원, 낚시는 확인 필요',
-      '🐟 김포 대명항 권역 — 선상 출조 + 수산시장 (숙소 별도)'
-    ]
-  },
-  {
-    group: 'ye',
-    id: 'ye_program',
-    question: '🎯 송년모임에서 하고 싶은 것 (모두 선택)',
-    options: [
-      '🎣 펜션 앞 바다낚시 — 물때 맞춰 워킹',
-      '🚤 선상 출조 — 1인 출조비 별도',
-      '🏞️ 유료 좌대·실내 낚시터 — 날씨 상관없이 보장',
-      '♨️ 석모도 미네랄 온천',
-      '🍖 낚시는 됐고 고기·술·수다 위주',
-      '🚶 강화 나들길·전등사 산책'
-    ]
-  },
-  {
-    group: 'ye',
-    id: 'ye_budget',
-    question: '💰 송년모임 1인 예산 (숙박·식비 포함, 모두 선택)',
-    options: [
-      '5만원 이하',
-      '5~8만원',
-      '8~12만원',
-      '🧾 회비에서 전액 또는 일부 충당',
-      '상관없음 — 좋은 데로 가자'
-    ]
-  },
-
   // ---------- 신년회 ----------
   {
     group: 'ny', single: true,
@@ -1563,17 +1114,17 @@ const POLLS = [
   {
     group: 'ny', absentRow: true,
     id: 'ny_when',
-    question: '🗓️ 신년회 주간 (가능한 일정 모두 선택 · 목~일 3박)',
+    question: '🗓️ 신년회 주간 (가능한 일정 모두 선택 · 목~일 3박 · 2~3월만)',
+    // 보기 번호 고정: 1월 보기(기존 0~3번)는 화면에서 뺐지만 번호는 비워둔다.
+    // 2~3월 보기는 기존 번호 4~9번 그대로 유지 — 이미 들어온 표가 옮겨가지 않는다.
+    // 1월 표는 Firebase에 그대로 남아 있고, keys를 지우면 되살릴 수 있다.
+    keys: [4, 5, 6, 7, 8, 9],
     options: [
-      '1/7(목) ~ 1/10(일) — 배는 1/6(수) 밤 승선',
-      '1/14(목) ~ 1/17(일) — 배는 1/13(수) 밤 승선',
-      '1/21(목) ~ 1/24(일) — 배는 1/20(수) 밤 승선',
-      '1/28(목) ~ 1/31(일) — 배는 1/27(수) 밤 승선',
       '2/11(목) ~ 2/14(일) — 배는 2/10(수) 밤 승선',
       '2/18(목) ~ 2/21(일) — 배는 2/17(수) 밤 승선',
       '2/25(목) ~ 2/28(일) — 배는 2/24(수) 밤 승선',
       '2/25(목) ~ 3/1(월) — 🎌 삼일절 끼고 4박, 연차는 목·금 2일만',
-      '3/4(목) ~ 3/7(일) — 배는 3/3(수) 밤 승선',
+      '3/4(목) ~ 3/7(일) — 배는 3/3(수) 밤 승선 · ✅ 제일 쌈',
       '3/11(목) ~ 3/14(일) — 신년회 마지노선'
     ]
   },
@@ -1656,23 +1207,6 @@ const POLLS = [
 // ============== 체크리스트 ==============
 const CHECKLISTS = [
   {
-    id: 'ye_prep',
-    title: '🍻 송년모임 준비',
-    color: '#0c447c',
-    items: [
-      { text: '참가 여부 · 진행 방식(1박/당일) · 날짜 · 장소 투표 완료', deadline: 14 },
-      { text: '펜션 전화 확인 (8인 가능? 좌대? 바베큐 요금?)', deadline: 10 },
-      { text: '펜션 예약 + 예약금 입금', deadline: 7 },
-      { text: '카풀 조 편성 (차량·탑승자 확정)', deadline: 5 },
-      { text: '물때(밀물·간조) 시간 확인해서 낚시 시간 잡기', deadline: 3 },
-      { text: '고기·주류·숯 담당자 정하기', deadline: 3 },
-      { text: '낚싯대·릴 없는 사람 빌릴 곳 확보', deadline: 3 },
-      { text: '기상·풍랑 예보 최종 확인', deadline: 1 },
-      { text: '집결 장소·시간 단톡방 공지 확인', deadline: 1 },
-      { text: '구명조끼·헤드랜턴 (방파제 밤낚시 시 필수)', deadline: 1 }
-    ]
-  },
-  {
     id: 'ny_prep',
     title: '✈️ 신년회(후쿠오카) 사전 준비',
     color: '#1f4e79',
@@ -1696,16 +1230,6 @@ const CHECKLISTS = [
       { text: '회비 정산 분담금 입금', deadline: 7 }
     ]
   }
-];
-
-// ============== 11월 서해(경기·인천) 어종 ==============
-const FISH_DATA = [
-  { name: '망둥어', months: ['', '', '', '', '', '', '', 'A', 'P', 'P', 'P', 'A'] },
-  { name: '우럭', months: ['P', 'A', 'A', 'A', 'A', 'P', 'P', 'P', 'P', 'P', 'P', 'P'] },
-  { name: '숭어', months: ['P', 'P', 'P', 'A', '', '', '', '', '', 'A', 'P', 'P'] },
-  { name: '학공치', months: ['A', '', '', '', '', '', '', '', 'A', 'P', 'P', 'P'] },
-  { name: '광어', months: ['', '', '', 'A', 'A', 'P', 'P', 'P', 'P', 'A', '', ''] },
-  { name: '주꾸미', months: ['A', 'A', '', '', '', '', '', 'A', 'P', 'P', 'A', ''] }
 ];
 
 // ============== 지난 기록 (2026년 10월 쭈꾸미 원정) ==============
@@ -1769,8 +1293,8 @@ const PASSPORT_FIELDS = [
   { key: 'issueDate',  label: '발급일',   type: 'date', w: 134 },
   { key: 'expiryDate', label: '만료일',   type: 'date', w: 134 }
 ];
-// 신년회 날짜가 아직 안 정해졌을 때 유효기간 판정에 쓰는 가정치 (1월 중순)
-const NY_ASSUMED_DATE = '2027-01-14';
+// 신년회 날짜가 아직 안 정해졌을 때 유효기간 판정에 쓰는 가정치 (2월 첫 주)
+const NY_ASSUMED_DATE = '2027-02-11';
 let _revealPassportNo = false;
 let _passportProxyEdit = false; // 총무가 다른 회원 몫까지 대신 입력하는 모드
 
@@ -2160,7 +1684,7 @@ function renderCloudStatus() {
   else note = CHECKING_NOTE;
   const mode = document.getElementById('cloud-mode');
   if (mode) mode.innerHTML = note;
-  ['ye', 'ny'].forEach(function (g) {
+  ['ny'].forEach(function (g) {
     const n = document.getElementById(g + '-cloud-note');
     if (!n) return;
     n.innerHTML = (cloudEnabled() && _cloudWritable !== false)
@@ -2178,7 +1702,6 @@ function renderCloudStatus() {
 }
 // ============== 안건 공통 ==============
 const AGENDAS = [
-  { group: 'ye', emoji: '🍻', name: '송년모임', joinPoll: 'ye_join', tab: 'ye', dateKey: 'departureDate' },
   { group: 'ny', emoji: '✈️', name: '신년회', joinPoll: 'ny_join', tab: 'ny', dateKey: 'nyDate' }
 ];
 function pollsOf(group) { return POLLS.filter(p => p.group === group); }
@@ -2188,8 +1711,6 @@ function agendaOf(group) { return AGENDAS.find(a => a.group === group); }
 function init() {
   renderAuthGate();
   renderMemberArea();
-  renderFishCalendar();
-  renderSpots();
   wireCost();
   renderCountdown();
   renderPolls();
@@ -2205,13 +1726,6 @@ function init() {
   renderCloudStatus();
   loadFromCloud(false);
   startCloudPolling();
-  document.getElementById('departure-date').addEventListener('change', e => {
-    DB.departureDate = e.target.value;
-    saveDB();
-    renderCountdown();
-    renderChecklists();
-    cloudSet(['meta', 'departureDate'], DB.departureDate || null);
-  });
   document.getElementById('ny-date').addEventListener('change', e => {
     DB.nyDate = e.target.value;
     saveDB();
@@ -2219,7 +1733,6 @@ function init() {
     renderChecklists();
     cloudSet(['meta', 'nyDate'], DB.nyDate || null);
   });
-  if (DB.departureDate) document.getElementById('departure-date').value = DB.departureDate;
   if (DB.nyDate) document.getElementById('ny-date').value = DB.nyDate;
   document.querySelectorAll('.tab').forEach(t => {
     t.onclick = () => switchTab(t.dataset.section);
@@ -2233,7 +1746,7 @@ function switchTab(name) {
   document.querySelectorAll('.section').forEach(s => {
     s.classList.toggle('active', s.id === 'section-' + name);
   });
-  if (name === 'ye' || name === 'ny') renderPolls();
+  if (name === 'ny') renderPolls();
   if (name === 'ny') { renderPassports(); wireCost(); }
   if (name === 'discuss') renderThreads();
   if (name === 'members') { renderMembers(); renderGear(); renderPassports(); }
@@ -2264,40 +1777,13 @@ function _renderOneCountdown(dateStr, dateElId, daysElId, inputId, label) {
   else daysEl.innerHTML = '<span style="font-size: 16px;">' + (-diff) + '일 지남</span>';
 }
 function renderCountdown() {
-  _renderOneCountdown(DB.departureDate, 'ye-countdown-date', 'ye-countdown-days', 'departure-date');
   _renderOneCountdown(DB.nyDate, 'ny-countdown-date', 'ny-countdown-days', 'ny-date');
-}
-
-// ============== SPOTS ==============
-function renderSpots() {
-  const el = document.getElementById('spot-grid');
-  if (!el) return;
-  let html = '';
-  SPOTS.forEach((s, i) => {
-    html += '<div class="spot-card">';
-    html += '<div class="spot-head"><div class="spot-emoji">' + s.emoji + '</div><div>';
-    html += '<div class="spot-name">' + (i + 1) + '. ' + escapeHtml(s.name) + '</div>';
-    html += '<div class="spot-region">' + escapeHtml(s.region) + '</div></div></div>';
-    html += '<div class="spot-meta">' + s.meta.map(m => '<span>' + escapeHtml(m) + '</span>').join('') + '</div>';
-    html += '<div class="spot-desc">' + escapeHtml(s.desc) + '</div>';
-    html += '<div class="pc-list">';
-    html += '<div class="pc-pros"><strong>👍 장점</strong><ul>' + s.pros.map(p => '<li>' + escapeHtml(p) + '</li>').join('') + '</ul></div>';
-    html += '<div class="pc-cons"><strong>👎 단점·확인할 점</strong><ul>' + s.cons.map(c => '<li>' + escapeHtml(c) + '</li>').join('') + '</ul></div>';
-    html += '</div>';
-    if (s.memo) html += '<div class="spot-memo">💬 ' + escapeHtml(s.memo) + '</div>';
-    if (s.link) {
-      html += '<div class="btn-row" style="margin-top:10px;"><button class="btn secondary" ' +
-        'style="padding:6px 12px; font-size:12px;" onclick="window.open(\'' + s.link + '\',\'_blank\')">🔗 ' +
-        escapeHtml(s.linkLabel || '사이트 열기') + '</button></div>';
-    }
-    html += '</div>';
-  });
-  el.innerHTML = html;
 }
 
 // ============== POLLS ==============
 function renderPolls() {
   AGENDAS.forEach(a => renderPollGroup(a.group));
+  renderPickers();
   renderHomeTodo();
 }
 
@@ -2543,7 +2029,6 @@ function renderHomeMemberStatus() {
   });
   html += '</tbody></table></div>';
   html += '<div class="btn-row" style="margin-top:14px;">';
-  html += '<button class="btn" onclick="switchTab(\'ye\')">🍻 송년모임 투표</button>';
   html += '<button class="btn" onclick="switchTab(\'ny\')">✈️ 신년회 투표</button>';
   html += '<button class="btn secondary" onclick="switchTab(\'prep\')">🎒 준비물</button>';
   html += '</div>';
@@ -2665,7 +2150,7 @@ function buildSummaryText() {
   const now = new Date();
   const stamp = (now.getMonth() + 1) + '/' + now.getDate();
   const L = [];
-  L.push('📋 송년모임 · 신년회 현황 (' + stamp + ' 기준)');
+  L.push('📋 신년회 현황 (' + stamp + ' 기준)');
 
   AGENDAS.forEach(function (a) {
     L.push('');
@@ -2675,7 +2160,7 @@ function buildSummaryText() {
     if (jn.go.length) L.push('  🙋 갈 사람: ' + jn.go.join(', '));
     if (jn.undecided.length) L.push('  🤔 미정: ' + jn.undecided.join(', '));
     if (jn.no.length) L.push('  ❌ 미참석: ' + jn.no.join(', '));
-    const dateStr = a.group === 'ye' ? DB.departureDate : DB.nyDate;
+    const dateStr = DB.nyDate;
     if (dateStr) L.push('· 📅 확정일: ' + dateStr);
     pollsOf(a.group).forEach(function (p) {
       if (p.id === a.joinPoll) return;
@@ -2765,6 +2250,7 @@ function costInputs() {
   const g = id => document.getElementById(id);
   return {
     rate: Number((g('cost-rate') || {}).value || COST.rate),
+    week: (g('cost-week') || {}).value || '8',
     go: (g('cost-go') || {}).value || 'air',
     stay: (g('cost-stay') || {}).value || 'apt3',
     onsen: (g('cost-onsen') || {}).value || 'beppu',
@@ -2772,11 +2258,126 @@ function costInputs() {
   };
 }
 
+
+// ============== 2~3월 주간 실측 가격 (2026-11-05, Duffel 1인 이코노미 왕복, 환율 1 USD ≈ 1,343원, 확정 요금 아님) ==============
+// key는 ny_when 보기의 기존 번호(4~9)를 그대로 쓴다.
+const WEEK_PRICES = {
+  4: { label: '2/11(목) ~ 2/14(일)', lcc: '43.1만원', lccKrw: 431000, note: 'LCC 제주 $320.90 · 대한항공 $352.30(진에어 운항 혼합 주의) · 아시아나 $354.90' },
+  5: { label: '2/18(목) ~ 2/21(일)', lcc: '46.0만원', lccKrw: 460000, note: 'LCC $342.90 · 아시아나 $354.90 · 대한항공 $382.30' },
+  6: { label: '2/25(목) ~ 2/28(일)', lcc: null, lccKrw: 501000, note: '아시아나 $372.90 · 대한항공 $390.30(귀국 아시아나 혼합 주의) · LCC 미확인' },
+  7: { label: '2/25(목) ~ 3/1(월) · 삼일절 4박', lcc: null, lccKrw: 526000, note: '아시아나 $391.90 · 대한항공 $401.30 · 4박이라 숙소 1박 추가' },
+  8: { label: '3/4(목) ~ 3/7(일)', lcc: '36.5만원', lccKrw: 365000, note: 'LCC 제주 $271.90 · 아시아나 $309.90 · 대한항공 A350 순수 KE787/KE788 $340.70 / 공식 442,200원', cheapest: true },
+  9: { label: '3/11(목) ~ 3/14(일)', lcc: '41.2만원', lccKrw: 412000, note: 'LCC $306.90 · 아시아나 $309.90 · 대한항공 $341.30(귀국 아시아나 혼합)' }
+};
+// 경비 계산기: 선택한 주의 항공권(LCC 최저, 2/25~2/28·2/25~3/1은 확인된 최저가) 반영. 3/4~3/7 기준 365,000원.
+const WEEK_FLIGHT_KRW = { 4: 431000, 5: 460000, 6: 501000, 7: 526000, 8: 365000, 9: 412000 };
+
+const PICK_EXTRA = {
+  ny_route: {
+    0: '배+귀국 항공 · KTX 6만 + 배 9.8만 + 편도 12만',
+    1: '배+귀국 항공 · 집에서 부산까지만',
+    2: '김포 왕복 · 항공권은 주간 카드 가격 참고',
+    3: '인천 왕복 · 항공권은 주간 카드 가격 참고',
+    4: '총무 재량'
+  },
+  ny_stay: {
+    0: '호텔 3박 · 1인 약 16.4~16.6만원 (3/4 실측)',
+    1: '아파트 독채 · 1인 비용 최저',
+    2: '아파트 2박 + 료칸 1박',
+    3: '호텔 2박 + 료칸 1박 · 료칸 약 25만원 추가',
+    4: '호텔 1박 + 료칸 2박 · 약 50만원 추가',
+    5: '료칸 3박 · 가장 비쌈',
+    6: '총무 재량'
+  },
+  ny_onsen: {
+    0: '벳푸 · 버스 왕복 6,500엔 + 지옥순례 2,400엔',
+    1: '유후인 · 열차 왕복 12,260엔, 1개월 전 예약',
+    2: '벳푸+유후인 둘 다 · 강행군 주의',
+    3: '가깝고 한적 · 시내 온천',
+    4: '온천 패스 · 이동 부담 최소, 허리 배려'
+  }
+};
+
+function renderPickers() {
+  const el = document.getElementById('pick-area');
+  if (!el) return;
+  if (!DB.user) {
+    el.innerHTML = '<div class="login-required">🔒 주간·가는 편·숙소·온천을 고르려면 상단에서 이름을 선택하고 참여해주세요</div>';
+    return;
+  }
+  const pick = (pollId, title, sub) => {
+    const poll = POLLS.find(p => p.id === pollId);
+    if (!poll) return '';
+    const keys = optKeys(poll);
+    const myKeys = _getUserVotes(pollId, DB.user);
+    const extra = PICK_EXTRA[pollId] || {};
+    let html = '<div class="pick-section"><div class="pick-head"><div class="pick-title">' + title + '</div><div class="pick-sub">' + sub + '</div></div><div class="pick-grid">';
+    poll.options.forEach((opt, i) => {
+      const k = keys[i];
+      const sel = myKeys.indexOf(k) >= 0;
+      const wp = pollId === 'ny_when' ? WEEK_PRICES[k] : null;
+      const voters = Object.keys(DB.votes[pollId] || {}).filter(u => _getUserVotes(pollId, u).indexOf(k) >= 0);
+      let price = '', sub2 = '';
+      if (wp) {
+        price = (wp.lcc ? 'LCC ' + wp.lcc : '최저 ' + fmt(wp.lccKrw)) + (wp.cheapest ? '<span class="pick-badge">✅ 제일 쌈</span>' : '');
+        sub2 = wp.note;
+      } else if (extra[k]) { sub2 = extra[k]; }
+      html += '<div class="pick-card' + (sel ? ' sel' : '') + '" onclick="vote(\'' + pollId + '\', ' + k + ')">' +
+        '<div class="pick-name">' + (sel ? '✓ ' : '') + escapeHtml(opt) + '</div>' +
+        (price ? '<div class="pick-price">' + price + '</div>' : '') +
+        (sub2 ? '<div class="pick-sub2">' + escapeHtml(sub2) + '</div>' : '') +
+        '<div class="pick-votes">' + voters.length + '명 선택' + (voters.length ? ' · ' + voters.map(escapeHtml).join(' · ') : '') + '</div>' +
+        '</div>';
+    });
+    return html + '</div></div>';
+  };
+  let html = '<div class="card"><h2>👆 카드 눌러서 선택하기</h2><p style="font-size:14px;">아래 카드를 누르면 바로 투표가 저장됩니다. 다시 누르면 취소됩니다. 가격은 2026-11-05 실측(확정 요금 아님)입니다.</p>';
+  html += pick('ny_when', '📅 주간 고르기', '가격은 1인 왕복 최저 · 목~일 3박');
+  html += pick('ny_route', '🚢🛫 가는 편 고르기', '배는 수요일 밤 승선');
+  html += pick('ny_stay', '🛏️ 숙소 고르기', '3박 기준 · 료칸은 1인 1박 약 25만원 추가');
+  html += pick('ny_onsen', '♨️ 온천 고르기', '금요일 메인 · 허리 배려');
+  html += pick('ny_budget', '💰 1인 예산 고르기', '항공+숙소+온천+식비 포함');
+  html += myEstimateHtml();
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function myEstimateHtml() {
+  const wk = _getUserVotes('ny_when', DB.user)[0];
+  const wp = wk !== undefined ? WEEK_PRICES[wk] : WEEK_PRICES[8];
+  const go = _getUserVotes('ny_route', DB.user)[0];
+  const stay = _getUserVotes('ny_stay', DB.user)[0];
+  const onsen = _getUserVotes('ny_onsen', DB.user)[0];
+  let fly = wp.lccKrw, flyLabel = '항공 왕복(LCC 최저)';
+  if (go === 0 || go === 1) { fly = COST.ktxKrw + COST.busanKrw + COST.ferryKrw + COST.flyOneKrw; flyLabel = '배+귀국 항공'; }
+  let stayCost = COST.aptKrw * 3, stayLabel = '아파트 독채 3박';
+  if (stay === 0) { stayCost = COST.hotelKrw * 3; stayLabel = '호텔 3박'; }
+  else if (stay === 2) { stayCost = COST.aptKrw * 2 + COST.ryokanKrw; stayLabel = '아파트 2박+료칸 1박'; }
+  else if (stay === 3) { stayCost = COST.hotelKrw * 2 + COST.ryokanKrw; stayLabel = '호텔 2박+료칸 1박'; }
+  else if (stay === 4) { stayCost = COST.hotelKrw + COST.ryokanKrw * 2; stayLabel = '호텔 1박+료칸 2박'; }
+  else if (stay === 5) { stayCost = COST.ryokanKrw * 3; stayLabel = '료칸 3박'; }
+  let onsenJpy = COST.beppuJpy;
+  if (onsen === 1) onsenJpy = COST.yufuinJpy;
+  else if (onsen === 2) onsenJpy = COST.beppuJpy + COST.yufuinJpy;
+  else if (onsen === 3 || onsen === 4) onsenJpy = 0;
+  const onsenCost = Math.round(onsenJpy * COST.rate / 100 / 1000) * 1000;
+  const total = fly + stayCost + onsenCost + COST.foodKrw;
+  const chosen = wk !== undefined;
+  return '<div class="total-bar"><div class="tb-label">' + (chosen ? '내 선택 기준 1인 예상 (항공+숙소+온천+식비)' : '아직 주간을 안 골랐어요 — 아래는 제일 싼 주(3/4~3/7) 기준 예시') + '</div>' +
+    '<div class="tb-value">약 ' + fmt(total) + '</div>' +
+    '<div class="tb-sub">' + wp.label + ' · ' + flyLabel + ' ' + fmt(fly) + ' · ' + stayLabel + ' ' + fmt(stayCost) + ' · 온천 ' + fmt(onsenCost) + ' · 식비 ' + fmt(COST.foodKrw) +
+    (wk === 7 ? ' · 4박이라 숙소 1박분은 별도 확인 필요' : '') +
+    ((onsen === 3 || onsen === 4) ? ' · 시내 온천/패스 비용 별도' : '') + '</div></div>';
+}
+
 function renderCost() {
   const el = document.getElementById('cost-result');
   if (!el) return;
   const i = costInputs();
   const jpy = v => v * i.rate / 100;
+  const wp = WEEK_PRICES[i.week];
+  const flyRt = WEEK_FLIGHT_KRW[i.week] || COST.flyRtKrw;
+  const weekLabel = wp ? wp.label : i.week;
   const rows = [];
 
   if (i.go === 'ferry') {
@@ -2785,7 +2386,7 @@ function renderCost() {
     rows.push(['🚢 뉴카멜리아 2등실 (편도, 제세공과금 포함)', COST.ferryKrw]);
     rows.push(['🛬 후쿠오카 → 김포·인천 (편도)', COST.flyOneKrw]);
   } else {
-    rows.push(['✈️ 김포·인천 ↔ 후쿠오카 왕복 (직항 LCC)', COST.flyRtKrw]);
+    rows.push(['✈️ 김포·인천 ↔ 후쿠오카 왕복 (' + weekLabel + ' · LCC 최저, 2026-11-05 실측)', flyRt]);
   }
 
   if (i.stay === 'hotel3') rows.push(['🏙️ 비즈니스 호텔 3박', COST.hotelKrw * 3]);
@@ -2804,7 +2405,7 @@ function renderCost() {
   rows.push(['🍢 현지 식비·교통·잡비 (3박4일)', i.food]);
 
   const total = rows.reduce((a, r) => a + r[1], 0);
-  let html = '<div style="overflow-x:auto;"><table style="font-size:12.5px; min-width:420px;">';
+  let html = '<div style="overflow-x:auto;"><table style="font-size:12.5px; min-width:0;">';
   html += '<thead><tr><th style="text-align:left;">항목</th><th style="text-align:right; min-width:96px;">1인</th></tr></thead><tbody>';
   rows.forEach(r => {
     html += '<tr><td style="padding:7px 10px;">' + r[0] + '</td>' +
@@ -2823,7 +2424,7 @@ function renderCost() {
 }
 
 function wireCost() {
-  ['cost-rate', 'cost-go', 'cost-stay', 'cost-onsen', 'cost-food'].forEach(id => {
+  ['cost-week', 'cost-rate', 'cost-go', 'cost-stay', 'cost-onsen', 'cost-food'].forEach(id => {
     const e = document.getElementById(id);
     if (e && !e._wired) { e._wired = true; e.addEventListener('change', renderCost); e.addEventListener('input', renderCost); }
   });
@@ -2834,7 +2435,6 @@ function wireCost() {
 // ============== 홈 맨 위 — 지금까지 투표로 본 잠정 계획 ==============
 // 전원이 투표하지 않았어도 현재 1위 기준으로 "계획표"처럼 보여준다. (확정일이 입력되면 그 날짜를 우선)
 const PLAN_ROWS = {
-  ye: [['ye_format', '🕐', '진행 방식'], ['ye_date', '📅', '날짜'], ['ye_place', '📍', '장소'], ['ye_program', '🎯', '할 것'], ['ye_budget', '💰', '1인 예산']],
   ny: [['ny_when', '📅', '주간'], ['ny_route', '🚢', '가는·오는 편'], ['ny_busan', '🏨', '수요일 전날'],
        ['ny_onsen', '♨️', '온천'], ['ny_stay', '🛏️', '숙박'], ['ny_activity', '🎌', '그 외'], ['ny_budget', '💰', '1인 예산']]
 };
@@ -2877,12 +2477,12 @@ function renderHomePlan() {
     const jn = _joinNames(a.group);
     const pend = _pendingMembers(a.group);          // 미참석은 빼고, 하나라도 덜 누른 사람
     const finished = REGISTERED_MEMBERS.length - pend.length;
-    const fixed = a.group === 'ye' ? DB.departureDate : DB.nyDate;
+    const fixed = DB.nyDate;
     html += '<div class="plan-agenda">' +
       '<div class="plan-agenda-head"><span>' + a.emoji + ' ' + escapeHtml(a.name) + '</span>' +
       '<span class="plan-count">다 누른 사람 ' + finished + '/' + REGISTERED_MEMBERS.length + '명</span></div>';
     PLAN_ROWS[a.group].forEach((row, i) => {
-      const isDateRow = row[0] === 'ye_date' || row[0] === 'ny_when';
+      const isDateRow = row[0] === 'ny_when';
       const cell = (isDateRow && fixed) ? { state: 'fixed', text: _planDate(fixed), sub: '확정' } : _planCell(row[0]);
       html += '<div class="plan-row ' + cell.state + '">' +
         '<div class="plan-label">' + row[1] + ' ' + row[2] + '</div>' +
@@ -2905,7 +2505,6 @@ function renderHomePlan() {
   html += '<div class="plan-foot">🟡 노란 줄은 <strong>동률이거나 1표 차</strong>라 아직 뒤집힐 수 있는 항목입니다. ' +
     '확정되면 총무가 아래 D-DAY의 확정일을 넣고, 그 날짜가 여기 "확정"으로 표시됩니다.</div>' +
     '<div class="btn-row" style="margin-top:10px;">' +
-    '<button class="btn" onclick="switchTab(\'ye\')">🍻 송년모임 투표</button>' +
     '<button class="btn" onclick="switchTab(\'ny\')">✈️ 신년회 투표</button>' +
     '<button class="btn secondary" onclick="shareSummary()">💬 카톡으로 보내기</button>' +
     '</div></div>';
@@ -2924,7 +2523,7 @@ function renderResult() {
 }
 
 function getParticipationStatus(name, group) {
-  const agenda = agendaOf(group || 'ye');
+  const agenda = agendaOf(group || 'ny');
   const v = (DB.votes[agenda.joinPoll] || {})[name];
   if (v === 0) return { code: 'yes', label: '✅ 참가', color: '#27ae60', bg: '#e6f7ec' };
   if (v === 1) return { code: 'no', label: '❌ 미참석', color: '#e74c3c', bg: '#fdebec' };
@@ -3270,19 +2869,6 @@ function gateShowError(msg) {
   el.textContent = msg;
   el.classList.add('show');
   setTimeout(() => el.classList.remove('show'), 4000);
-}
-function renderFishCalendar() {
-  const el = document.getElementById('fish-calendar');
-  let html = '<div class="head"></div>';
-  for (let i = 1; i <= 12; i++) html += '<div class="head">' + i + '월</div>';
-  FISH_DATA.forEach(row => {
-    html += '<div class="name">' + escapeHtml(row.name) + '</div>';
-    row.months.forEach(v => {
-      const cls = v === 'P' ? 'cell peak' : v === 'A' ? 'cell avail' : 'cell';
-      html += '<div class="' + cls + '"></div>';
-    });
-  });
-  el.innerHTML = html;
 }
 function _getUserVotes(pollId, user) {
   const v = (DB.votes[pollId] || {})[user];
@@ -3809,7 +3395,7 @@ function exportData() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'jjukkumi_trip_2026_' + new Date().toISOString().split('T')[0] + '.json';
+  a.download = 'fukuoka_ny_2027_' + new Date().toISOString().split('T')[0] + '.json';
   a.click();
   URL.revokeObjectURL(url);
 }
