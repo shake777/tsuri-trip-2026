@@ -168,6 +168,7 @@ tr:hover td { background: #f5f9ff; }
 .pick-card .pick-name { font-weight: 800; font-size: 16px; color: var(--text); line-height: 1.35; }
 .pick-card .pick-price { font-size: 18px; font-weight: 800; color: var(--primary); }
 .pick-card .pick-sub2 { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.pick-card .pick-trip { font-size: 13px; color: #0b6e4f; line-height: 1.5; }
 .pick-card .pick-votes { font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-top: auto; padding-top: 6px; line-height: 1.5; }
 .pick-badge {
   display: inline-block; background: #dcfce7; color: #15803d;
@@ -628,7 +629,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 
       <div class="card">
         <h2>📊 2~3월 주간별 항공권 실측 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">2026-11-05 기준</span></h2>
-        <p style="font-size:14px;">인천 ↔ 후쿠오카, 1인 이코노미 왕복, 세금 포함. Duffel 기준(대한항공 공식 사이트는 별도 표기). 환율 1 USD ≈ 1,343원. <strong>확정 요금이 아니라 2026-11-05에 확인한 실측 가격대입니다. 예약 전 항공사 공식 사이트에서 재확인하세요.</strong> 3/18~3/21·3/25~3/28 카드는 Google Flights 2026-11-10 실측(원화, 세금 포함)입니다.</p>
+        <p style="font-size:14px;">인천 ↔ 후쿠오카, 1인 이코노미 왕복, 세금 포함. Duffel 기준(대한항공 공식 사이트는 별도 표기). 환율 1 USD ≈ 1,343원. <strong>확정 요금이 아니라 2026-11-05에 확인한 실측 가격대입니다. 예약 전 항공사 공식 사이트에서 재확인하세요.</strong> 3/18~3/21·3/25~3/28 카드는 Google Flights 2026-11-10 실측(원화, 세금 포함)입니다. 초록색 트립닷컴 줄은 2026-11-11 트립닷컴 실측(화면 표시 왕복가, 세금 포함 여부는 별도 표시 없음)입니다.</p>
         <div class="pick-grid" style="margin-top:14px;">
           <div class="pick-card" style="cursor:default;">
             <div class="pick-name">2/11(목) ~ 2/14(일)</div>
@@ -639,6 +640,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
             <div class="pick-name">2/18(목) ~ 2/21(일)</div>
             <div class="pick-price">LCC 약 46.0만원</div>
             <div class="pick-sub2">LCC $342.90 · 아시아나 $354.90 · 대한항공 $382.30</div>
+            <div class="pick-trip">✈️ 트립닷컴 11/11 실측: 최저 406,900원(혼합) · 제주 465,300원 · 아시아나 454,800원 · 대한항공 544,400원</div>
           </div>
           <div class="pick-card" style="cursor:default;">
             <div class="pick-name">2/25(목) ~ 2/28(일)</div>
@@ -654,6 +656,7 @@ body.gated header, body.gated main, body.gated footer { display: none; }
             <div class="pick-name">3/4(목) ~ 3/7(일)<span class="pick-badge">✅ 제일 쌈</span></div>
             <div class="pick-price">LCC 약 36.5만원</div>
             <div class="pick-sub2">제주 $271.90 · 아시아나 $309.90 · 대한항공 A350 순수 KE787/KE788 $340.70 / 공식 442,200원</div>
+            <div class="pick-trip">✈️ 트립닷컴 11/11 실측: 최저 343,800원(혼합) · 제주 365,200원 · 아시아나 396,100원 · 대한항공 439,700원</div>
           </div>
           <div class="pick-card" style="cursor:default;">
             <div class="pick-name">3/11(목) ~ 3/14(일)</div>
@@ -664,11 +667,13 @@ body.gated header, body.gated main, body.gated footer { display: none; }
             <div class="pick-name">3/18(목) ~ 3/21(일)</div>
             <div class="pick-price">LCC 약 43.6만원</div>
             <div class="pick-sub2">제주 ₩436,200 · 아시아나 ₩446,500 · 대한항공 ₩502,900 (KE787 A350 출발편) · Google Flights 2026-11-10 실측</div>
+            <div class="pick-trip">✈️ 트립닷컴 11/11 실측: 최저 394,700원(혼합) · 제주 440,800원 · 아시아나 425,200원 · 대한항공 484,000원</div>
           </div>
           <div class="pick-card" style="cursor:default;">
             <div class="pick-name">3/25(목) ~ 3/28(일)</div>
             <div class="pick-price">최저 약 51.9만원 (아시아나)</div>
             <div class="pick-sub2">제주 왕복 옵션 없음 · 아시아나 ₩519,000 · 대한항공 ₩552,900 (KE787 A350 출발편) · Google Flights 2026-11-10 실측</div>
+            <div class="pick-trip">✈️ 트립닷컴 11/11 실측: 최저 431,700원(혼합) · 제주 왕복 없음 · 아시아나 순수 운항 없음 · 대한항공 536,500원</div>
           </div>
         </div>
         <div class="note success" style="margin-top:14px;">
@@ -2329,13 +2334,13 @@ function costInputs() {
 // key는 ny_when 보기의 기존 번호(4~9)를 그대로 쓴다. 3/18·3/25주는 10·11번을 새로 쓴다.
 const WEEK_PRICES = {
   4: { label: '2/11(목) ~ 2/14(일)', lcc: '43.1만원', lccKrw: 431000, note: 'LCC 제주 $320.90 · 대한항공 $352.30(진에어 운항 혼합 주의) · 아시아나 $354.90' },
-  5: { label: '2/18(목) ~ 2/21(일)', lcc: '46.0만원', lccKrw: 460000, note: 'LCC $342.90 · 아시아나 $354.90 · 대한항공 $382.30' },
+  5: { label: '2/18(목) ~ 2/21(일)', lcc: '46.0만원', lccKrw: 460000, note: 'LCC $342.90 · 아시아나 $354.90 · 대한항공 $382.30', tripcom: '최저 406,900원(혼합) · 제주 465,300원 · 아시아나 454,800원 · 대한항공 544,400원' },
   6: { label: '2/25(목) ~ 2/28(일)', lcc: null, lccKrw: 501000, note: '아시아나 $372.90 · 대한항공 $390.30(귀국 아시아나 혼합 주의) · LCC 미확인' },
   7: { label: '2/25(목) ~ 3/1(월) · 삼일절 4박', lcc: null, lccKrw: 526000, note: '아시아나 $391.90 · 대한항공 $401.30 · 4박이라 숙소 1박 추가' },
-  8: { label: '3/4(목) ~ 3/7(일)', lcc: '36.5만원', lccKrw: 365000, note: 'LCC 제주 $271.90 · 아시아나 $309.90 · 대한항공 A350 순수 KE787/KE788 $340.70 / 공식 442,200원', cheapest: true },
+  8: { label: '3/4(목) ~ 3/7(일)', lcc: '36.5만원', lccKrw: 365000, note: 'LCC 제주 $271.90 · 아시아나 $309.90 · 대한항공 A350 순수 KE787/KE788 $340.70 / 공식 442,200원', cheapest: true, tripcom: '최저 343,800원(혼합) · 제주 365,200원 · 아시아나 396,100원 · 대한항공 439,700원' },
   9: { label: '3/11(목) ~ 3/14(일)', lcc: '41.2만원', lccKrw: 412000, note: 'LCC $306.90 · 아시아나 $309.90 · 대한항공 $341.30(귀국 아시아나 혼합)' },
-  10: { label: '3/18(목) ~ 3/21(일)', lcc: '43.6만원', lccKrw: 436200, note: '제주 ₩436,200 · 아시아나 ₩446,500 · 대한항공 ₩502,900 (KE787 A350 출발편) · Google Flights 2026-11-10 실측' },
-  11: { label: '3/25(목) ~ 3/28(일)', lcc: null, lccKrw: 519000, note: '제주 왕복 옵션 없음 · 아시아나 ₩519,000 · 대한항공 ₩552,900 (KE787 A350 출발편) · Google Flights 2026-11-10 실측' }
+  10: { label: '3/18(목) ~ 3/21(일)', lcc: '43.6만원', lccKrw: 436200, note: '제주 ₩436,200 · 아시아나 ₩446,500 · 대한항공 ₩502,900 (KE787 A350 출발편) · Google Flights 2026-11-10 실측', tripcom: '최저 394,700원(혼합) · 제주 440,800원 · 아시아나 425,200원 · 대한항공 484,000원' },
+  11: { label: '3/25(목) ~ 3/28(일)', lcc: null, lccKrw: 519000, note: '제주 왕복 옵션 없음 · 아시아나 ₩519,000 · 대한항공 ₩552,900 (KE787 A350 출발편) · Google Flights 2026-11-10 실측', tripcom: '최저 431,700원(혼합) · 제주 왕복 없음 · 아시아나 순수 운항 없음 · 대한항공 536,500원' }
 };
 // 경비 계산기: 선택한 주의 항공권(LCC 최저, 2/25~2/28·2/25~3/1은 확인된 최저가) 반영. 3/4~3/7 기준 365,000원. 3/25주는 제주 왕복 옵션 없어 아시아나 최저가(519,000원)를 쓴다.
 const WEEK_FLIGHT_KRW = { 4: 431000, 5: 460000, 6: 501000, 7: 526000, 8: 365000, 9: 412000, 10: 436200, 11: 519000 };
@@ -2384,22 +2389,24 @@ function renderPickers() {
       const sel = myKeys.indexOf(k) >= 0;
       const wp = pollId === 'ny_when' ? WEEK_PRICES[k] : null;
       const voters = Object.keys(DB.votes[pollId] || {}).filter(u => _getUserVotes(pollId, u).indexOf(k) >= 0);
-      let price = '', sub2 = '';
+      let price = '', sub2 = '', trip = '';
       if (wp) {
         price = (wp.lcc ? 'LCC ' + wp.lcc : '최저 ' + fmt(wp.lccKrw)) + (wp.cheapest ? '<span class="pick-badge">✅ 제일 쌈</span>' : '');
         sub2 = wp.note;
+        if (wp.tripcom) { trip = '<div class="pick-trip">✈️ 트립닷컴 11/11 실측: ' + escapeHtml(wp.tripcom) + '</div>'; }
       } else if (extra[k]) { sub2 = extra[k]; }
       html += '<div class="pick-card' + (sel ? ' sel' : '') + '" onclick="vote(\'' + pollId + '\', ' + k + ')">' +
         (sel ? '<span class="pick-sel-badge">✓ 선택됨</span>' : '') +
         '<div class="pick-name">' + escapeHtml(opt) + '</div>' +
         (price ? '<div class="pick-price">' + price + '</div>' : '') +
         (sub2 ? '<div class="pick-sub2">' + escapeHtml(sub2) + '</div>' : '') +
+        trip +
         '<div class="pick-votes">' + voters.length + '명 선택' + (voters.length ? ' · ' + voters.map(escapeHtml).join(' · ') : '') + '</div>' +
         '</div>';
     });
     return html + '</div></div>';
   };
-  let html = '<div class="card"><h2>👆 카드 눌러서 선택하기</h2><p style="font-size:14px;">카드를 누르면 바로 투표가 저장됩니다. 여러 개를 골라도 되고, 눌렀던 카드를 다시 누르면 취소됩니다. 언제든 바꿀 수 있습니다. 가격은 2026-11-05 실측(3/18·3/25주는 Google Flights 2026-11-10 실측, 확정 요금 아님)입니다.</p>';
+  let html = '<div class="card"><h2>👆 카드 눌러서 선택하기</h2><p style="font-size:14px;">카드를 누르면 바로 투표가 저장됩니다. 여러 개를 골라도 되고, 눌렀던 카드를 다시 누르면 취소됩니다. 언제든 바꿀 수 있습니다. 가격은 2026-11-05 실측(3/18·3/25주는 Google Flights 2026-11-10 실측, 확정 요금 아님)이고, 초록색 트립닷컴 줄은 2026-11-11 트립닷컴 실측입니다.</p>';
   html += pick('ny_when', '📅 주간 고르기', '가격은 1인 왕복 최저 · 목~일 3박');
   html += pick('ny_route', '🚢🛫 가는 편 고르기', '배는 수요일 밤 승선');
   html += pick('ny_stay', '🛏️ 숙소 고르기', '3박 기준 · 료칸은 1인 1박 약 25만원 추가');
