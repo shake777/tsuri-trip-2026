@@ -483,11 +483,6 @@ tr.done-row td { opacity: 0.62; }
         </div>
       </div>
 
-      <div class="card" id="timeline-card">
-        <h2>🗓️ 전체 타임라인</h2>
-        <p style="font-size:14px; color:var(--text-muted); margin-top:-4px;">위에서 아래로 흐르는 순서입니다. 확정된 것은 고정, 아직 정할 것은 카드를 좌우로 밀어 보고 하단의 선택 버튼을 눌러 고르세요. 선택하면 모두에게 공유되고, 아래 확정 일정에 반영됩니다.</p>
-        <div id="timeline-flow" style="margin-top:12px;"></div>
-        <div id="timeline-decided" style="margin-top:16px;"></div>
       </div>
 
       <div class="card">
@@ -627,7 +622,21 @@ tr.done-row td { opacity: 0.62; }
             <div style="font-size:11px; color:var(--text-muted);">후쿠오카 3박 · 일요일 귀국</div>
           </div>
         </div>
-        <p style="margin-top:14px;">날짜는 <strong>3월 4일(목) ~ 3월 7일(일)로 확정</strong>됐습니다. 정해진 건 <strong>어떻게 갈지(배 3명·비행기 4명)·숙박(아파트 2박 + 료칸 1박)</strong>입니다. 정해야 할 건 <strong>온천(벳푸/유후인)·예산</strong>입니다.</p>
+        <p style="margin-top:14px;">날짜는 <strong>3월 4일(목) ~ 3월 7일(일)로 확정</strong>됐습니다. 정해진 건 <strong>어떻게 갈지(배 3명·비행기 4명)·숙박(아파트 2박 + 료칸 1박)</strong>입니다. 정해야 할 건 <strong>온천(벳푸/유후인/쿠로가와)·예산</strong>입니다.</p>
+        <div style="overflow-x:auto; margin-top:14px;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>항목</th><th>내용</th><th>금액</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600; color:var(--primary);">🚢 배 (가는 편)</td><td>뉴카멜리아 3/3(수) 22:30 부산 → 3/4(목) 07:30 하카타 · 3명 (김석, 김철현, 박중산)</td><td>2등 일반실 1인 8.1만원 / 침대실 1인 9.6만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">✈️ 비행기 왕복</td><td>3/4(목) 오전 10시쯤 인천 출발 · 3/7(일) 오후 귀국 · 4명 (김기태, 최근호, 윤유병, 최진원)</td><td>제주 왕복 50.6만원 / 대한항공 왕복 53.9만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">✈️ 귀국 편도</td><td>3/7(일) 오후 후쿠오카 → 인천 · 배 3명</td><td>제주 7C1404 13:00 34.2만원 / 대한항공 KE792 13:45 37.2만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🚄 KTX</td><td>3/3(수) 점심쯤(15시 이전 출발) 서울 → 부산 편도 · 배 3명</td><td>약 6만원 (2027년 2월 초부터 예약 가능)</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🏠 아파트</td><td>3/4 1박 + 3/6 1박 · 하카타 · 7명</td><td>1인 1박 4.5만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">♨️ 료칸</td><td>3/5 1박 · 중급 · 7명</td><td>1인 25만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">💰 1인 총비용</td><td>항공+숙소+온천+식비+현지 교통 합계</td><td>비행기 약 90~97만원 / 배 부산 출발 약 87~94만원</td></tr>
+            </tbody>
+          </table>
+        </div>
         <ul class="timeline" style="margin-top:14px;">
           <li>
             <div class="timeline-time">3/3(수) 밤 <span style="font-size:11px; background:#fef3e6; color:#8a4500; padding:1px 7px; border-radius:8px; font-weight:600;">배 타는 사람 3명</span></div>
@@ -662,6 +671,12 @@ tr.done-row td { opacity: 0.62; }
           </li>
         </ul>
       </div>
+
+      <div class="card" id="timeline-card">
+        <h2>🗓️ 전체 타임라인</h2>
+        <p style="font-size:14px; color:var(--text-muted); margin-top:-4px;">위에서 아래로 흐르는 순서입니다. 확정된 것은 고정, 아직 정할 것은 카드를 좌우로 밀어 보고 하단의 선택 버튼을 눌러 고르세요. 선택하면 모두에게 공유되고, 아래 확정 일정에 반영됩니다.</p>
+        <div id="timeline-flow" style="margin-top:12px;"></div>
+        <div id="timeline-decided" style="margin-top:16px;"></div>
 
       <div class="card">
         <h2>🗓️ 목~일 일정 메모 — 허리 배려</h2>
