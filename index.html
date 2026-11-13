@@ -325,6 +325,8 @@ body.gated header, body.gated main, body.gated footer { display: none; }
   .poll-option .label { flex-basis: 100%; }
 }
 
+tr.done-row td { opacity: 0.62; }
+.booking-note { width: 100%; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -412,14 +414,14 @@ body.gated header, body.gated main, body.gated footer { display: none; }
         <h2>🗓️ 확정 일정 로드맵</h2>
         <p style="font-size:14px; color:var(--text-muted); margin-top:-4px;">날짜는 확정됐습니다. 이 순서로 밀면 됩니다.</p>
         <table style="margin-top:12px;">
-          <thead><tr><th style="min-width:96px;">시기</th><th>할 일</th></tr></thead>
+          <thead><tr><th style="min-width:96px;">시기</th><th>할 일</th><th style="width:52px; text-align:center;">체크</th></tr></thead>
           <tbody>
-            <tr><td style="font-weight:700; color:var(--primary);">✅ 완료</td><td><strong>신년회 날짜 확정 (3/4~3/7)</strong></td></tr>
-            <tr><td style="font-weight:700; color:var(--primary);">11월 중순</td><td><strong>🛂 여권 확인 마감</strong> — 최근호 미입력 · 재발급에 2~3주 걸리니 이때가 마지노선</td></tr>
-            <tr><td style="font-weight:700; color:var(--primary);">11월 말~12월 초</td><td>아파트·료칸 7명 기준 견적</td></tr>
-            <tr><td style="font-weight:700; color:var(--primary);">12월 중순</td><td>숙소 예약 완료 · <strong>유후인 갈 거면 열차 예약</strong> (승차 1개월 전 일본시간 10:00 오픈, 금방 매진)</td></tr>
-            <tr><td style="font-weight:700; color:var(--primary);">12월 말</td><td>환전·여행자보험·유심 · 분담금 정산</td></tr>
-            <tr><td style="font-weight:700; color:var(--primary);">3/3~3/7</td><td>✈️ <strong>신년회 실행</strong> — 3/3(수) 밤 배 3명 부산 출발 · 3/4(목) 후쿠오카 합류 · 3/5(금) 온천 · 3/6(토) 자유 일정 + 신년회 저녁 · 3/7(일) 귀국</td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">✅ 완료</td><td><strong>신년회 날짜 확정 (3/4~3/7)</strong></td><td style="text-align:center;"><input type="checkbox" data-roadmap="date" checked disabled style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">11월 중순</td><td><strong>🛂 여권 확인 마감</strong> — 최근호 미입력 · 재발급에 2~3주 걸리니 이때가 마지노선</td><td style="text-align:center;"><input type="checkbox" data-roadmap="passport" onchange="toggleRoadmap('passport', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">11월 말~12월 초</td><td>아파트·료칸 7명 기준 견적</td><td style="text-align:center;"><input type="checkbox" data-roadmap="quote" onchange="toggleRoadmap('quote', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">12월 중순</td><td>숙소 예약 완료 · <strong>유후인 갈 거면 열차 예약</strong> (승차 1개월 전 일본시간 10:00 오픈, 금방 매진)</td><td style="text-align:center;"><input type="checkbox" data-roadmap="stay" onchange="toggleRoadmap('stay', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">12월 말</td><td>환전·여행자보험·유심 · 분담금 정산</td><td style="text-align:center;"><input type="checkbox" data-roadmap="money" onchange="toggleRoadmap('money', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">3/3~3/7</td><td>✈️ <strong>신년회 실행</strong> — 3/3(수) 밤 배 3명 부산 출발 · 3/4(목) 후쿠오카 합류 · 3/5(금) 온천 · 3/6(토) 자유 일정 + 신년회 저녁 · 3/7(일) 귀국</td><td style="text-align:center;"><input type="checkbox" data-roadmap="trip" onchange="toggleRoadmap('trip', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
           </tbody>
         </table>
         <div class="note info" style="margin-top:12px;">
@@ -695,47 +697,53 @@ body.gated header, body.gated main, body.gated footer { display: none; }
       </div>
 
       <div class="card">
-        <h2>📋 예약 전 정리 — 항목별 대상</h2>
-        <p style="font-size:14px;">예약하기 전에 각 항목마다 누가 대상인지 정리했습니다. <strong>아직 예약한 것은 없습니다.</strong> 예약할 때는 대상 인원만큼 끊고, 여권 정보는 [💬👥 토론 · 회원] 탭에서 확인하세요.</p>
+        <h2>📋 예약 관리 — 항목별 예약 현황</h2>
+        <p style="font-size:14px;">예약이 끝나면 <strong>체크박스를 눌러 완료 표시</strong>를 하고, <strong>예약 내용란에 예약번호·확정 금액·예약일 등을 적어두세요.</strong> 체크와 내용은 모두에게 공유됩니다. 예약할 때는 대상 인원만큼 끊고, 여권 정보는 홈 하단의 여권 정보에서 확인하세요.</p>
         <div style="overflow-x:auto; margin-top:12px;">
           <table style="font-size:13px; min-width:0;">
-            <thead><tr><th>예약 항목</th><th>대상</th><th>내용</th><th>상태</th></tr></thead>
+            <thead><tr><th>예약 항목</th><th>대상</th><th>내용</th><th style="width:64px; text-align:center;">예약 완료</th><th style="min-width:180px;">예약 내용</th></tr></thead>
             <tbody>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">✈️ 비행기 왕복</td>
                 <td>김기태, 최근호, 윤유병, 최진원 (4명)</td>
                 <td>3/4(목) 오전 10시쯤 인천→후쿠오카 + 3/7(일) 오후 후쿠오카→인천. 제주 왕복 50.6만원 / 대한항공 왕복 53.9만원</td>
-                <td>아직 예약 안 함</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="flight" onchange="toggleBooking('flight', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="flight" onchange="saveBookingNote('flight', this.value)" placeholder="예약번호·확정 금액·메모"></td>
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">🚢 배 (가는 편)</td>
                 <td>김석, 김철현, 박중산 (3명)</td>
                 <td>3/3(수) 22:30 부산→3/4(목) 07:30 하카타, 뉴카멜리아 2등 일반실 3명 합계 24.3만원 / 침대실 28.8만원</td>
-                <td>아직 예약 안 함</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ferry" onchange="toggleBooking('ferry', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="ferry" onchange="saveBookingNote('ferry', this.value)" placeholder="예약번호·확정 금액·메모"></td>
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">✈️ 귀국 편도</td>
                 <td>김석, 김철현, 박중산 (3명)</td>
                 <td>3/7(일) 오후 후쿠오카→인천 편도. 제주 7C1404 13:00 (34.2만원) / 대한항공 KE792 13:45 (37.2만원)</td>
-                <td>아직 예약 안 함</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="return" onchange="toggleBooking('return', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="return" onchange="saveBookingNote('return', this.value)" placeholder="예약번호·확정 금액·메모"></td>
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">🚄 KTX</td>
                 <td>김석, 김철현, 박중산 (3명)</td>
                 <td>3/3(수) 점심쯤(15시 이전 출발) 서울→부산 편도, 약 6만원</td>
-                <td>2027년 2월 초부터 예약 가능 (출발 1개월 전)</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ktx" onchange="toggleBooking('ktx', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="ktx" onchange="saveBookingNote('ktx', this.value)" placeholder="예약번호·확정 금액·메모 (2월 초부터 예약 가능)"></td>
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">🏠 아파트</td>
                 <td>7명 전원</td>
                 <td>3/4 1박 + 3/6 1박, 하카타. 1인 1박 4.5만원</td>
-                <td>아직 예약 안 함. 어느 집으로 할지 정해야 함</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="apt" onchange="toggleBooking('apt', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="apt" onchange="saveBookingNote('apt', this.value)" placeholder="예약번호·확정 금액·메모 (어느 집으로 할지 정해야 함)"></td>
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">♨️ 료칸</td>
                 <td>7명 전원</td>
                 <td>3/5 1박, 중급 1인 25만원</td>
-                <td>온천지(벳푸/유후인/쿠로가와) 정해야 함</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ryokan" onchange="toggleBooking('ryokan', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="ryokan" onchange="saveBookingNote('ryokan', this.value)" placeholder="예약번호·확정 금액·메모 (온천지 정해야 함)"></td>
               </tr>
             </tbody>
           </table>
@@ -1288,6 +1296,8 @@ function applyCloud(cloud) {
   if (!cloud) return;
   DB.votes = normalizeVotes(cloud.votes);
   DB.checklists = cloud.checklists || {};
+  DB.roadmap = cloud.roadmap || {};
+  DB.bookings = cloud.bookings || {};
   const cloudThreads = threadsFromCloud(cloud.threads);
   if (cloudThreads.length) DB.threads = cloudThreads.sort((a, b) => a.ts - b.ts);
   if (cloud.members) {
@@ -1307,7 +1317,7 @@ function applyCloud(cloud) {
 }
 
 function _snapshot() {
-  return JSON.stringify([DB.votes, DB.checklists, DB.threads, DB.departureDate, DB.nyDate,
+  return JSON.stringify([DB.votes, DB.checklists, DB.roadmap, DB.bookings, DB.threads, DB.departureDate, DB.nyDate,
     REGISTERED_MEMBERS.map(n => (DB.members[n] || {}).gear || null),
     REGISTERED_MEMBERS.map(n => (DB.members[n] || {}).passport || null)]);
 }
@@ -1642,6 +1652,8 @@ function init() {
   renderHomeMemberStatus();
   renderResult();
   renderArchive();
+  renderRoadmap();
+  renderBookings();
   renderCloudStatus();
   loadFromCloud(false);
   startCloudPolling();
@@ -2655,6 +2667,8 @@ function refreshViews() {
   renderHomeLoginGrid();
   renderHomeMemberStatus();
   renderCountdown();
+  renderRoadmap();
+  renderBookings();
   renderCloudStatus();
   Object.keys(drafts).forEach(id => {
     const e = document.getElementById(id);
@@ -3516,6 +3530,71 @@ function toggleChecklist(name, clId, idx, event) {
   renderChecklistSummary();
   renderHomeMemberStatus();
   cloudSet(['checklists', key], DB.checklists[key] || null);
+}
+
+// ============== 로드맵 체크 + 예약 관리 ==============
+// 로드맵과 예약 상태는 모두에게 공유되는 값이다. Firebase trip2026/roadmap, trip2026/bookings에 저장한다.
+function renderRoadmap() {
+  if (!DB.roadmap) DB.roadmap = {};
+  document.querySelectorAll('[data-roadmap]').forEach(cb => {
+    const id = cb.dataset.roadmap;
+    if (id === 'date') { cb.checked = true; return; }
+    const st = DB.roadmap[id];
+    cb.checked = !!(st && st.done);
+    const row = cb.closest('tr');
+    if (row) row.classList.toggle('done-row', !!(st && st.done));
+  });
+}
+function toggleRoadmap(rowId, event) {
+  if (event) event.stopPropagation();
+  if (rowId === 'date') { renderRoadmap(); return; }
+  if (!DB.roadmap) DB.roadmap = {};
+  const wasDone = !!(DB.roadmap[rowId] && DB.roadmap[rowId].done);
+  if (wasDone) delete DB.roadmap[rowId];
+  else DB.roadmap[rowId] = { done: true, by: DB.user || '', at: Date.now() };
+  saveDB();
+  renderRoadmap();
+  cloudSet(['roadmap', rowId], DB.roadmap[rowId] || null);
+}
+function renderBookings() {
+  if (!DB.bookings) DB.bookings = {};
+  document.querySelectorAll('[data-booking]').forEach(cb => {
+    const id = cb.dataset.booking;
+    const st = DB.bookings[id];
+    cb.checked = !!(st && st.done);
+    const row = cb.closest('tr');
+    if (row) row.classList.toggle('done-row', !!(st && st.done));
+  });
+  document.querySelectorAll('[data-booking-note]').forEach(inp => {
+    // 입력 중인 칸은 덮어쓰지 않는다
+    if (document.activeElement === inp) return;
+    const id = inp.dataset.bookingNote;
+    const st = DB.bookings[id];
+    inp.value = (st && st.note) || '';
+  });
+}
+function toggleBooking(itemId, event) {
+  if (event) event.stopPropagation();
+  if (!DB.bookings) DB.bookings = {};
+  const st = DB.bookings[itemId] || {};
+  if (st.done) delete st.done;
+  else st.done = true;
+  st.by = DB.user || '';
+  st.at = Date.now();
+  DB.bookings[itemId] = st;
+  saveDB();
+  renderBookings();
+  cloudSet(['bookings', itemId], DB.bookings[itemId]);
+}
+function saveBookingNote(itemId, value) {
+  if (!DB.bookings) DB.bookings = {};
+  const st = DB.bookings[itemId] || {};
+  st.note = value;
+  st.by = DB.user || '';
+  st.at = Date.now();
+  DB.bookings[itemId] = st;
+  saveDB();
+  cloudSet(['bookings', itemId], DB.bookings[itemId]);
 }
 
 // ============== START ==============
