@@ -1747,6 +1747,7 @@ const AGENDAS = [
   { group: 'ny', emoji: '✈️', name: '신년회', joinPoll: 'ny_join', tab: 'ny', dateKey: 'nyDate' }
 ];
 function pollsOf(group) { return POLLS.filter(p => p.group === group && !p.hidden); }
+function visiblePolls() { return POLLS.filter(p => !p.hidden); }
 function agendaOf(group) { return AGENDAS.find(a => a.group === group); }
 
 // ============== INIT ==============
@@ -2023,16 +2024,16 @@ function renderHomeMemberStatus() {
   });
   let groupVoteSum = 0;
   REGISTERED_MEMBERS.forEach(name => {
-    groupVoteSum += POLLS.filter(p => {
+    groupVoteSum += visiblePolls().filter(p => {
       const v = (DB.votes[p.id] || {})[name];
       return v !== undefined && !(Array.isArray(v) && v.length === 0);
     }).length;
   });
-  const groupVotePct = Math.round(groupVoteSum / (REGISTERED_MEMBERS.length * POLLS.length) * 100);
+  const groupVotePct = Math.round(groupVoteSum / (REGISTERED_MEMBERS.length * visiblePolls().length) * 100);
   html += '<div style="background: #185fa5; color:white; padding:14px; border-radius:10px; text-align:center;">' +
     '<div style="font-size:11px; opacity:0.9;">📊 전체 투표 진행률</div>' +
     '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + groupVotePct + '%</div>' +
-    '<div style="font-size:11px; opacity:0.85;">' + groupVoteSum + ' / ' + (REGISTERED_MEMBERS.length * POLLS.length) + '</div></div>';
+    '<div style="font-size:11px; opacity:0.85;">' + groupVoteSum + ' / ' + (REGISTERED_MEMBERS.length * visiblePolls().length) + '</div></div>';
   html += '</div>';
 
   html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:680px;"><thead><tr>';
@@ -2604,7 +2605,7 @@ function _getPollWinner(pollId) {
 function renderResultSummary(targetId, group) {
   const el = document.getElementById(targetId);
   if (!el) return;
-  const list = group ? pollsOf(group) : POLLS;
+  const list = group ? pollsOf(group) : visiblePolls();
   let html = '';
   let lastGroup = null;
   list.forEach(poll => {
@@ -2674,13 +2675,14 @@ function renderPlan(targetId, group) {
     '<div style="background:#fef3e6; padding:12px; border-radius:10px;"><div style="font-size:11px; color:#8a4500;">🤔 미정 · 아직 안 누름</div><div style="font-size:16px; font-weight:700; color:#8a4500;">' + undecided.length + '명</div><div style="font-size:11px; color:#8a4500;">' + (undecided.length ? undecided.map(escapeHtml).join(' · ') : '없음') + '</div></div>' +
     '<div style="background:#fdebec; padding:12px; border-radius:10px;"><div style="font-size:11px; color:#c0392b;">❌ 미참석</div><div style="font-size:16px; font-weight:700; color:#c0392b;">' + absentees.length + '명</div><div style="font-size:11px; color:#c0392b;">' + (absentees.length ? absentees.map(escapeHtml).join(' · ') : '없음') + '</div></div>' +
     '</div>';
-  html += '<div class="note info" style="margin-top:12px;">📌 위 항목이 단독 1위로 정리되면 총무가 홈 화면의 <strong>확정일</strong>을 입력하고 D-DAY가 시작됩니다.</div>';
+  html += '<div class="note info" style="margin-top:12px;">📌 날짜는 3/4~3/7로 확정됐고 D-DAY가 돌아가고 있습니다. 나머지 항목이 정해지면 여기에 반영됩니다.</div>';
   el.innerHTML = html;
 }
 
 function renderResultByMember() {
   const el = document.getElementById('result-by-member');
   if (!el) return;
+  const list = visiblePolls();
   const memberNames = Object.keys(DB.members).sort((a, b) => {
     const ai = REGISTERED_MEMBERS.indexOf(a), bi = REGISTERED_MEMBERS.indexOf(b);
     if (ai !== -1 && bi !== -1) return ai - bi;
@@ -2689,14 +2691,14 @@ function renderResultByMember() {
     return a.localeCompare(b);
   });
   let html = '<table style="font-size: 12px; min-width: 820px;"><thead><tr><th style="min-width: 76px;">회원</th>' +
-    POLLS.map(p => {
+    list.map(p => {
       const short = p.question.replace(/\s*\([^)]*\)\s*$/, '').replace(/^(.)\S*\s/, '$1 ');
       return '<th style="font-size:11px;">' + escapeHtml(short.length > 14 ? short.substring(0, 13) + '…' : short) + '</th>';
     }).join('') + '<th>완료</th></tr></thead><tbody>';
   memberNames.forEach(name => {
     let done = 0;
     html += '<tr><td style="font-weight: 600; color: var(--primary);">' + escapeHtml(name) + '</td>';
-    POLLS.forEach(p => {
+    list.forEach(p => {
       const voteVal = (DB.votes[p.id] || {})[name];
       const idxs = _valKeys(voteVal);
       if (idxs.length > 0) {
@@ -2711,9 +2713,9 @@ function renderResultByMember() {
         html += '<td style="color: var(--text-muted);">—</td>';
       }
     });
-    const pct = Math.round(done / POLLS.length * 100);
+    const pct = Math.round(done / list.length * 100);
     const color = pct === 100 ? '#27ae60' : pct >= 60 ? '#e67e22' : '#888';
-    html += '<td style="font-weight: 600; color: ' + color + ';">' + done + '/' + POLLS.length + '</td></tr>';
+    html += '<td style="font-weight: 600; color: ' + color + ';">' + done + '/' + list.length + '</td></tr>';
   });
   html += '</tbody></table>';
   el.innerHTML = html;
@@ -3403,7 +3405,7 @@ function renderMembers() {
   });
   let html = '';
   memberNames.forEach(name => {
-    const voteCount = POLLS.filter(p => {
+    const voteCount = visiblePolls().filter(p => {
       const v = (DB.votes[p.id] || {})[name];
       return v !== undefined && !(Array.isArray(v) && v.length === 0);
     }).length;
@@ -3414,7 +3416,7 @@ function renderMembers() {
     const escName = escapeHtml(name).replace(/'/g, "\\'");
     html += '<div class="member-chip" style="' + (canSwitch ? 'cursor:pointer;' : '') + '" ' + (canSwitch ? 'onclick="loginAs(\'' + escName + '\')"' : '') + '>' +
       '<div class="name">' + escapeHtml(name) + (isMe ? ' ✓ (나)' : '') + '</div>' +
-      '<div class="meta">투표 ' + voteCount + '/' + POLLS.length + ' · 활동 ' + commentCount + (canSwitch ? ' · 👆 클릭해서 로그인' : '') + '</div>' +
+      '<div class="meta">투표 ' + voteCount + '/' + visiblePolls().length + ' · 활동 ' + commentCount + (canSwitch ? ' · 👆 클릭해서 로그인' : '') + '</div>' +
       '</div>';
   });
   list.innerHTML = html;
@@ -3427,13 +3429,13 @@ function renderHomeLoginGrid() {
   card.style.display = '';
   let html = '';
   REGISTERED_MEMBERS.forEach(name => {
-    const voteCount = POLLS.filter(p => {
+    const voteCount = visiblePolls().filter(p => {
       const v = (DB.votes[p.id] || {})[name];
       return v !== undefined && !(Array.isArray(v) && v.length === 0);
     }).length;
     const escName = escapeHtml(name).replace(/'/g, "\\'");
     html += '<button onclick="loginAs(\'' + escName + '\')" style="background: white; border: 2px solid var(--primary-lighter); color: var(--primary); padding: 14px 12px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600;" onmouseover="this.style.background=\'var(--primary)\'; this.style.color=\'white\';" onmouseout="this.style.background=\'white\'; this.style.color=\'var(--primary)\';">' +
-      escapeHtml(name) + '<div style="font-size: 11px; font-weight: 400; margin-top: 3px; opacity: 0.7;">투표 ' + voteCount + '/' + POLLS.length + '</div></button>';
+      escapeHtml(name) + '<div style="font-size: 11px; font-weight: 400; margin-top: 3px; opacity: 0.7;">투표 ' + voteCount + '/' + visiblePolls().length + '</div></button>';
   });
   grid.innerHTML = html;
 }
