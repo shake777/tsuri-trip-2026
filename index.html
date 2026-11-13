@@ -337,7 +337,7 @@ tr.done-row td { opacity: 0.62; }
 .tl-badge.todo { background: #fff3e0; color: #e65100; }
 .tl-desc { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
 .tl-arrow { text-align: center; font-size: 20px; color: var(--text-muted); line-height: 1.2; padding: 2px 0; }
-.tl-branches { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.tl-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
 @media (max-width: 600px) { .tl-branches { grid-template-columns: 1fr; } }
 .tl-branch { text-align: left; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: #fafafa; cursor: pointer; font-size: 14px; line-height: 1.5; }
 .tl-branch:hover { border-color: var(--primary); }
@@ -422,7 +422,7 @@ tr.done-row td { opacity: 0.62; }
               <tr><td style="font-weight:700; color:var(--primary);">✈️ 비행기</td><td><strong>3월 4일(목) 오전 10시쯤 인천 출발 · 4명 (김기태, 최근호, 윤유병, 최진원)</strong> · 한국 출발 왕복 · 귀국 3월 7일(일) 오후 항공편</td></tr>
               <tr><td style="font-weight:700; color:var(--primary);">🏠 숙소</td><td><strong>아파트 1박(3/4) + 료칸 1박(3/5) + 아파트 1박(3/6)</strong> · 7명 · 호텔 아님</td></tr>
               <tr><td style="font-weight:700; color:var(--primary);">🛂 여권</td><td>7명 완료 · <strong>최근호 미입력</strong></td></tr>
-              <tr><td style="font-weight:700; color:var(--primary);">❓ 아직 미정</td><td>온천 (벳푸/유후인) · 예산</td></tr>
+              <tr><td style="font-weight:700; color:var(--primary);">❓ 아직 미정</td><td>온천 (벳푸/유후인/쿠로가와) · 예산</td></tr>
             </tbody>
           </table>
         </div>
@@ -3607,10 +3607,11 @@ function renderTimeline() {
     '배 3명 07:30 하카타 도착 + 비행기 4명 오전 10시쯤 인천 출발 → 후쿠오카 합류. 아파트 독채 1박 (7명).');
   html += arrow;
   html += '<div class="tl-node branch"><div class="tl-date">3/5 (금)</div>' +
-    '<div class="tl-title">♨️ 온천 — 두 갈래 중 선택 <span class="tl-badge todo">정해야 할 것</span></div>' +
+    '<div class="tl-title">♨️ 온천 — 세 갈래 중 선택 <span class="tl-badge todo">정해야 할 것</span></div>' +
     '<div class="tl-branches">' +
     branch('ny_onsen', 0, '🌋 벳푸', '지옥순례 + 온천 · 하카타에서 약 2시간 10분', onsenCount(0), myOnsen.indexOf(0) >= 0, onsenLeader.indexOf(0) >= 0) +
     branch('ny_onsen', 1, '🏞️ 유후인', '료칸·긴린코 온천마을 · 약 2시간 10~20분', onsenCount(1), myOnsen.indexOf(1) >= 0, onsenLeader.indexOf(1) >= 0) +
+    branch('ny_onsen', 5, '🏞️ 쿠로가와', '아소 경유 버스투어 · 조용하고 한적 · <a href="https://m.blog.naver.com/hjk8427_/224401394564" target="_blank" rel="noopener">블로그</a>', onsenCount(5), myOnsen.indexOf(5) >= 0, onsenLeader.indexOf(5) >= 0) +
     '</div><div class="tl-desc">온천 뒤 료칸 1박 (7명, 중급 1인 25만원) — 확정.</div></div>';
   html += arrow;
   html += node('3/6 (토)', '🎌 자유 일정 + 신년회 저녁 · 아파트 1박', '확정', 'fixed',
