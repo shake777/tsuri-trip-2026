@@ -337,14 +337,15 @@ tr.done-row td { opacity: 0.62; }
 .tl-badge.todo { background: #fff3e0; color: #e65100; }
 .tl-desc { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
 .tl-arrow { text-align: center; font-size: 20px; color: var(--text-muted); line-height: 1.2; padding: 2px 0; }
-.tl-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
-@media (max-width: 600px) { .tl-branches { grid-template-columns: 1fr; } }
-.tl-branch { text-align: left; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: #fafafa; cursor: pointer; font-size: 14px; line-height: 1.5; }
-.tl-branch:hover { border-color: var(--primary); }
-.tl-branch.sel { border-color: var(--primary); background: #e8f0fe; }
-.tl-branch.leader { border-color: #2e7d32; }
-.tl-branch .tl-votes { display: block; font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-.tl-branch .tl-votes b { color: var(--primary); }
+.tl-carousel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 10px; -webkit-overflow-scrolling: touch; margin-top: 10px; }
+.tl-branch-card { flex: 0 0 78%; max-width: 320px; scroll-snap-align: start; min-height: 190px; display: flex; flex-direction: column; border: 2px solid var(--border); border-radius: 12px; padding: 16px; background: #fafafa; font-size: 14px; line-height: 1.5; }
+.tl-branch-card.sel { border-color: var(--primary); background: #e8f0fe; }
+.tl-branch-card.leader { border-color: #2e7d32; }
+.tl-branch-body { flex: 1; }
+.tl-branch-card .tl-votes { display: block; font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+.tl-branch-card .tl-votes b { color: var(--primary); }
+.tl-branch-btn { margin-top: 12px; width: 100%; padding: 11px; border: none; border-radius: 8px; background: var(--primary); color: white; font-size: 15px; font-weight: 700; cursor: pointer; }
+.tl-branch-btn:hover { background: var(--primary-dark); }
 </style>
 </head>
 <body>
@@ -484,7 +485,7 @@ tr.done-row td { opacity: 0.62; }
 
       <div class="card" id="timeline-card">
         <h2>🗓️ 전체 타임라인</h2>
-        <p style="font-size:14px; color:var(--text-muted); margin-top:-4px;">위에서 아래로 흐르는 순서입니다. 확정된 것은 고정, 아직 정할 것은 두 갈래 중 맘에 드는 쪽을 눌러 선택하세요. 선택하면 모두에게 공유됩니다.</p>
+        <p style="font-size:14px; color:var(--text-muted); margin-top:-4px;">위에서 아래로 흐르는 순서입니다. 확정된 것은 고정, 아직 정할 것은 카드를 좌우로 밀어 보고 하단의 선택 버튼을 눌러 고르세요. 선택하면 모두에게 공유되고, 아래 확정 일정에 반영됩니다.</p>
         <div id="timeline-flow" style="margin-top:12px;"></div>
         <div id="timeline-decided" style="margin-top:16px;"></div>
       </div>
@@ -3590,12 +3591,15 @@ function renderTimeline() {
   const onsenLeader = onsenW && onsenW.winnerIdxs ? onsenW.winnerIdxs : [];
   const budgetLeader = budgetW && budgetW.winnerIdxs ? budgetW.winnerIdxs : [];
   const branch = (pollId, idx, label, sub, count, isSel, isLeader) => {
-    const cls = 'tl-branch' + (isSel ? ' sel' : '') + (isLeader ? ' leader' : '');
+    const cls = 'tl-branch-card' + (isSel ? ' sel' : '') + (isLeader ? ' leader' : '');
     const tag = isSel ? ' · 내가 선택' : (isLeader ? ' · 현재 1위' : '');
-    return '<button type="button" class="' + cls + '" onclick="vote(\'' + pollId + '\', ' + idx + ')">' +
-      '<strong>' + label + '</strong>' + tag +
-      '<span style="display:block; font-size:12px; color:var(--text-muted); margin-top:2px;">' + sub + '</span>' +
-      '<span class="tl-votes"><b>' + count + '표</b></span></button>';
+    const btnLabel = isSel ? '✓ 선택됨' : '선택';
+    return '<div class="' + cls + '">' +
+      '<div class="tl-branch-body">' +
+      '<strong style="font-size:15px;">' + label + '</strong>' + tag +
+      '<span style="display:block; font-size:13px; color:var(--text-muted); margin-top:6px; line-height:1.6;">' + sub + '</span>' +
+      '<span class="tl-votes"><b>' + count + '표</b></span></div>' +
+      '<button type="button" class="tl-branch-btn" onclick="vote(\'' + pollId + '\', ' + idx + ')">' + btnLabel + '</button></div>';
   };
   const node = (date, title, badge, badgeCls, desc) => {
     return '<div class="tl-node ' + badgeCls + '">' +
@@ -3613,7 +3617,8 @@ function renderTimeline() {
   html += arrow;
   html += '<div class="tl-node branch"><div class="tl-date">3/5 (금)</div>' +
     '<div class="tl-title">♨️ 온천 — 세 갈래 중 선택 <span class="tl-badge todo">정해야 할 것</span></div>' +
-    '<div class="tl-branches">' +
+    '<div style="font-size:12px; color:var(--text-muted); margin-top:4px;">← 좌우로 밀어서 보기 →</div>' +
+    '<div class="tl-carousel">' +
     branch('ny_onsen', 0, '🌋 벳푸', '지옥순례 + 온천 · 하카타에서 약 2시간 10분', onsenCount(0), myOnsen.indexOf(0) >= 0, onsenLeader.indexOf(0) >= 0) +
     branch('ny_onsen', 1, '🏞️ 유후인', '료칸·긴린코 온천마을 · 약 2시간 10~20분', onsenCount(1), myOnsen.indexOf(1) >= 0, onsenLeader.indexOf(1) >= 0) +
     branch('ny_onsen', 5, '🏞️ 쿠로가와', '아소 경유 버스투어 · 조용하고 한적 · <a href="https://m.blog.naver.com/hjk8427_/224401394564" target="_blank" rel="noopener">블로그</a>', onsenCount(5), myOnsen.indexOf(5) >= 0, onsenLeader.indexOf(5) >= 0) +
@@ -3627,7 +3632,8 @@ function renderTimeline() {
   html += arrow;
   html += '<div class="tl-node branch">' +
     '<div class="tl-title">💰 예산 — 두 갈래 중 선택 <span class="tl-badge todo">정해야 할 것</span></div>' +
-    '<div class="tl-branches">' +
+    '<div style="font-size:12px; color:var(--text-muted); margin-top:4px;">← 좌우로 밀어서 보기 →</div>' +
+    '<div class="tl-carousel">' +
     branch('ny_budget', 0, '✈️ 제주 왕복 기준', '1인 약 90~97만원 (가장 저렴)', budgetCount(0), myBudget.indexOf(0) >= 0, budgetLeader.indexOf(0) >= 0) +
     branch('ny_budget', 1, '✈️ 대한항공 A350 기준', '1인 약 98~104만원 (편안함)', budgetCount(1), myBudget.indexOf(1) >= 0, budgetLeader.indexOf(1) >= 0) +
     '</div><div class="tl-desc">항공권 가격에 따라 1인 총비용이 달라집니다. 제주 왕복 50.6만원 / 대한항공 왕복 53.9만원.</div></div>';
@@ -3637,7 +3643,7 @@ function renderTimeline() {
     const onsenTxt = onsenLeader.length ? onsenW.winners.join(' / ') + ' (' + onsenW.maxCount + '표)' : '아직 표 없음';
     const budgetTxt = budgetLeader.length ? budgetW.winners.join(' / ') + ' (' + budgetW.maxCount + '표)' : '아직 표 없음';
     decided.innerHTML = '<div class="card" style="margin:0; background:var(--primary-lighter);">' +
-      '<h2 style="margin-bottom:8px;">📌 투표로 정해진 내용</h2>' +
+      '<h2 style="margin-bottom:8px;">📌 확정 일정</h2>' +
       '<table style="font-size:14px; min-width:0;"><tbody>' +
       '<tr><td style="font-weight:700; color:var(--primary); width:130px;">✅ 날짜</td><td><strong>2027년 3월 4일(목) ~ 3월 7일(일)</strong> · 3박 4일</td></tr>' +
       '<tr><td style="font-weight:700; color:var(--primary);">🚢 배 · ✈️ 비행기</td><td><strong>배 3명</strong> (김석, 김철현, 박중산) · <strong>비행기 4명</strong> (김기태, 최근호, 윤유병, 최진원)</td></tr>' +
