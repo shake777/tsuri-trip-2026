@@ -2255,7 +2255,7 @@ function renderHomePlan() {
   if (!el) return;
   const jn = _joinNames('ny');
   const isGo = n => jn.go.indexOf(n) >= 0;
-  const nm = n => escapeHtml(n) + (jn.maybe.indexOf(n) >= 0 ? '<span style="font-weight:400; color:var(--text-muted);">(조건부)</span>' : '');
+  const nm = n => escapeHtml(n);
   const row = (state, label, val, tag, hint) => '<div class="plan-row ' + state + '">' +
     '<div class="plan-label">' + label + '</div><div class="plan-val">' + val +
     (tag ? '<span class="plan-tag">' + escapeHtml(tag) + '</span>' : '') +
