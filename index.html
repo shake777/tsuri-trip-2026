@@ -326,10 +326,6 @@ body.gated header, body.gated main, body.gated footer { display: none; }
 }
 
 tr.done-row td { opacity: 0.62; }
-.home-dday { background: var(--primary); color: #fff; font-size: 24px; font-weight: 800; padding: 8px 14px; border-radius: 12px; white-space: nowrap; line-height: 1.15; }
-.home-dday span { font-size: 13px; font-weight: 600; margin-left: 2px; }
-.todo-table td.when { font-weight: 700; color: var(--primary); white-space: nowrap; }
-.todo-table .sub, .todo-table td .sub { display: block; font-size: 12px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
 .booking-note { width: 100%; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
 .tl-node { border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; background: white; }
 .tl-node.fixed { border-left: 4px solid #2e7d32; }
@@ -341,36 +337,6 @@ tr.done-row td { opacity: 0.62; }
 .tl-badge.todo { background: #fff3e0; color: #e65100; }
 .tl-desc { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
 .tl-arrow { text-align: center; font-size: 20px; color: var(--text-muted); line-height: 1.2; padding: 2px 0; }
-/* 일정: 왼쪽 세로선 하나로 처음부터 끝까지 이어지고, 날짜마다 점이 찍힌다 */
-.tl-flow { position: relative; padding-left: 30px; }
-.tl-flow::before { content: ''; position: absolute; left: 10px; top: 20px; bottom: 20px; width: 3px; background: #9db8dc; border-radius: 2px; }
-.tl-step { position: relative; margin-bottom: 14px; }
-.tl-step:last-child { margin-bottom: 0; }
-.tl-step::before { content: ''; position: absolute; left: -28px; top: 15px; width: 18px; height: 18px; box-sizing: border-box; border-radius: 50%; background: #2e7d32; border: 3px solid #fff; box-shadow: 0 0 0 2px #2e7d32; z-index: 1; }
-.tl-step.vote::before { background: #e65100; box-shadow: 0 0 0 2px #e65100; }
-.tl-facts { margin-top: 8px; display: grid; gap: 5px; font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); }
-.tl-facts > div { display: grid; grid-template-columns: 22px 1fr; gap: 2px; }
-.tl-step.sub { margin: -6px 0 8px; }
-.tl-step.sub::before { left: -24px; top: 8px; width: 10px; height: 10px; border-width: 2px; background: #fff; box-shadow: 0 0 0 2px #2e7d32; }
-.tl-sub { font-size: 13.5px; padding: 2px 4px; line-height: 1.55; }
-.tl-sub .t { display: inline-block; min-width: 52px; font-weight: 700; color: #2e7d32; margin-right: 4px; }
-.tl-detail { margin-top: 12px; border-radius: 10px; padding: 12px 14px; background: #eef4fd; border: 1px solid #cfe0f7; }
-.tl-detail.decided { background: #eef8f0; border-color: #bfe3c8; }
-.tl-detail-head { font-weight: 700; font-size: 14px; color: var(--primary); margin-bottom: 8px; line-height: 1.5; }
-.tl-detail.decided .tl-detail-head { color: #1b5e20; }
-.tl-kv { display: grid; grid-template-columns: 92px 1fr; gap: 5px 10px; font-size: 13px; line-height: 1.55; }
-.tl-kv .k { color: var(--text-muted); font-weight: 600; white-space: nowrap; }
-.tl-plan { list-style: none; margin: 12px 0 0 6px; padding: 0 0 0 16px; border-left: 2px solid #9db8dc; }
-.tl-plan li { position: relative; font-size: 13px; padding: 3px 0 3px 2px; line-height: 1.5; }
-.tl-plan li::before { content: ''; position: absolute; left: -22px; top: 9px; width: 10px; height: 10px; border-radius: 50%; background: #fff; border: 2px solid #5b8fd1; box-sizing: border-box; }
-.tl-plan .t { display: inline-block; min-width: 50px; font-weight: 700; color: var(--primary); }
-.tl-detail.decided .tl-plan { border-left-color: #8fcf9f; }
-.tl-detail.decided .tl-plan li::before { border-color: #2e7d32; }
-.tl-mini-btn { margin-top: 10px; padding: 7px 12px; border: none; border-radius: 8px; background: #2e7d32; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }
-.tl-mini-btn.ghost { background: #fff; color: #666; border: 1px solid var(--border); }
-.tl-revote { margin-top: 10px; font-size: 13px; }
-.tl-revote > summary { cursor: pointer; color: var(--text-muted); }
-@media (max-width: 600px) { .tl-kv { grid-template-columns: 1fr; gap: 0; } .tl-kv .k { margin-top: 6px; } }
 .tl-carousel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 10px; -webkit-overflow-scrolling: touch; margin-top: 10px; }
 .tl-branch-card { flex: 0 0 78%; max-width: 320px; scroll-snap-align: start; min-height: 190px; display: flex; flex-direction: column; border: 2px solid var(--border); border-radius: 12px; padding: 16px; background: #fafafa; font-size: 14px; line-height: 1.5; }
 .tl-branch-card.sel { border-color: var(--primary); background: #e8f0fe; }
@@ -432,131 +398,162 @@ tr.done-row td { opacity: 0.62; }
 
     <!-- ============ HOME ============ -->
     <section class="section active" id="section-home">
-      <div class="plan-card">
-        <div class="plan-head">
-          <div>
-            <div class="plan-title">✈️ 2027 신년회 — 후쿠오카</div>
-            <div class="plan-sub">2027년 3월 4일(목) ~ 3월 7일(일) · 3박 4일 · 초록 = 확정, 파랑·노랑 = 투표 중</div>
-          </div>
-          <div class="home-dday" id="ny-countdown-days">--</div>
-          <span id="ny-countdown-date" style="display:none;"></span>
+      <div id="home-plan"></div>
+
+      <div class="hero">
+        <h2>✈️ 2027 신년회 — 후쿠오카, 3월 4일(목) ~ 3월 7일(일) 확정</h2>
+        <p>목요일 아침에 후쿠오카에서 전원 합류해서 3박 하고, 일요일에 귀국합니다.</p>
+        <p>배 타는 사람은 <strong>김석·김철현·박중산 3명</strong> — 3월 3일(수) 밤 뉴카멜리아(부산 22:30 → 목 07:30 하카타) <strong>(예약 가능)</strong>, 비행기 타는 사람은 <strong>김기태·최근호·윤유병·최진원 4명</strong> — 목요일 아침 인천 출발입니다.</p>
+        <div class="hero-facts">
+          <div class="hero-fact"><div class="k">확정 날짜</div><div class="v">3/4 ~ 3/7</div><div class="s">제주 왕복 50.6만원부터 (오후 귀국 기준)</div></div>
+          <div class="hero-fact"><div class="k">배 타는 사람</div><div class="v">3명</div><div class="s">김석·김철현·박중산 · 3/3(수) 저녁 부산 출발 (예약 가능)</div></div>
+          <div class="hero-fact"><div class="k">온천 메인</div><div class="v">금요일</div><div class="s">벳푸 · 유후인 · 쿠로가와</div></div>
+          <div class="hero-fact"><div class="k">인원</div><div class="v">7명</div><div class="s">조성화 제외 · 하카타 거점</div></div>
         </div>
-        <div id="home-plan"></div>
       </div>
 
       <div class="card">
-        <h2>🙋 내 할 일</h2>
-        <div id="home-todo"></div>
-      </div>
-
-      <div class="card">
-        <h2>📋 할 일 · 예약 — 시기순</h2>
-        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">끝나면 ✓를 누르고 메모칸에 예약번호·확정 금액을 적어 두세요. 모두에게 공유됩니다. 개인 준비물은 <a href="javascript:void(0)" onclick="switchTab('prep')" style="color:var(--primary-light);">🎒 준비물</a> 탭에서 각자 체크합니다.</p>
-        <div style="overflow-x:auto; margin-top:10px;">
-          <table class="todo-table" style="font-size:13px; min-width:660px;">
-            <thead><tr><th style="min-width:78px;">시기</th><th>할 일</th><th style="min-width:88px;">대상</th><th style="width:44px; text-align:center;">✓</th><th style="min-width:170px;">메모</th></tr></thead>
+        <h2>📌 확정된 것 · 아직 정할 것</h2>
+        <div style="overflow-x:auto;">
+          <table style="font-size:14px; min-width:0;">
             <tbody>
-              <tr class="done-row">
-                <td class="when">✅ 끝남</td>
-                <td><strong>날짜 · 인원 · 이동 · 숙소 구성 · 여권</strong><span class="sub">3/4~3/7 · 7명 · 배 3명/비행기 4명 · 아파트 2박+료칸 1박 · 여권 등록 완료</span></td>
-                <td>—</td>
-                <td style="text-align:center;">✅</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="when">11월 중</td>
-                <td><strong>🗳️ 남은 투표 마감</strong><span class="sub">금요일 온천 · 토요일 낮 · 항공 기준 — 온천지가 정해져야 료칸을 잡습니다</span></td>
-                <td>참가자 전원</td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="vote" onchange="toggleBooking('vote', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="vote" onchange="saveBookingNote('vote', this.value)" placeholder="메모"></td>
-              </tr>
-              <tr>
-                <td class="when">11월 말</td>
-                <td><strong>✈️ 비행기 왕복</strong><span class="sub">3/4(목) 오전 인천 → 후쿠오카 · 3/7(일) 오후 귀국. 제주 50.6만 / 대한항공 53.9만</span></td>
-                <td>비행기 4명<span class="sub">김기태·최근호·윤유병·최진원</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="flight" onchange="toggleBooking('flight', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="flight" onchange="saveBookingNote('flight', this.value)" placeholder="예약번호·확정 금액·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">11월 말</td>
-                <td><strong>✈️ 귀국 편도</strong><span class="sub">3/7(일) 오후 후쿠오카 → 인천. 제주 7C1404 13:00 34.2만 / 대한항공 KE792 13:45 37.2만 — 비행기 4명과 같은 편 추천</span></td>
-                <td>배 3명<span class="sub">김석·김철현·박중산</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="return" onchange="toggleBooking('return', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="return" onchange="saveBookingNote('return', this.value)" placeholder="예약번호·확정 금액·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">12월 초</td>
-                <td><strong>🚢 뉴카멜리아</strong><span class="sub">3/3(수) 22:30 부산 → 3/4(목) 07:30 하카타. 2등 일반실 1인 8.1만 / 침대실 9.6만 (11/14 예약 가능 확인)</span></td>
-                <td>배 3명<span class="sub">김석·김철현·박중산</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="ferry" onchange="toggleBooking('ferry', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="ferry" onchange="saveBookingNote('ferry', this.value)" placeholder="예약번호·확정 금액·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">12월 초</td>
-                <td><strong>🏠 아파트 2박</strong><span class="sub">3/4(목) · 3/6(토) · 하카타 · 7명 한 채. 한 채인지 · 욕실 수 · 침대 구성 확인</span></td>
-                <td>7명<span class="sub">총무 예약</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="apt" onchange="toggleBooking('apt', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="apt" onchange="saveBookingNote('apt', this.value)" placeholder="예약번호·확정 금액·메모 (어느 집으로 할지)"></td>
-              </tr>
-              <tr>
-                <td class="when">12월 초</td>
-                <td><strong>♨️ 료칸 1박</strong><span class="sub">3/5(금) · 1박 2식 · 중급 1인 약 25만원. 온천지 정해진 뒤 7명으로 검색 (1인당 요금)</span></td>
-                <td>7명<span class="sub">총무 예약</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="ryokan" onchange="toggleBooking('ryokan', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="ryokan" onchange="saveBookingNote('ryokan', this.value)" placeholder="예약번호·확정 금액·메모 (온천지 정한 뒤)"></td>
-              </tr>
-              <tr>
-                <td class="when">1월</td>
-                <td><strong>💰 분담금 입금</strong><span class="sub">총무가 금액 안내 → 각자 입금 (🎒 준비물에도 체크)</span></td>
-                <td>참가자 전원</td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="money" onchange="toggleBooking('money', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="money" onchange="saveBookingNote('money', this.value)" placeholder="메모"></td>
-              </tr>
-              <tr>
-                <td class="when">2/3(수) 07:00</td>
-                <td><strong>🚄 KTX 예매 오픈</strong><span class="sub">3/3(수) 점심, 15시 이전 서울 → 부산 편도 약 6만원 · 승차 1개월 전 오픈</span></td>
-                <td>배 3명<span class="sub">김석·김철현·박중산</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="ktx" onchange="toggleBooking('ktx', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="ktx" onchange="saveBookingNote('ktx', this.value)" placeholder="예약번호·확정 금액·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">2월 초</td>
-                <td><strong>🚌 온천 교통 예약</strong><span class="sub">벳푸면 고속버스(토요노쿠니호) 좌석 · 유후인이면 유후인노모리 2/5(금) 10:00(일본시간) 오픈, 금방 매진</span></td>
-                <td>7명<span class="sub">총무 예약</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="onsen_trans" onchange="toggleBooking('onsen_trans', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="onsen_trans" onchange="saveBookingNote('onsen_trans', this.value)" placeholder="예약번호·확정 금액·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">2월 말</td>
-                <td><strong>🍽️ 신년회 저녁 식당</strong><span class="sub">3/6(토) 저녁 7명 예약</span></td>
-                <td>총무</td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="dinner" onchange="toggleBooking('dinner', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="dinner" onchange="saveBookingNote('dinner', this.value)" placeholder="식당·시간·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">2월 말</td>
-                <td><strong>🚢 고려훼리 운항 재확인</strong><span class="sub">3월 휴항일 · 출항 시간 확인 (1688-7447)</span></td>
-                <td>배 3명<span class="sub">김석·김철현·박중산</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="ferry_check" onchange="toggleBooking('ferry_check', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="ferry_check" onchange="saveBookingNote('ferry_check', this.value)" placeholder="메모"></td>
-              </tr>
-              <tr>
-                <td class="when">3/3 ~ 3/7</td>
-                <td><strong>✈️ 신년회</strong><span class="sub">3/3 배 출발 · 3/4 합류 · 3/5 온천·료칸 · 3/6 자유 + 신년회 · 3/7 귀국</span></td>
-                <td>참가자 전원</td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="trip" onchange="toggleBooking('trip', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="trip" onchange="saveBookingNote('trip', this.value)" placeholder="메모"></td>
-              </tr>
+              <tr><td style="font-weight:700; color:var(--primary); width:130px;">✅ 날짜 확정</td><td><strong>2027년 3월 4일(목) ~ 3월 7일(일)</strong> · 3박 4일 · 목요일 아침 후쿠오카 합류, 일요일 귀국</td></tr>
+              <tr><td style="font-weight:700; color:var(--primary);">🙋 참석 확정</td><td><strong>7명</strong> · 김석, 김철현, 박중산, 윤유병, 김기태, 최근호, 최진원 <span style="color:var(--text-muted);">(조성화 제외)</span></td></tr>
+              <tr><td style="font-weight:700; color:var(--primary);">🚢 배</td><td><strong>3월 3일(수) 저녁 부산 출발 · 3명 (김석, 김철현, 박중산)</strong> · 뉴카멜리아 22:30 → 목 07:30 하카타 · 수요일 점심쯤 서울 출발 KTX(15시 이전 출발·편도)로 부산 이동</td></tr>
+              <tr><td style="font-weight:700; color:var(--primary);">✈️ 비행기</td><td><strong>3월 4일(목) 오전 10시쯤 인천 출발 · 4명 (김기태, 최근호, 윤유병, 최진원)</strong> · 한국 출발 왕복 · 귀국 3월 7일(일) 오후 항공편</td></tr>
+              <tr><td style="font-weight:700; color:var(--primary);">🏠 숙소</td><td><strong>아파트 1박(3/4) + 료칸 1박(3/5) + 아파트 1박(3/6)</strong> · 7명 · 호텔 아님</td></tr>
+              <tr><td style="font-weight:700; color:var(--primary);">🛂 여권</td><td><strong>7명 완료</strong></td></tr>
+              <tr><td style="font-weight:700; color:var(--primary);">❓ 아직 미정</td><td>온천 (벳푸/유후인/쿠로가와) · 예산</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
       <div class="card">
-        <h2>👥 회원 현황</h2>
+        <h2>📋 예약 관리 — 항목별 예약 현황</h2>
+        <p style="font-size:14px;">예약이 끝나면 <strong>체크박스를 눌러 완료 표시</strong>를 하고, <strong>예약 내용란에 예약번호·확정 금액·예약일 등을 적어두세요.</strong> 체크와 내용은 모두에게 공유됩니다. 예약할 때는 대상 인원만큼 끊고, 여권 정보는 홈 하단의 여권 정보에서 확인하세요.</p>
+        <div style="overflow-x:auto; margin-top:12px;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>예약 항목</th><th>대상</th><th>내용</th><th style="width:64px; text-align:center;">예약 완료</th><th style="min-width:180px;">예약 내용</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">✈️ 비행기 왕복</td>
+                <td>김기태, 최근호, 윤유병, 최진원 (4명)</td>
+                <td>3/4(목) 오전 10시쯤 인천→후쿠오카 + 3/7(일) 오후 후쿠오카→인천. 제주 왕복 50.6만원 / 대한항공 왕복 53.9만원</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="flight" onchange="toggleBooking('flight', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="flight" onchange="saveBookingNote('flight', this.value)" placeholder="예약번호·확정 금액·메모"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🚢 배 (가는 편)</td>
+                <td>김석, 김철현, 박중산 (3명)</td>
+                <td>3/3(수) 22:30 부산→3/4(목) 07:30 하카타, 뉴카멜리아 2등 일반실 3명 합계 24.3만원 / 침대실 28.8만원</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ferry" onchange="toggleBooking('ferry', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="ferry" onchange="saveBookingNote('ferry', this.value)" placeholder="예약번호·확정 금액·메모"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">✈️ 귀국 편도</td>
+                <td>김석, 김철현, 박중산 (3명)</td>
+                <td>3/7(일) 오후 후쿠오카→인천 편도. 제주 7C1404 13:00 (34.2만원) / 대한항공 KE792 13:45 (37.2만원)</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="return" onchange="toggleBooking('return', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="return" onchange="saveBookingNote('return', this.value)" placeholder="예약번호·확정 금액·메모"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🚄 KTX</td>
+                <td>김석, 김철현, 박중산 (3명)</td>
+                <td>3/3(수) 점심쯤(15시 이전 출발) 서울→부산 편도, 약 6만원</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ktx" onchange="toggleBooking('ktx', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="ktx" onchange="saveBookingNote('ktx', this.value)" placeholder="예약번호·확정 금액·메모 (2월 초부터 예약 가능)"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🏠 아파트</td>
+                <td>7명 전원</td>
+                <td>3/4 1박 + 3/6 1박, 하카타. 1인 1박 4.5만원</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="apt" onchange="toggleBooking('apt', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="apt" onchange="saveBookingNote('apt', this.value)" placeholder="예약번호·확정 금액·메모 (어느 집으로 할지 정해야 함)"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">♨️ 료칸</td>
+                <td>7명 전원</td>
+                <td>3/5 1박, 중급 1인 25만원</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ryokan" onchange="toggleBooking('ryokan', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="ryokan" onchange="saveBookingNote('ryokan', this.value)" placeholder="예약번호·확정 금액·메모 (온천지 정해야 함)"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="card">
+        <h2>🗓️ 확정 일정 로드맵</h2>
+        <p style="font-size:14px; color:var(--text-muted); margin-top:-4px;">날짜는 확정됐습니다. 이 순서로 밀면 됩니다.</p>
+        <table style="margin-top:12px;">
+          <thead><tr><th style="min-width:96px;">시기</th><th>할 일</th><th style="width:52px; text-align:center;">체크</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700; color:var(--primary);">✅ 완료</td><td><strong>신년회 날짜 확정 (3/4~3/7)</strong></td><td style="text-align:center;"><input type="checkbox" data-roadmap="date" checked disabled style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">11월 중순</td><td><strong>🛂 여권 확인 마감</strong> — 재발급에 2~3주 걸리니 이때가 마지노선</td><td style="text-align:center;"><input type="checkbox" data-roadmap="passport" onchange="toggleRoadmap('passport', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">11월 말~12월 초</td><td>아파트·료칸 7명 기준 견적</td><td style="text-align:center;"><input type="checkbox" data-roadmap="quote" onchange="toggleRoadmap('quote', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">12월 중순</td><td>숙소 예약 완료 · <strong>유후인 갈 거면 열차 예약</strong> (승차 1개월 전 일본시간 10:00 오픈, 금방 매진)</td><td style="text-align:center;"><input type="checkbox" data-roadmap="stay" onchange="toggleRoadmap('stay', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">12월 말</td><td>환전·여행자보험·유심 · 분담금 정산</td><td style="text-align:center;"><input type="checkbox" data-roadmap="money" onchange="toggleRoadmap('money', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+            <tr><td style="font-weight:700; color:var(--primary);">3/3~3/7</td><td>✈️ <strong>신년회 실행</strong> — 3/3(수) 밤 배 3명 부산 출발 · 3/4(목) 후쿠오카 합류 · 3/5(금) 온천 · 3/6(토) 자유 일정 + 신년회 저녁 · 3/7(일) 귀국</td><td style="text-align:center;"><input type="checkbox" data-roadmap="trip" onchange="toggleRoadmap('trip', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td></tr>
+          </tbody>
+        </table>
+        <div class="note info" style="margin-top:12px;">
+          ⏰ <strong>지금 제일 급한 건 여권 확인입니다.</strong>
+          날짜가 정해졌으니 숙소 실측을 3/4~3/7로 다시 뽑아 공유합니다.
+        </div>
+      </div>
+
+      <div class="dday-grid">
+        <div class="dday-card ny">
+          <div class="dday-top">
+            <div>
+              <div class="dday-label">✈️ 신년회 (후쿠오카) — 3/4(목) ~ 3/7(일)</div>
+              <div class="dday-date" id="ny-countdown-date">날짜 미정</div>
+            </div>
+            <div class="dday-days" id="ny-countdown-days">--<span>일</span></div>
+          </div>
+          <div class="dday-controls">
+            <label>확정일</label>
+            <input type="date" id="ny-date">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🗳️ 지금 눌러야 할 것</h2>
+        <div id="home-todo"></div>
+      </div>
+
+      <div class="card">
+        <h2>📊 회원별 진행 현황</h2>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: -4px; margin-bottom: 12px;">누가 아직 안 눌렀는지 한눈에 보입니다. 재촉은 여기 보고 하세요 😄</p>
         <div id="home-member-status"></div>
       </div>
 
+      <div class="card">
+        <h2>📌 활동 통계</h2>
+        <div id="progress-summary"></div>
+      </div>
+
+      <div class="card" id="home-login-card">
+        <h2>👤 본인 이름을 클릭해서 시작하세요</h2>
+        <p>등록된 8명 중 본인을 클릭하면 바로 투표·토론에 참여할 수 있습니다.</p>
+        <div id="home-login-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 12px;"></div>
+      </div>
+
+      <div class="card">
+        <h2>☁️ 실시간 동기화 상태</h2>
+        <div id="cloud-mode"></div>
+        <div class="btn-row">
+          <button class="btn" id="cloud-save-btn" onclick="saveToCloud(false)">💾 지금 저장</button>
+          <button class="btn secondary" onclick="cloudRefresh()">🔄 새로고침</button>
+        </div>
+        <div id="cloud-status" style="font-size: 12px; color: var(--text-muted); margin-top: 10px;"></div>
+      </div>
+
+      <!-- ============ 회원 (토론·회원 탭에서 홈 하단으로 이동) ============ -->
       <div class="card">
         <h2>🛂 여권 정보 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(신년회용)</span></h2>
         <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">후쿠오카 항공·선박 예약에 <strong>영문 성명·여권번호·생년월일·만료일</strong>이 필요합니다.
@@ -576,182 +573,417 @@ tr.done-row td { opacity: 0.62; }
         </div>
       </div>
 
-      <details class="card">
-        <summary style="cursor:pointer; font-weight:700; color:var(--primary);">⚙️ 관리 · 백업 <span style="font-weight:400; font-size:12px; color:var(--text-muted);">(관리자용 — 평소엔 안 열어도 됩니다)</span></summary>
-        <div id="cloud-status" style="font-size: 12px; color: var(--text-muted); margin-top: 10px;"></div>
-        <div id="cloud-mode" style="margin-top:6px;"></div>
-        <div class="btn-row">
-          <button class="btn" id="cloud-save-btn" onclick="saveToCloud(false)">💾 지금 저장</button>
-          <button class="btn secondary" onclick="cloudRefresh()">🔄 새로고침</button>
-        </div>
-        <p style="font-size:13px; margin-top:12px;">클라우드 자동 저장이 켜져 있어 평소에는 쓸 일이 없습니다. 백업이나 여권 파일 가져오기가 필요할 때만 쓰세요.</p>
+      <div class="card">
+        <h2>👥 참여 회원</h2>
+        <div class="member-list" id="member-list"></div>
+      </div>
+
+      <div class="card">
+        <h2>⚙️ 실시간 동기화 설정 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(관리자용)</span></h2>
+        <div id="sync-setup-status"></div>
+      </div>
+
+      <div class="card">
+        <h2>💾 데이터 관리</h2>
+        <p>클라우드 자동 저장이 켜져 있어 평소에는 쓸 일이 없습니다. 백업이 필요할 때만 사용하세요.</p>
         <div class="btn-row">
           <button class="btn" onclick="exportData()">📥 데이터 내보내기</button>
           <button class="btn secondary" onclick="importData()">📤 데이터 가져오기</button>
           <button class="btn danger" onclick="resetAll()">🗑️ 내 브라우저 데이터 초기화</button>
         </div>
         <input type="file" id="import-file" accept=".json" style="display:none" onchange="handleImport(event)">
-      </details>
+      </div>
     </section>
 
     <!-- ============ 신년회 ============ -->
     <section class="section" id="section-ny">
-      <div class="card" id="timeline-card">
-        <h2>🗓️ 일정 — 3/3(수) ~ 3/7(일)</h2>
-        <p style="font-size:14px; margin-top:-4px;">초록 점은 확정, 주황 점은 투표 중입니다. 투표 칸은 <strong>비교 카드(거리·교통·요금·주의)를 좌우로 넘겨 보고</strong> [선택]을 누르세요(다시 누르면 취소). 1위 안은 카드 아래에 「확정되면 이렇게 진행」으로 미리 보이고, 총무가 [✅ 이걸로 확정]을 누르면 <strong>그 시간표가 세로선 위 확정 일정으로 들어가고 다음 날 일정도 따라 바뀝니다.</strong></p>
-        <div id="ny-cloud-note"></div>
-        <div id="timeline-flow" style="margin-top:12px;"></div>
-        <div class="note info" style="margin-top:14px;">
-          🧘 <strong>허리 배려</strong> — 첫날(목)은 이동 피로가 크니 무리하지 않기 · 금요일은 온천지까지 2시간 넘게 가니 중간 휴식 넉넉히 · 3월 초 후쿠오카는 평균 9.5도(낮 13도 · 밤 6도)라 겹옷·우산 필수.
+      <div class="card">
+        <h2>✈️ 2027 신년회 — 후쿠오카</h2>
+        <p>본 일정은 <strong>목 · 금 · 토 · 일</strong>입니다. <strong>목요일 아침에 후쿠오카에서 전원 합류</strong>해서 3박 하고 일요일에 귀국합니다.</p>
+        <div class="note warn" style="margin-top:12px;">
+          🚢 <strong>배를 타면 목요일 아침에 도착하려고 수요일 밤에 승선해야 합니다.</strong>
+          뉴카멜리아는 야간페리라 <strong>부산 22:30 출항 → 다음 날 07:30 하카타 도착</strong>이기 때문입니다.
+          (목요일 밤에 타면 금요일 아침 도착이라 일정이 하루 밀립니다.)
         </div>
-        <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">예약 진행 · 회원별 현황 · 여권은 🏠 홈에 모아 두었습니다.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-top: 14px;">
+          <div style="background:#f0f7fc; padding:12px; border-radius:8px;">
+            <div style="font-size:11px; color:var(--text-muted);">🚢 배 타는 사람 — 김석·김철현·박중산</div>
+            <div style="font-size:16px; font-weight:600; color:var(--primary); margin-top:2px;">수요일 밤 승선</div>
+            <div style="font-size:11px; color:var(--text-muted);">선상 1박 → 목 07:30 하카타 도착</div>
+          </div>
+          <div style="background:#f0f7fc; padding:12px; border-radius:8px;">
+            <div style="font-size:11px; color:var(--text-muted);">🛫 비행기 타는 사람 — 4명</div>
+            <div style="font-size:16px; font-weight:600; color:var(--primary); margin-top:2px;">목요일 아침 출발</div>
+            <div style="font-size:11px; color:var(--text-muted);">인천 → 약 1시간 20~30분</div>
+          </div>
+          <div style="background:#fef3e6; padding:12px; border-radius:8px;">
+            <div style="font-size:11px; color:var(--text-muted);">공통</div>
+            <div style="font-size:16px; font-weight:600; color:#b35c00; margin-top:2px;">목 · 금 · 토 · 일</div>
+            <div style="font-size:11px; color:var(--text-muted);">후쿠오카 3박 · 일요일 귀국</div>
+          </div>
+        </div>
+        <p style="margin-top:14px;">날짜는 <strong>3월 4일(목) ~ 3월 7일(일)로 확정</strong>됐습니다. 정해진 건 <strong>어떻게 갈지(배 3명·비행기 4명)·숙박(아파트 2박 + 료칸 1박)</strong>입니다. 정해야 할 건 <strong>온천(벳푸/유후인/쿠로가와)·예산</strong>입니다.</p>
+        <div style="overflow-x:auto; margin-top:14px;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>항목</th><th>내용</th><th>금액</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600; color:var(--primary);">🚢 배 (가는 편)</td><td>뉴카멜리아 3/3(수) 22:30 부산 → 3/4(목) 07:30 하카타 · 3명 (김석, 김철현, 박중산)</td><td>2등 일반실 1인 8.1만원 / 침대실 1인 9.6만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">✈️ 비행기 왕복</td><td>3/4(목) 오전 10시쯤 인천 출발 · 3/7(일) 오후 귀국 · 4명 (김기태, 최근호, 윤유병, 최진원)</td><td>제주 왕복 50.6만원 / 대한항공 왕복 53.9만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">✈️ 귀국 편도</td><td>3/7(일) 오후 후쿠오카 → 인천 · 배 3명</td><td>제주 7C1404 13:00 34.2만원 / 대한항공 KE792 13:45 37.2만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🚄 KTX</td><td>3/3(수) 점심쯤(15시 이전 출발) 서울 → 부산 편도 · 배 3명</td><td>약 6만원 (2027년 2월 초부터 예약 가능)</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🏠 아파트</td><td>3/4 1박 + 3/6 1박 · 하카타 · 7명</td><td>1인 1박 4.5만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">♨️ 료칸</td><td>3/5 1박 · 중급 · 7명</td><td>1인 25만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">💰 1인 총비용</td><td>항공+숙소+온천+식비+현지 교통 합계</td><td>비행기 제주 약 104~111만원 · 대한항공 약 107~114만원 / 배 부산 출발 약 96~102만원</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" id="timeline-card">
+        <h2>🗓️ 전체 타임라인</h2>
+        <p style="font-size:14px; color:var(--text-muted); margin-top:-4px;">위에서 아래로 흐르는 순서입니다. 확정된 것은 고정, 아직 정할 것은 카드를 좌우로 밀어 보고 하단의 선택 버튼을 눌러 고르세요. 선택하면 모두에게 공유되고, 아래 확정 일정에 반영됩니다.</p>
+        <div id="timeline-flow" style="margin-top:12px;"></div>
+        <div id="timeline-decided" style="margin-top:16px;"></div>
+
+      <div class="card">
+        <h2>🗓️ 목~일 일정 메모 — 허리 배려</h2>
+        <p style="font-size:12.5px;">목~일 3박4일을 허리 부담을 줄이는 방향으로 정리한 메모입니다. 3월 초 후쿠오카 평균 9.5도 · 최고 13.4도 · 최저 6도라 겹옷·우산을 챙기세요.</p>
+        <ul style="font-size:12.5px; line-height:1.9; padding-left:20px; margin-top:10px;">
+          <li>첫날은 이동만으로 피로가 크니 무리하지 않기.</li>
+          <li>온천은 아직 미정이라 교통편은 정해지는 대로 확인하기.</li>
+          <li>저녁 식사는 7명 예약 필수.</li>
+        </ul>
+        <div class="note info" style="margin-top:12px;">
+          💡 <strong>현지 비용 참고(2026-11-05 확인 가격대, 확정 요금 아님)</strong> — 식비 3박4일 1인 18,000~25,000엔 · 교통(공항 왕복+시내 이동+지하철) 3,500~4,000엔 · 현지 합계 1인 약 24,500~34,000엔. 유후인노모리 정상 6,130엔 / 넷きっぷ 5,600엔, 벳푸 고속버스 왕복 6,500엔 + 지옥순례 2,400엔.
+        </div>
       </div>
 
       <div class="card">
-        <h2>🚢✈️ 이동 — 배 3명 · 비행기 4명</h2>
+        <h2>🚢✈️ 최종 이동 계획 — 7명 확정</h2>
         <div style="overflow-x:auto;">
           <table style="font-size:12.5px; min-width:0;">
-            <thead><tr><th>구분</th><th>일정</th><th>요금 (1인 · 11/14 실측)</th></tr></thead>
+            <thead><tr><th>구분</th><th>일정</th><th>요금(대략)</th><th>메모</th></tr></thead>
             <tbody>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">🚢 배 3명<br><span style="font-size:11px; color:var(--text-muted);">김석, 김철현, 박중산</span></td>
-                <td><strong>3/3(수) 점심 서울역 KTX</strong> (15시 이전·편도, 약 2시간 30분) → 부산에서 저녁 → <strong>22:30 뉴카멜리아</strong> → <strong>3/4(목) 07:30 하카타</strong></td>
-                <td>2등 일반실 8.1만원 · 침대실 9.6만원 (부대비용 포함)<br><span style="font-size:11px; color:var(--text-muted);">KTX 약 6만원 별도 · 11/14 예약 가능 확인</span></td>
+                <td><strong>3/3(수) 점심쯤 서울역 출발 KTX(15시 이전·편도)</strong> → 부산역 도착 → 부산에서 저녁 → <strong>22:30 뉴카멜리아 승선</strong> → <strong>3/4(목) 07:30 하카타 도착</strong><br><span style="font-size:11px;color:var(--text-muted);">KTX 약 2시간 30분 · 배 약 9시간 · 선상 1박</span></td>
+                <td>2등 일반실 1인 8.1만원 · 침대실 1인 9.6만원<br><span style="font-size:11px;color:var(--text-muted);">부대비용 포함 3명 합계 일반실 24.3만원 · 침대실 28.8만원 · KTX 편도 6만원대 별도</span></td>
+                <td><strong>예약 가능 (2026-11-14 확인).</strong> 숙박 1박을 아끼는 효과. <span style="color:var(--danger); font-weight:600;">부산발 토요일 휴항</span></td>
               </tr>
               <tr>
-                <td style="font-weight:600; color:var(--primary);">✈️ 비행기 4명<br><span style="font-size:11px; color:var(--text-muted);">김기태, 최근호, 윤유병, 최진원</span></td>
-                <td><strong>3/4(목) 오전 10시쯤 인천</strong> → 약 1시간 20~30분 → 후쿠오카 · 점심 무렵 하카타 합류 · <strong>3/7(일) 오후 귀국</strong></td>
-                <td>왕복 제주 50.6만원 · 대한항공 53.9만원 (오후 귀국 기준)</td>
+                <td style="font-weight:600; color:var(--primary);">🛫 비행기 4명<br><span style="font-size:11px; color:var(--text-muted);">김기태, 최근호, 윤유병, 최진원</span></td>
+                <td><strong>3/4(목) 아침 인천 출발</strong> → 약 1시간 20~30분 → 후쿠오카공항 · 오전 중 하카타 합류</td>
+                <td>제주 왕복 50.6만원 · 대한항공 왕복 53.9만원 (오후 귀국 기준)<br><span style="font-size:11px;color:var(--text-muted);">2026-11-14 실측, 확정 요금 아님</span></td>
+                <td>부산을 아예 안 거침. 왕복 같은 공항으로 끊으면 주차·교통이 가장 단순</td>
               </tr>
               <tr>
-                <td style="font-weight:600; color:var(--primary);">🛬 배 3명 귀국</td>
-                <td><strong>3/7(일) 오후 후쿠오카 → 인천</strong> 편도 · 일요일 하카타발 배가 없어 항공</td>
-                <td>제주 7C1404 13:00 34.2만원 · 대한항공 KE792 13:45 37.2만원</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <h3 style="margin-top:14px;">✈️ 항공권 사는 법</h3>
-        <ul style="font-size:14px; line-height:1.8; padding-left:20px;">
-          <li><strong>비행기 4명:</strong> 한국 출발 왕복(인천 → 후쿠오카 → 인천)이 제일 쌉니다.</li>
-          <li><strong>배 3명:</strong> 돌아오는 편도만 직접 삽니다. 가능하면 비행기 4명과 같은 귀국편으로 맞추세요. (김해로 오는 제주 7C1452는 약 16.8~31만원)</li>
-          <li><strong>❌ 하지 말 것:</strong> 일본 출발 왕복을 사서 한 구간만 쓰고 버리기 — 왕복이 편도보다 비싸고(3/7 제주 왕복 약 38.2만원), 부분 환불 때 위약금(대한항공 Saver 16만원 등)을 빼서 거의 안 돌아옵니다.</li>
-          <li><strong>🚗 배 3명은 자차 말고 KTX:</strong> 돌아올 때 인천이라 차가 부산에 남습니다.</li>
-        </ul>
-        <div class="note warn" style="margin-top:10px;">
-          ⚠️ <strong>뉴카멜리아는 예약 전 공식 확인</strong> — 부산발 토요일 휴항, 월 1회 정기휴항이 있습니다(2023년 재개 공지 기준).
-          👉 <strong>고려훼리 1688-7447</strong> 또는 <a href="https://www.koreaferry.kr/bbs/board.php?bo_table=notice" target="_blank" style="color:var(--primary-light);">공지사항</a>에서 3월 휴항일을 확인하세요. 유류할증료·터미널이용료·일본 출국세 불포함 상품이 많습니다.
-        </div>
-        <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">가격은 실측 가격대이며 확정 요금이 아닙니다. 예약 전 항공사 공식 사이트에서 다시 확인하세요.</p>
-      </div>
-
-      <div class="card">
-        <h2>🏠 숙소 — 아파트 2박 + 료칸 1박 (확정)</h2>
-        <div style="overflow-x:auto;">
-          <table style="font-size:12.5px; min-width:0;">
-            <thead><tr><th>날짜</th><th>숙소</th><th>1인</th><th>예약 전 확인할 것</th></tr></thead>
-            <tbody>
-              <tr>
-                <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/4(목)<br>3/6(토)</td>
-                <td><strong>🏠 아파트 독채</strong><br>하카타·텐진 · 7명 한 채</td>
-                <td>1박 약 4.5만원<br><span style="font-size:11px; color:var(--text-muted);">2박 9만원</span></td>
-                <td>정말 <strong>한 채</strong>인지 · 욕실·화장실 개수 · 침대 구성. 「로프트형 객실 2개 세트」는 방 두 개를 묶은 것일 수 있습니다.</td>
-              </tr>
-              <tr>
-                <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/5(금)</td>
-                <td><strong>♨️ 온천지 료칸</strong><br>1박 2식 · 중급</td>
-                <td>약 25만원<br><span style="font-size:11px; color:var(--text-muted);">20~30만원대 · 7명 약 175만원</span></td>
-                <td>요금이 <strong>1인당</strong>이라 꼭 <strong>7명으로 검색</strong>해야 맞는 금액이 나옵니다. 전세탕 있는 곳도 이 가격대에서 찾을 수 있습니다.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="note info" style="margin-top:12px;">
-          💡 7명이 묵을 만한 아파트 예 — 하카타역 도보권 60㎡ 더블침대 4개(평점 4.97), 텐진역 도보 6분 욕실 2개짜리. 료칸은 금요일 온천지가 정해지면 그 지역에서 찾습니다.
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>💰 비용 — 1인 기준 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">11/14 실측 가격대 · 확정 요금 아님</span></h2>
-        <div style="overflow-x:auto; margin-top:8px;">
-          <table style="font-size:13px; min-width:0;">
-            <thead><tr><th>구분</th><th>내역</th><th style="min-width:118px;">1인 합계</th></tr></thead>
-            <tbody>
-              <tr>
-                <td style="font-weight:600; color:var(--primary);">✈️ 비행기 4명</td>
-                <td>항공 왕복 50.6만(제주) + 아파트 2박 9만 + 료칸 25만 + <strong>온천지 왕복 교통 약 6만</strong> + 식비·현지 교통 19.4~26.1만</td>
-                <td><strong>약 110~117만원</strong><br><span style="font-size:12px; color:var(--text-muted);">대한항공이면 약 113~120만원</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight:600; color:var(--primary);">🚢 배 3명</td>
-                <td>배 8.1만(2등 일반실) + 귀국 편도 34.2만(제주 7C1404) + 아파트 9만 + 료칸 25만 + <strong>온천지 왕복 교통 약 6만</strong> + 식비·현지 교통 19.4~26.1만</td>
-                <td><strong>부산 출발 약 102~108만원</strong><br><span style="font-size:12px; color:var(--text-muted);">서울 출발(KTX 6만 + 부산 저녁 4만) 약 112~118만원 · 침대실이면 +1.5만</span></td>
+                <td style="font-weight:600; color:var(--primary);">🛬 귀국 — 전원<br><span style="font-size:11px; color:var(--text-muted);">3/7(일)</span></td>
+                <td>후쿠오카공항 → 인천 · 약 1시간 20~30분</td>
+                <td>시기·항공사별 편차 큼</td>
+                <td>후쿠오카공항은 <strong>하카타역에서 지하철 2정거장(약 5분)</strong>. 일요일 하카타발 배가 없어 귀국은 항공으로 확정</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="note warn" style="margin-top:12px;">
-          ⚠️ <strong>11/14 수정</strong> — 전에는 「온천은 료칸에서 해결」로 계산해서 <strong>온천지까지 오가는 교통비가 빠져 있었습니다.</strong> 벳푸 고속버스 왕복 6,500엔(약 6만원)을 더해 1인 합계가 약 6만원 올랐습니다. 유후인이면 열차 왕복 12,260엔(약 11만원)이라 5만원쯤 더 듭니다.
+          ⚠️ <strong>반드시 예약 전 공식 확인이 필요합니다.</strong> 위 시간은 통상 운항 기준이고, 요일별 운항 패턴(부산발 토요일 휴항 / 하카타발 일요일 휴항)은 <strong>2023년 재개 공지 기준</strong>이라 현재와 다를 수 있습니다.
+          뉴카멜리아는 <strong>월 1회 정기휴항</strong>이 있고, 연말연시에는 특별 운항편이 따로 뜹니다
+          (예: 2026년 12월 31일 하카타 18:00 출항 → 2027년 1월 1일 부산 08:30 하선).<br>
+          👉 <strong>고려훼리 1688-7447</strong> 또는 <a href="https://www.koreaferry.kr/bbs/board.php?bo_table=notice" target="_blank" style="color:var(--primary-light);">공지사항</a>에서 해당 월 휴항일을 확인하세요. 유류할증료·터미널이용료·일본 출국세 불포함 상품이 많습니다.
         </div>
-        <div class="pick-grid" style="margin-top:12px;">
+        <div class="note info" style="margin-top:8px;">
+          💡 <strong>귀국은 인천으로 확정입니다.</strong> 배로 가는 3명도 돌아올 때는 항공편을 편도로 직접 구매합니다.<br>
+          🚗 <strong>주의 — 배로 가면 편도가 됩니다.</strong> 자차로 부산까지 내려가면 인천으로 돌아올 때 차를 부산에 두고 오게 됩니다.
+          배 타실 분은 <strong>KTX</strong>로 내려가시는 걸 권합니다.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>💰 비용 대시보드 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">한눈에 보기 · 2026-11-11 실측 기준</span></h2>
+        <p style="font-size:14px;">확정 날짜의 1인 총비용, 회비를 한눈에 봅니다. <strong>확정 요금이 아니라 실측 가격대입니다.</strong> 자세한 내용은 아래 1인 총비용 예시·경비 계산기를 보세요.</p>
+        <div class="pick-grid" style="margin-top:14px;">
+          <div class="pick-card" style="cursor:default;">
+            <div class="pick-name">✅ 확정 날짜</div>
+            <div class="pick-price">3/4(목) ~ 3/7(일)</div>
+            <div class="pick-sub2">제주 왕복 365,200원 · 대한항공 A350 439,700원 (트립닷컴 11/11 실측)</div>
+          </div>
+          <div class="pick-card" style="cursor:default;">
+            <div class="pick-name">💰 1인 총비용 (3/4주 기준)</div>
+            <div class="pick-price">약 96~114만원</div>
+            <div class="pick-sub2">✈️ 비행기 4명 제주 약 104~111만 · 대한항공 약 107~114만 · 🚢 배 3명 약 96~102만 (부산 출발, 일반실)</div>
+          </div>
           <div class="pick-card" style="cursor:default;">
             <div class="pick-name">🧾 회비 (총 560만원)</div>
             <div class="pick-price">가는 사람 약 74.7만원</div>
             <div class="pick-sub2">안 가는 사람 약 37.3만원 (7명 간다고 가정 · 조성화 제외)</div>
           </div>
           <div class="pick-card" style="cursor:default;">
-            <div class="pick-name">🍱 식비 · 현지 교통 (3박4일)</div>
+            <div class="pick-name">🍱 현지 비용 (1인, 3박4일)</div>
             <div class="pick-price">약 19.4~26.1만원</div>
-            <div class="pick-sub2">식비 18,000~25,000엔 + 공항·시내 교통 3,500~4,000엔 (100엔=900원)</div>
+            <div class="pick-sub2">식비 18,000~25,000엔 + 교통 3,500~4,000엔 (100엔=900원)</div>
           </div>
         </div>
-        <details style="margin-top:14px; border:1px solid var(--border); border-radius:10px; padding:10px 12px;">
-          <summary style="cursor:pointer; font-weight:600; color:var(--primary);">🧮 경비 계산기 — 조건 바꿔서 계산해 보기</summary>
-          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr)); gap:10px; margin-top:12px;">
-            <div>
-              <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">가는 편</label>
-              <select id="cost-go" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
-                <option value="air">✈️ 비행기 왕복 — 제주항공</option>
-                <option value="air_ke">✈️ 비행기 왕복 — 대한항공</option>
-                <option value="ferry_busan">🚢 배 + 귀국 편도 (부산 출발)</option>
-                <option value="ferry_seoul">🚢 배 + 귀국 편도 (서울 출발, KTX 포함)</option>
-              </select>
-            </div>
-            <div>
-              <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">금요일 온천</label>
-              <select id="cost-onsen" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
-                <option value="beppu">♨️ 벳푸 (고속버스 왕복)</option>
-                <option value="yufuin">🏞️ 유후인 (유후인노모리 왕복)</option>
-                <option value="none">교통비 없음 (가까운 곳)</option>
-              </select>
-            </div>
-            <div>
-              <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">식비 · 현지 교통 (원)</label>
-              <input type="number" id="cost-food" value="230000" step="10000" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
-            </div>
-            <div>
-              <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">환율 (100엔 = ?원)</label>
-              <input type="number" id="cost-rate" value="900" step="10" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
-            </div>
-          </div>
-          <div id="cost-result" style="margin-top:14px;"></div>
-          <div class="note warn" style="margin-top:10px; font-size:12px;">
-            ⚠️ 실측 가격대로 자릿수를 잡는 추정입니다. 숙소는 아파트 2박 9만 + 료칸 25만으로 고정했고, 환율 900원은 지금 시세로 고쳐 쓰세요. 실제 견적이 나오면 갱신하겠습니다.
-          </div>
-        </details>
-        <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">항공은 화면 표시 가격 그대로라 세금 포함 여부가 따로 없습니다. 예약 전 항공사 공식 사이트에서 다시 확인하세요.</p>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:10px;">항공권은 인천 ↔ 후쿠오카 1인 이코노미 왕복. 트립닷컴 화면 표시 왕복가 그대로이며 세금 포함 여부는 별도 표시가 없습니다. 예약 전 항공사 공식 사이트에서 재확인하세요.</p>
       </div>
+
+      <div class="card">
+        <h2>💰 모임 통장 — 회비·정산 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(확인된 금액 기준 · 2026-11-14 확인)</span></h2>
+        <p style="font-size:14px;">현재까지 확인된 금액을 모아뒀습니다. <strong>확인된 금액만</strong> 적었고, 아직 정하지 않은 항목은 미정으로 표시했습니다. 회비(모임 통장)와 1인 총비용은 다른 돈이라 따로 보여줍니다.</p>
+        <h3 style="font-size:14px; margin:14px 0 6px;">🧾 회비 (모임 통장)</h3>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>구분</th><th>금액</th><th>비고</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600; color:var(--primary);">모임 통장 총액</td><td><strong>5,600,000원</strong></td><td>7명 간다고 가정</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">가는 사람 1인</td><td><strong>약 746,667원</strong></td><td>김석·김철현·박중산·윤유병·김기태·최근호·최진원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">안 가는 사람 1인</td><td><strong>약 373,333원</strong></td><td>조성화 (가는 사람의 50%)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="font-size:14px; margin:14px 0 6px;">🚢✈️ 확인된 교통비</h3>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>항목</th><th>1인</th><th>합계</th><th>비고</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600; color:var(--primary);">🚢 배 (뉴카멜리아, 3명)</td><td>일반실 81,000원<br>침대실 96,000원</td><td>일반실 243,000원<br>침대실 288,000원</td><td>부대비용 포함 · 날짜 변경 불가 · 환불 가능 · 부산 체크인 16:30~19:00 · 객실 종류 미정</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">✈️ 비행기 왕복 (4명)</td><td>제주 505,900원<br>대한항공 554,000원</td><td>제주 2,023,600원<br>대한항공 2,216,000원</td><td>2026-11-14 확인 · 항공사 미정 · 대한항공 10:50 KE791은 A330 (A350은 07:45 KE787)</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🛬 귀국 편도 (배 3명)</td><td>제주 342,456원<br>대한항공 약 372,158원</td><td>제주 1,027,368원<br>대한항공 약 1,116,475원</td><td>3/7 오후 · 제주 7C1404 13:00 · 대한항공 KE792 13:45</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🚄 KTX (배 3명)</td><td>약 60,000원</td><td>약 180,000원</td><td>서울→부산 편도 · 2027년 2월 초부터 예약 가능</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🍻 부산 저녁 (배 3명)</td><td>약 40,000원</td><td>약 120,000원</td><td>3/3 저녁</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="font-size:14px; margin:14px 0 6px;">🏠 확인된 숙박비</h3>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>항목</th><th>1인</th><th>7명 합계</th><th>비고</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600; color:var(--primary);">🏠 아파트 2박</td><td>90,000원</td><td>630,000원</td><td>1박 45,000원 · 3/4 1박 + 3/6 1박 · 구체적인 곳 미정</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">♨️ 료칸 1박 (중급)</td><td>250,000원</td><td>1,750,000원</td><td>3/5 1박 · 1박2식 · 온천 지역 미정 (벳푸/유후인/쿠로가와)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="font-size:14px; margin:14px 0 6px;">🍱 현지비</h3>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>항목</th><th>1인</th><th>7명 합계</th><th>비고</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600; color:var(--primary);">🍱 식비·교통 (3박4일)</td><td>약 194,000~261,000원</td><td>약 1,358,000~1,827,000원</td><td>식비 18,000~25,000엔 + 교통 3,500~4,000엔 · 100엔=900원</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="font-size:14px; margin:14px 0 6px;">💰 1인 총비용 (범위)</h3>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>구분</th><th>1인 총비용</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600; color:var(--primary);">✈️ 비행기 4명</td><td>제주 약 104~111만원 · 대한항공 약 107~114만원</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🚢 배 3명</td><td>부산 출발 일반실 약 96~102만원 (침대실 약 97~104만원) · 서울 출발 약 106~112만원</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note warn" style="margin-top:12px;">
+          ⚠️ <strong>아직 미정이라 금액이 없는 항목</strong> — 항공사(제주/대한항공), 온천 지역(벳푸/유후인/쿠로가와), 배 객실 종류(일반실/침대실), 아파트 구체적인 곳. 정해지면 이 표에 금액을 채웁니다. 요금은 조회 시점 기준이라 변동될 수 있습니다.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>✈️ 항공권 사는 법 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">2026-11-05 실측 기준</span></h2>
+        <ul style="font-size:15px; line-height:1.9; padding-left:20px;">
+          <li><strong>🛫 비행기 4명 (김기태, 최근호, 윤유병, 최진원):</strong> 한국 출발 왕복(ICN→FUK→ICN)으로 사는 게 제일 쌉니다. 3/4~3/7 제주 왕복 50.6만원, 대한항공 왕복 53.9만원 (오후 귀국 기준).</li>
+          <li><strong>🚢 배 3명 (김석, 김철현, 박중산):</strong> 돌아오는 편만 편도로 직접 사세요. FUK→ICN 3/7 오후 제주 7C1404 13:00 편도 34.2만원, 대한항공 KE792 13:45 편도 37.2만원. FUK→PUS 일요일 직항 제주 7C1452 약 16.8~31만원.</li>
+          <li><strong>❌ 하지 말 것:</strong> 일본 출발 왕복(FUK→ICN→FUK)을 사서 한 구간만 쓰고 취소하는 방법 — 왕복 자체가 편도보다 비싸고(3/7 제주 왕복 약 38.2만원), 남은 구간 취소 시 사용한 구간을 편도 정상 운임으로 재산정하고 부분환불 위약금(대한항공 Saver 16만원 등)을 또 빼서 환불이 거의 안 남습니다. 첫 구간을 안 타면 뒷 구간은 자동 취소됩니다.</li>
+        </ul>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:10px;">가격은 2026-11-05 실측 가격대이며 확정 요금이 아닙니다. 예약 전 항공사 공식 사이트에서 재확인하세요.</p>
+      </div>
+
+      <div class="card">
+        <h2>💰 1인 총비용 예시 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">3/4~3/7 목~일 3박4일 · 2026-11-05 실측 기준</span></h2>
+        <p style="font-size:14px;">항공+숙소+온천+식비+현지 교통 합계입니다. 식비 18,000~25,000엔, 현지 교통 3,500~4,000엔으로 계산했고 환율은 100엔=900원입니다. <strong>확정 요금이 아니라 2026-11-05에 확인한 실측 가격대입니다.</strong> 숙소는 아파트 2박 + 료칸 1박으로 확정됐습니다.</p>
+        <div style="overflow-x:auto; margin-top:12px;">
+          <table style="font-size:14px; min-width:0;">
+            <thead><tr><th>구분</th><th>내역</th><th>합계 (1인)</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">✈️ 비행기 4명<br><span style="font-size:12px; color:var(--text-muted);">제주 왕복 + 아파트 2박 + 료칸 1박</span></td>
+                <td>항공 50.6만(제주 왕복) + 아파트 9만 + 료칸 중급 25만 + 식비·교통 약 19.4~26.1만 (온천은 료칸에서 해결)</td>
+                <td style="font-weight:700;">약 104~111만원<br><span style="font-size:12px; font-weight:400; color:var(--text-muted);">대한항공 A350이면 약 107~114만원</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🚢 배 3명<br><span style="font-size:12px; color:var(--text-muted);">배 + 귀국 편도 + 아파트 2박 + 료칸 1박</span></td>
+                <td>부산 출발: 배 8.1만(일반실) + 편도 34.2만(제주 7C1404) + 아파트 9만 + 료칸 중급 25만 + 식비·교통 약 19.4~26.1만 (온천은 료칸에서 해결)<br><span style="font-size:12px; color:var(--text-muted);">서울 출발은 KTX 편도 6만 + 부산 저녁 4만 추가 · 침대실(9.6만)이면 1.5만 추가</span></td>
+                <td style="font-weight:700;">부산 출발 약 96~102만원 (침대실 약 97~104만원)<br>서울 출발 약 106~112만원</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+
+      <div class="card">
+        <h2>♨️ 온천 후보 비교 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(금요일 메인)</span></h2>
+        <div style="overflow-x:auto;">
+          <table style="font-size:12.5px; min-width:0;">
+            <thead><tr><th>후보</th><th>하카타에서</th><th>교통·요금(편도)</th><th>특징 / 주의</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">♨️ 벳푸</td>
+                <td>약 2시간 10분</td>
+                <td>특급 소닉 30분 간격<br>고속버스 토요노쿠니호 <strong>3,250엔</strong><br><span style="font-size:11px; color:var(--text-muted);">약 2시간 20분~2시간 45분</span></td>
+                <td><strong>지옥순례 7곳 공통권 성인 2,400엔</strong> (구매일부터 2일 유효, 공식 홈페이지 10% 할인). 온천 가짓수가 가장 많음.<br>⚠️ 버스는 벳푸역이 아니라 <strong>기타하마</strong> 하차</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🏞️ 유후인</td>
+                <td>약 2시간 10~20분</td>
+                <td>특급 유후인노모리 <strong>6,130엔</strong><br><span style="font-size:11px; color:var(--text-muted);">인터넷 큐슈넷티켓 5,600엔</span></td>
+                <td>료칸·긴린코 호수·온천 거리 분위기가 좋음.<br>⚠️ <strong>전 좌석 지정석</strong>이고 하루 왕복 2회뿐. <strong>승차 1개월 전 일본시간 10:00</strong> 예약 오픈인데 금방 매진됨 — 2월 초 오픈 때 바로 잡아야 함</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🚆 유후인 + 벳푸</td>
+                <td>하루 종일</td>
+                <td>유후인노모리 일부 편이 벳푸까지 운행<br>복귀는 소닉</td>
+                <td>오전 유후인 → 오후 벳푸 → 저녁 하카타 복귀. 가능하지만 <strong>강행군</strong>이라 7명 단체엔 빠듯할 수 있음</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🏞️ 쿠로가와 온천마을</td>
+                <td>차로 약 2시간</td>
+                <td>아소&쿠로가와 버스투어 (마이리얼트립)<br>대중교통 불편 · 렌트카도 가능</td>
+                <td>유후인보다 관광객 적고 조용하고 한적. 무료 족욕탕, 온천 계란 100엔. 마을 구경 약 1시간.<br>⚠️ 산속이라 겨울엔 눈 많이 내려 대중교통 끊길 수 있음</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🚌 유후인 + 쿠로카와 당일 버스투어</td>
+                <td>하루 종일 (08:00~18:20)</td>
+                <td>소소버스투어 · 1인 56,640 (표시 가격)<br>최소 출발 10인 · 한국인 가이드</td>
+                <td>하카타 08:00 출발 → 유후인 10:00–12:30 → 쿠로카와 13:30–15:50 → 18:20 하카타 복귀. 당일입욕 선택 (온천마패 1,500엔 / 개별 입욕권 500~800엔). 점심·입욕료 별도</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🍵 사가 우레시노·다케오</td>
+                <td>벳푸·유후인보다 가까움</td>
+                <td colspan="2">한적하고 이동이 짧은 대신 정보가 덜 모였습니다. 이쪽으로 기울면 따로 알아보겠습니다</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🏙️ 시내 온천</td>
+                <td>30분 이내</td>
+                <td colspan="2">이동 부담이 없어 체력 아끼기 좋음. 대신 온천여행 느낌은 덜함</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note warn" style="margin-top:12px;">
+          ⚠️ 요금·소요시간은 여행 정보 사이트 기준입니다. 지옥순례 공통권은 과거 2,200엔이던 자료도 있어 <strong>출발 전 공식 사이트 재확인</strong>이 필요하고, 열차 시간표는 JR큐슈 공식에서 확인하세요.
+        </div>
+        <div class="note info" style="margin-top:8px;">
+          💡 <strong>7명 단체면 벳푸 고속버스가 무난합니다.</strong> 좌석 예약 부담이 유후인노모리보다 훨씬 적고 요금도 절반 수준입니다. 분위기를 택하면 유후인인데, 그 경우 <strong>2월 초 열차부터 예약</strong>해야 합니다.
+        </div>
+        <div class="note info" style="margin-top:8px;">
+          💡 <strong>블로그에서 추가한 코스입니다.</strong> 쿠로가와는 <a href="https://m.blog.naver.com/hjk8427_/224401394564" target="_blank" rel="noopener">엘리의 영국라이프 — 쿠로가와 온천마을 버스투어</a>, 유후인+쿠로카와 당일투어는 <a href="https://m.blog.naver.com/0510408/224405051451" target="_blank" rel="noopener">테라투어 — 유후인·쿠로카와 온천 하루에 다녀오기</a> 글을 참고했습니다. 두 코스 모두 당일치기라 하카타로 돌아오기 때문에, 이 코스를 고르면 금요일 밤은 료칸 대신 아파트에서 잡니다. 아래에서 바로 고르세요.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🏠 숙소 — 확정 (7명 기준)</h2>
+        <div class="note success" style="margin-top:8px;">
+          ✅ <strong>확정 — 아파트 독채 2박 + 중급 료칸 1박.</strong>
+          목·토는 아파트, 금요일 밤은 온천 료칸입니다. 아파트에서 숙박비를 아끼고 그 돈으로 료칸 하루를 넣는 구성입니다. 다 같이 모여 마시는 밤 이틀 + 온천 하루.
+        </div>
+        <div class="note info" style="margin-top:12px;">
+          💡 <strong>실제로 7명이 묵을 만한 아파트가 있습니다.</strong> 하카타역 도보권 60㎡ 더블침대 4개(평점 4.97),
+          텐진역 도보 6분 욕실 2개짜리 등이 확인됩니다.<br>
+          ⚠️ 다만 <strong>"로프트형 객실 2개 세트" 같은 건 독채가 아니라 방 두 개를 묶은 것</strong>이라
+          칸막이가 없는 경우도 있습니다. 예약 전에 <strong>한 채인지 / 욕실·화장실 개수 / 침대 구성</strong>을 꼭 확인해야 합니다.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🛏️ 료칸 1박 — 금요일 밤 확정</h2>
+        <p style="font-size:12.5px;">3/5(금) 밤은 <strong>온천지 료칸에서 하룻밤</strong> 잡니다. 저녁 가이세키 + 아침 일식 한상(<strong>1박 2식</strong>)이 기본 구성이고, 객실 노천탕이나 전세탕이 있는 곳도 많습니다.</p>
+        <div class="note warn" style="margin-top:10px;">
+          ⚠️ <strong>료칸은 객실당이 아니라 「1인당」 요금제입니다.</strong> 호텔처럼 방 하나에 여러 명 넣는 식으로 계산하면 견적이 완전히 어긋납니다.
+          예약 사이트에서 <strong>반드시 실제 인원(7명)으로 검색</strong>해야 맞는 금액이 나옵니다.
+        </div>
+        <div style="overflow-x:auto; margin-top:12px;">
+          <table style="font-size:12.5px; min-width:0;">
+            <thead><tr><th>등급</th><th>1인 1박 2식</th><th>내용</th></tr></thead>
+            <tbody>
+              <tr style="background:#e6f7ec;">
+                <td style="font-weight:700; color:#155f3a;">중급 ✅<br><span style="font-size:11px; font-weight:400;">이걸로 진행</span></td>
+                <td><strong style="color:#155f3a;">20~30만원대</strong></td>
+                <td><strong>1박2식 + 전세탕</strong> 있는 곳도 이 구간에서 찾을 수 있습니다.<br>온천 료칸 경험은 충분히 하면서 부담이 적은 선</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note success" style="margin-top:12px;">
+          ✅ <strong>중급(1인 20~30만원대)으로 내려 잡습니다.</strong>
+          1인 25만원으로 보면 7명 <strong>약 175만원</strong>. 이 구간에서도 <strong>1박2식 + 전세탕</strong> 있는 곳은 찾을 수 있습니다.<br>
+          금액은 원화 환산 참고값입니다.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>💰 경비 계산기 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(1인 기준)</span></h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">조사한 시세의 중간값을 넣어뒀습니다. 숫자는 직접 고칠 수 있으니 실제 견적이 나오면 바꿔서 쓰세요.</p>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap:10px; margin-top:12px;">
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">주간 (항공권 가격 반영)</label>
+            <div style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px; background:#f0f7fc; font-weight:600; color:var(--primary);">3/4(목) ~ 3/7(일) · 확정</div>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">환율 (100엔 = ?원)</label>
+            <input type="number" id="cost-rate" value="900" step="10" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">가는 편</label>
+            <select id="cost-go" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+              <option value="air">✈️ 인천 항공 왕복</option>
+              <option value="ferry">🚢 갈 때 배 + 올 때 항공</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">숙소 구성</label>
+            <div style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px; background:#f0f7fc; font-weight:600; color:var(--primary);">🏠 아파트 2박 + ♨️ 료칸 1박 (중급) · 확정</div>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">온천</label>
+            <select id="cost-onsen" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+              <option value="beppu">♨️ 벳푸 당일</option>
+              <option value="yufuin">🏞️ 유후인 당일</option>
+              <option value="none">안 감 (료칸만)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">식비·잡비 (3박4일)</label>
+            <input type="number" id="cost-food" value="250000" step="10000" style="width:100%; padding:7px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px;">
+          </div>
+        </div>
+        <div id="cost-result" style="margin-top:14px;"></div>
+        <div class="note info" style="margin-top:12px; font-size:12px;">
+          <strong>기준값 근거</strong> — 뉴카멜리아 2등실 편도 6~9만원(중간 7.5만) + 유류세·항만세 1.7~3만원 ·
+          후쿠오카 직항 왕복 18~30만원대 · 중급 료칸 1인 20~30만원(중간 25만) ·
+          벳푸 고속버스 왕복 6,500엔 + 지옥순례 2,400엔 · 유후인노모리 왕복 12,260엔 ·
+          아파트는 7인 1채를 나눈 값(1인 1박 4.5만원).<br>
+          <strong>2026-11-05 실측</strong> — 항공권은 3/4~3/7 LCC 최저가 365,000원이 들어갑니다. 3/4-3/7 제주항공 $271.90 ≈ 36.5만원, 대한항공 A350 공식 44.2만원 · 숙소 아파트 2박 9만원 + 중급 료칸 1박 25만원 · 현지 식비 3박4일 1인 18,000~25,000엔, 교통 3,500~4,000엔 (식비·잡비 입력값은 이 범위를 참고해 고쳐 쓰세요).
+        </div>
+        <div class="note warn" style="margin-top:8px; font-size:12px;">
+          ⚠️ <strong>확정 견적이 아니라 자릿수를 잡기 위한 추정</strong>입니다. 환율 기본값 900원은 2026년 7월 기준(888~908원)이라
+          지금 시세로 고쳐 쓰세요. 항공·숙소는 날짜를 넣어야 실제 금액이 나오므로,
+          3/4~3/7 날짜로 실제 견적을 뽑아 이 숫자를 갱신하겠습니다.
+        </div>
+      </div>
+
+
     </section>
 
     <!-- ============ 토론 ============ -->
     <!-- ============ 준비물 ============ -->
     <section class="section" id="section-prep">
       <div class="card">
-        <h2>🎒 준비물 · 개인 할 일</h2>
-        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">본인 칸만 체크할 수 있습니다. <strong>🚢 배 3명</strong> · <strong>✈️ 비행기 4명</strong> 표시는 그 사람만 해당하고, 해당 없는 칸은 회색입니다. 항공·배·숙소 같은 공동 예약은 🏠 홈의 「할 일 · 예약」에서 관리합니다.</p>
+        <h2>🎒 준비 체크리스트</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:-4px;">본인 칸만 체크할 수 있습니다. 서로 뭐가 없는지 보이면 빌려주기 편합니다.</p>
         <div id="checklist-summary" style="margin-top:12px;"></div>
       </div>
       <div class="card">
+        <h2>📋 항목별 체크</h2>
         <div id="checklist-container"></div>
       </div>
     </section>
@@ -874,7 +1106,7 @@ const POLLS = [
     ]
   },
   {
-    group: 'ny', hidden: true, // 이동은 확정(배 3명 · 비행기 4명) — 표는 그대로 보존
+    group: 'ny',
     id: 'ny_route',
     short: ['🚢 배 → 인천 귀국', '✈️ 인천 왕복', '🤷 총무 재량'],
     question: '🚢 가는 편 · 오는 편 (귀국은 인천 · 모두 선택)',
@@ -891,7 +1123,6 @@ const POLLS = [
   {
     group: 'ny',
     id: 'ny_onsen',
-    short: ['♨️ 벳푸', '🏞️ 유후인', '🚆 유후인+벳푸', '🍵 사가 우레시노·다케오', '🏙️ 시내 온천', '🏞️ 쿠로가와', '🚌 유후인+쿠로카와 버스투어'],
     question: '♨️ 온천 목적지 (금요일 메인 일정 · 모두 선택)',
     options: [
       '♨️ 벳푸 — 지옥순례 + 온천, 하카타에서 약 2시간 10분',
@@ -906,8 +1137,7 @@ const POLLS = [
   {
     group: 'ny',
     id: 'ny_activity',
-    short: ['🍢 야타이·이자카야', '🛍️ 텐진·캐널시티', '🏯 다자이후·모지코', '⚾ 야구장·돔', '🛌 쉬엄쉬엄'],
-    question: '🎌 토요일 낮에 하고 싶은 것 (모두 선택)',
+    question: '🎌 온천 말고 하고 싶은 것 (모두 선택)',
     options: [
       '🍢 야타이·이자카야 먹방',
       '🛍️ 텐진·캐널시티 쇼핑',
@@ -919,47 +1149,37 @@ const POLLS = [
   {
     group: 'ny', single: true,
     id: 'ny_budget',
-    short: ['✈️ 제주항공 기준', '✈️ 대한항공 기준'],
-    question: '💰 항공 기준 (하나 선택)',
-    // 11/14: 온천지 왕복 교통(약 6만원)을 더해 금액만 고침 — 보기 번호·뜻은 그대로
+    question: '💰 예산 (두 갈래 중 하나 선택)',
     options: [
-      '✈️ 제주항공 왕복 기준 · 1인 약 110~117만원 (가장 저렴)',
-      '✈️ 대한항공 A350 기준 · 1인 약 113~120만원 (편안함)'
+      '✈️ 제주 왕복 기준 · 1인 약 104~111만원 (가장 저렴)',
+      '✈️ 대한항공 A350 기준 · 1인 약 107~114만원 (편안함)'
     ]
   }
 ];
 
 // ============== 체크리스트 ==============
 const CHECKLISTS = [
-  // 11/14 새 목록 — 옛 ny_prep(체크 0건)과 번호가 섞이지 않게 id를 새로 씀
-  // deadline = 3/4(목) 기준 며칠 전, only = 해당 이동 그룹만 ('ferry' 배 3명 / 'air' 비행기 4명)
   {
-    id: 'fk_todo',
-    title: '📅 출발 전 할 일',
+    id: 'ny_prep',
+    title: '✈️ 신년회(후쿠오카) 사전 준비',
     color: '#1f4e79',
     items: [
-      { text: '💰 분담금 입금 (총무 안내 금액)', deadline: 60 },
-      { text: '🚄 KTX 예매 — 3/3(수) 점심, 15시 이전 서울 → 부산 (2/3 07:00 오픈)', deadline: 29, only: 'ferry' },
-      { text: '🛡️ 여행자 보험 가입', deadline: 14 },
-      { text: '💴 엔화 환전 · 트래블카드 (현금만 받는 곳 많음)', deadline: 7 },
-      { text: '📶 유심 · 이심 · 로밍 중 하나 준비', deadline: 7 },
-      { text: '📱 Visit Japan Web 입국·세관 등록 (QR 캡처)', deadline: 3 },
-      { text: '🎫 항공권 · 승선권 · 숙소 예약 확인서 휴대폰에 저장', deadline: 2 }
-    ]
-  },
-  {
-    id: 'fk_pack',
-    title: '🧳 짐 챙기기',
-    color: '#185fa5',
-    items: [
-      { text: '🛂 여권 실물 (사이트에 등록한 그 여권)', deadline: 1 },
-      { text: '🧥 겹옷 · 접이식 우산 (3월 초 낮 13도 · 밤 6도)', deadline: 1 },
-      { text: '💊 허리 보호 (복대 · 파스) · 개인 상비약', deadline: 1 },
-      { text: '♨️ 온천·료칸용 갈아입을 옷 · 작은 수건', deadline: 1 },
-      { text: '🔌 일본 11자(A타입) 어댑터 · 보조배터리는 기내 휴대', deadline: 1 },
-      { text: '💊 멀미약 (야간 배 약 9시간)', deadline: 1, only: 'ferry' },
-      { text: '🚢 3/3(수) 21시까지 부산항 국제여객터미널 도착 (출항 22:30 · 예약 안내 시간 재확인)', deadline: 1, only: 'ferry' },
-      { text: '✈️ 3/4(목) 출발 2시간 전 인천공항 도착', deadline: 0, only: 'air' }
+      { text: '🛂 여권 유효기간 6개월 이상 남았는지 확인', deadline: 90 },
+      { text: '여권 없거나 만료 임박 → 재발급 신청', deadline: 75 },
+      { text: '참가 여부 · 시기 투표 완료', deadline: 70 },
+      { text: '항공권 또는 뉴카멜리아 승선권 예약', deadline: 50 },
+      { text: '고려훼리 공식 채널에서 운항일·휴항일 재확인', deadline: 50 },
+      { text: '숙박 구성 확정 — 아파트 2박 + 료칸 1박 (확정됨)', deadline: 50 },
+      { text: '아파트 독채 선택 시 — 한 채 여부·욕실 수·침대 구성 확인', deadline: 46 },
+      { text: '후쿠오카 숙소 예약', deadline: 45 },
+      { text: '료칸 예약 — 7명 기준 실제 견적, 1박2식 포함 여부 확인 (해당 시)', deadline: 45 },
+      { text: '서울→부산 KTX 또는 카풀 확정', deadline: 30 },
+      { text: '온천 목적지 확정 + 교통편 예약 (유후인노모리는 1개월 전 10시 오픈, 금방 매진)', deadline: 32 },
+      { text: '벳푸 지옥순례 공통권 공식 홈 할인 확인 (해당 시)', deadline: 14 },
+      { text: '여행자 보험 가입', deadline: 14 },
+      { text: '엔화 환전 · 트래블카드 준비', deadline: 10 },
+      { text: '로밍 또는 유심·이심 준비', deadline: 7 },
+      { text: '회비 정산 분담금 입금', deadline: 7 }
     ]
   }
 ];
@@ -1120,7 +1340,6 @@ function applyCloud(cloud) {
   }
   DB.departureDate = (cloud.meta && cloud.meta.departureDate) || null;
   DB.nyDate = (cloud.meta && cloud.meta.nyDate) || null;
-  DB.decided = (cloud.meta && cloud.meta.decided) || {};
 }
 
 function _snapshot() {
@@ -1403,7 +1622,7 @@ function renderCloudStatus() {
   }
   const SETUP_NOTE = '<div class="note warn"><strong>⚙️ 실시간 공유가 아직 켜지지 않았습니다.</strong> ' +
     '지금 누르는 투표·댓글은 <strong>내 브라우저에만</strong> 저장되고 다른 회원에게 전달되지 않습니다.<br>' +
-    '관리자: <strong>홈 하단 → "⚙️ 관리 · 백업"</strong> 안내를 따라 Firebase 주소를 넣어주세요. ' +
+    '관리자: <strong>홈 하단 → "실시간 동기화 설정"</strong> 안내를 따라 Firebase 주소를 넣어주세요. ' +
     '그 전까지는 [📥 데이터 내보내기]로 파일을 뽑아 총무에게 보내면 됩니다.</div>';
   const FAIL_NOTE = '<div class="note warn"><strong>⚠️ 동기화 서버에 연결하지 못했습니다.</strong> ' +
     '지금 누르는 내용은 이 브라우저에만 저장됩니다. 잠시 후 자동으로 다시 시도합니다.' +
@@ -1443,43 +1662,6 @@ function pollsOf(group) { return POLLS.filter(p => p.group === group && !p.hidde
 function visiblePolls() { return POLLS.filter(p => !p.hidden); }
 function agendaOf(group) { return AGENDAS.find(a => a.group === group); }
 
-// ============== 이동 그룹 (확정) ==============
-// 배 3명 · 비행기 4명. 홈 요약 · 회원 현황 · 준비물(only)이 모두 이 값을 쓴다.
-const TRAVEL = {
-  ferry: ['김석', '김철현', '박중산'],
-  air: ['김기태', '최근호', '윤유병', '최진원']
-};
-const TRAVEL_LABEL = { ferry: '🚢 배', air: '✈️ 비행기' };
-function membersByTravel() {
-  const order = TRAVEL.ferry.concat(TRAVEL.air);
-  return order.filter(n => REGISTERED_MEMBERS.indexOf(n) >= 0)
-    .concat(REGISTERED_MEMBERS.filter(n => order.indexOf(n) < 0));
-}
-function travelOf(name) {
-  if (TRAVEL.ferry.indexOf(name) >= 0) return 'ferry';
-  if (TRAVEL.air.indexOf(name) >= 0) return 'air';
-  return null;
-}
-function _hasVote(pid, name) {
-  const v = (DB.votes[pid] || {})[name];
-  return v !== undefined && v !== null && !(Array.isArray(v) && v.length === 0);
-}
-// 아직 열려 있는 신년회 투표 (참가 여부 제외) — 금요일 온천 · 토요일 낮 · 항공 기준
-function nyOpenPolls() { return pollsOf('ny').filter(p => p.id !== 'ny_join' && !decidedKeys(p.id).length); }
-const OPEN_POLL_LABEL = { ny_onsen: '금요일 온천', ny_activity: '토요일 낮', ny_budget: '항공 기준' };
-// 준비물: 참가자만(미참석 제외) 보여주고, only가 있으면 해당 이동 그룹만 센다
-function _clMembers() { return membersByTravel().filter(n => getParticipationStatus(n, 'ny').code !== 'no'); }
-function _clApplies(item, name) { return !item.only || travelOf(name) === item.only; }
-function checklistProgress(name) {
-  let done = 0, total = 0;
-  CHECKLISTS.forEach(cl => cl.items.forEach((it, idx) => {
-    if (!_clApplies(it, name)) return;
-    total++;
-    if (DB.checklists && DB.checklists[name + '__' + cl.id + '__' + idx]) done++;
-  }));
-  return { done: done, total: total };
-}
-
 // ============== INIT ==============
 function init() {
   renderAuthGate();
@@ -1502,17 +1684,14 @@ function init() {
   renderCloudStatus();
   loadFromCloud(false);
   startCloudPolling();
-  const nyDateEl = document.getElementById('ny-date');
-  if (nyDateEl) {
-    nyDateEl.addEventListener('change', e => {
-      DB.nyDate = e.target.value;
-      saveDB();
-      renderCountdown();
-      renderChecklists();
-      cloudSet(['meta', 'nyDate'], DB.nyDate || null);
-    });
-    if (DB.nyDate) nyDateEl.value = DB.nyDate;
-  }
+  document.getElementById('ny-date').addEventListener('change', e => {
+    DB.nyDate = e.target.value;
+    saveDB();
+    renderCountdown();
+    renderChecklists();
+    cloudSet(['meta', 'nyDate'], DB.nyDate || null);
+  });
+  if (DB.nyDate) document.getElementById('ny-date').value = DB.nyDate;
   document.querySelectorAll('.tab').forEach(t => {
     t.onclick = () => switchTab(t.dataset.section);
   });
@@ -1525,8 +1704,9 @@ function switchTab(name) {
   document.querySelectorAll('.section').forEach(s => {
     s.classList.toggle('active', s.id === 'section-' + name);
   });
-  if (name === 'ny') { renderTimeline(); renderCloudStatus(); wireCost(); }
-  if (name === 'home') { renderHomePlan(); renderHomeTodo(); renderHomeMemberStatus(); renderBookings(); renderPassports(); }
+  if (name === 'ny') renderPolls();
+  if (name === 'ny') { renderPassports(); wireCost(); }
+  if (name === 'home') { renderMembers(); renderGear(); renderPassports(); }
   if (name === 'result') renderResult();
   if (name === 'prep') renderChecklists();
   if (name === 'archive') renderArchive();
@@ -1542,14 +1722,14 @@ function _renderOneCountdown(dateStr, dateElId, daysElId, inputId, label) {
   if (inp) { const v = dateStr || ''; if (inp.value !== v) inp.value = v; }
   if (!dateStr) {
     dateEl.textContent = '날짜 미정 — 투표로 정해지면 입력';
-    daysEl.innerHTML = '--';
+    daysEl.innerHTML = '--<span>일</span>';
     return;
   }
   const target = new Date(dateStr + 'T00:00:00');
   const now = new Date(); now.setHours(0, 0, 0, 0);
   const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
   dateEl.textContent = target.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
-  if (diff > 0) daysEl.innerHTML = 'D-' + diff;
+  if (diff > 0) daysEl.innerHTML = 'D-' + diff + '<span>일</span>';
   else if (diff === 0) daysEl.innerHTML = '<span style="font-size: 20px;">D-DAY!</span>';
   else daysEl.innerHTML = '<span style="font-size: 16px;">' + (-diff) + '일 지남</span>';
 }
@@ -1674,98 +1854,143 @@ function vote(pollId, key) {
   cloudSet(['votes', pollId, DB.user], DB.votes[pollId][DB.user]);
 }
 
-// ============== 홈 — 내 할 일 (로그인한 본인 것만) ==============
+// ============== 홈 — 지금 눌러야 할 것 ==============
 function renderHomeTodo() {
   const el = document.getElementById('home-todo');
   if (!el) return;
   if (!DB.user) {
-    el.innerHTML = '<div class="login-required">🔒 이름을 선택해 입장하면 내 할 일이 보입니다</div>';
+    el.innerHTML = '<div class="login-required">🔒 아래에서 본인 이름을 눌러 입장하면 할 일이 표시됩니다</div>';
     return;
   }
-  const me = DB.user;
-  if (getParticipationStatus(me, 'ny').code === 'no') {
-    el.innerHTML = '<div class="note" style="background:#f5f5f5; color:#666; margin:0;">❌ 신년회 <strong>미참석</strong>으로 되어 있어 할 일이 없습니다. 바뀌면 총무에게 알려 주세요.</div>';
-    return;
-  }
-  const item = (ok, text, btn) => '<div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; padding:10px 12px; border-radius:10px; margin-bottom:8px; background:' +
-    (ok ? '#e6f7ec' : '#fef3e6') + '; border-left:4px solid ' + (ok ? 'var(--success)' : 'var(--accent)') + ';">' +
-    '<div style="font-size:14px; color:' + (ok ? '#155f3a' : '#8a4500') + ';">' + (ok ? '✅ ' : '⬜ ') + text + '</div>' + (btn || '') + '</div>';
-  const btn = (label, js) => '<button class="btn" style="padding:5px 12px; font-size:12px; white-space:nowrap;" onclick="' + js + '">' + label + '</button>';
   let html = '';
-  // 1) 남은 투표
-  const open = nyOpenPolls();
-  const left = open.filter(p => !_hasVote(p.id, me));
-  html += left.length
-    ? item(false, '<strong>투표 ' + left.length + '개 남음</strong> — ' + left.map(p => OPEN_POLL_LABEL[p.id] || _shortLabel(p)).join(' · '), btn('투표하러 →', "switchTab('ny')"))
-    : item(true, '투표 완료 <span style="font-size:12px;">(바꾸려면 ✈️ 신년회 탭)</span>', '');
-  // 2) 여권
-  const ps = checkPassportStatus(getPassport(me), DB.nyDate);
-  if (ps.code === 'ok') {
-    html += item(true, '여권 정상 등록', '');
-  } else {
-    const msg = ps.code === 'none' ? '여권 정보가 아직 없습니다'
-      : ps.code === 'expired' ? '여권이 만료됐습니다 — 재발급이 필요합니다'
-      : ps.code === 'short' ? '여권 유효기간이 6개월 미만입니다'
-      : '여권 날짜 형식을 확인해 주세요';
-    html += item(false, '<strong>🛂 ' + msg + '</strong>', btn(ps.code === 'none' ? '입력하러 →' : '확인하기 →', 'goPassportForm()'));
+  AGENDAS.forEach(a => {
+    if (getParticipationStatus(DB.user, a.group).code === 'no') {
+      html += '<div style="padding:12px 14px; border-radius:10px; margin-bottom:10px; border-left:4px solid #bbb; background:#f5f5f5;">' +
+        '<div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">' +
+        '<div style="font-size:14px; font-weight:700; color:#666;">' + a.emoji + ' ' + escapeHtml(a.name) + ' — ❌ 미참석으로 표시됨</div>' +
+        '<button class="btn secondary" style="padding:5px 12px; font-size:12px;" onclick="switchTab(\'' + a.tab + '\')">바꾸기</button></div>' +
+        '<div style="font-size:12px; color:#777; margin-top:4px;">더 누를 건 없습니다. 마음이 바뀌면 [참가 여부]를 다시 눌러주세요.</div></div>';
+      return;
+    }
+    const list = pollsOf(a.group);
+    const todo = list.filter(p => {
+      const v = (DB.votes[p.id] || {})[DB.user];
+      return v === undefined || (Array.isArray(v) && v.length === 0);
+    });
+    const done = list.length - todo.length;
+    const pct = Math.round(done / list.length * 100);
+    const allDone = todo.length === 0;
+    html += '<div style="padding:12px 14px; border-radius:10px; margin-bottom:10px; border-left:4px solid ' +
+      (allDone ? 'var(--success)' : 'var(--accent)') + '; background:' + (allDone ? '#e6f7ec' : '#fef3e6') + ';">' +
+      '<div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">' +
+      '<div style="font-size:14px; font-weight:700; color:' + (allDone ? '#155f3a' : '#8a4500') + ';">' +
+      a.emoji + ' ' + escapeHtml(a.name) + ' — ' + done + '/' + list.length + ' 완료 (' + pct + '%)</div>' +
+      '<button class="btn" style="padding:5px 12px; font-size:12px;" onclick="switchTab(\'' + a.tab + '\')">' +
+      (allDone ? '결과 보기' : '투표하러 가기 →') + '</button></div>';
+    if (allDone) {
+      html += '<div style="font-size:12px; color:#155f3a; margin-top:4px;">✅ 다 누르셨습니다. 다른 분들 기다리는 중.</div>';
+    } else {
+      html += '<div style="font-size:12px; color:#8a4500; margin-top:4px;">남은 항목: ' +
+        todo.map(p => escapeHtml(p.question.replace(/^[^\s]+\s/, '').split('(')[0].trim())).join(' · ') + '</div>';
+    }
+    html += '</div>';
+  });
+  // 신년회 가는 사람은 여권도
+  if (getParticipationStatus(DB.user, 'ny').code !== 'no') {
+    const ps = checkPassportStatus(getPassport(DB.user), DB.nyDate);
+    if (ps.code !== 'ok') {
+      const msg = ps.code === 'none' ? '여권 정보가 아직 없습니다'
+        : ps.code === 'expired' ? '여권이 만료됐습니다 — 재발급이 필요합니다'
+        : ps.code === 'short' ? '여권 유효기간이 6개월 미만입니다'
+        : '여권 날짜 형식을 확인해 주세요';
+      html += '<div style="padding:12px 14px; border-radius:10px; margin-bottom:10px; border-left:4px solid var(--accent); background:#fef3e6;">' +
+        '<div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">' +
+        '<div style="font-size:14px; font-weight:700; color:#8a4500;">🛂 ' + msg + '</div>' +
+        '<button class="btn" style="padding:5px 12px; font-size:12px;" onclick="goPassportForm()">' +
+        (ps.code === 'none' ? '입력하러 가기 →' : '확인하기 →') + '</button></div>' +
+        '<div style="font-size:12px; color:#8a4500; margin-top:4px;">신년회(후쿠오카) 항공·선박 예약에 필요합니다. 1분이면 됩니다.</div></div>';
+    }
   }
-  // 3) 내 이동 그룹 예약 (홈 「할 일 · 예약」 표의 체크와 같은 값)
-  const t = travelOf(me);
-  const MY_BOOK = {
-    ferry: [['ferry', '🚢 뉴카멜리아'], ['return', '✈️ 귀국 편도'], ['ktx', '🚄 KTX (2/3 오픈)']],
-    air: [['flight', '✈️ 비행기 왕복']]
-  };
-  if (t) {
-    const b = DB.bookings || {};
-    const list = MY_BOOK[t];
-    const doneN = list.filter(x => b[x[0]] && b[x[0]].done).length;
-    html += item(doneN === list.length, '<strong>' + TRAVEL_LABEL[t] + ' 그룹 예약</strong> — ' +
-      list.map(x => (b[x[0]] && b[x[0]].done ? '✔️ ' : '') + x[1]).join(' · ') + ' <span style="font-size:12px;">(' + doneN + '/' + list.length + ')</span>', '');
-  }
-  // 4) 준비물
-  const cp = checklistProgress(me);
-  html += item(cp.total > 0 && cp.done === cp.total, '<strong>🎒 준비물 ' + cp.done + '/' + cp.total + '</strong>', btn('체크하러 →', "switchTab('prep')"));
   el.innerHTML = html;
 }
 
-// ============== 홈 — 회원 현황 (회원 정보는 홈에만) ==============
-function _miniBar(done, total, color) {
-  const pct = total ? Math.round(done / total * 100) : 0;
-  return '<div style="position:relative; height:18px; min-width:58px; background:#f0f0f0; border-radius:9px; overflow:hidden;">' +
-    '<div style="position:absolute; left:0; top:0; bottom:0; width:' + pct + '%; background:' + color + ';"></div>' +
-    '<div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (pct > 50 ? 'white' : 'var(--text)') + ';">' + done + '/' + total + '</div></div>';
-}
+// ============== 회원별 진행 현황 ==============
 function renderHomeMemberStatus() {
   const el = document.getElementById('home-member-status');
   if (!el) return;
-  const open = nyOpenPolls();
-  const pending = [];
-  let rows = '';
-  membersByTravel().forEach(name => {
-    const isMe = DB.user === name;
-    const st = getParticipationStatus(name, 'ny');
-    const absent = st.code === 'no';
-    const t = travelOf(name);
-    const voted = open.filter(p => _hasVote(p.id, name)).length;
-    const cp = checklistProgress(name);
-    if (!absent && voted < open.length) pending.push(escapeHtml(name) + ' <span style="opacity:0.75;">' + voted + '/' + open.length + '</span>');
-    const dash = '<div style="text-align:center; color:var(--text-muted);">—</div>';
-    rows += '<tr style="' + (isMe ? 'background:#f0f7fc;' : '') + '">' +
-      '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:var(--primary); white-space:nowrap;">' + escapeHtml(name) + (isMe ? ' ✓' : '') + '</td>' +
-      '<td style="text-align:center; padding:6px;"><span style="background:' + st.bg + '; color:' + st.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600; white-space:nowrap;">' + st.label + '</span></td>' +
-      '<td style="text-align:center; padding:6px; white-space:nowrap;">' + (absent ? '—' : (t ? TRAVEL_LABEL[t] : '미정')) + '</td>' +
-      '<td style="padding:6px 8px;">' + ((absent || !open.length) ? dash : _miniBar(voted, open.length, 'var(--primary)')) + '</td>' +
-      '<td style="padding:6px 8px;">' + (absent ? dash : _miniBar(cp.done, cp.total, '#185fa5')) + '</td></tr>';
+  const totalChecks = CHECKLISTS.reduce((s, cl) => s + cl.items.length, 0);
+  const counts = {};
+  AGENDAS.forEach(a => { counts[a.group] = { yes: 0, no: 0, none: 0 }; });
+  REGISTERED_MEMBERS.forEach(name => {
+    AGENDAS.forEach(a => {
+      const st = getParticipationStatus(name, a.group);
+      if (st.code === 'yes' || st.code === 'maybe') counts[a.group].yes++;
+      else if (st.code === 'no') counts[a.group].no++;
+      else counts[a.group].none++;
+    });
   });
-  let html = pending.length
-    ? '<div class="note warn" style="margin-top:0;">⏳ <strong>투표 남은 분</strong> — ' + pending.join(', ') + '</div>'
-    : '<div class="note success" style="margin-top:0;">🎉 참가자 전원 투표 완료</div>';
-  html += '<div style="overflow-x:auto;"><table style="font-size:13px; min-width:0;"><thead><tr>' +
-    '<th style="text-align:left;">회원</th><th style="text-align:center;">참가</th><th style="text-align:center;">이동</th>' +
-    '<th style="text-align:center; min-width:76px;">🗳️ 투표</th><th style="text-align:center; min-width:76px;">🎒 준비물</th></tr></thead><tbody>' +
-    rows + '</tbody></table></div>';
-  html += '<div style="font-size:12px; color:var(--text-muted); margin-top:8px;">' + (open.length ? '남은 투표 = ' + open.map(p => OPEN_POLL_LABEL[p.id] || _shortLabel(p)).join(' · ') : '남은 투표 없음 (모두 확정)') +
-    ' · 여권 상태는 바로 아래 🛂 여권 정보에 있습니다.</div>';
+  let html = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap:10px; margin-bottom:14px;">';
+  AGENDAS.forEach(a => {
+    const c = counts[a.group];
+    html += '<div style="background: var(--primary); color:white; padding:14px; border-radius:10px; text-align:center;">' +
+      '<div style="font-size:11px; opacity:0.9;">' + a.emoji + ' ' + escapeHtml(a.name) + ' 참가 의향</div>' +
+      '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + c.yes + '명</div>' +
+      '<div style="font-size:11px; opacity:0.85;">미참석 ' + c.no + ' · 미투표 ' + c.none + '</div></div>';
+  });
+  let groupVoteSum = 0;
+  REGISTERED_MEMBERS.forEach(name => {
+    groupVoteSum += visiblePolls().filter(p => {
+      const v = (DB.votes[p.id] || {})[name];
+      return v !== undefined && !(Array.isArray(v) && v.length === 0);
+    }).length;
+  });
+  const groupVotePct = Math.round(groupVoteSum / (REGISTERED_MEMBERS.length * visiblePolls().length) * 100);
+  html += '<div style="background: #185fa5; color:white; padding:14px; border-radius:10px; text-align:center;">' +
+    '<div style="font-size:11px; opacity:0.9;">📊 전체 투표 진행률</div>' +
+    '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + groupVotePct + '%</div>' +
+    '<div style="font-size:11px; opacity:0.85;">' + groupVoteSum + ' / ' + (REGISTERED_MEMBERS.length * visiblePolls().length) + '</div></div>';
+  html += '</div>';
+
+  html += '<div style="overflow-x:auto;"><table style="font-size:12px; min-width:680px;"><thead><tr>';
+  html += '<th style="text-align:left; min-width:80px;">회원</th>';
+  AGENDAS.forEach(a => {
+    html += '<th style="text-align:center; min-width:96px;">' + a.emoji + ' 참가</th>';
+    html += '<th style="text-align:center; min-width:84px;">' + a.emoji + ' 투표</th>';
+  });
+  html += '<th style="text-align:center; min-width:96px;">🎒 준비물</th>';
+  html += '<th style="text-align:center; min-width:56px;">활동</th>';
+  html += '</tr></thead><tbody>';
+  REGISTERED_MEMBERS.forEach(name => {
+    const isMe = DB.user === name;
+    let checked = 0;
+    CHECKLISTS.forEach(cl => cl.items.forEach((_, idx) => {
+      if (DB.checklists && DB.checklists[name + '__' + cl.id + '__' + idx]) checked++;
+    }));
+    const checkPct = Math.round(checked / totalChecks * 100);
+    const commentCount = DB.threads.reduce((s, t) => s + (t.author === name ? 1 : 0) + (t.comments || []).filter(c => c.author === name).length, 0);
+    html += '<tr style="' + (isMe ? 'background:#f0f7fc;' : '') + '">';
+    html += '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:var(--primary);">' + escapeHtml(name) + (isMe ? ' ✓' : '') + '</td>';
+    AGENDAS.forEach(a => {
+      const st = getParticipationStatus(name, a.group);
+      html += '<td style="text-align:center; padding:6px 8px;"><span style="background:' + st.bg + '; color:' + st.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600; white-space:nowrap;">' + st.label + '</span></td>';
+      const list = pollsOf(a.group);
+      const voted = list.filter(p => {
+        const v = (DB.votes[p.id] || {})[name];
+        return v !== undefined && !(Array.isArray(v) && v.length === 0);
+      }).length;
+      const pct = Math.round(voted / list.length * 100);
+      const dim = st.code === 'no';
+      html += '<td style="padding:6px 8px;' + (dim ? 'opacity:0.4;' : '') + '"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + pct + '%; background:var(--primary);"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (pct > 50 ? 'white' : 'var(--text)') + ';">' + voted + '/' + list.length + '</div></div></td>';
+    });
+    html += '<td style="padding:6px 8px;"><div style="position:relative; height:18px; background:#f0f0f0; border-radius:9px; overflow:hidden;"><div style="position:absolute; left:0; top:0; bottom:0; width:' + checkPct + '%; background:#185fa5;"></div><div style="position:relative; text-align:center; line-height:18px; font-size:11px; font-weight:600; color:' + (checkPct > 50 ? 'white' : 'var(--text)') + ';">' + checked + '/' + totalChecks + '</div></div></td>';
+    html += '<td style="text-align:center; padding:8px 10px; font-size:12px; color:var(--text-secondary);">💬 ' + commentCount + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  html += '<div class="btn-row" style="margin-top:14px;">';
+  html += '<button class="btn" onclick="switchTab(\'ny\')">✈️ 신년회 투표</button>';
+  html += '<button class="btn secondary" onclick="switchTab(\'prep\')">🎒 준비물</button>';
+  html += '</div>';
   el.innerHTML = html;
 }
 
@@ -1820,7 +2045,7 @@ function _joinNames(group) {
 
 // 이 안건에서 몇 개 눌렀는지 (예: 1/8)
 function _progressOf(name, group) {
-  const list = pollsOf(group).filter(function (p) { return !decidedKeys(p.id).length; });
+  const list = pollsOf(group);
   const done = list.filter(function (p) {
     const v = (DB.votes[p.id] || {})[name];
     return v !== undefined && !(Array.isArray(v) && v.length === 0);
@@ -1839,7 +2064,7 @@ function toggleAbsent(group) {
 
 // 해당 안건에서 아직 다 안 누른 사람 (미참석자는 제외)
 function _pendingMembers(group) {
-  const list = pollsOf(group).filter(function (p) { return !decidedKeys(p.id).length; });
+  const list = pollsOf(group);
   return REGISTERED_MEMBERS.filter(function (n) {
     if (getParticipationStatus(n, group).code === 'no') return false;
     return list.some(function (p) {
@@ -1870,10 +2095,8 @@ function _singleBreakdown(poll) {
   const counts = poll.options.map(function () { return 0; });
   Object.keys(v).forEach(function (u) {
     if (!isJoin && getParticipationStatus(u, poll.group).code === 'no') return; // 미참석자 의견은 제외
-    _valKeys(v[u]).forEach(function (k) {   // 예전에 배열로 저장된 표도 센다
-      const pos = posOfKey(poll, k);
-      if (pos >= 0) counts[pos]++;
-    });
+    const pos = posOfKey(poll, v[u]);
+    if (pos >= 0) counts[pos]++;
   });
   const parts = [];
   counts.forEach(function (c, i) {
@@ -1897,25 +2120,18 @@ function buildSummaryText() {
     if (jn.undecided.length) L.push('  🤔 미정: ' + jn.undecided.join(', '));
     if (jn.no.length) L.push('  ❌ 미참석: ' + jn.no.join(', '));
     const dateStr = DB.nyDate || NY_ASSUMED_DATE;
-    L.push('· 📅 확정: ' + dateStr + ' (3/4~3/7, 3박 4일)');
-    L.push('· 🚢 배 ' + TRAVEL.ferry.join('·') + ' — 3/3(수) 22:30 부산 출발');
-    L.push('· ✈️ 비행기 ' + TRAVEL.air.join('·') + ' — 3/4(목) 오전 인천 출발');
-    L.push('· 🏠 아파트(목) → 료칸(금) → 아파트(토) · 3/7(일) 오후 귀국');
+    L.push('· 📅 확정일: ' + dateStr + ' (3/4~3/7)');
     pollsOf(a.group).forEach(function (p) {
       if (p.id === a.joinPoll) return;
-      if (decidedKeys(p.id).length) {
-        L.push('· ' + (OPEN_POLL_LABEL[p.id] || _shortLabel(p)) + ': ' + _planCell(p.id).text + ' (확정)');
-        return;
-      }
       if (p.single) {
         const bd = _singleBreakdown(p);
-        if (bd) L.push('· ' + (OPEN_POLL_LABEL[p.id] || _shortLabel(p)) + ': ' + bd);
+        if (bd) L.push('· ' + _shortLabel(p) + ': ' + bd);
         return;
       }
       const r = _getPollWinner(p.id);
       if (!r || r.total === 0) return;
       const tie = r.winnerIdxs.length > 1;
-      L.push('· ' + (OPEN_POLL_LABEL[p.id] || _shortLabel(p)) + ': ' + ((p.short && p.short[r.winnerIdxs[0]]) || _shortOption(r.winners[0])) +
+      L.push('· ' + _shortLabel(p) + ': ' + _shortOption(r.winners[0]) +
         (tie ? ' 외 ' + (r.winners.length - 1) + '개 동률' : '') +
         ' (' + r.maxCount + '표)');
     });
@@ -1973,19 +2189,18 @@ function copySummary() {
 // ============== 신년회 경비 계산기 ==============
 // 기준값은 조사한 시세의 중간값. 화면에서 직접 고칠 수 있게 해 둔다.
 const COST = {
-  rate: 900,           // 100엔당 원
-  ferryKrw: 81000,     // 뉴카멜리아 2등 일반실 1인 (부대비용 포함, 2026-11-14 확인)
-  ktxKrw: 60000,       // 서울 → 부산 KTX 편도
-  busanKrw: 40000,     // 배 조 3/3 부산 저녁
-  flyOneKrw: 342000,   // 3/7 후쿠오카 → 인천 편도 제주 7C1404 13:00 (11/14 실측)
-  flyRtKrw: 506000,    // 3/4~3/7 인천 ↔ 후쿠오카 왕복 제주항공 (오후 귀국 기준, 11/14 실측)
-  flyRtKeKrw: 539000,  // 같은 일정 대한항공 왕복
-  hotelKrw: 65000,     // (예전 비교용) 비즈니스 호텔 1인 1박
-  aptKrw: 45000,       // 아파트 독채 1인 1박 (7인 분할)
-  ryokanKrw: 250000,   // 중급 료칸 1인 1박 2식
-  beppuJpy: 6500,      // 하카타 ↔ 벳푸 고속버스 왕복 (지옥순례 2,400엔은 별도)
-  yufuinJpy: 12260,    // 유후인노모리 왕복
-  foodKrw: 230000      // 3박4일 식비 + 공항·시내 교통 (19.4~26.1만 중간)
+  rate: 900,          // 100엔당 원 (2026-07 기준 888~908원)
+  ferryKrw: 98000,    // 뉴카멜리아 2등실 편도 75,000 + 유류세·항만세 23,000
+  ktxKrw: 60000,      // 서울 → 부산 KTX 편도
+  busanKrw: 40000,    // 배 조 전날 부산 저녁
+  flyOneKrw: 238000,  // 후쿠오카 → 인천 편도 — 2026-11-05 Duffel 3/7 제주 7C1402 $176.90 기준 (약 23.8만원)
+  flyRtKrw: 365000,   // 인천 ↔ 후쿠오카 왕복 — 2026-11-05 Duffel 3/4-3/7 제주항공 $271.90 기준 (약 36.5만원)
+  hotelKrw: 65000,    // 비즈니스 호텔 1인 1박
+  aptKrw: 45000,      // 아파트 독채 1인 1박 (7인 분할)
+  ryokanKrw: 250000,  // 중급 료칸 1인 1박 (20~30만 중간)
+  beppuJpy: 8900,     // 고속버스 왕복 6,500 + 지옥순례 2,400
+  yufuinJpy: 14260,   // 열차 왕복 12,260 + 현지 2,000
+  foodKrw: 250000     // 3박4일 식비·잡비
 };
 const won = n => Math.round(n / 1000) * 1000;
 const fmt = n => won(n).toLocaleString('ko-KR') + '원';
@@ -1994,11 +2209,14 @@ function costInputs() {
   const g = id => document.getElementById(id);
   return {
     rate: Number((g('cost-rate') || {}).value || COST.rate),
+    week: (g('cost-week') || {}).value || '8',
     go: (g('cost-go') || {}).value || 'air',
+    stay: (g('cost-stay') || {}).value || 'apt2r1',
     onsen: (g('cost-onsen') || {}).value || 'beppu',
     food: Number((g('cost-food') || {}).value || COST.foodKrw)
   };
 }
+
 
 // ============== 2~3월 주간 실측 가격 (2026-11-05, Duffel 1인 이코노미 왕복, 환율 1 USD ≈ 1,343원, 확정 요금 아님) ==============
 // 3/18·3/25주는 Google Flights 2026-11-10 실측(원화, 세금 포함). 3/25주는 제주 왕복 옵션 없음.
@@ -2120,34 +2338,53 @@ function renderCost() {
   if (!el) return;
   const i = costInputs();
   const jpy = v => v * i.rate / 100;
+  const wp = WEEK_PRICES[i.week];
+  const flyRt = WEEK_FLIGHT_KRW[i.week] || COST.flyRtKrw;
+  const weekLabel = wp ? wp.label : i.week;
   const rows = [];
-  if (i.go === 'ferry_busan' || i.go === 'ferry_seoul') {
-    if (i.go === 'ferry_seoul') {
-      rows.push(['🚄 서울 → 부산 KTX (편도)', COST.ktxKrw]);
-      rows.push(['🍻 3/3 부산 저녁', COST.busanKrw]);
-    }
-    rows.push(['🚢 뉴카멜리아 2등 일반실 (부대비용 포함)', COST.ferryKrw]);
-    rows.push(['🛬 3/7 후쿠오카 → 인천 편도 (제주 7C1404)', COST.flyOneKrw]);
-  } else if (i.go === 'air_ke') {
-    rows.push(['✈️ 인천 ↔ 후쿠오카 왕복 (대한항공)', COST.flyRtKeKrw]);
+
+  if (i.go === 'ferry') {
+    rows.push(['🚄 서울 → 부산 KTX (편도)', COST.ktxKrw]);
+    rows.push(['🍻 전날 부산 저녁', COST.busanKrw]);
+    rows.push(['🚢 뉴카멜리아 2등실 (편도, 제세공과금 포함)', COST.ferryKrw]);
+    rows.push(['🛬 후쿠오카 → 인천 (편도)', COST.flyOneKrw]);
   } else {
-    rows.push(['✈️ 인천 ↔ 후쿠오카 왕복 (제주항공)', COST.flyRtKrw]);
+    const flySrc = (i.week === '10' || i.week === '11') ? 'Google Flights 2026-11-10 실측' : 'LCC 최저, 2026-11-05 실측';
+    const flyNote = i.week === '11' ? ' · 제주 왕복 옵션 없음, 아시아나 최저' : '';
+    rows.push(['✈️ 인천 ↔ 후쿠오카 왕복 (' + weekLabel + ' · ' + flySrc + flyNote + ')', flyRt]);
   }
-  rows.push(['🏠 아파트 2박 (7명 나눔)', COST.aptKrw * 2]);
-  rows.push(['♨️ 료칸 1박 2식 (중급)', COST.ryokanKrw]);
-  if (i.onsen === 'beppu') rows.push(['🚌 벳푸 고속버스 왕복 (6,500엔)', jpy(COST.beppuJpy)]);
-  else if (i.onsen === 'yufuin') rows.push(['🚆 유후인노모리 왕복 (12,260엔)', jpy(COST.yufuinJpy)]);
-  rows.push(['🍢 식비 · 공항·시내 교통 (3박4일)', i.food]);
+
+  if (i.stay === 'hotel3') rows.push(['🏙️ 비즈니스 호텔 3박', COST.hotelKrw * 3]);
+  else if (i.stay === 'apt3') rows.push(['🏠 아파트 독채 3박 (7인 분할)', COST.aptKrw * 3]);
+  else if (i.stay === 'apt2r1') {
+    rows.push(['🏠 아파트 독채 2박 (7인 분할)', COST.aptKrw * 2]);
+    rows.push(['♨️ 중급 료칸 1박 (1박2식)', COST.ryokanKrw]);
+  } else if (i.stay === 'hotel2r1') {
+    rows.push(['🏙️ 비즈니스 호텔 2박', COST.hotelKrw * 2]);
+    rows.push(['♨️ 중급 료칸 1박 (1박2식)', COST.ryokanKrw]);
+  }
+
+  if (i.onsen === 'beppu') rows.push(['♨️ 벳푸 당일 (버스 왕복 + 지옥순례)', jpy(COST.beppuJpy)]);
+  else if (i.onsen === 'yufuin') rows.push(['🏞️ 유후인 당일 (유후인노모리 왕복 + 현지)', jpy(COST.yufuinJpy)]);
+
+  rows.push(['🍢 현지 식비·교통·잡비 (3박4일)', i.food]);
+
   const total = rows.reduce((a, r) => a + r[1], 0);
   let html = '<div style="overflow-x:auto;"><table style="font-size:12.5px; min-width:0;">';
   html += '<thead><tr><th style="text-align:left;">항목</th><th style="text-align:right; min-width:96px;">1인</th></tr></thead><tbody>';
   rows.forEach(r => {
-    html += '<tr><td style="padding:7px 10px;">' + r[0] + '</td><td style="padding:7px 10px; text-align:right; white-space:nowrap;">' + fmt(r[1]) + '</td></tr>';
+    html += '<tr><td style="padding:7px 10px;">' + r[0] + '</td>' +
+      '<td style="padding:7px 10px; text-align:right; white-space:nowrap;">' + fmt(r[1]) + '</td></tr>';
   });
   html += '</tbody></table></div>';
-  html += '<div style="background:var(--primary); color:white; padding:14px; border-radius:10px; text-align:center; margin-top:12px;">' +
-    '<div style="font-size:12px; opacity:0.9;">👤 1인 예상</div>' +
-    '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + fmt(total) + '</div></div>';
+  html += '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap:10px; margin-top:12px;">' +
+    '<div style="background:var(--primary); color:white; padding:14px; border-radius:10px; text-align:center;">' +
+    '<div style="font-size:11px; opacity:0.9;">👤 1인 예상</div>' +
+    '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + fmt(total) + '</div></div>' +
+    '<div style="background:#185fa5; color:white; padding:14px; border-radius:10px; text-align:center;">' +
+    '<div style="font-size:11px; opacity:0.9;">👥 7명 총액</div>' +
+    '<div style="font-size:24px; font-weight:700; margin-top:4px;">' + fmt(total * 7) + '</div></div>' +
+    '</div>';
   el.innerHTML = html;
 }
 
@@ -2160,7 +2397,13 @@ function wireCost() {
 }
 
 // ============== RESULT ==============
-// ============== 홈 맨 위 — 확정 내용 + 남은 투표 현재 1위 ==============
+// ============== 홈 맨 위 — 지금까지 투표로 본 잠정 계획 ==============
+// 전원이 투표하지 않았어도 현재 1위 기준으로 "계획표"처럼 보여준다. (확정일이 입력되면 그 날짜를 우선)
+const PLAN_ROWS = {
+  ny: [['ny_when', '📅', '주간'], ['ny_route', '🚢', '가는·오는 편'],
+       ['ny_onsen', '♨️', '온천']]
+};
+
 function _planDate(ymd) {
   const d = new Date(ymd + 'T00:00:00');
   if (isNaN(d)) return ymd;
@@ -2170,61 +2413,66 @@ function _planDate(ymd) {
 function _planCell(pid) {
   const poll = POLLS.find(p => p.id === pid);
   if (!poll) return { state: 'none', text: '—' };
-  const dk = decidedKeys(pid);
-  if (dk.length) {
-    return { state: 'fixed', sub: '확정', text: dk.map(k => {
-      const pos = posOfKey(poll, k);
-      return (poll.short && poll.short[pos]) || _shortOption(poll.options[pos]);
-    }).join(' · ') };
-  }
   if (poll.single && poll.personal) {
     const bd = _singleBreakdown(poll);
     return bd ? { state: 'info', text: bd } : { state: 'none', text: '아직 표 없음' };
   }
   const r = _getPollWinner(pid);
   if (!r || r.total === 0) return { state: 'none', text: '아직 표 없음' };
-  const nVoters = new Set([].concat.apply([], r.voters)).size;
   const names = r.winnerIdxs.map(i => (poll.short && poll.short[i]) || _shortOption(poll.options[i]));
   if (names.length > 1) {
     return { state: 'tie', text: names.slice(0, 3).join(' · ') + (names.length > 3 ? ' 외 ' + (names.length - 3) + '개' : ''),
-             sub: '동률 각 ' + r.maxCount + '표 · ' + nVoters + '명 투표' };
+             sub: '동률 각 ' + r.maxCount + '표' };
   }
   const sorted = r.counts.slice().sort((a, b) => b - a);
   const close = sorted[1] > 0 && sorted[0] - sorted[1] <= 1;
-  return { state: close ? 'close' : 'lead', text: names[0], sub: r.maxCount + '표 / ' + nVoters + '명 투표' + (close ? ' · 1표 차' : '') };
+  return { state: close ? 'close' : 'lead', text: names[0], sub: r.maxCount + '표' + (close ? ' · 1표 차' : '') };
 }
 
 function renderHomePlan() {
   const el = document.getElementById('home-plan');
   if (!el) return;
-  const jn = _joinNames('ny');
-  const isGo = n => jn.go.indexOf(n) >= 0;
-  const nm = n => escapeHtml(n) + (jn.maybe.indexOf(n) >= 0 ? '<span style="font-weight:400; color:var(--text-muted);">(조건부)</span>' : '');
-  const row = (state, label, val, tag, hint) => '<div class="plan-row ' + state + '">' +
-    '<div class="plan-label">' + label + '</div><div class="plan-val">' + val +
-    (tag ? '<span class="plan-tag">' + escapeHtml(tag) + '</span>' : '') +
-    (hint ? '<div style="font-size:12.5px; font-weight:400; color:var(--text-muted); margin-top:2px;">' + hint + '</div>' : '') +
-    '</div></div>';
-  const voteRow = (label, pid, hint) => { const c = _planCell(pid); return row(c.state, label, escapeHtml(c.text), c.sub, hint); };
-  const ferry = TRAVEL.ferry.filter(isGo), air = TRAVEL.air.filter(isGo);
-  const others = [];
-  if (jn.no.length) others.push('미참석 ' + jn.no.map(escapeHtml).join(', '));
-  if (jn.undecided.length || jn.none.length) others.push('미정 ' + jn.undecided.concat(jn.none).map(escapeHtml).join(', '));
-  let html = '';
-  html += row('fixed', '📅 날짜', '3/4(목) ~ 3/7(일) · 3박 4일', '', '');
-  html += row('fixed', '🙋 인원', jn.go.length + '명 — ' + jn.go.map(nm).join(', '), '', others.join(' · '));
-  html += row('fixed', '🚢 배 ' + ferry.length + '명', ferry.map(escapeHtml).join(' · '), '', '3/3(수) 22:30 부산 → 3/4(목) 07:30 하카타 · 귀국은 항공 편도');
-  html += row('fixed', '✈️ 비행기 ' + air.length + '명', air.map(escapeHtml).join(' · '), '', '3/4(목) 오전 인천 → 후쿠오카 · 3/7(일) 오후 귀국');
-  html += row('fixed', '🏠 숙소', '아파트(목) → 료칸(금) → 아파트(토)', '', '료칸은 금요일 온천지에서 1박 2식');
-  html += voteRow('♨️ 금 온천', 'ny_onsen', '정해지면 그 지역 료칸 예약');
-  html += voteRow('🎌 토 낮', 'ny_activity', '저녁은 신년회 (7명 식당 예약)');
-  html += voteRow('💰 항공 기준', 'ny_budget', '');
-  html += row('info', '💵 1인 예상', '비행기 약 110~117만 · 배 약 102~108만', '', '배는 부산 출발 기준 · 온천지 교통 포함 · 11/14 실측');
-  html += '<div class="plan-foot">🟡 노란 줄은 동률이거나 1표 차라 바뀔 수 있습니다. 투표는 ✈️ 신년회 탭의 일정 카드에서 누릅니다.</div>' +
+  let html = '<div class="plan-card">' +
+    '<div class="plan-head"><div>' +
+    '<div class="plan-title">📌 지금까지 투표로 본 계획</div>' +
+    '<div class="plan-sub">날짜는 <strong>3/4~3/7로 확정</strong>됐습니다. 나머지 항목은 현재 1위로 정리했고, 표가 들어오면 자동으로 바뀝니다.</div>' +
+    '</div><div class="plan-badge">날짜 확정</div></div>';
+
+  AGENDAS.forEach(a => {
+    const jn = _joinNames(a.group);
+    const pend = _pendingMembers(a.group);          // 미참석은 빼고, 하나라도 덜 누른 사람
+    const finished = REGISTERED_MEMBERS.length - pend.length;
+    const fixed = DB.nyDate || NY_ASSUMED_DATE;
+    html += '<div class="plan-agenda">' +
+      '<div class="plan-agenda-head"><span>' + a.emoji + ' ' + escapeHtml(a.name) + '</span>' +
+      '<span class="plan-count">다 누른 사람 ' + finished + '/' + REGISTERED_MEMBERS.length + '명</span></div>';
+    PLAN_ROWS[a.group].forEach((row, i) => {
+      const isDateRow = row[0] === 'ny_when';
+      const cell = (isDateRow && fixed) ? { state: 'fixed', text: _planDate(fixed), sub: '확정' } : _planCell(row[0]);
+      html += '<div class="plan-row ' + cell.state + '">' +
+        '<div class="plan-label">' + row[1] + ' ' + row[2] + '</div>' +
+        '<div class="plan-val">' + escapeHtml(cell.text) +
+        (cell.sub ? '<span class="plan-tag">' + escapeHtml(cell.sub) + '</span>' : '') + '</div></div>';
+    });
+    html += '<div class="plan-people">' +
+      '<div>🙋 <strong>갈 사람</strong> ' + (jn.go.length
+        ? jn.go.map(n => escapeHtml(n) + (jn.maybe.indexOf(n) >= 0 ? '<span style="color:var(--text-muted);">(조건부)</span>' : '')).join(', ') + ' (' + jn.go.length + '명)'
+        : '아직 없음') + '</div>' +
+      (jn.undecided.length ? '<div>🤔 <strong>참가 미정</strong> ' + jn.undecided.map(escapeHtml).join(', ') + '</div>' : '') +
+      (jn.no.length ? '<div>❌ <strong>미참석</strong> ' + jn.no.map(escapeHtml).join(', ') + '</div>' : '') +
+      (jn.none.length ? '<div>❔ <strong>참가 여부 안 누름</strong> ' + jn.none.map(escapeHtml).join(', ') + '</div>' : '') +
+      (pend.length
+        ? '<div>⏳ <strong>아직 다 안 누른 분</strong> ' + pend.map(n => escapeHtml(n) + ' <span style="color:var(--text-muted);">' + _progressOf(n, a.group) + '</span>').join(', ') + '</div>'
+        : '<div>🎉 모두 다 눌렀습니다</div>') +
+      '</div></div>';
+  });
+
+  html += '<div class="plan-foot">🟡 노란 줄은 <strong>동률이거나 1표 차</strong>라 아직 뒤집힐 수 있는 항목입니다. ' +
+    '날짜는 3/4~3/7로 확정됐고, 나머지 항목이 정해지면 여기에 반영됩니다.</div>' +
     '<div class="btn-row" style="margin-top:10px;">' +
-    '<button class="btn" onclick="switchTab(\'ny\')">✈️ 일정 · 투표</button>' +
+    '<button class="btn" onclick="switchTab(\'ny\')">✈️ 신년회 투표</button>' +
     '<button class="btn secondary" onclick="shareSummary()">💬 카톡으로 보내기</button>' +
-    '</div>';
+    '</div></div>';
   el.innerHTML = html;
 }
 
@@ -2503,8 +2751,6 @@ function _completeLogin(name) {
   renderHomeLoginGrid();
   renderHomeMemberStatus();
   renderChecklists();
-  renderTimeline();
-  renderHomePlan();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function logout() {
@@ -3065,7 +3311,6 @@ function savePassportForm() {
 // ============== MEMBERS ==============
 function renderMembers() {
   const list = document.getElementById('member-list');
-  if (!list) return; // 참여 회원 카드는 홈 「회원 현황」으로 합침
   const memberNames = Object.keys(DB.members);
   if (memberNames.length === 0) {
     list.innerHTML = '<div class="empty">아직 참여한 회원이 없습니다.</div>';
@@ -3211,85 +3456,74 @@ function formatTime(ts) {
   return d.toLocaleDateString('ko-KR');
 }
 // ============== CHECKLISTS ==============
-function _deadlineBadge(deadlineDays, baseDate) {
-  if (deadlineDays === null || deadlineDays === undefined) return '';
-  if (deadlineDays === 0) return '<span style="font-size:10px; background:#f0f0f0; color:#666; padding:2px 6px; border-radius:8px; margin-left:6px;">당일</span>';
-  let dueLabel = 'D-' + deadlineDays, dueColor = '#666', dueBg = '#f0f0f0', dueDateStr = '';
-  if (baseDate) {
-    const due = new Date(baseDate);
-    due.setDate(due.getDate() - deadlineDays);
-    const today = new Date(); today.setHours(0, 0, 0, 0);
-    const daysToDue = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
-    dueDateStr = ' (' + due.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' }) + ')';
-    if (daysToDue < 0) { dueColor = '#e74c3c'; dueBg = '#fdebec'; dueLabel = '⚠️ 지났음 D-' + deadlineDays; }
-    else if (daysToDue <= 3) { dueColor = '#e67e22'; dueBg = '#fef3e6'; dueLabel = '🔥 임박 D-' + deadlineDays; }
-    else if (daysToDue <= 14) { dueColor = '#185fa5'; dueBg = '#e6f1fb'; }
-    else { dueColor = '#27ae60'; dueBg = '#e6f7ec'; }
-  }
-  return '<span style="font-size:10px; background:' + dueBg + '; color:' + dueColor + '; padding:2px 6px; border-radius:8px; margin-left:6px; white-space:nowrap;">' + dueLabel + dueDateStr + '</span>';
-}
 function renderChecklistSummary() {
   const summary = document.getElementById('checklist-summary');
   if (!summary) return;
   if (!DB.checklists) DB.checklists = {};
-  const members = _clMembers();
-  let totalItems = 0, totalChecked = 0, boxes = '';
+  let summaryHtml = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">';
+  let totalItems = 0, totalChecked = 0;
   CHECKLISTS.forEach(cl => {
-    let n = 0, c = 0;
-    cl.items.forEach((it, idx) => members.forEach(name => {
-      if (!_clApplies(it, name)) return;
-      n++;
-      if (DB.checklists[name + '__' + cl.id + '__' + idx]) c++;
-    }));
-    totalItems += n; totalChecked += c;
-    const pct = n ? Math.round(c / n * 100) : 0;
-    boxes += '<div style="background:' + cl.color + '10; padding:10px; border-radius:8px; border-left:3px solid ' + cl.color + ';">' +
-      '<div style="font-size:12px; color:var(--text-muted);">' + escapeHtml(cl.title) + '</div>' +
+    let clChecked = 0;
+    cl.items.forEach((_, idx) => {
+      REGISTERED_MEMBERS.forEach(name => {
+        totalItems++;
+        if (DB.checklists[name + '__' + cl.id + '__' + idx]) { totalChecked++; clChecked++; }
+      });
+    });
+    const clTotal = cl.items.length * REGISTERED_MEMBERS.length;
+    const pct = clTotal > 0 ? Math.round(clChecked / clTotal * 100) : 0;
+    summaryHtml += '<div style="background: ' + cl.color + '10; padding:10px; border-radius:8px; border-left:3px solid ' + cl.color + ';">' +
+      '<div style="font-size:11px; color:var(--text-muted);">' + escapeHtml(cl.title) + '</div>' +
       '<div style="font-size:18px; font-weight:700; color:' + cl.color + ';">' + pct + '%</div>' +
-      '<div style="font-size:11px; color:var(--text-muted);">' + c + '/' + n + ' 완료</div></div>';
+      '<div style="font-size:10px; color:var(--text-muted);">' + clChecked + '/' + clTotal + ' 완료</div></div>';
   });
-  const overall = totalItems ? Math.round(totalChecked / totalItems * 100) : 0;
-  let mine = '';
-  if (DB.user && members.indexOf(DB.user) >= 0) {
-    const p = checklistProgress(DB.user);
-    mine = ' · <strong>내 진행</strong> ' + p.done + '/' + p.total;
-  }
-  summary.innerHTML = '<div style="margin-bottom:10px; padding:12px 14px; background:var(--primary-lighter); border-radius:8px; font-size:14px;"><strong>전체 진행률</strong> ' +
-    overall + '% (' + totalChecked + '/' + totalItems + ')' + mine + '</div>' +
-    '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:8px;">' + boxes + '</div>';
+  summaryHtml += '</div>';
+  const overallPct = totalItems > 0 ? Math.round(totalChecked / totalItems * 100) : 0;
+  summary.innerHTML = '<div style="margin-bottom:10px; padding:12px 14px; background: var(--primary-lighter); border-radius:8px; font-size:14px;"><strong>전체 진행률:</strong> ' + overallPct + '% (' + totalChecked + '/' + totalItems + ')</div>' + summaryHtml;
 }
 function renderChecklists() {
   const container = document.getElementById('checklist-container');
   if (!container) return;
   if (!DB.checklists) DB.checklists = {};
-  const first = !container.innerHTML.trim();
   const openSet = new Set();
   container.querySelectorAll('details[open]').forEach(d => { if (d.dataset.clId) openSet.add(d.dataset.clId); });
   renderChecklistSummary();
-  const members = _clMembers();
-  const baseDate = DB.nyDate || NY_ASSUMED_DATE;
-  const ONLY_TAG = { ferry: '🚢 배 3명', air: '✈️ 비행기 4명' };
   let html = '';
   CHECKLISTS.forEach(cl => {
-    html += '<details data-cl-id="' + cl.id + '"' + ((first || openSet.has(cl.id)) ? ' open' : '') + ' style="margin-bottom:12px; border:1px solid var(--border); border-radius:10px; overflow:hidden;">';
-    html += '<summary style="padding:12px 16px; cursor:pointer; background:' + cl.color + '10; font-weight:600; color:' + cl.color + ';">' + escapeHtml(cl.title) + ' (' + cl.items.length + '개)</summary>';
-    html += '<div style="padding:12px; background:white;"><div style="overflow-x:auto;"><table style="font-size:12.5px; min-width:' + (280 + members.length * 46) + 'px;"><thead><tr>';
-    html += '<th style="background:' + cl.color + '20; color:' + cl.color + '; text-align:left; padding:8px;">항목</th>';
-    members.forEach(n => {
-      const t = travelOf(n);
-      html += '<th style="background:' + cl.color + '20; color:' + cl.color + '; text-align:center; padding:6px 4px; min-width:42px; line-height:1.3;" title="' + escapeHtml(n) + '">' +
-        escapeHtml(n) + '<div style="font-size:10px; font-weight:400;">' + (t === 'ferry' ? '🚢' : (t === 'air' ? '✈️' : '')) + '</div></th>';
+    const baseDate = cl.id === 'ny_prep' ? (DB.nyDate || NY_ASSUMED_DATE) : DB.departureDate;
+    html += '<details data-cl-id="' + cl.id + '"' + (openSet.has(cl.id) ? ' open' : '') + ' style="margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px; overflow:hidden;">';
+    html += '<summary style="padding: 12px 16px; cursor: pointer; background: ' + cl.color + '10; font-weight:600; color:' + cl.color + ';">' + escapeHtml(cl.title) + ' (' + cl.items.length + '개 항목)</summary>';
+    html += '<div style="padding: 14px 16px; background: white;"><div style="overflow-x:auto;"><table style="font-size:12px; min-width:600px;"><thead><tr>';
+    html += '<th style="background: ' + cl.color + '20; color:' + cl.color + '; text-align:left; padding:8px;">항목</th>';
+    REGISTERED_MEMBERS.forEach(n => {
+      html += '<th style="background: ' + cl.color + '20; color:' + cl.color + '; text-align:center; padding:8px; min-width:40px;" title="' + escapeHtml(n) + '">' + escapeHtml(n.length > 3 ? n.substring(0, 3) : n) + '</th>';
     });
     html += '</tr></thead><tbody>';
-    cl.items.forEach((it, idx) => {
-      html += '<tr><td style="padding:8px; color:var(--text);">' + escapeHtml(it.text) +
-        (it.only ? ' <span style="font-size:10px; background:#eef2fb; color:var(--primary); padding:1px 6px; border-radius:8px; white-space:nowrap;">' + ONLY_TAG[it.only] + '</span>' : '') +
-        _deadlineBadge(it.deadline, baseDate) + '</td>';
-      members.forEach(name => {
-        if (!_clApplies(it, name)) {
-          html += '<td style="text-align:center; padding:6px; background:#f4f4f4; color:#c8c8c8; font-size:11px;" title="해당 없음">·</td>';
-          return;
+    cl.items.forEach((itemObj, idx) => {
+      const item = typeof itemObj === 'string' ? itemObj : itemObj.text;
+      const deadlineDays = typeof itemObj === 'object' ? itemObj.deadline : null;
+      let deadlineHtml = '';
+      if (deadlineDays !== null && deadlineDays !== undefined) {
+        if (deadlineDays === 0) {
+          deadlineHtml = '<span style="font-size:10px; background:#f0f0f0; color:#666; padding:2px 6px; border-radius:8px; margin-left:6px;">당일</span>';
+        } else {
+          let dueLabel = 'D-' + deadlineDays, dueColor = '#666', dueBg = '#f0f0f0', dueDateStr = '';
+          if (baseDate) {
+            const due = new Date(baseDate);
+            due.setDate(due.getDate() - deadlineDays);
+            const today = new Date(); today.setHours(0, 0, 0, 0);
+            const daysToDue = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+            dueDateStr = ' (' + due.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' }) + ')';
+            if (daysToDue < 0) { dueColor = '#e74c3c'; dueBg = '#fdebec'; dueLabel = '⚠️ 지났음 D-' + deadlineDays; }
+            else if (daysToDue <= 3) { dueColor = '#e67e22'; dueBg = '#fef3e6'; dueLabel = '🔥 임박 D-' + deadlineDays; }
+            else if (daysToDue <= 14) { dueColor = '#185fa5'; dueBg = '#e6f1fb'; }
+            else { dueColor = '#27ae60'; dueBg = '#e6f7ec'; }
+          }
+          deadlineHtml = '<span style="font-size:10px; background:' + dueBg + '; color:' + dueColor + '; padding:2px 6px; border-radius:8px; margin-left:6px; white-space:nowrap;">' + dueLabel + dueDateStr + '</span>';
         }
+      }
+      html += '<tr><td style="padding: 8px; color:var(--text);">' + escapeHtml(item) + deadlineHtml + '</td>';
+      REGISTERED_MEMBERS.forEach(name => {
         const key = name + '__' + cl.id + '__' + idx;
         const checked = !!DB.checklists[key];
         const canEdit = DB.user === name;
@@ -3324,396 +3558,86 @@ function toggleChecklist(name, clId, idx, event) {
   });
   renderChecklistSummary();
   renderHomeMemberStatus();
-  renderHomeTodo();
   cloudSet(['checklists', key], DB.checklists[key] || null);
 }
 
-// ============== 일정 (타임라인) ==============
-// 왼쪽 세로선 하나로 3/3 ~ 3/7을 잇는다.
-// - 확정된 날은 시간별 일정이 세로선 위의 작은 점으로 이어진다.
-// - 투표 칸은 비교 카드를 넘겨 보고 고른다. 1위 안은 「확정되면 이렇게 진행」으로 미리 보여 주고,
-//   총무가 확정하면 그 시간표가 세로선 위 확정 일정으로 들어간다. (다음 날 아침 일정도 따라 바뀜)
-
-const BLOG_KURO = '<a href="https://m.blog.naver.com/hjk8427_/224401394564" target="_blank" rel="noopener">엘리의 영국라이프 블로그</a>';
-const BLOG_TOUR = '<a href="https://m.blog.naver.com/0510408/224405051451" target="_blank" rel="noopener">테라투어 블로그</a>';
-
-// 투표 카드에 보여 줄 비교 내용 — 예전 「온천 후보 비교」 표를 카드 안으로 옮김
-const VOTE_CARDS = {
-  ny_onsen: [
-    { k: 0, name: '🌋 벳푸', facts: [
-      ['🕒', '하카타에서 약 2시간 10분~2시간 45분'],
-      ['🚌', '고속버스 토요노쿠니호 편도 3,250엔(왕복 6,500엔) · 특급 소닉 30분 간격'],
-      ['👍', '지옥순례 7곳 공통권 2,400엔(2일 유효, 공식 홈 할인) · 온천 가짓수가 가장 많음 · 7명이면 버스가 무난'],
-      ['⚠️', '버스는 벳푸역이 아니라 <strong>기타하마</strong> 하차'],
-      ['🛏️', '료칸 1박 그대로'],
-      ['💰', '지금 1인 계산 기준']] },
-    { k: 1, name: '🏞️ 유후인', facts: [
-      ['🕒', '약 2시간 10~20분'],
-      ['🚆', '특급 유후인노모리 편도 6,130엔(넷 5,600엔) · 전석 지정석'],
-      ['👍', '료칸 · 긴린코 호수 · 온천 거리 분위기가 좋음'],
-      ['⚠️', '편수가 적고 <strong>승차 1개월 전(2/5) 10:00</strong> 오픈, 금방 매진'],
-      ['🛏️', '료칸 1박 그대로 (유후인 료칸은 비싼 편)'],
-      ['💰', '1인 약 +5만원']] },
-    { k: 5, name: '🏞️ 쿠로가와', facts: [
-      ['🕒', '차로 약 2시간~'],
-      ['🚌', '대중교통 불편 · 아소&쿠로가와 버스투어 또는 렌터카'],
-      ['👍', '관광객 적고 조용 · 무료 족욕탕 · 온천 계란 100엔 · 입욕 마패'],
-      ['⚠️', '산속이라 겨울엔 눈 · 대중교통이 끊길 수 있음'],
-      ['🛏️', '료칸 1박 가능 — 작은 료칸이 많아 7명 확인 필요'],
-      ['🔗', BLOG_KURO]] },
-    { k: 2, name: '🚆 유후인 + 벳푸', facts: [
-      ['🕒', '하루 종일'],
-      ['🚆', '유후인노모리 일부 편이 벳푸까지 · 복귀는 소닉'],
-      ['👍', '오전 유후인 → 오후 벳푸, 하루에 두 곳'],
-      ['⚠️', '<strong>강행군</strong> — 7명 단체 · 허리엔 빠듯'],
-      ['🛏️', '벳푸 쪽 료칸 1박'],
-      ['💰', '1인 약 +5만원 이상']] },
-    { k: 6, name: '🚌 유후인 + 쿠로카와 버스투어', facts: [
-      ['🕒', '08:00~18:20 하카타 출발·복귀'],
-      ['🚌', '소소버스투어 1인 56,640원 · 최소 10명 · 한국인 가이드'],
-      ['👍', '유후인 10:00–12:30 → 쿠로카와 13:30–15:50 · 당일입욕(마패 1,500엔 / 입욕권 500~800엔)'],
-      ['⚠️', '7명이면 최소 인원 미달 가능 · 점심·입욕료 별도'],
-      ['🛏️', '<strong>당일치기 → 금요일 밤은 료칸 대신 아파트</strong>'],
-      ['🔗', BLOG_TOUR]] },
-    { k: 3, name: '🍵 사가 우레시노·다케오', facts: [
-      ['🕒', '벳푸·유후인보다 가까움'],
-      ['👍', '한적하고 이동이 짧음'],
-      ['⚠️', '정보가 아직 적음 — 이쪽으로 기울면 따로 조사'],
-      ['🛏️', '료칸 1박 가능']] },
-    { k: 4, name: '🏙️ 후쿠오카 시내 온천', facts: [
-      ['🕒', '30분 이내'],
-      ['👍', '이동 부담이 없어 체력 아끼기 좋음'],
-      ['⚠️', '온천여행 느낌은 덜함'],
-      ['🛏️', '<strong>료칸 대신 아파트</strong> (금요일 밤)']] }
-  ],
-  ny_activity: [
-    { k: 2, name: '🏯 다자이후 · 모지코', facts: [['🕒', '다자이후 약 40분 · 모지코 약 1시간 반'], ['👍', '텐만구 · 참배길 · 레트로 항구 거리']] },
-    { k: 0, name: '🍢 야타이 · 이자카야', facts: [['🕒', '저녁 6시 이후'], ['👍', '나카스 포장마차 · 신년회 뒤 2차']] },
-    { k: 1, name: '🛍️ 텐진 · 캐널시티', facts: [['🕒', '하카타에서 10~15분'], ['👍', '쇼핑 · 비 와도 괜찮음']] },
-    { k: 3, name: '⚾ 야구장 · 돔', facts: [['🕒', '시내'], ['⚠️', '3월 초는 시범경기 — 일정 확인 필요']] },
-    { k: 4, name: '🛌 쉬엄쉬엄', facts: [['👍', '욕심내지 말고 자유 일정 · 허리 회복']] }
-  ],
-  ny_budget: [
-    { k: 0, name: '✈️ 제주항공', facts: [['💰', '왕복 50.6만원 · 비행기 4명 1인 약 110~117만원'], ['🛬', '3/7 귀국 7C1404 13:00'], ['👍', '가장 저렴']] },
-    { k: 1, name: '✈️ 대한항공 A350', facts: [['💰', '왕복 53.9만원 · 1인 약 113~120만원'], ['🛬', '3/7 귀국 KE792 13:45'], ['👍', '위탁 수하물 포함 · 편안함']] }
-  ]
-};
-
-// 정해지면 쓰는 상세 내용 — rows: 준비할 것, plan: 그날 시간표, backPlan: 다음 날 아침(온천지 → 하카타)
-const VOTE_DETAILS = {
-  ny_onsen: {
-    0: {
-      title: '♨️ 벳푸 온천 + 료칸 1박',
-      rows: [
-        ['🚌 가는 법', '하카타 버스터미널(하카타역 바로 옆) → 고속버스 <strong>토요노쿠니호</strong> → 벳푸 <strong>기타하마</strong> · 약 2시간 20분~2시간 45분 · 편도 3,250엔(왕복 6,500엔)'],
-        ['♨️ 할 것', '지옥순례 7곳 공통권 2,400엔(2일 유효) · 칸나와 온천거리 산책 · 온천 증기 찜 요리(지고쿠무시)'],
-        ['🛏️ 료칸', '칸나와 · 벳푸 시내 중급 1박 2식 1인 20~30만원대 · <strong>7명으로 검색</strong> · 전세탕 있는 곳'],
-        ['📌 예약', '12월 초 료칸 → 2월 초 고속버스 좌석 · 지옥순례권은 현장 구매 가능'],
-        ['💰 비용', '지금 1인 계산(비행기 110~117만 · 배 102~108만)이 벳푸 기준'],
-        ['⚠️ 주의', '지옥 2곳(치노이케·타츠마키)은 떨어져 있어 버스·택시 이동 — 허리 아끼기']
-      ],
-      plan: [['09:00', '하카타 버스터미널 출발 (토요노쿠니호)'], ['11:30', '벳푸 기타하마 도착 · 점심'], ['13:00', '칸나와 지옥순례'], ['15:30', '료칸 체크인 · 온천'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 벳푸 료칸 1박']],
-      backPlan: [['08:00', '료칸 조식'], ['10:00', '벳푸 기타하마 → 고속버스'], ['12:30', '하카타 도착']]
-    },
-    1: {
-      title: '🏞️ 유후인 온천 + 료칸 1박',
-      rows: [
-        ['🚆 가는 법', 'JR 하카타역 → 특급 <strong>유후인노모리</strong>(전석 지정석) · 약 2시간 10분 · 편도 6,130엔(넷 예약 5,600엔). 편수가 적어 고속버스(하카타 버스터미널 → 유후인역 앞)도 대안'],
-        ['♨️ 할 것', '유노쓰보 거리 산책 · 긴린코 호수 · 료칸 노천탕'],
-        ['🛏️ 료칸', '유후인 중급 1박 2식 1인 20~30만원대 — 비싼 편이라 이 가격대는 <strong>일찍</strong>'],
-        ['📌 예약', '12월 초 료칸 → <strong>2/5(금) 10:00(일본시간)</strong> 유후인노모리 오픈 즉시 (금방 매진)'],
-        ['💰 비용', '열차 왕복 12,260엔이라 벳푸 기준보다 1인 약 5만원 더'],
-        ['⚠️ 주의', '걷는 구간이 길어 허리 부담 — 중간에 카페 휴식']
-      ],
-      plan: [['오전', '하카타역 출발 (유후인노모리)'], ['점심', '유후인 도착 · 점심'], ['오후', '유노쓰보 거리 · 긴린코 호수'], ['15:00', '료칸 체크인 · 온천'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 유후인 료칸 1박']],
-      backPlan: [['08:00', '료칸 조식'], ['오전', '유후인 → 하카타 (열차·버스)'], ['점심', '하카타 도착']]
-    },
-    5: {
-      title: '🏞️ 쿠로가와 온천 + 료칸 1박',
-      rows: [
-        ['🚌 가는 법', '대중교통이 불편 — 하카타 출발 직행 고속버스는 편수가 적어 시간표 확인 필요(약 3시간), 또는 렌터카'],
-        ['♨️ 할 것', '입욕 마패(1,500엔)로 료칸 노천탕 3곳 · 조용한 온천마을 산책 · 온천 계란'],
-        ['🛏️ 료칸', '산속 작은 료칸이 많아 <strong>7명을 한 번에</strong> 잡기 어려울 수 있음 → 제일 먼저 확인'],
-        ['📌 예약', '료칸 먼저 → 교통편'],
-        ['⚠️ 주의', '3월 초 산간이라 눈·결빙 가능, 대중교통이 끊길 수 있음']
-      ],
-      plan: [['오전', '하카타 출발 (버스 · 렌터카)'], ['점심', '쿠로가와 도착 · 점심'], ['오후', '입욕 마패로 노천탕 순례'], ['15:00', '료칸 체크인'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 쿠로가와 료칸 1박']],
-      backPlan: [['08:00', '료칸 조식'], ['오전', '쿠로가와 출발 (약 3시간)'], ['오후', '하카타 도착']]
-    },
-    2: {
-      title: '🚆 유후인 + 벳푸 + 료칸 1박',
-      rows: [
-        ['🚆 가는 법', '하카타 → 유후인(유후인노모리) → 벳푸 · 복귀는 소닉 또는 고속버스'],
-        ['🛏️ 료칸', '벳푸 쪽 중급 1박 2식'],
-        ['📌 예약', '2/5(금) 10:00 유후인노모리 · 12월 초 료칸'],
-        ['⚠️ 주의', '강행군이라 7명 단체 · 허리에는 빠듯함']
-      ],
-      plan: [['오전', '하카타 → 유후인 (유후인노모리)'], ['점심', '유후인 산책 · 점심'], ['오후', '유후인 → 벳푸 · 지옥순례'], ['17:00', '벳푸 료칸 체크인'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 벳푸 료칸 1박']],
-      backPlan: [['08:00', '료칸 조식'], ['10:00', '벳푸 기타하마 → 고속버스'], ['12:30', '하카타 도착']]
-    },
-    3: {
-      title: '🍵 사가 우레시노·다케오 + 료칸 1박',
-      rows: [['ℹ️ 내용', '벳푸·유후인보다 가깝고 한적'], ['📌 할 일', '정보가 아직 적어 정해지면 료칸·교통을 따로 조사']],
-      plan: [['오전', '하카타 → 우레시노·다케오'], ['오후', '온천 · 료칸 체크인'], ['저녁', '가이세키 저녁'], ['밤', '♨️ 료칸 1박']],
-      backPlan: [['08:00', '료칸 조식'], ['오전', '하카타 복귀']]
-    },
-    4: {
-      title: '🏙️ 후쿠오카 시내 온천',
-      rows: [['ℹ️ 내용', '이동 부담 없음 · 온천여행 느낌은 덜함'], ['⚠️ 바뀌는 것', '료칸 1박과 안 맞아 <strong>금요일 밤도 아파트</strong> → 숙소 예약 다시 계산']],
-      plan: [['오전', '아파트에서 여유'], ['오후', '시내 온천 당일 입욕'], ['저녁', '시내 저녁'], ['밤', '🏠 아파트 1박 (료칸 대신)']],
-      backPlan: [['오전', '아파트에서 여유 있게']]
-    },
-    6: {
-      title: '🚌 유후인 + 쿠로카와 당일 버스투어',
-      rows: [['ℹ️ 내용', '하카타 08:00 → 유후인 → 쿠로카와 → 18:20 하카타 · 1인 56,640원(최소 10명)'], ['⚠️ 바뀌는 것', '당일치기라 <strong>금요일 밤은 료칸 대신 아파트</strong> · 7명이면 최소 인원 미달 가능']],
-      plan: [['08:00', '하카타 출발 (버스투어)'], ['10:00', '유후인 (~12:30)'], ['13:30', '쿠로카와 (~15:50)'], ['18:20', '하카타 복귀'], ['밤', '🏠 아파트 1박 (료칸 대신)']],
-      backPlan: [['오전', '아파트에서 여유 있게']]
-    }
-  },
-  ny_activity: {
-    2: {
-      title: '🏯 다자이후 · 모지코',
-      rows: [
-        ['🏯 다자이후', '다자이후 텐만구 · 참배길 우메가에모치 · 하카타 버스터미널 직행버스 약 40분(또는 니시테쓰 텐진역에서 전철)'],
-        ['🚂 모지코', '모지코 레트로 항구 거리 · 야키카레 · JR 하카타 → 고쿠라 → 모지코 약 1시간 반'],
-        ['💡 추천', '온천지에서 돌아오면 점심 무렵이라 둘 다는 빠듯함 → <strong>다자이후 하나만</strong> 반나절']
-      ],
-      plan: [['13:00', '하카타 → 다자이후 (버스 약 40분)'], ['14:00', '텐만구 · 참배길'], ['17:00', '하카타 복귀 · 아파트에서 잠깐 휴식']]
-    },
-    0: {
-      title: '🍢 야타이 · 이자카야',
-      rows: [
-        ['🍢 야타이', '나카스 · 텐진 포장마차는 보통 저녁 6시 이후 영업 → <strong>신년회 저녁 뒤 2차</strong>로 딱'],
-        ['👥 7명', '포장마차는 좁아 한곳에 7명이 앉기 어려움 → 2~3명씩 나눠 앉거나 이자카야 단체석']
-      ],
-      plan: [['21:00', '🍢 나카스 야타이 2차']]
-    },
-    1: {
-      title: '🛍️ 텐진 · 캐널시티',
-      rows: [['🛍️ 동선', '하카타역에서 캐널시티 걸어서 10~15분 · 텐진은 지하철 약 5분 · 비 와도 괜찮음']],
-      plan: [['13:00', '캐널시티'], ['15:00', '텐진 지하상가'], ['17:00', '아파트 휴식']]
-    },
-    3: {
-      title: '⚾ 야구장 · 돔',
-      rows: [['⚾ 내용', '미즈호 PayPay돔 · 3월 초는 시범경기 — 일정이 나오면 날짜·표 확인']],
-      plan: [['오후', '⚾ PayPay돔 (시범경기 일정 나오면)']]
-    },
-    4: {
-      title: '🛌 쉬엄쉬엄 자유 일정',
-      rows: [['🛌 내용', '아파트에서 쉬고 근처 산책 · 허리 회복 · 저녁 신년회에 집중']],
-      plan: [['오후', '🛌 아파트 휴식 · 근처 산책']]
-    }
-  },
-  ny_budget: {
-    0: {
-      title: '✈️ 제주항공',
-      rows: [
-        ['✈️ 비행기 4명', '인천 ↔ 후쿠오카 왕복 약 50.6만원 (11/14 실측) · 3/7 귀국 <strong>7C1404 13:00</strong>'],
-        ['🚢 배 3명', '같은 귀국편 7C1404 13:00 편도 약 34.2만원'],
-        ['🧳 짐', '운임 종류에 따라 위탁 수하물 포함 여부가 다름 — 예약 때 확인'],
-        ['💰 1인 총비용', '비행기 약 110~117만 · 배 약 102~108만 (부산 출발)'],
-        ['📌 예약', '11월 말 · 7명이 같은 귀국편으로']
-      ],
-      flight: '제주항공 7C1404', flightTime: '13:00'
-    },
-    1: {
-      title: '✈️ 대한항공 A350',
-      rows: [
-        ['✈️ 비행기 4명', '인천 ↔ 후쿠오카 왕복 약 53.9만원 · 3/7 귀국 <strong>KE792 13:45</strong>'],
-        ['🚢 배 3명', '같은 귀국편 KE792 13:45 편도 약 37.2만원'],
-        ['🧳 짐', '위탁 수하물 기본 포함 · 기내식'],
-        ['💰 1인 총비용', '비행기 약 113~120만 · 배 약 105~111만 (부산 출발)'],
-        ['📌 예약', '11월 말 · 7명이 같은 귀국편으로']
-      ],
-      flight: '대한항공 KE792', flightTime: '13:45'
-    }
-  }
-};
-const EXCLUSIVE_DECIDE = { ny_onsen: true, ny_budget: true }; // 하나만 확정 (토요일 낮은 여러 개 가능)
-
-function decidedKeys(pid) { return _valKeys((DB.decided || {})[pid]); }
-function leaderKeys(pid) {
-  const poll = POLLS.find(p => p.id === pid);
-  const w = _getPollWinner(pid);
-  if (!poll || !w || !w.total) return [];
-  const keys = optKeys(poll);
-  return w.winnerIdxs.map(i => keys[i]);
-}
-function canDecide() { return !!DB.user && REGISTERED_MEMBERS.indexOf(DB.user) >= 0; }
-function _afterDecide() { saveDB(); renderTimeline(); renderHomePlan(); renderHomeTodo(); renderHomeMemberStatus(); }
-function decideVote(pollId, key) {
-  if (!canDecide()) return;
-  const poll = POLLS.find(p => p.id === pollId);
-  if (!poll || optKeys(poll).indexOf(key) < 0) return;
-  const pos = posOfKey(poll, key);
-  const label = (poll.short && poll.short[pos]) || _shortOption(poll.options[pos]);
-  if (!confirm('「' + label + '」(으)로 확정할까요?\n\n모두의 화면에 확정으로 표시되고, 그 시간표가 일정에 들어갑니다.\n투표 기록은 그대로 남고, 언제든 [확정 취소]로 되돌릴 수 있습니다.')) return;
-  if (!DB.decided) DB.decided = {};
-  const cur = decidedKeys(pollId);
-  const next = EXCLUSIVE_DECIDE[pollId] ? [key] : cur.concat(cur.indexOf(key) >= 0 ? [] : [key]).sort((a, b) => a - b);
-  DB.decided[pollId] = next;
-  _afterDecide();
-  cloudSet(['meta', 'decided', pollId], next);
-}
-function undecideVote(pollId, key) {
-  if (!canDecide()) return;
-  if (!confirm('확정을 취소하고 다시 투표 중으로 돌릴까요?')) return;
-  if (!DB.decided) DB.decided = {};
-  const next = decidedKeys(pollId).filter(k => k !== key);
-  if (next.length) DB.decided[pollId] = next;
-  else delete DB.decided[pollId];
-  _afterDecide();
-  cloudSet(['meta', 'decided', pollId], next.length ? next : null);
-}
-
-// 시간표 정렬: "13:00" 같은 시각과 오전·점심·오후·저녁·밤을 같이 정렬한다 (같은 시각은 원래 순서 유지)
-function _tmin(t) {
-  const m = /^(\d{1,2}):(\d{2})$/.exec(t);
-  if (m) return Number(m[1]) * 60 + Number(m[2]);
-  return ({ '아침': 480, '오전': 600, '점심': 720, '오후': 900, '저녁': 1080, '밤': 1380 })[t] || 0;
-}
-function _sortPlan(items) {
-  return items.map((p, i) => [p, i]).sort((a, b) => (_tmin(a[0][0]) - _tmin(b[0][0])) || (a[1] - b[1])).map(x => x[0]);
-}
-
+// ============== 전체 타임라인 ==============
+// 세로 순서 흐름도. 확정된 것은 고정 노드, 미정인 온천·예산은 두 갈래로 보여주고 눌러서 선택(투표)한다.
+// 밑에는 투표에 따른 결정된 내용을 보여준다.
 function renderTimeline() {
   const flow = document.getElementById('timeline-flow');
+  const decided = document.getElementById('timeline-decided');
   if (!flow) return;
-  const mine = pid => DB.user ? _getUserVotes(pid, DB.user) : [];
-  const countOf = (pollId, k) => {
-    const poll = POLLS.find(p => p.id === pollId);
-    const w = _getPollWinner(pollId);
-    const pos = poll ? posOfKey(poll, k) : -1;
-    return (w && w.counts && pos >= 0) ? w.counts[pos] : 0;
-  };
-  const labelOf = (pollId, k) => {
-    const poll = POLLS.find(p => p.id === pollId);
-    const pos = posOfKey(poll, k);
-    return (poll.short && poll.short[pos]) || _shortOption(poll.options[pos]);
-  };
-  const detailOf = (pollId, k) => (VOTE_DETAILS[pollId] || {})[k] || { title: labelOf(pollId, k), rows: [] };
-
-  // 비교 카드 (좌우로 넘겨 보고 선택)
-  const branch = (pollId, c) => {
-    const isSel = mine(pollId).indexOf(c.k) >= 0;
-    const isLeader = leaderKeys(pollId).indexOf(c.k) >= 0;
+  const onsenW = _getPollWinner('ny_onsen');
+  const budgetW = _getPollWinner('ny_budget');
+  const myOnsen = DB.user ? _getUserVotes('ny_onsen', DB.user) : [];
+  const myBudget = DB.user ? _getUserVotes('ny_budget', DB.user) : [];
+  const onsenCount = i => (onsenW && onsenW.counts) ? onsenW.counts[i] : 0;
+  const budgetCount = i => (budgetW && budgetW.counts) ? budgetW.counts[i] : 0;
+  const onsenLeader = onsenW && onsenW.winnerIdxs ? onsenW.winnerIdxs : [];
+  const budgetLeader = budgetW && budgetW.winnerIdxs ? budgetW.winnerIdxs : [];
+  const branch = (pollId, idx, label, sub, count, isSel, isLeader) => {
     const cls = 'tl-branch-card' + (isSel ? ' sel' : '') + (isLeader ? ' leader' : '');
     const tag = isSel ? ' · 내가 선택' : (isLeader ? ' · 현재 1위' : '');
-    return '<div class="' + cls + '"><div class="tl-branch-body">' +
-      '<strong style="font-size:15px;">' + c.name + '</strong>' + tag +
-      '<div class="tl-facts">' + c.facts.map(f => '<div><span>' + f[0] + '</span><span>' + f[1] + '</span></div>').join('') + '</div>' +
-      '<span class="tl-votes"><b>' + countOf(pollId, c.k) + '표</b></span></div>' +
-      '<button type="button" class="tl-branch-btn" onclick="vote(\'' + pollId + '\', ' + c.k + ')">' + (isSel ? '✓ 선택됨' : '선택') + '</button></div>';
+    const btnLabel = isSel ? '✓ 선택됨' : '선택';
+    return '<div class="' + cls + '">' +
+      '<div class="tl-branch-body">' +
+      '<strong style="font-size:15px;">' + label + '</strong>' + tag +
+      '<span style="display:block; font-size:13px; color:var(--text-muted); margin-top:6px; line-height:1.6;">' + sub + '</span>' +
+      '<span class="tl-votes"><b>' + count + '표</b></span></div>' +
+      '<button type="button" class="tl-branch-btn" onclick="vote(\'' + pollId + '\', ' + idx + ')">' + btnLabel + '</button></div>';
   };
-  const cardsOf = pollId => (VOTE_CARDS[pollId] || []).map(c => branch(pollId, c)).join('');
-
-  // 1위 미리보기(preview) 또는 확정 내용(decided)
-  const panel = (pollId, k, mode) => {
-    const d = detailOf(pollId, k);
-    let h = '<div class="tl-detail' + (mode === 'decided' ? ' decided' : '') + '">';
-    h += '<div class="tl-detail-head">' + (mode === 'decided'
-      ? '📋 ' + d.title + ' — 준비할 것'
-      : '👑 현재 1위 (' + countOf(pollId, k) + '표) — ' + d.title + ' <span style="font-weight:400; color:var(--text-muted); font-size:12.5px;">· 확정되면 이렇게 진행</span>') + '</div>';
-    if (d.rows && d.rows.length) {
-      h += '<div class="tl-kv">' + d.rows.map(r => '<div class="k">' + r[0] + '</div><div class="v">' + r[1] + '</div>').join('') + '</div>';
-    }
-    if (mode !== 'decided' && d.plan && d.plan.length) {
-      h += '<ul class="tl-plan">' + d.plan.map(p => '<li><span class="t">' + p[0] + '</span> ' + p[1] + '</li>').join('') + '</ul>';
-    }
-    if (canDecide()) {
-      h += mode === 'decided'
-        ? '<button type="button" class="tl-mini-btn ghost" onclick="undecideVote(\'' + pollId + '\', ' + k + ')">확정 취소</button>'
-        : '<button type="button" class="tl-mini-btn" onclick="decideVote(\'' + pollId + '\', ' + k + ')">✅ 이걸로 확정</button> <span style="font-size:12px; color:var(--text-muted);">(총무용 · 확정하면 시간표가 일정에 들어감)</span>';
-    }
-    return h + '</div>';
-  };
-
-  // 세로선 위 시간별 확정 일정 (작은 점)
-  const subSteps = items => items.map(p => '<div class="tl-step sub"><div class="tl-sub"><span class="t">' + p[0] + '</span>' + p[1] + '</div></div>').join('');
-  const fixedStep = (date, title, desc, items) => '<div class="tl-step"><div class="tl-node fixed">' +
-    (date ? '<div class="tl-date">' + date + '</div>' : '') +
-    '<div class="tl-title">' + title + ' <span class="tl-badge fixed">확정</span></div>' +
-    (desc ? '<div class="tl-desc">' + desc + '</div>' : '') + '</div></div>' + subSteps(items || []);
-  const voteStep = (pollId, date, title, hint, desc, note, items) => {
-    const dk = decidedKeys(pollId).sort((a, b) => countOf(pollId, b) - countOf(pollId, a)); // 표 많은 순
-    const decided = dk.length > 0;
-    let h = '<div class="tl-step' + (decided ? '' : ' vote') + '"><div class="tl-node ' + (decided ? 'fixed' : 'branch') + '">' +
+  const node = (date, title, badge, badgeCls, desc) => {
+    return '<div class="tl-node ' + badgeCls + '">' +
       (date ? '<div class="tl-date">' + date + '</div>' : '') +
-      '<div class="tl-title">' + (decided ? dk.map(k => detailOf(pollId, k).title).join(' + ') : title) +
-      ' <span class="tl-badge ' + (decided ? 'fixed' : 'todo') + '">' + (decided ? '확정' : '투표 중') + '</span></div>' +
-      (desc ? '<div class="tl-desc">' + desc + '</div>' : '');
-    if (decided) {
-      h += dk.map(k => panel(pollId, k, 'decided')).join('');
-      if (!EXCLUSIVE_DECIDE[pollId] && canDecide()) {
-        const pollObj = POLLS.find(p => p.id === pollId);
-        const extra = optKeys(pollObj).filter(k => dk.indexOf(k) < 0 && countOf(pollId, k) > 0);
-        if (extra.length) {
-          h += '<div style="margin-top:8px; font-size:12.5px; color:var(--text-muted);">같이 확정할 것 ' + extra.map(k =>
-            '<button type="button" class="tl-mini-btn ghost" style="margin:4px 4px 0 0;" onclick="decideVote(\'' + pollId + '\', ' + k + ')">＋ ' + labelOf(pollId, k) + ' (' + countOf(pollId, k) + '표)</button>').join('') + '</div>';
-        }
-      }
-      h += '<details class="tl-revote"><summary>🗳️ 비교 카드 · 투표 결과 다시 보기</summary><div class="tl-carousel">' + cardsOf(pollId) + '</div>' + (note || '') + '</details>';
-    } else {
-      h += '<div style="font-size:12px; color:var(--text-muted); margin-top:6px;">' + hint + ' · ← 좌우로 넘겨 보기 →</div>' +
-        '<div class="tl-carousel">' + cardsOf(pollId) + '</div>' + (note || '');
-      const lead = leaderKeys(pollId);
-      if (lead.length === 1) {
-        h += panel(pollId, lead[0], 'preview');
-      } else if (lead.length > 1) {
-        h += '<div class="tl-detail"><div class="tl-detail-head">🟡 동률 — ' + lead.map(k => labelOf(pollId, k)).join(' · ') + ' (각 ' + countOf(pollId, lead[0]) + '표)</div>' +
-          '<div style="font-size:13px; color:var(--text-muted);">투표가 더 필요합니다. 아래를 펼쳐 각 안을 비교해 보세요.</div>' +
-          lead.map(k => '<details style="margin-top:8px;"><summary style="cursor:pointer; font-weight:600;">' + labelOf(pollId, k) + '</summary>' + panel(pollId, k, 'preview') + '</details>').join('') +
-          '</div>';
-      }
-    }
-    return h + '</div></div>' + subSteps(items || []);
+      '<div class="tl-title">' + title + ' <span class="tl-badge ' + badgeCls + '">' + badge + '</span></div>' +
+      (desc ? '<div class="tl-desc">' + desc + '</div>' : '') + '</div>';
   };
-
-  // 확정된 투표만 세로선 위 시간표로 들어간다
-  const onsenDec = decidedKeys('ny_onsen');
-  const actDec = decidedKeys('ny_activity');
-  const budgetDec = decidedKeys('ny_budget');
-  const friItems = onsenDec.length ? (detailOf('ny_onsen', onsenDec[0]).plan || []) : [];
-  const satBack = onsenDec.length ? (detailOf('ny_onsen', onsenDec[0]).backPlan || [])
-    : [['오전', '료칸 조식 → 하카타 복귀 (온천지가 확정되면 시간이 정해짐)']];
-  const satAct = actDec.reduce((a, k) => a.concat(detailOf('ny_activity', k).plan || []), []);
-  const satItems = _sortPlan(satBack.concat(satAct, [['19:00', '🍻 신년회 저녁 (7명 식당 미리 예약)'], ['밤', '🏠 아파트 1박']]));
-  const bd = budgetDec.length ? detailOf('ny_budget', budgetDec[0]) : null;
-  const sunItems = [
-    ['10:00', '아파트 체크아웃'],
-    ['10:30', '하카타역 → 지하철 2정거장(약 5분) → 공항역 → <strong>국제선 무료 셔틀버스</strong>'],
-    ['11:00', '후쿠오카공항 국제선 도착 · 체크인'],
-    bd ? [bd.flightTime, '🛬 귀국 — <strong>' + bd.flight + '</strong> (배 3명도 같은 편)']
-       : ['오후', '🛬 귀국 — 제주 7C1404 13:00 / 대한항공 KE792 13:45 (항공 기준 확정되면 하나로)']
-  ];
-  const onsenNote = '<div class="tl-desc" style="font-size:12px;">⚠️ 요금·소요시간은 여행 정보 사이트 기준입니다. 지옥순례 공통권은 과거 2,200엔이던 자료도 있어 출발 전 공식 사이트에서, 열차 시간표는 JR큐슈 공식에서 다시 확인하세요.</div>';
-
+  const arrow = '<div class="tl-arrow">↓</div>';
   let html = '';
-  html += fixedStep('3/3 (수)', '🚢 배 3명 출발', '배 3명만 · ✈️ 비행기 4명은 이날 일정 없음', [
-    ['점심', '🚄 서울역 KTX 출발 (15시 이전, 약 2시간 30분)'],
-    ['저녁', '부산에서 저녁'],
-    ['21:00', '부산항 국제여객터미널 도착 · 출국 수속'],
-    ['22:30', '🚢 뉴카멜리아 출항 · 선상 1박']
-  ]);
-  html += fixedStep('3/4 (목)', '🤝 하카타 합류 · 아파트 1박', '첫날은 이동 피로가 크니 무리하지 않기', [
-    ['07:30', '🚢 배 3명 하카타항 도착 · 아침 식사 · 짐 보관'],
-    ['10:00', '✈️ 비행기 4명 인천 출발 (오전 10시쯤)'],
-    ['11:30', '✈️ 후쿠오카공항 도착 → 하카타'],
-    ['점심', '🤝 하카타에서 7명 합류 · 점심'],
-    ['15:00', '🏠 아파트 체크인 (보통 오후 3~4시) · 휴식'],
-    ['저녁', '가볍게 시내 · 저녁'],
-    ['밤', '🏠 아파트 1박']
-  ]);
-  html += voteStep('ny_onsen', '3/5 (금)', '♨️ 온천 + 료칸 1박', '카드마다 거리·교통·요금·주의가 있어요 · 여러 개 선택 가능',
-    onsenDec.length ? '' : '온천지 <strong>료칸에서 1박 2식</strong> (7명 · 중급 1인 약 25만원 · 확정). 이동이 길어 중간 휴식 넉넉히.',
-    onsenNote, friItems);
-  html += voteStep('ny_activity', '3/6 (토)', '🎌 낮 자유 일정 → 저녁 신년회 · 아파트 1박', '하고 싶은 것 여러 개 선택',
-    actDec.length ? '' : '낮에 할 것을 골라 주세요. 아침 복귀 · 저녁 신년회 · 아파트 1박은 확정입니다.',
-    '', satItems);
-  html += fixedStep('3/7 (일)', '🛬 귀국 — 전원 항공', '배 3명도 비행기 4명과 같은 귀국편으로 맞추면 편합니다', sunItems);
-  html += voteStep('ny_budget', '', '💰 항공 기준 (3/4 출발 · 3/7 귀국편)', '둘 중 하나만',
-    '배 3명은 귀국 편도만 삽니다. 자세한 건 아래 💰 비용.', '', []);
-  flow.innerHTML = '<div class="tl-flow">' + html + '</div>';
+  html += node('3/3 (수)', '🚢 배 3명 출발 준비', '확정', 'fixed',
+    'KTX 서울→부산 (점심쯤, 15시 이전 출발) → 부산 저녁 → 뉴카멜리아 22:30 승선. 비행기 4명은 목요일 아침 인천 출발 준비.');
+  html += arrow;
+  html += node('3/4 (목)', '✈️ 하카타 합류 · 아파트 1박', '확정', 'fixed',
+    '배 3명 07:30 하카타 도착 + 비행기 4명 오전 10시쯤 인천 출발 → 후쿠오카 합류. 아파트 독채 1박 (7명).');
+  html += arrow;
+  html += '<div class="tl-node branch"><div class="tl-date">3/5 (금)</div>' +
+    '<div class="tl-title">♨️ 온천 — 세 갈래 중 선택 <span class="tl-badge todo">정해야 할 것</span></div>' +
+    '<div style="font-size:12px; color:var(--text-muted); margin-top:4px;">← 좌우로 밀어서 보기 →</div>' +
+    '<div class="tl-carousel">' +
+    branch('ny_onsen', 0, '🌋 벳푸', '지옥순례 + 온천 · 하카타에서 약 2시간 10분', onsenCount(0), myOnsen.indexOf(0) >= 0, onsenLeader.indexOf(0) >= 0) +
+    branch('ny_onsen', 1, '🏞️ 유후인', '료칸·긴린코 온천마을 · 약 2시간 10~20분', onsenCount(1), myOnsen.indexOf(1) >= 0, onsenLeader.indexOf(1) >= 0) +
+    branch('ny_onsen', 5, '🏞️ 쿠로가와', '아소 경유 버스투어 · 조용하고 한적 · <a href="https://m.blog.naver.com/hjk8427_/224401394564" target="_blank" rel="noopener">블로그</a>', onsenCount(5), myOnsen.indexOf(5) >= 0, onsenLeader.indexOf(5) >= 0) +
+    '</div><div class="tl-desc">온천 뒤 료칸 1박 (7명, 중급 1인 25만원) — 확정.</div></div>';
+  html += arrow;
+  html += node('3/6 (토)', '🎌 자유 일정 + 신년회 저녁 · 아파트 1박', '확정', 'fixed',
+    '낮에는 자유 일정, 저녁에 신년회. 아파트 독채 1박 (7명).');
+  html += arrow;
+  html += node('3/7 (일)', '✈️ 귀국 — 전원 항공편', '확정', 'fixed',
+    '비행기 4명 왕복 귀국 + 배 3명 편도 귀국. 오후 항공편 (제주 7C1404 13:00 / 대한항공 KE792 13:45).');
+  html += arrow;
+  html += '<div class="tl-node branch">' +
+    '<div class="tl-title">💰 예산 — 두 갈래 중 선택 <span class="tl-badge todo">정해야 할 것</span></div>' +
+    '<div style="font-size:12px; color:var(--text-muted); margin-top:4px;">← 좌우로 밀어서 보기 →</div>' +
+    '<div class="tl-carousel">' +
+    branch('ny_budget', 0, '✈️ 제주 왕복 기준', '1인 약 104~111만원 (가장 저렴)', budgetCount(0), myBudget.indexOf(0) >= 0, budgetLeader.indexOf(0) >= 0) +
+    branch('ny_budget', 1, '✈️ 대한항공 A350 기준', '1인 약 107~114만원 (편안함)', budgetCount(1), myBudget.indexOf(1) >= 0, budgetLeader.indexOf(1) >= 0) +
+    '</div><div class="tl-desc">항공권 가격에 따라 1인 총비용이 달라집니다. 제주 왕복 50.6만원 / 대한항공 왕복 53.9만원.</div></div>';
+  flow.innerHTML = html;
+  // 밑: 투표에 따른 결정된 내용
+  if (decided) {
+    const onsenTxt = onsenLeader.length ? onsenW.winners.join(' / ') + ' (' + onsenW.maxCount + '표)' : '아직 표 없음';
+    const budgetTxt = budgetLeader.length ? budgetW.winners.join(' / ') + ' (' + budgetW.maxCount + '표)' : '아직 표 없음';
+    decided.innerHTML = '<div class="card" style="margin:0; background:var(--primary-lighter);">' +
+      '<h2 style="margin-bottom:8px;">📌 확정 일정</h2>' +
+      '<table style="font-size:14px; min-width:0;"><tbody>' +
+      '<tr><td style="font-weight:700; color:var(--primary); width:130px;">✅ 날짜</td><td><strong>2027년 3월 4일(목) ~ 3월 7일(일)</strong> · 3박 4일</td></tr>' +
+      '<tr><td style="font-weight:700; color:var(--primary);">🚢 배 · ✈️ 비행기</td><td><strong>배 3명</strong> (김석, 김철현, 박중산) · <strong>비행기 4명</strong> (김기태, 최근호, 윤유병, 최진원)</td></tr>' +
+      '<tr><td style="font-weight:700; color:var(--primary);">🏠 숙소</td><td><strong>아파트 1박(3/4) + 료칸 1박(3/5) + 아파트 1박(3/6)</strong> · 7명</td></tr>' +
+      '<tr><td style="font-weight:700; color:var(--primary);">♨️ 온천 (투표)</td><td>' + escapeHtml(onsenTxt) + '</td></tr>' +
+      '<tr><td style="font-weight:700; color:var(--primary);">💰 예산 (투표)</td><td>' + escapeHtml(budgetTxt) + '</td></tr>' +
+      '</tbody></table></div>';
+  }
 }
 
 // ============== 로드맵 체크 + 예약 관리 ==============
@@ -3768,7 +3692,6 @@ function toggleBooking(itemId, event) {
   DB.bookings[itemId] = st;
   saveDB();
   renderBookings();
-  renderHomeTodo();
   cloudSet(['bookings', itemId], DB.bookings[itemId]);
 }
 function saveBookingNote(itemId, value) {
