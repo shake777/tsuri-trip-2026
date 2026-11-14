@@ -535,6 +535,13 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td class="when">2월 말</td>
+                <td><strong>🍱 3/4 첫날 저녁 — 요시즈카 우나기야</strong><span class="sub">3/4(목) 저녁 8명 · 나카스 2-8-27 · 150년 전통 장어 전문점 · 8명 개실 예약 필수 (개실료 10% · 현금만 가능) · ☎ 092-271-0700</span></td>
+                <td>총무</td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="unagi" onchange="toggleBooking('unagi', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="unagi" onchange="saveBookingNote('unagi', this.value)" placeholder="예약 시간·메모"></td>
+              </tr>
+              <tr>
+                <td class="when">2월 말</td>
                 <td><strong>🚢 고려훼리 운항 재확인</strong><span class="sub">3월 휴항일 · 출항 시간 확인 (1688-7447)</span></td>
                 <td>배 4명<span class="sub">김석·김철현·박중산·최진원</span></td>
                 <td style="text-align:center;"><input type="checkbox" data-booking="ferry_check" onchange="toggleBooking('ferry_check', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
@@ -3755,9 +3762,9 @@ function renderTimeline() {
     ['07:30', '🚢 배 4명 하카타항 도착 · 아침 식사 · 짐 보관'],
     ['10:00', '✈️ 비행기 3명 인천 출발 (오전 10시쯤)'],
     ['11:30', '✈️ 후쿠오카공항 도착 → 하카타'],
-    ['점심', '🤝 하카타에서 8명 합류 · 점심'],
+    ['점심', '🤝 하카타에서 8명 합류 · 점심 (하카타역 주변 가볍게)'],
     ['15:00', '🏠 아파트 체크인 (보통 오후 3~4시) · 휴식'],
-    ['저녁', '가볍게 시내 · 저녁'],
+    ['저녁', '🍱 <strong>요시즈카 우나기야</strong> (博多名代 吉塚うなぎ屋) — 1873년 창업, 150년 전통 장어 전문점 · 나카스 2-8-27 · 우나동 2,260엔~ · 8명 개실 예약 필수 (개실료 10% · 현금만 가능) · 영업 10:00~21:00 (목요일 영업) · ☎ 092-271-0700'],
     ['밤', '🏠 아파트 1박']
   ]);
   html += voteStep('ny_onsen', '3/5 (금)', '♨️ 온천 + 료칸 1박', '카드마다 거리·교통·요금·주의가 있어요 · 여러 개 선택 가능',
