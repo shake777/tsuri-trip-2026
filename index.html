@@ -485,6 +485,13 @@ tr.done-row td { opacity: 0.62; }
                 <td><input type="text" class="booking-note" data-booking-note="return" onchange="saveBookingNote('return', this.value)" placeholder="예약번호·확정 금액·메모"></td>
               </tr>
               <tr>
+                <td class="when">11월 말</td>
+                <td><strong>✈️ 대구 왕복</strong><span class="sub">조성화. 티웨이 TW213 3/4(목) 08:20 대구 → 09:25 후쿠오카 + TW214 3/7(일) 14:45 후쿠오카 → 15:55 대구. 왕복 361,800원 결제 완료, 발권 대기 중 (PNR은 11/15 06:49까지 발급 예정, 예약번호 1688903521540181)</span></td>
+                <td>대구 1명<span class="sub">조성화</span></td>
+                <td style="text-align:center;"><input type="checkbox" data-booking="daegu" onchange="toggleBooking('daegu', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><input type="text" class="booking-note" data-booking-note="daegu" onchange="saveBookingNote('daegu', this.value)" placeholder="PNR·e-티켓·메모"></td>
+              </tr>
+              <tr>
                 <td class="when">12월 초</td>
                 <td><strong>🚢 뉴카멜리아</strong><span class="sub">3/3(수) 22:30 부산 → 3/4(목) 07:30 하카타. 침대실 4명 예약·결제 완료 — 444,000원 (세금 포함 · 기본 384,000원 + 세금 60,000원 · 2026-11-15 결제, 주문번호 5129084)</span></td>
                 <td>배 4명<span class="sub">김석·김철현·박중산·최진원</span></td>
@@ -851,14 +858,14 @@ tr.done-row td { opacity: 0.62; }
         </div>
         <p style="font-size:13px; margin-top:10px;"><strong>3/5 당일치기 일정 (벳푸 기준)</strong> — 08:30 하카타 버스센터 출발 → 10:30 벳푸 도착 → 지옥순례(2,400엔) + 점심 → 당일 온천(히요탄온천·다케가와라온천 등, 500~1,500엔) → 16:00 벳푸 출발 → 18:00 하카타 도착, 저녁. 벳푸가 제일 편하고(버스 왕복 6,500엔, 약 2시간), 유후인도 가능(열차 왕복 12,260엔, 약 2시간 15분). 쿠로가와는 왕복 5~6시간이라 당일치기로는 멀어요.</p>
         <p style="font-size:12px; color:var(--text-muted);">장점: 짐 안 옮김, 같은 아파트 3박, 8명 한 집에 넓게. 단점: 료칸 가이세키 저녁·숙박 경험·아침 온천 없음. 바꾸기로 정하면 아파트 3박 예약·웹·캘린더를 그때 고칩니다.</p>
-        <h3 style="font-size:14px; margin:14px 0 6px;">🛫 전원 출발 (8명)</h3>
+        <h3 style="font-size:14px; margin:14px 0 6px;">🛫 전원 출발 · 귀국 (8명)</h3>
         <div style="overflow-x:auto;">
           <table style="font-size:13px; min-width:0;">
-            <thead><tr><th>이동</th><th>인원</th><th>출발</th></tr></thead>
+            <thead><tr><th>이동</th><th>인원</th><th>가는 편</th><th>오는 편</th></tr></thead>
             <tbody>
-              <tr><td style="font-weight:600; color:var(--primary);">🚢 배 4명</td><td>김석, 김철현, 박중산, 최진원</td><td>3/3(수) 22:30 부산 출발 (뉴카멜리아)</td></tr>
-              <tr><td style="font-weight:600; color:var(--primary);">✈️ 비행기 3명</td><td>김기태, 최근호, 윤유병</td><td>김기태 제주 7C1401 06:30 (예약 완료) · 최근호·윤유병 대한항공 KE787 07:45</td></tr>
-              <tr><td style="font-weight:600; color:var(--primary);">✈️ 대구 1명</td><td>조성화</td><td>3/4(목) TW213 08:20 대구 출발 (예약 완료)</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">🚢 배 4명</td><td>김석, 김철현, 박중산, 최진원</td><td>3/3(수) 22:30 부산 출발 뉴카멜리아 → 3/4(목) 07:30 하카타 도착</td><td>3/7(일) KE792 13:45 후쿠오카 → 15:10 인천</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">✈️ 비행기 3명</td><td>김기태, 최근호, 윤유병</td><td>김기태 제주 7C1401 06:30→07:55 (예약 완료) · 최근호·윤유병 대한항공 KE787 07:45→09:15</td><td>김기태 에어부산 BX446 10:00→11:45 (예약 완료) · 최근호·윤유병 KE792 13:45→15:10</td></tr>
+              <tr><td style="font-weight:600; color:var(--primary);">✈️ 대구 1명</td><td>조성화</td><td>3/4(목) 티웨이 TW213 08:20 대구 → 09:25 후쿠오카 (예약 완료)</td><td>3/7(일) 티웨이 TW214 14:45 후쿠오카 → 15:55 대구 (예약 완료)</td></tr>
             </tbody>
           </table>
         </div>
