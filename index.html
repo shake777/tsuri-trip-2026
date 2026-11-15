@@ -639,9 +639,9 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/6 (토)<br><span style="font-size:11px; color:var(--text-muted);">자유</span></td>
-                <td>낮 일정 따라 점심<br><span style="font-size:11px; color:var(--text-muted);">굴 오두막 · 바다낚시 · 골프 · 사케 양조장 · 보트레이스 투표 중</span></td>
+                <td>낮 일정 따라 점심<br><span style="font-size:11px; color:var(--text-muted);">11개 안 투표 중 — 다자이후 · 야타이 · 텐진 · 돔 · 굴 · 낚시 · 골프 · 사케 · 경정 · 나가사키 · 쉬엄쉬엄</span></td>
                 <td>🍻 <strong>신년회 저녁 19:00</strong><br><span style="font-size:11px; color:var(--text-muted);">식당 투표 중 — 아래 투표에서 선택 · 정해지면 예약</span></td>
-                <td>낮 자유 일정 (투표 중) · 오전 온천지에서 복귀 · 밤 아파트 1박</td>
+                <td>오전 온천지 복귀 → 낮 자유 일정 (투표 중) → 저녁 전 아파트 휴식 · 밤 아파트 1박</td>
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/7 (일)<br><span style="font-size:11px; color:var(--text-muted);">귀국</span></td>
@@ -4088,7 +4088,7 @@ function renderTimeline() {
     : [['오전', '료칸 조식 → 하카타 복귀 (온천지가 확정되면 시간이 정해짐)']];
   const satAct = actDec.reduce((a, k) => a.concat(detailOf('ny_activity', k).plan || []), []);
   const dinnerItems = dinnerDec.length ? (detailOf('ny_dinner', dinnerDec[0]).plan || []) : [];
-  const satItems = _sortPlan(satBack.concat(satAct, dinnerDec.length ? [] : [['19:00', '🍻 신년회 저녁 (8명 식당 미리 예약)'], ['밤', '🏠 아파트 1박']]));
+  const satItems = _sortPlan(satBack.concat(satAct, actDec.length ? [] : [['17:00', '🏠 하카타 복귀 · 아파트 휴식 · 신년회 저녁 준비']], dinnerDec.length ? [] : [['19:00', '🍻 신년회 저녁 (8명 식당 미리 예약)'], ['밤', '🏠 아파트 1박']]));
   const sunItems = [
     ['08:00', '🛬 김기태 공항 이동 — 에어부산 BX446 10:00 후쿠오카 → 11:45 인천 (PNR KCTNEI · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['10:00', '아파트 체크아웃'],
@@ -4123,7 +4123,7 @@ function renderTimeline() {
     onsenDec.length ? '' : '온천지 <strong>료칸에서 1박 2식</strong> (8명 · 중급 1인 약 25만원 · 확정). 이동이 길어 중간 휴식 넉넉히.',
     onsenNote, friItems);
   html += voteStep('ny_activity', '3/6 (토)', '🎌 낮 자유 일정 → 아파트 1박', '하고 싶은 것 여러 개 선택',
-    actDec.length ? '' : '낮에 할 것을 골라 주세요. 아침 복귀 · 아파트 1박은 확정이고, 저녁 식당은 아래 투표에서 고릅니다.',
+    actDec.length ? '' : '낮에 할 것을 골라 주세요. 아침 료칸 조식 · 하카타 복귀와 밤 아파트 1박은 확정. 점심은 낮 일정 따라 현지에서. 저녁 19:00 신년회라 낮 일정은 17:00 전후 하카타 복귀가 좋아요.',
     '', satItems);
   html += voteStep('ny_dinner', '3/6 (토)', '🍻 신년회 저녁 식당', '카드마다 위치·가격·개실이 있어요 · 하나만 선택',
     dinnerDec.length ? '' : '토요일 저녁 19:00 · 8명이 한자리에 앉을 수 있는 곳으로 · 식당 정해지면 예약합니다.',
