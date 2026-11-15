@@ -3903,34 +3903,33 @@ function renderTimeline() {
   // 확정된 투표만 세로선 위 시간표로 들어간다
   const onsenDec = decidedKeys('ny_onsen');
   const actDec = decidedKeys('ny_activity');
-  const budgetDec = decidedKeys('ny_budget');
   const friItems = onsenDec.length ? (detailOf('ny_onsen', onsenDec[0]).plan || []) : [];
   const satBack = onsenDec.length ? (detailOf('ny_onsen', onsenDec[0]).backPlan || [])
     : [['오전', '료칸 조식 → 하카타 복귀 (온천지가 확정되면 시간이 정해짐)']];
   const satAct = actDec.reduce((a, k) => a.concat(detailOf('ny_activity', k).plan || []), []);
   const satItems = _sortPlan(satBack.concat(satAct, [['19:00', '🍻 신년회 저녁 (8명 식당 미리 예약)'], ['밤', '🏠 아파트 1박']]));
-  const bd = budgetDec.length ? detailOf('ny_budget', budgetDec[0]) : null;
   const sunItems = [
+    ['08:00', '🛬 김기태 공항 이동 — 에어부산 BX446 10:00 후쿠오카 → 11:45 인천 (PNR KCTNEI · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['10:00', '아파트 체크아웃'],
     ['10:30', '하카타역 → 지하철 2정거장(약 5분) → 공항역 → <strong>국제선 무료 셔틀버스</strong>'],
     ['11:00', '후쿠오카공항 국제선 도착 · 체크인'],
-    bd ? [bd.flightTime, '🛬 귀국 — <strong>' + bd.flight + '</strong> (배 4명도 같은 편)']
-       : ['오후', '🛬 귀국 — 제주 7C1404 13:00 / 대한항공 KE792 13:45 (항공 기준 확정되면 하나로)']
+    ['13:45', '🛬 배 4명 + 최근호 · 윤유병 귀국 — 대한항공 KE792 13:45 후쿠오카 → 15:10 인천 (배 4명 PNR XEJFYA · <a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 e-티켓</a> · 최근호·윤유병 미예약)'],
+    ['14:45', '🛬 조성화 귀국 — 티웨이 TW214 14:45 후쿠오카 → 15:55 대구 (PNR AH7Y68 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)']
   ];
   const onsenNote = '<div class="tl-desc" style="font-size:12px;">⚠️ 요금·소요시간은 여행 정보 사이트 기준입니다. 지옥순례 공통권은 과거 2,200엔이던 자료도 있어 출발 전 공식 사이트에서, 열차 시간표는 JR큐슈 공식에서 다시 확인하세요.</div>';
 
   let html = '';
   html += fixedStep('3/3 (수)', '🚢 배 4명 출발', '배 4명만 · ✈️ 비행기 3명은 이날 일정 없음', [
-    ['점심', '🚄 서울역 KTX 출발 (15시 이전, 약 2시간 30분)'],
+    ['점심', '🚄 서울역 KTX 출발 (15시 이전, 약 2시간 30분) · 2월 초 예매 오픈 (아직 미예약)'],
     ['저녁', '부산에서 저녁 (일찍 마치고 이동)'],
     ['18:30', '부산항 국제여객터미널 도착 · 출국 수속 (승선 마감 20:00)'],
-    ['22:30', '🚢 뉴카멜리아 출항 · 선상 1박']
+    ['22:30', '🚢 뉴카멜리아 출항 · 선상 1박 (침대실 4명 · 주문번호 5129084 · 444,000원 · 예약 확인 완료)']
   ]);
   html += fixedStep('3/4 (목)', '🤝 하카타 합류 · 아파트 1박', '첫날은 이동 피로가 크니 무리하지 않기', [
-    ['07:30', '🚢 배 4명 하카타항 도착 (김석 · 김철현 · 박중산 · 최진원) · 아침 식사 · 짐 보관'],
-    ['07:55', '✈️ 김기태 후쿠오카공항 도착 (제주 7C1401)'],
+    ['07:30', '🚢 배 4명 하카타항 도착 (김석 · 김철현 · 박중산 · 최진원) · 뉴카멜리아 침대실 · 주문번호 5129084 · 아침 식사 · 짐 보관'],
+    ['07:55', '✈️ 김기태 후쿠오카공항 도착 (제주 7C1401 · PNR IIJ4NX · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['09:15', '✈️ 최근호 · 윤유병 후쿠오카공항 도착 (대한항공 KE787 · 미예약)'],
-    ['09:25', '✈️ 조성화 후쿠오카공항 도착 (티웨이 TW213 · 대구)'],
+    ['09:25', '✈️ 조성화 후쿠오카공항 도착 (티웨이 TW213 · 대구 · PNR AH7Y68 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['12:00', '🤝 하카타에서 8명 합류 · 점심 (하카타역 주변 가볍게)'],
     ['15:00', '🏠 아파트 체크인 (보통 오후 3~4시) · 휴식'],
     ['저녁', '🦑 <strong>카와타로 나카스 본점</strong> (河太郎) — 오징어 활어회(이카 이키즈쿠리) 원조, 1960년 창업 · 나카스 1-6-6 · 오징어회 1,500엔부터, 저녁 코스 5,000~10,000엔 · 3월은 무늬오징어(미즈이카) 철 · 예약 필수 · ☎ 092-271-2133'],
