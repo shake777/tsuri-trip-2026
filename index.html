@@ -660,7 +660,7 @@ tr.done-row td { opacity: 0.62; }
         <div id="ny-cloud-note"></div>
         <div id="timeline-flow" style="margin-top:12px;"></div>
         <div class="note info" style="margin-top:14px;">
-          🧘 <strong>허리 배려</strong> — 첫날(목)은 이동 피로가 크니 무리하지 않기 · 금요일은 온천지까지 2시간 넘게 가니 중간 휴식 넉넉히 · 3월 초 후쿠오카는 평균 9.5도(낮 13도 · 밤 6도)라 겹옷·우산 필수.
+          🌡️ <strong>3월 초 날씨</strong> — 평균 9.5도(낮 13도 · 밤 6도)라 겹옷·우산 필수.
         </div>
         <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">예약 진행 · 회원별 현황 · 여권은 🏠 홈에 모아 두었습니다.</p>
       </div>
@@ -1141,7 +1141,6 @@ const CHECKLISTS = [
     items: [
       { text: '🛂 여권 실물 (사이트에 등록한 그 여권)', deadline: 1 },
       { text: '🧥 겹옷 · 접이식 우산 (3월 초 낮 13도 · 밤 6도)', deadline: 1 },
-      { text: '💊 허리 보호 (복대 · 파스) · 개인 상비약', deadline: 1 },
       { text: '♨️ 온천·료칸용 갈아입을 옷 · 작은 수건', deadline: 1 },
       { text: '🔌 일본 11자(A타입) 어댑터 · 보조배터리는 기내 휴대', deadline: 1 },
       { text: '💊 멀미약 (야간 배 약 9시간)', deadline: 1, only: 'ferry' },
@@ -2223,7 +2222,7 @@ const PICK_EXTRA = {
     1: '유후인 · 열차 왕복 12,260엔, 1개월 전 예약',
     2: '벳푸+유후인 둘 다 · 강행군 주의',
     3: '가깝고 한적 · 시내 온천',
-    4: '온천 패스 · 이동 부담 최소, 허리 배려'
+    4: '온천 패스 · 이동 부담 최소'
   }
 };
 
@@ -2269,11 +2268,11 @@ function renderPickers() {
   };
   let html = '<div class="card"><h2>👆 카드 눌러서 선택하기</h2><p style="font-size:14px;">카드를 누르면 바로 투표가 저장됩니다. 여러 개를 골라도 되고, 눌렀던 카드를 다시 누르면 취소됩니다. 언제든 바꿀 수 있습니다.</p>';
   html += '<div class="pick-section"><div class="pick-head"><div class="pick-title">📅 날짜 확정</div><div class="pick-sub">2027년 3월 4일(목) ~ 3월 7일(일) · 3박 4일</div></div><div style="font-size:14px; padding:4px 0 8px;">✅ 날짜가 확정돼서 주간 투표는 끝났습니다.</div></div>';
-  html += pick('ny_onsen', '♨️ 온천 고르기', '금요일 메인 · 허리 배려');
+  html += pick('ny_onsen', '♨️ 온천 고르기', '금요일 메인');
   html += myEstimateHtml();
   html += '</div>';
   if (el) el.innerHTML = html;
-  if (homePick) homePick.innerHTML = '<div class="card"><h2>👆 온천 코스 고르기</h2><p style="font-size:14px;">카드를 누르면 바로 투표가 저장됩니다. 여러 개를 골라도 되고, 눌렀던 카드를 다시 누르면 취소됩니다. 언제든 바꿀 수 있습니다.</p>' + pick('ny_onsen', '♨️ 온천 고르기', '금요일 메인 · 허리 배려') + '</div>';
+  if (homePick) homePick.innerHTML = '<div class="card"><h2>👆 온천 코스 고르기</h2><p style="font-size:14px;">카드를 누르면 바로 투표가 저장됩니다. 여러 개를 골라도 되고, 눌렀던 카드를 다시 누르면 취소됩니다. 언제든 바꿀 수 있습니다.</p>' + pick('ny_onsen', '♨️ 온천 고르기', '금요일 메인') + '</div>';
 }
 
 function myEstimateHtml() {
@@ -3552,7 +3551,7 @@ const VOTE_CARDS = {
       ['🕒', '하루 종일'],
       ['🚆', '유후인노모리 일부 편이 벳푸까지 · 복귀는 소닉'],
       ['👍', '오전 유후인 → 오후 벳푸, 하루에 두 곳'],
-      ['⚠️', '<strong>강행군</strong> — 8명 단체 · 허리엔 빠듯'],
+      ['⚠️', '<strong>강행군</strong> — 8명 단체'],
       ['🛏️', '벳푸 쪽 료칸 1박'],
       ['💰', '1인 약 +5만원 이상']] },
     { k: 6, name: '🚌 유후인 + 쿠로카와 버스투어', facts: [
@@ -3578,7 +3577,7 @@ const VOTE_CARDS = {
     { k: 0, name: '🍢 야타이 · 이자카야', facts: [['🕒', '저녁 6시 이후'], ['👍', '나카스 포장마차 · 신년회 뒤 2차']] },
     { k: 1, name: '🛍️ 텐진 · 캐널시티', facts: [['🕒', '하카타에서 10~15분'], ['👍', '쇼핑 · 비 와도 괜찮음']] },
     { k: 3, name: '⚾ 야구장 · 돔', facts: [['🕒', '시내'], ['⚠️', '3월 초는 시범경기 — 일정 확인 필요']] },
-    { k: 4, name: '🛌 쉬엄쉬엄', facts: [['👍', '욕심내지 말고 자유 일정 · 허리 회복']] },
+    { k: 4, name: '🛌 쉬엄쉬엄', facts: [['👍', '욕심내지 말고 자유 일정']] },
     { k: 5, name: '🦪 이토시마 굴 오두막', facts: [['🕒', '3월 말 시즌 종료 · 3/6이 막바지 · 10:00~17:00'], ['👍', '굴 1kg 800엔 · 숯불 300엔 · 현금만']] },
     { k: 6, name: '🎣 하카타만 바다낚시공원', facts: [['🕒', '잔교 낚시 4시간 1,000엔 · 낚싯대 대여 600엔'], ['👍', '화요일 휴무라 토요일 가능 · 초보자도 직원 안내']] },
     { k: 7, name: '⛳ 골프 라운드', facts: [['🕒', '다이하카타 CC 27홀 · 센트럴 후쿠오카 GC 18홀'], ['👍', '4인 1조라 8명은 2조 · 노캐디 셀프 · 3월 티타임 예약 가능']] },
@@ -3602,7 +3601,7 @@ const VOTE_DETAILS = {
         ['🛏️ 료칸', '칸나와 · 벳푸 시내 중급 1박 2식 1인 20~30만원대 · <strong>8명으로 검색</strong> · 전세탕 있는 곳'],
         ['📌 예약', '12월 초 료칸 → 2월 초 고속버스 좌석 · 지옥순례권은 현장 구매 가능'],
         ['💰 비용', '지금 1인 계산(비행기 110~117만 · 배 102~108만)이 벳푸 기준'],
-        ['⚠️ 주의', '지옥 2곳(치노이케·타츠마키)은 떨어져 있어 버스·택시 이동 — 허리 아끼기']
+        ['⚠️ 주의', '지옥 2곳(치노이케·타츠마키)은 떨어져 있어 버스·택시 이동']
       ],
       plan: [['09:00', '하카타 버스터미널 출발 (토요노쿠니호)'], ['11:30', '벳푸 기타하마 도착 · 점심'], ['13:00', '칸나와 지옥순례'], ['15:30', '료칸 체크인 · 온천'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 벳푸 료칸 1박']],
       backPlan: [['08:00', '료칸 조식'], ['10:00', '벳푸 기타하마 → 고속버스'], ['12:30', '하카타 도착']]
@@ -3615,7 +3614,7 @@ const VOTE_DETAILS = {
         ['🛏️ 료칸', '유후인 중급 1박 2식 1인 20~30만원대 — 비싼 편이라 이 가격대는 <strong>일찍</strong>'],
         ['📌 예약', '12월 초 료칸 → <strong>2/5(금) 10:00(일본시간)</strong> 유후인노모리 오픈 즉시 (금방 매진)'],
         ['💰 비용', '열차 왕복 12,260엔이라 벳푸 기준보다 1인 약 5만원 더'],
-        ['⚠️ 주의', '걷는 구간이 길어 허리 부담 — 중간에 카페 휴식']
+        ['⚠️ 주의', '걷는 구간이 길어 중간에 카페 휴식']
       ],
       plan: [['오전', '하카타역 출발 (유후인노모리)'], ['점심', '유후인 도착 · 점심'], ['오후', '유노쓰보 거리 · 긴린코 호수'], ['15:00', '료칸 체크인 · 온천'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 유후인 료칸 1박']],
       backPlan: [['08:00', '료칸 조식'], ['오전', '유후인 → 하카타 (열차·버스)'], ['점심', '하카타 도착']]
@@ -3638,7 +3637,7 @@ const VOTE_DETAILS = {
         ['🚆 가는 법', '하카타 → 유후인(유후인노모리) → 벳푸 · 복귀는 소닉 또는 고속버스'],
         ['🛏️ 료칸', '벳푸 쪽 중급 1박 2식'],
         ['📌 예약', '2/5(금) 10:00 유후인노모리 · 12월 초 료칸'],
-        ['⚠️ 주의', '강행군이라 8명 단체 · 허리에는 빠듯함']
+        ['⚠️ 주의', '강행군이라 8명 단체']
       ],
       plan: [['오전', '하카타 → 유후인 (유후인노모리)'], ['점심', '유후인 산책 · 점심'], ['오후', '유후인 → 벳푸 · 지옥순례'], ['17:00', '벳푸 료칸 체크인'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 벳푸 료칸 1박']],
       backPlan: [['08:00', '료칸 조식'], ['10:00', '벳푸 기타하마 → 고속버스'], ['12:30', '하카타 도착']]
@@ -3692,7 +3691,7 @@ const VOTE_DETAILS = {
     },
     4: {
       title: '🛌 쉬엄쉬엄 자유 일정',
-      rows: [['🛌 내용', '아파트에서 쉬고 근처 산책 · 허리 회복 · 저녁 신년회에 집중']],
+      rows: [['🛌 내용', '아파트에서 쉬고 근처 산책 · 저녁 신년회에 집중']],
       plan: [['오후', '🛌 아파트 휴식 · 근처 산책']]
     },
     5: {
@@ -3720,7 +3719,7 @@ const VOTE_DETAILS = {
         ['⛳ 코스', '다이하카타 CC 27홀 (나카가와시) · 센트럴 후쿠오카 GC 18홀 (치쿠시노시) · 시내에서 약 40분'],
         ['👥 8명', '4인 1조라 2조로 나눔 · 노캐디 셀프 플레이'],
         ['📌 예약', '2027년 3월 티타임 예약 가능 · 그린피는 날짜·시간별 상이 · 복장 규정 확인'],
-        ['⚠️ 주의', '허리 부담 · 비 와도 라운드 진행이 기본']
+        ['⚠️ 주의', '비 와도 라운드 진행이 기본']
       ],
       plan: [['08:00', '하카타 → 골프장 (약 40분)'], ['09:00', '⛳ 18홀 라운드 (2조)'], ['14:00', '클럽하우스 점심 · 하카타 복귀']]
     },
@@ -3851,6 +3850,8 @@ function renderTimeline() {
     let h = '<div class="tl-detail' + (mode === 'decided' ? ' decided' : '') + '">';
     h += '<div class="tl-detail-head">' + (mode === 'decided'
       ? '📋 ' + d.title + ' — 준비할 것'
+      : mode === 'mine'
+      ? '👉 내 선택' + (leaderKeys(pollId).indexOf(k) >= 0 ? ' · 현재 1위 (' + countOf(pollId, k) + '표)' : '') + ' — ' + d.title + ' <span style="font-weight:400; color:var(--text-muted); font-size:12.5px;">· 확정되면 이렇게 진행</span>'
       : '👑 현재 1위 (' + countOf(pollId, k) + '표) — ' + d.title + ' <span style="font-weight:400; color:var(--text-muted); font-size:12.5px;">· 확정되면 이렇게 진행</span>') + '</div>';
     if (d.rows && d.rows.length) {
       h += '<div class="tl-kv">' + d.rows.map(r => '<div class="k">' + r[0] + '</div><div class="v">' + r[1] + '</div>').join('') + '</div>';
@@ -3894,14 +3895,20 @@ function renderTimeline() {
     } else {
       h += '<div style="font-size:12px; color:var(--text-muted); margin-top:6px;">' + hint + ' · ← 좌우로 넘겨 보기 →</div>' +
         '<div class="tl-carousel">' + cardsOf(pollId) + '</div>' + (note || '');
-      const lead = leaderKeys(pollId);
-      if (lead.length === 1) {
-        h += panel(pollId, lead[0], 'preview');
-      } else if (lead.length > 1) {
+      const mySel = mine(pollId);
+      if (mySel.length) {
+        // 내가 고른 안을 그대로 미리보기로 보여 준다. [✅ 이걸로 확정]은 그 안을 결정한다.
+        h += mySel.map(k => panel(pollId, k, 'mine')).join('');
+      } else {
+        const lead = leaderKeys(pollId);
+        if (lead.length === 1) {
+          h += panel(pollId, lead[0], 'preview');
+        } else if (lead.length > 1) {
         h += '<div class="tl-detail"><div class="tl-detail-head">🟡 동률 — ' + lead.map(k => labelOf(pollId, k)).join(' · ') + ' (각 ' + countOf(pollId, lead[0]) + '표)</div>' +
           '<div style="font-size:13px; color:var(--text-muted);">투표가 더 필요합니다. 아래를 펼쳐 각 안을 비교해 보세요.</div>' +
           lead.map(k => '<details style="margin-top:8px;"><summary style="cursor:pointer; font-weight:600;">' + labelOf(pollId, k) + '</summary>' + panel(pollId, k, 'preview') + '</details>').join('') +
           '</div>';
+        }
       }
     }
     return h + '</div></div>' + subSteps(items || []);
