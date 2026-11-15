@@ -596,7 +596,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">🚢 배 4명<br><span style="font-size:11px; color:var(--text-muted);">김석 · 김철현 · 박중산 · 최진원</span></td>
-                <td>뉴카멜리아 침대실 (1등4인실)<br>3/3(수) 22:30 부산 → 3/4(목) 07:30 하카타<br><span style="font-size:11px; color:var(--text-muted);">444,000원 · 주문번호 5129084 · 수속 16:30~18:30 · 승선 마감 20:00</span></td>
+                <td>뉴카멜리아 침대실 (1등4인실)<br>3/3(수) 22:30 부산 → 3/4(목) 07:30 하카타<br><span style="font-size:11px; color:var(--text-muted);">444,000원 · 주문번호 5129084 · 체크인 16:30~19:00 · 승선 마감 20:00</span></td>
                 <td>대한항공 KE792<br>3/7(일) 13:45 후쿠오카 → 15:10 인천<br><span style="font-size:11px; color:var(--text-muted);">1,490,000원 (372,500원/인) · PNR XEJFYA · 위탁 23kg</span></td>
                 <td>✅ 예약·발권 완료<br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓 열기</a><br><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓 열기</a></td>
               </tr>
@@ -623,7 +623,7 @@ tr.done-row td { opacity: 0.62; }
                 <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/3 (수)<br><span style="font-size:11px; color:var(--text-muted);">출발</span></td>
                 <td>서울역 KTX 이동<br><span style="font-size:11px; color:var(--text-muted);">12:00–14:30 · 배 4명</span></td>
                 <td>부산에서 저녁<br><span style="font-size:11px; color:var(--text-muted);">일찍 마치고 이동</span></td>
-                <td>18:30 부산항 터미널 도착 · 22:30 뉴카멜리아 출항 (침대실 4명)</td>
+                <td>18:30 부산항 터미널 도착 (체크인 16:30~19:00) · 22:30 뉴카멜리아 출항 (침대실 4명)</td>
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/4 (목)<br><span style="font-size:11px; color:var(--text-muted);">합류</span></td>
@@ -1165,7 +1165,7 @@ const CHECKLISTS = [
       { text: '♨️ 온천·료칸용 갈아입을 옷 · 작은 수건', deadline: 1 },
       { text: '🔌 일본 11자(A타입) 어댑터 · 보조배터리는 기내 휴대', deadline: 1 },
       { text: '💊 멀미약 (야간 배 약 9시간)', deadline: 1, only: 'ferry' },
-      { text: '🚢 3/3(수) 18:30까지 부산항 국제여객터미널 도착 (승선 마감 20:00 · 출항 22:30)', deadline: 1, only: 'ferry' },
+      { text: '🚢 3/3(수) 18:30까지 부산항 국제여객터미널 도착 (체크인 16:30~19:00 · 승선 마감 20:00 · 출항 22:30)', deadline: 1, only: 'ferry' },
       { text: '✈️ 3/4(목) 출발 2시간 전 인천공항 도착', deadline: 0, only: 'air' }
     ]
   }
@@ -4103,7 +4103,7 @@ function renderTimeline() {
   html += fixedStep('3/3 (수)', '🚢 배 4명 출발', '배 4명만 · ✈️ 비행기 3명은 이날 일정 없음', [
     ['점심', '🚄 서울역 KTX 출발 (15시 이전, 약 2시간 30분) · 2월 초 예매 오픈 (아직 미예약)'],
     ['저녁', '부산에서 저녁 (일찍 마치고 이동)'],
-    ['18:30', '부산항 국제여객터미널 도착 · 출국 수속 (승선 마감 20:00)'],
+    ['18:30', '부산항 국제여객터미널 도착 · 체크인 16:30~19:00 (승선 마감 20:00)'],
     ['22:30', '🚢 뉴카멜리아 출항 · 선상 1박 (침대실 4명 · 주문번호 5129084 · 444,000원 · 예약 확인 완료)']
   ]);
   html += fixedStep('3/4 (목)', '🤝 하카타 합류 · 아파트 1박', '첫날은 이동 피로가 크니 무리하지 않기', [
