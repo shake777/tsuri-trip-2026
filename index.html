@@ -451,52 +451,17 @@ tr.done-row td { opacity: 0.62; }
 
       <div class="card">
         <h2>📋 할 일 · 예약 — 시기순</h2>
-        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">끝나면 ✓를 누르고 메모칸에 예약번호·확정 금액을 적어 두세요. 모두에게 공유됩니다. 개인 준비물은 <a href="javascript:void(0)" onclick="switchTab('prep')" style="color:var(--primary-light);">🎒 준비물</a> 탭에서 각자 체크합니다.</p>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">끝나면 ✓를 누르고 메모칸에 예약번호·확정 금액을 적어 두세요. 모두에게 공유됩니다. 항공·페리 예약 현황은 ✈️ 신년회 탭의 🎫 티켓 · 예약 현황에서 확인하세요. 개인 준비물은 <a href="javascript:void(0)" onclick="switchTab('prep')" style="color:var(--primary-light);">🎒 준비물</a> 탭에서 각자 체크합니다.</p>
         <div style="overflow-x:auto; margin-top:10px;">
           <table class="todo-table" style="font-size:13px; min-width:660px;">
             <thead><tr><th style="min-width:78px;">시기</th><th>할 일</th><th style="min-width:88px;">대상</th><th style="width:44px; text-align:center;">✓</th><th style="min-width:170px;">메모</th></tr></thead>
             <tbody>
-              <tr class="done-row">
-                <td class="when">✅ 끝남</td>
-                <td><strong>날짜 · 인원 · 이동 · 숙소 구성 · 여권</strong><span class="sub">3/4~3/7 · 8명 · 배 4명/비행기 3명/대구 1명 · 아파트 2박+료칸 1박 · 여권 등록 완료</span></td>
-                <td>—</td>
-                <td style="text-align:center;">✅</td>
-                <td></td>
-              </tr>
               <tr>
                 <td class="when">11월 중</td>
                 <td><strong>🗳️ 남은 투표 마감</strong><span class="sub">금요일 온천 · 토요일 낮 · 항공 기준 — 온천지가 정해져야 료칸을 잡습니다</span></td>
                 <td>참가자 전원</td>
                 <td style="text-align:center;"><input type="checkbox" data-booking="vote" onchange="toggleBooking('vote', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
                 <td><input type="text" class="booking-note" data-booking-note="vote" onchange="saveBookingNote('vote', this.value)" placeholder="메모"></td>
-              </tr>
-              <tr>
-                <td class="when">11월 말</td>
-                <td><strong>✈️ 비행기 왕복</strong><span class="sub">김기태 발권 완료 (제주 7C1401 06:30 PNR IIJ4NX + 에어부산 BX446 10:00 PNR KCTNEI, 36.5만원) · 최근호·윤유병 대한항공 KE787 07:45 + KE792 13:45 (50.6만원/인, 미예약) · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 김기태 e-티켓 열기</a></span></td>
-                <td>비행기 3명<span class="sub">김기태·최근호·윤유병</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="flight" onchange="toggleBooking('flight', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="flight" onchange="saveBookingNote('flight', this.value)" placeholder="예약번호·확정 금액·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">11월 말</td>
-                <td><strong>✈️ 귀국 편도</strong><span class="sub">대한항공 KE792 13:45 발권 완료 (배 4명 149만원, PNR XEJFYA, 예약번호 1688903524972693) — 최근호·윤유병과 같은 편 · <a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓 열기</a></span></td>
-                <td>배 4명<span class="sub">김석·김철현·박중산·최진원</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="return" onchange="toggleBooking('return', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="return" onchange="saveBookingNote('return', this.value)" placeholder="예약번호·확정 금액·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">11월 말</td>
-                <td><strong>✈️ 대구 왕복</strong><span class="sub">조성화. 티웨이 TW213 3/4(목) 08:20 대구 → 09:25 후쿠오카 + TW214 3/7(일) 14:45 후쿠오카 → 15:55 대구. 왕복 361,800원 발권 완료 (PNR AH7Y68, e-티켓 722-5862661409, 예약번호 1688903521540181) · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 조성화 e-티켓 열기</a></span></td>
-                <td>대구 1명<span class="sub">조성화</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="daegu" onchange="toggleBooking('daegu', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="daegu" onchange="saveBookingNote('daegu', this.value)" placeholder="PNR·e-티켓·메모"></td>
-              </tr>
-              <tr>
-                <td class="when">12월 초</td>
-                <td><strong>🚢 뉴카멜리아</strong><span class="sub">3/3(수) 22:30 부산 → 3/4(목) 07:30 하카타. 침대실 4명 예약·결제 완료 — 444,000원 (세금 포함 · 기본 384,000원 + 세금 60,000원 · 2026-11-15 결제, 주문번호 5129084)</span></td>
-                <td>배 4명<span class="sub">김석·김철현·박중산·최진원</span></td>
-                <td style="text-align:center;"><input type="checkbox" data-booking="ferry" onchange="toggleBooking('ferry', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><input type="text" class="booking-note" data-booking-note="ferry" onchange="saveBookingNote('ferry', this.value)" placeholder="예약번호·확정 금액·메모"></td>
               </tr>
               <tr>
                 <td class="when">12월 초</td>
@@ -1138,7 +1103,7 @@ const CHECKLISTS = [
       { text: '♨️ 온천·료칸용 갈아입을 옷 · 작은 수건', deadline: 1 },
       { text: '🔌 일본 11자(A타입) 어댑터 · 보조배터리는 기내 휴대', deadline: 1 },
       { text: '💊 멀미약 (야간 배 약 9시간)', deadline: 1, only: 'ferry' },
-      { text: '🚢 3/3(수) 21시까지 부산항 국제여객터미널 도착 (출항 22:30 · 예약 안내 시간 재확인)', deadline: 1, only: 'ferry' },
+      { text: '🚢 3/3(수) 18:30까지 부산항 국제여객터미널 도착 (승선 마감 20:00 · 출항 22:30)', deadline: 1, only: 'ferry' },
       { text: '✈️ 3/4(목) 출발 2시간 전 인천공항 도착', deadline: 0, only: 'air' }
     ]
   }
@@ -3926,8 +3891,11 @@ function renderTimeline() {
     ['22:30', '🚢 뉴카멜리아 출항 · 선상 1박 (침대실 4명 · 주문번호 5129084 · 444,000원 · 예약 확인 완료)']
   ]);
   html += fixedStep('3/4 (목)', '🤝 하카타 합류 · 아파트 1박', '첫날은 이동 피로가 크니 무리하지 않기', [
+    ['06:30', '✈️ 김기태 인천 출발 (제주 7C1401 · PNR IIJ4NX · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['07:30', '🚢 배 4명 하카타항 도착 (김석 · 김철현 · 박중산 · 최진원) · 뉴카멜리아 침대실 · 주문번호 5129084 · 아침 식사 · 짐 보관'],
+    ['07:45', '✈️ 최근호 · 윤유병 인천 출발 (대한항공 KE787 · 미예약)'],
     ['07:55', '✈️ 김기태 후쿠오카공항 도착 (제주 7C1401 · PNR IIJ4NX · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
+    ['08:20', '✈️ 조성화 대구 출발 (티웨이 TW213 · PNR AH7Y68 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['09:15', '✈️ 최근호 · 윤유병 후쿠오카공항 도착 (대한항공 KE787 · 미예약)'],
     ['09:25', '✈️ 조성화 후쿠오카공항 도착 (티웨이 TW213 · 대구 · PNR AH7Y68 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['12:00', '🤝 하카타에서 8명 합류 · 점심 (하카타역 주변 가볍게)'],
