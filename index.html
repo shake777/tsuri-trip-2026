@@ -397,6 +397,18 @@ tr.done-row td { opacity: 0.62; }
 .info-muted { font-size: 11.5px; color: var(--text-muted); font-weight: 400; }
 .info-more { margin-top: 12px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
 .info-more > summary { cursor: pointer; font-weight: 700; color: var(--primary); }
+/* ============ 사람별 여행 안내 (11/16 추가) ============ */
+.mt-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.mt-chip { padding: 7px 12px; border-radius: 999px; border: 1px solid var(--border); background: #fff; color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer; }
+.mt-chip.on { background: var(--primary); color: #fff; border-color: var(--primary); }
+.mt-head { margin-top: 12px; padding: 10px 12px; background: #f0f7fc; border-radius: 10px; font-size: 14px; line-height: 1.8; }
+.mt-st span { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; margin: 2px 2px 0 0; font-weight: 600; }
+.mt-ok { background: #e6f7ec; color: #155f3a; }
+.mt-no { background: #fef3e6; color: #8a4500; }
+.mt-sec { font-size: 13.5px; font-weight: 800; color: var(--primary); margin: 14px 0 4px; }
+.mt-row { display: grid; grid-template-columns: 112px 1fr; gap: 8px; padding: 7px 4px; border-bottom: 1px dashed var(--border); font-size: 13.5px; line-height: 1.6; }
+.mt-t { font-weight: 700; color: var(--text-secondary); font-size: 12.5px; }
+@media (max-width: 480px) { .mt-row { grid-template-columns: 1fr; gap: 0; } }
 </style>
 </head>
 <body>
@@ -464,6 +476,12 @@ tr.done-row td { opacity: 0.62; }
       <div class="card">
         <h2>🙋 내 할 일</h2>
         <div id="home-todo"></div>
+      </div>
+
+      <!-- 11/16 추가: 사람별 여행 안내 -->
+      <div class="card" id="my-trip-card">
+        <h2>🧳 사람별 여행 안내 <span style="font-size:12px; font-weight:400; color:var(--text-muted);">이름을 누르면 그 사람 기준으로 바뀝니다</span></h2>
+        <div id="my-trip"></div>
       </div>
 
       <div class="card">
@@ -917,7 +935,7 @@ tr.done-row td { opacity: 0.62; }
             <tbody>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">🚢 배 4명<br>3/4(목) 07:30<br><span class="info-muted">하카타항 국제터미널</span></td>
-                <td>입국심사·세관 → 터미널 앞 <strong>니시테츠 버스로 하카타역 약 20분</strong> · 택시 약 10분</td>
+                <td>입국심사(VJW QR)·세관(<strong>종이 신고서</strong> — 부산 체크인 때 배부) → 터미널 앞 <strong>니시테츠 버스로 하카타역 약 20분</strong> · 택시 약 10분</td>
                 <td>밤배라 피곤하면 하카타역 주변에서 아침 먹고 쉬면서 나머지 4명 기다리기.</td>
               </tr>
               <tr>
@@ -1467,7 +1485,8 @@ const CHECKLISTS = [
       { text: '💴 엔화 환전 · 트래블카드 (현금만 받는 곳 많음)', deadline: 7 },
       { text: '📶 유심 · 이심 · 로밍 중 하나 준비', deadline: 7 },
       { text: '📱 Visit Japan Web 입국·세관 등록 (QR 캡처)', deadline: 3 },
-      { text: '🎫 항공권 · 승선권 · 숙소 예약 확인서 휴대폰에 저장', deadline: 2 }
+      { text: '🎫 항공권 · 승선권 · 숙소 예약 확인서 휴대폰에 저장', deadline: 2 },
+      { text: '📝 하카타항 세관 신고서(종이) — 3/3 부산 체크인 때 받아 배에서 작성 (배는 VJW 입국심사 QR + 종이 세관 신고서)', deadline: 0, only: 'ferry' }
     ]
   },
   {
@@ -4561,6 +4580,94 @@ function renderBkSummary() {
   var orig = renderBookings;
   renderBookings = function () { orig.apply(this, arguments); renderBkSummary(); };
   renderBookings();
+})();
+</script>
+<script>
+// ============== 홈 — 사람별 여행 안내 (11/16 추가) ==============
+// 티켓 정보는 신년회 탭 🎫 티켓 카드와 같은 내용, 예약 체크는 bookings 값을 그대로 읽는다.
+var MT_VJW = 'https://www.vjw.digital.go.jp/main/#/vjwplo001';
+var MT_FERRY_NOTICE = 'https://www.koreaferry.kr/bbs/board.php?bo_table=ferry_notice&wr_id=41';
+var MT_GROUP = {
+  ferry: {
+    label: '🚢 배 4명', bk: [['ktx', '🚄 KTX'], ['ferry', '🚢 뉴카멜리아'], ['return', '🛬 귀국 KE792']],
+    pre: [
+      ['3/3(수) 점심', '🚄 KTX 서울 → 부산 (15시 이전 · 약 2시간 30분) — <strong>2/3(수) 07:00 예매 오픈</strong>'],
+      ['3/3(수) 저녁', '부산에서 저녁 → <strong>18:30까지 부산항 국제여객터미널</strong> (체크인 16:30~19:00 · 승선 마감 20:00) · 체크인 때 <strong>하카타항 세관 신고서(종이)</strong>를 받습니다'],
+      ['3/3(수) 22:30', '🚢 뉴카멜리아 출항 — 침대실(1등4인실) · 주문번호 5129084 · <a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a> · 멀미약 챙기기'],
+      ['3/4(목) 07:30', '하카타항 국제터미널 도착 → 입국심사(VJW QR) · 세관(종이 신고서) → 버스로 하카타역 약 20분']
+    ],
+    entry: '<strong>입국심사</strong>는 Visit Japan Web(VJW) QR, <strong>세관은 종이 신고서</strong> — 하카타항으로 들어오는 배 승객은 별도 세관 신고서를 써야 하고, 3/3 부산 체크인 때 나눠 줍니다(배 안에서 작성). VJW 입국심사 등록은 출발 전에 끝내 두세요.',
+    back: { when: '3/7(일)', txt: '대한항공 <strong>KE792 13:45</strong> 후쿠오카 → 15:10 인천 · PNR XEJFYA · 위탁 23kg', airport: '11:45', pdf: 'tickets/ke792-e-itinerary.pdf' }
+  },
+  air: {
+    label: '✈️ 비행기 3명', bk: [['flight', '✈️ 왕복 항공']],
+    entry: '<strong>입국심사 + 세관 둘 다 Visit Japan Web(VJW) QR</strong> — 출발 전에 등록하고 QR 2개(입국·세관)를 캡처해 두세요. 후쿠오카공항은 세관 QR 전자 게이트가 있습니다.'
+  },
+  daegu: {
+    label: '✈️ 대구 1명', bk: [['daegu', '✈️ 대구 왕복']],
+    entry: '<strong>입국심사 + 세관 둘 다 Visit Japan Web(VJW) QR</strong> — 출발 전에 등록하고 QR 2개(입국·세관)를 캡처해 두세요.'
+  }
+};
+var MT_PERSON = {
+  '김석': { g: 'ferry', eticket: '180-5270255948' },
+  '김철현': { g: 'ferry', eticket: '180-5270255949' },
+  '박중산': { g: 'ferry', eticket: '180-5270255946' },
+  '최진원': { g: 'ferry', eticket: '180-5270255947' },
+  '김기태': { g: 'air', issued: true,
+    pre: [['3/4(목) 04:30', '인천공항 도착 (출발 2시간 전)'],
+          ['3/4(목) 06:30', '✈️ 제주항공 <strong>7C1401</strong> 인천 → 07:55 후쿠오카 · PNR IIJ4NX · e-티켓 806-3926482595 · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>'],
+          ['3/4(목) 07:55', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분 · 먼저 도착하니 하카타역에서 배 4명과 합류']],
+    back: { when: '3/7(일)', txt: '에어부산 <strong>BX446 10:00</strong> 후쿠오카 → 11:45 인천 · PNR KCTNEI · e-티켓 982-2325474159 · 위탁 15kg', airport: '08:00', pdf: 'tickets/kim-gitae-e-itinerary.pdf' } },
+  '최근호': { g: 'air' }, '윤유병': { g: 'air' },
+  '조성화': { g: 'daegu',
+    pre: [['3/4(목) 06:20', '대구공항 도착 (출발 2시간 전)'],
+          ['3/4(목) 08:20', '✈️ 티웨이 <strong>TW213</strong> 대구 → 09:25 후쿠오카 · PNR AH7Y68 · e-티켓 722-5862661409 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>'],
+          ['3/4(목) 09:25', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분']],
+    back: { when: '3/7(일)', txt: '티웨이 <strong>TW214 14:45</strong> 후쿠오카 → 15:55 대구 · PNR AH7Y68', airport: '12:45', pdf: 'tickets/jo-seonghwa-e-itinerary.pdf' } }
+};
+// 최근호·윤유병 (아직 미예약 — 예정 편)
+['최근호', '윤유병'].forEach(function (n) {
+  MT_PERSON[n].pre = [['3/4(목) 05:45', '인천공항 도착 (출발 2시간 전)'],
+    ['3/4(목) 07:45', '✈️ 대한항공 <strong>KE787</strong> 인천 → 09:15 후쿠오카 (A350) <span style="color:#8a4500;">· 예정 편 — 아직 미예약</span>'],
+    ['3/4(목) 09:15', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분']];
+  MT_PERSON[n].back = { when: '3/7(일)', txt: '대한항공 <strong>KE792 13:45</strong> 후쿠오카 → 15:10 인천 <span style="color:#8a4500;">· 예정 편 — 아직 미예약</span>', airport: '11:45' };
+});
+var _mtSel = null;
+function mtPick(name) { _mtSel = name; renderMyTrip(); }
+function renderMyTrip() {
+  var el = document.getElementById('my-trip');
+  if (!el) return;
+  var names = Object.keys(MT_PERSON);
+  var me = (typeof DB !== 'undefined' && DB.user && MT_PERSON[DB.user]) ? DB.user : null;
+  var sel = _mtSel || me;
+  var h = '<div class="mt-chips">' + names.map(function (n) {
+    return '<button class="mt-chip' + (n === sel ? ' on' : '') + '" onclick="mtPick(\'' + n + '\')">' + n + (n === me ? ' (나)' : '') + '</button>';
+  }).join('') + '</div>';
+  if (!sel) { el.innerHTML = h + '<div class="info-muted" style="margin-top:8px;">이름을 누르면 그 사람의 가는 편·입국 절차·귀국 편이 보입니다.</div>'; return; }
+  var p = MT_PERSON[sel], g = MT_GROUP[p.g], bk = (DB && DB.bookings) || {};
+  var pre = p.pre || g.pre, back = p.back || g.back;
+  var row = function (t, txt) { return '<div class="mt-row"><div class="mt-t">' + t + '</div><div>' + txt + '</div></div>'; };
+  // 예약 상태
+  var st;
+  if (p.issued) st = '<span class="mt-ok">✅ 항공 발권 완료</span>';
+  else st = g.bk.map(function (b) { var d = bk[b[0]] && bk[b[0]].done; return '<span class="' + (d ? 'mt-ok' : 'mt-no') + '">' + (d ? '✅ ' : '⏳ ') + b[1] + '</span>'; }).join(' ');
+  h += '<div class="mt-head"><strong>' + sel + '</strong> · ' + g.label + ' <span class="mt-st">' + st + '</span></div>';
+  h += '<div class="mt-sec">🧳 가는 길</div>' + pre.map(function (r) { return row(r[0], r[1]); }).join('');
+  h += '<div class="mt-sec">🛂 일본 입국 절차</div><div class="note info" style="margin:4px 0 0; font-size:13px;">' + g.entry +
+    ' QR은 <strong>1인 1개</strong>라 각자 본인 휴대폰에 저장하세요. <a href="' + MT_VJW + '" target="_blank" rel="noopener">VJW 등록하기</a>' +
+    (p.g === 'ferry' ? ' · <a href="' + MT_FERRY_NOTICE + '" target="_blank" rel="noopener">고려훼리 안내문</a>' : '') + '</div>';
+  h += '<div class="mt-sec">🗓️ 3/4 ~ 3/6</div>' + row('현지', '하카타에서 8명 합류 → 3/4 카와타로 저녁 · 3/5 온천·료칸 · 3/6 자유 일정 + 19:00 신년회 — <a href="javascript:void(0)" onclick="switchTab(\'ny\')">일정·투표 보기 →</a>');
+  h += '<div class="mt-sec">🛬 돌아오는 길</div>' +
+    row(back.when + ' ' + back.airport + '까지', '후쿠오카공항 국제선 도착 (출발 2시간 전) — 하카타역에서 직행 버스 약 20~25분 · 면세품은 짐 부치기 전에 세관 확인') +
+    row(back.when, back.txt + (p.eticket ? ' · e-티켓 ' + p.eticket : '') + (back.pdf ? ' · <a href="' + back.pdf + '" target="_blank">🎫 e-티켓</a>' : ''));
+  var cp = checklistProgress(sel);
+  h += '<div class="mt-sec">🎒 준비물</div>' + row(cp.done + '/' + cp.total, (cp.done === cp.total && cp.total ? '✅ 다 챙겼습니다' : '남은 준비물이 있습니다') + ' — <a href="javascript:void(0)" onclick="switchTab(\'prep\')">준비물 체크 →</a>');
+  el.innerHTML = h;
+}
+(function () {
+  var orig = renderHomeTodo;
+  renderHomeTodo = function () { orig.apply(this, arguments); renderMyTrip(); };
+  renderMyTrip();
 })();
 </script>
 </body>
