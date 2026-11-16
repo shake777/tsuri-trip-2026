@@ -509,7 +509,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td class="when">12월 초</td>
-                <td><strong>♨️ 료칸 1박</strong><span class="sub">3/4(목) · 1박 2식 · 중급 1인 약 25만원. 온천지 정해진 뒤 8명으로 검색 (1인당 요금)</span></td>
+                <td><strong>♨️ 료칸 1박</strong><span class="sub">3/4(목) · 1박 2식 · 1인 약 19,000~28,400엔 (벳푸 가장 쌈 · 유후인 가장 비쌈). 온천지 정해진 뒤 8명으로 검색 (1인당 요금)</span></td>
                 <td>8명<span class="sub">총무 예약</span></td>
                 <td style="text-align:center;"><input type="checkbox" data-booking="ryokan" onchange="toggleBooking('ryokan', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
                 <td><input type="text" class="booking-note" data-booking-note="ryokan" onchange="saveBookingNote('ryokan', this.value)" placeholder="예약번호·확정 금액·메모 (온천지 정한 뒤)"></td>
@@ -544,7 +544,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td class="when">2월 말</td>
-                <td><strong>🦑 3/4 첫날 저녁 — 카와타로 나카스 본점</strong><span class="sub">3/4(목) 저녁 8명 · 나카스 1-6-6 · 오징어 활어회 원조 (1960년 창업) · 3월 무늬오징어 철 · 예약 필수 · ☎ 092-271-2133</span></td>
+                <td><strong>🦑 3/5 저녁 — 카와타로 나카스 본점</strong><span class="sub">3/5(금) 저녁 8명 · 나카스 1-6-6 · 오징어 활어회 원조 (1960년 창업) · 3월 무늬오징어 철 · 예약 필수 · ☎ 092-271-2133</span></td>
                 <td>총무</td>
                 <td style="text-align:center;"><input type="checkbox" data-booking="kawataro" onchange="toggleBooking('kawataro', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
                 <td><input type="text" class="booking-note" data-booking-note="kawataro" onchange="saveBookingNote('kawataro', this.value)" placeholder="예약 시간·메모"></td>
@@ -781,7 +781,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="text-align:center;"><input type="checkbox" data-booking="kawataro" onchange="toggleBooking('kawataro', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><strong>🦑 3/4 첫날 저녁 — 카와타로 나카스 본점</strong><span class="sub">8명은 온라인 안 됨 → <strong>전화 예약</strong> ☎ 092-271-2133 · 약 30일 전부터 받음 · 당일 취소 100% 취소료</span></td>
+                <td><strong>🦑 3/5 저녁 — 카와타로 나카스 본점</strong><span class="sub">8명은 온라인 안 됨 → <strong>전화 예약</strong> ☎ 092-271-2133 · 약 30일 전부터 받음 · 당일 취소 100% 취소료</span></td>
                 <td class="when">2월 초<span class="sub">전화</span></td>
                 <td>총무</td>
                 <td><input type="text" class="booking-note" data-booking-note="kawataro" onchange="saveBookingNote('kawataro', this.value)" placeholder="예약 시간·메모"></td>
@@ -2766,7 +2766,7 @@ function renderHomePlan() {
   const moveTxt = ['🚢 배 ' + ferry.length, '✈️ 비행기 ' + air.length].concat(extra.map(n => (TRAVEL_EXTRA[n] || '기타') + ' 1')).join(' · ');
   html += row('fixed', '🙋 인원', jn.go.length + '명 — ' + moveTxt, '', others.concat(['사람별 참가·이동·투표·준비물은 아래 표 · 편명·시간은 신년회 탭 🎫 티켓']).join(' · '));
   html += row('fixed', '🏠 숙소', '료칸(목) → 아파트(금·토 연박)', '', '료칸은 목요일 온천지에서 1박 2식');
-  html += voteRow('♨️ 금 온천', 'ny_onsen', '정해지면 그 지역 료칸 예약');
+  html += voteRow('♨️ 목 온천', 'ny_onsen', '정해지면 그 지역 료칸 예약');
   html += voteRow('🎌 토 낮', 'ny_activity', '저녁은 신년회 (8명 식당 예약)');
   html += voteRow('💰 항공 기준', 'ny_budget', '');
   html += row('info', '💵 1인 비용', '약 100만 (김기태·조성화) · 114만 (최근호·윤유병) · 122만 (배 4명)', '', '교통비 실제 결제액 + 숙소 34만 + 식사·현지·온천 29.5만 · 회비 100만 지원 넘는 부분만 본인 부담 (0~22만)');
@@ -3897,21 +3897,23 @@ const VOTE_CARDS = {
       ['🚌', '고속버스 토요노쿠니호 편도 3,250엔(왕복 6,500엔) · 특급 소닉 30분 간격'],
       ['👍', '온천 가짓수가 가장 많음 · 칸나와 온천거리 · 8명이면 버스가 무난'],
       ['⚠️', '버스는 벳푸역이 아니라 <strong>기타하마</strong> 하차'],
-      ['🛏️', '료칸 1박 그대로'],
-      ['💰', '💰 비용 표의 1인 비용이 벳푸 기준'], ['🔗', '<a href="https://www.google.com/maps/search/?api=1&query=%E5%88%A5%E5%BA%9C%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E5%88%A5%E5%BA%9C%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']] },
+      ['🛏️', '료칸 1박 2식 <strong>1인 약 19,000엔</strong> (8명 약 137만원) · 8명이 <strong>방 2개</strong>로 나뉨'],
+      ['🔙', '다음 날 11:00 버스 → 13:51 하카타 도착 · 점심이 14:00쯤으로 늦음'],
+      ['💰', '3곳 중 <strong>가장 쌈</strong> · 버스도 매시간'], ['🔗', '<a href="https://www.google.com/maps/search/?api=1&query=%E5%88%A5%E5%BA%9C%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E5%88%A5%E5%BA%9C%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']] },
     { k: 1, name: '🏞️ 유후인', facts: [
       ['🕒', '약 2시간 10~20분'],
       ['🚆', '특급 유후인노모리 편도 6,130엔(넷 5,600엔) · 전석 지정석'],
       ['👍', '료칸 · 긴린코 호수 · 온천 거리 분위기가 좋음'],
       ['⚠️', '편수가 적고 <strong>승차 1개월 전(2/5) 10:00</strong> 오픈, 금방 매진'],
-      ['🛏️', '료칸 1박 그대로 (유후인 료칸은 비싼 편)'],
-      ['💰', '1인 약 +5만원'], ['🔗', '<a href="https://www.google.com/maps/search/?api=1&query=%E7%94%B1%E5%B8%83%E9%99%A2%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E7%94%B1%E5%B8%83%E9%99%A2%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']] },
+      ['🛏️', '<strong>8명 한 별채</strong> · 객실 노천탕 · 음식 평이 제일 좋음 · 1인 약 22,000~28,400엔 (8명 약 158~205만원)'],
+      ['🔙', '다음 날 오전 버스 → 12:50쯤 하카타 · 점심 13:00 · 15:00 아파트 체크인 여유'],
+      ['💰', '3곳 중 <strong>가장 비쌈</strong>'], ['🔗', '<a href="https://www.google.com/maps/search/?api=1&query=%E7%94%B1%E5%B8%83%E9%99%A2%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E7%94%B1%E5%B8%83%E9%99%A2%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']] },
     { k: 5, name: '🏞️ 쿠로가와', facts: [
       ['🕒', '차로 약 2시간~'],
       ['🚌', '대중교통 불편 · 아소&쿠로가와 버스투어 또는 렌터카'],
       ['👍', '관광객 적고 조용 · 무료 족욕탕 · 온천 계란 100엔 · 입욕 마패'],
-      ['⚠️', '산속이라 겨울엔 눈 · 대중교통이 끊길 수 있음'],
-      ['🛏️', '료칸 1박 가능 — 작은 료칸이 많아 8명 확인 필요'],
+      ['⚠️', '<strong>왕복 5시간 넘게</strong> 이동 · 버스 하루 3편뿐이라 시간이 틀어지면 대안 없음 · 산속이라 눈'],
+      ['🛏️', '분위기 최고 · <strong>8명 한 방</strong> · 체크아웃 11:00이라 아침 여유 · 1인 약 20,900~23,100엔 (8명 약 150~166만원)'],
       ['🔗', BLOG_KURO + ' · <a href="https://www.google.com/maps/search/?api=1&query=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']] },
     { k: 2, name: '🚆 유후인 + 벳푸', facts: [
       ['🕒', '하루 종일'],
@@ -4002,37 +4004,37 @@ const VOTE_DETAILS = {
       rows: [
         ['🚌 가는 법', '하카타 버스터미널(하카타역 바로 옆) → 고속버스 <strong>토요노쿠니호</strong> → 벳푸 <strong>기타하마</strong> · 약 2시간 45분 · 편도 3,250엔(왕복 6,500엔) · 10:40 출발 → 13:29 도착'],
         ['♨️ 할 것', '칸나와 온천거리 산책 · 온천 증기 찜 요리 · 료칸 온천에서 푹 쉬기'],
-        ['🛏️ 료칸', '칸나와 · 벳푸 시내 중급 1박 2식 1인 20~30만원대 · <strong>8명으로 검색</strong> · 전세탕 있는 곳'],
+        ['🛏️ 료칸', '1박 2식 <strong>1인 약 19,000엔 · 8명 약 137만원</strong> (3곳 중 가장 쌈) · 8명이 <strong>방 2개</strong>로 나뉨 · 전세탕 있는 곳'],
         ['📌 예약', '12월 초 료칸 → 2월 초 고속버스 좌석'],
         ['💰 비용', '💰 비용 표의 1인 비용(약 100~122만)이 벳푸 기준'],
         ['⚠️ 주의', '버스는 벳푸역이 아니라 기타하마 하차 · 료칸까지 택시'],
         ['🔗 지도', '<a href="https://www.google.com/maps/search/?api=1&query=%E5%88%A5%E5%BA%9C%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E5%88%A5%E5%BA%9C%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']
       ],
       plan: [['10:40', '하카타 버스터미널 출발 (토요노쿠니호)'], ['13:29', '벳푸 기타하마 도착 · 점심'], ['14:30', '칸나와 온천거리 산책'], ['15:30', '료칸 체크인 · 온천'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 벳푸 료칸 1박']],
-      backPlan: [['08:00', '료칸 조식'], ['10:00', '벳푸 기타하마 → 고속버스'], ['12:30', '하카타 도착']]
+      backPlan: [['08:00', '료칸 조식'], ['11:00', '벳푸 기타하마 → 고속버스'], ['13:51', '하카타 도착 → 점심 14:00쯤']]
     },
     1: {
       title: '🏞️ 유후인 온천 + 료칸 1박',
       rows: [
         ['🚆 가는 법', '첫날은 <strong>고속버스</strong>(하카타 버스터미널 → 유후인역 앞) · 약 2시간 · 편도 3,250엔 · 10:18 출발 → 12:17 도착. 열차 유후인노모리(10:11)는 비행기 조 도착 시간상 첫날엔 너무 빡빡함 · 편도 6,130엔(넷 예약 5,600엔)'],
         ['♨️ 할 것', '유노쓰보 거리 산책 · 긴린코 호수 · 료칸 노천탕'],
-        ['🛏️ 료칸', '유후인 중급 1박 2식 1인 20~30만원대 — 비싼 편이라 이 가격대는 <strong>일찍</strong>'],
+        ['🛏️ 료칸', '<strong>8명 한 별채</strong> · 객실 노천탕 · 음식 평 최고 · 1박 2식 <strong>1인 약 22,000~28,400엔 · 8명 약 158~205만원</strong> (3곳 중 가장 비쌈) — <strong>일찍</strong> 예약'],
         ['📌 예약', '12월 초 료칸 → 고속버스 좌석 2월 초 (열차로 돌아올 경우 <strong>2/5(금) 10:00(일본시간)</strong> 유후인노모리 오픈 즉시)'],
         ['💰 비용', '버스로 가면 왕복 6,500엔(벳푸와 같음) · 열차 왕복은 12,260엔이라 1인 약 5만원 더'],
         ['⚠️ 주의', '걷는 구간이 길어 중간에 카페 휴식'],
         ['🔗 지도', '<a href="https://www.google.com/maps/search/?api=1&query=%E7%94%B1%E5%B8%83%E9%99%A2%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E7%94%B1%E5%B8%83%E9%99%A2%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']
       ],
       plan: [['10:18', '하카타 버스터미널 출발 (고속버스)'], ['12:17', '유후인 도착 · 점심'], ['오후', '유노쓰보 거리 · 긴린코 호수'], ['15:00', '료칸 체크인 · 온천'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 유후인 료칸 1박']],
-      backPlan: [['08:00', '료칸 조식'], ['오전', '유후인 → 하카타 (열차·버스)'], ['점심', '하카타 도착']]
+      backPlan: [['08:00', '료칸 조식'], ['오전', '유후인 → 하카타 고속버스'], ['12:50', '하카타 도착 → 점심 13:00 · 15:00 체크인까지 여유']]
     },
     5: {
       title: '🏞️ 쿠로가와 온천 + 료칸 1박',
       rows: [
         ['🚌 가는 법', '하카타 버스터미널 → 고속버스(규슈산코) · 11:38 출발 → 14:14 도착 · 약 2시간 36분 · 편도 4,000엔 · 하루 3편(09:53·11:38·13:03)이라 예약 필수'],
         ['♨️ 할 것', '입욕 마패(1,500엔)로 료칸 노천탕 3곳 · 조용한 온천마을 산책 · 온천 계란'],
-        ['🛏️ 료칸', '산속 작은 료칸이 많아 <strong>8명을 한 번에</strong> 잡기 어려울 수 있음 → 제일 먼저 확인'],
+        ['🛏️ 료칸', '분위기 최고 · <strong>8명 한 방</strong> · 체크아웃 11:00 · 1박 2식 <strong>1인 약 20,900~23,100엔 · 8명 약 150~166만원</strong>'],
         ['📌 예약', '료칸 먼저 → 교통편'],
-        ['⚠️ 주의', '3월 초 산간이라 눈·결빙 가능, 대중교통이 끊길 수 있음'],
+        ['⚠️ 주의', '<strong>왕복 5시간 넘게</strong> 이동 · 버스 하루 3편뿐이라 시간이 틀어지면 대안 없음 · 3월 초 산간이라 눈·결빙 가능'],
         ['🔗 지도', '<a href="https://www.google.com/maps/search/?api=1&query=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E9%BB%92%E5%B7%9D%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']
       ],
       plan: [['11:38', '하카타 버스터미널 출발 (고속버스)'], ['14:14', '쿠로가와 도착 · 료칸 이동'], ['15:00', '료칸 체크인 · 온천'], ['16:00', '입욕 마패로 노천탕 순례'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 쿠로가와 료칸 1박']],
@@ -4048,7 +4050,7 @@ const VOTE_DETAILS = {
         ['🔗 지도', '<a href="https://www.google.com/maps/search/?api=1&query=%E7%94%B1%E5%B8%83%E9%99%A2%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E7%94%B1%E5%B8%83%E9%99%A2%E6%B8%A9%E6%B3%89&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>']
       ],
       plan: [['10:18', '하카타 → 유후인 (고속버스)'], ['12:17', '유후인 산책 · 점심'], ['오후', '유후인 → 벳푸'], ['17:00', '벳푸 료칸 체크인'], ['18:30', '가이세키 저녁'], ['밤', '♨️ 벳푸 료칸 1박']],
-      backPlan: [['08:00', '료칸 조식'], ['10:00', '벳푸 기타하마 → 고속버스'], ['12:30', '하카타 도착']]
+      backPlan: [['08:00', '료칸 조식'], ['11:00', '벳푸 기타하마 → 고속버스'], ['13:51', '하카타 도착 → 점심 14:00쯤']]
     },
     3: {
       title: '🍵 사가 우레시노·다케오 + 료칸 1박',
@@ -4441,7 +4443,7 @@ function renderTimeline() {
     ['10:00', '🤝 하카타 버스터미널에서 8명 집결 · 온천지로 함께 출발 (짐은 버스 트렁크)']
   ];
   const friItems = _sortPlan(onsenBack.concat([
-    ['13:00', '🍜 하카타 점심 (온천 복귀 후 · 하카타역 주변)'],
+    ['13:00', '🍜 하카타 점심 (온천 복귀 후 · 하카타역 주변 · 벳푸에서 오면 14:00쯤)'],
     ['15:00', '<div class="tl-detail decided"><div class="tl-detail-head">🏠 아파트 체크인 (GRHT-H 확정) · 휴식</div><div class="tl-kv"><div class="k">숙소</div><div class="v">GRHT-H 96㎡ · 최상층 · 침실 3 · 더블 5개 + 이불 4장</div><div class="k">위치</div><div class="v">나카스카와바타역 도보 8분</div><div class="k">체크인</div><div class="v">15:00~ · 셀프 체크인(무인) · 체크아웃 11:00</div><div class="k">짐 보관</div><div class="v">체크인 전·체크아웃 후 보관 불가</div><div class="k">3/5 요금</div><div class="v">90,825엔 · 무료 취소 2/28까지</div><div class="k">3/6 밤</div><div class="v">같은 집 · 90,825엔 · 무료 취소 2/28까지</div><div class="k">2박 합계</div><div class="v">173,167엔 (조기 예약 할인 8,483엔 적용)</div><div class="k">예약</div><div class="v"><a href="https://www.airbnb.com/rooms/1659244743378337715" target="_blank" rel="noopener">Airbnb 보기</a> · 예약 아직 안 함</div></div></div>'],
     ['저녁', '🦑 <strong>카와타로 나카스 본점</strong> (河太郎) — 오징어 활어회(이카 이키즈쿠리) 원조, 1960년 창업 · 나카스 1-6-6 · 오징어회 1,500엔부터, 저녁 코스 5,000~10,000엔 · 3월은 무늬오징어(미즈이카) 철 · 예약 필수 · ☎ 092-271-2133 · <a href="https://www.google.com/maps/search/?api=1&query=%E6%B2%B3%E5%A4%AA%E9%83%8E%20%E4%B8%AD%E6%B4%B2%E6%9C%AC%E5%BA%97" target="_blank" rel="noopener">🗺️ 지도 보기</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=%E6%B2%B3%E5%A4%AA%E9%83%8E%20%E4%B8%AD%E6%B4%B2%E6%9C%AC%E5%BA%97&travelmode=transit" target="_blank" rel="noopener">🚗 길찾기</a>'],
     ['밤', '🏠 아파트 1박']
@@ -4455,7 +4457,13 @@ function renderTimeline() {
     ['13:45', '🛬 배 4명 + 최근호 · 윤유병 귀국 — 대한항공 KE792 13:45 후쿠오카 → 15:10 인천 (배 4명 PNR XEJFYA · <a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 e-티켓</a> · 최근호·윤유병 미예약)'],
     ['14:45', '🛬 조성화 귀국 — 티웨이 TW214 14:45 후쿠오카 → 15:55 대구 (PNR AH7Y68 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)']
   ];
-  const onsenNote = '<div class="tl-desc" style="font-size:12px;">⚠️ 요금·소요시간은 여행 정보 사이트 기준입니다. 열차 시간표는 JR큐슈 공식에서 다시 확인하세요.</div>';
+  const onsenCmp = '<div style="overflow-x:auto; margin:8px 0 6px;"><table class="todo-table" style="font-size:12.5px; min-width:560px;">' +
+    '<thead><tr><th>3곳 비교 (11/16)</th><th>료칸 1박 2식</th><th>방</th><th>3/5 복귀</th><th>한 줄 평</th></tr></thead><tbody>' +
+    '<tr><td><strong>🌋 벳푸</strong></td><td>1인 약 19,000엔<br>8명 약 137만원</td><td>방 2개로 나뉨</td><td>11:00 버스 → 13:51 도착<br>점심 14:00쯤</td><td>제일 쌈 · 버스 매시간</td></tr>' +
+    '<tr><td><strong>🏞️ 유후인</strong></td><td>1인 약 22,000~28,400엔<br>8명 약 158~205만원</td><td>8명 한 별채 · 객실 노천탕</td><td>오전 버스 → 12:50쯤 도착<br>점심 13:00</td><td>음식 평 최고 · 제일 비쌈 · 15:00 체크인 여유</td></tr>' +
+    '<tr><td><strong>🏞️ 쿠로가와</strong></td><td>1인 약 20,900~23,100엔<br>8명 약 150~166만원</td><td>8명 한 방</td><td>체크아웃 11:00 (아침 여유)</td><td>분위기 최고 · 왕복 5시간+ · 버스 하루 3편</td></tr>' +
+    '</tbody></table></div>';
+  const onsenNote = onsenCmp + '<div class="tl-desc" style="font-size:12px;">⚠️ 요금·소요시간은 여행 정보 사이트 기준입니다. 열차 시간표는 JR큐슈 공식에서 다시 확인하세요.</div>';
 
   let html = '';
   html += fixedStep('3/3 (수)', '🚢 배 4명 출발', '배 4명만 · ✈️ 비행기 3명은 이날 일정 없음', [
@@ -4465,7 +4473,7 @@ function renderTimeline() {
     ['22:30', '🚢 뉴카멜리아 출항 · 선상 1박 (침대실 4명 · 주문번호 5129084 · 444,000원 · 예약 확인 완료)']
   ]);
   html += voteStep('ny_onsen', '3/4 (목)', '♨️ 온천 + 료칸 1박', '카드마다 거리·교통·요금·주의가 있어요 · 여러 개 선택 가능',
-    onsenDec.length ? '' : '8명 도착 → <strong>10:00 하카타 버스터미널 집결</strong> → 온천지 함께 출발 (벳푸 버스 10:40 · 유후인 버스 10:18 · 쿠로가와 버스 11:38) · <strong>료칸에서 1박 2식</strong> (8명 · 중급 1인 약 25만원 · 확정). 이동이 길어 중간 휴식 넉넉히.',
+    onsenDec.length ? '' : '8명 도착 → <strong>10:00 하카타 버스터미널 집결</strong> → 온천지 함께 출발 (벳푸 버스 10:40 · 유후인 버스 10:18 · 쿠로가와 버스 11:38) · <strong>료칸에서 1박 2식</strong> (8명 · 1인 약 19,000~28,400엔 — 아래 3곳 비교). 이동이 길어 중간 휴식 넉넉히.',
     onsenNote, _sortPlan(arrivalItems.concat(onsenPlan)));
   html += fixedStep('3/5 (금)', '🏠 하카타 복귀 · 아파트 체크인 · 카와타로 저녁', '온천에서 돌아와 하카타에서 하루 · 첫날 일정(점심·체크인·카와타로)을 오늘로 옮김', friItems);
   html += voteStep('ny_activity', '3/6 (토)', '🎌 낮 자유 일정 → 아파트 1박', '하고 싶은 것 여러 개 선택',
