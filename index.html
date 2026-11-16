@@ -680,6 +680,104 @@ tr.done-row td { opacity: 0.62; }
         <p style="font-size:13px; margin-top:10px;">💰 <strong>결제 완료 합계 2,656,900원</strong> (김기태 361,100 + 조성화 361,800 + KE792 1,490,000 + 뉴카멜리아 444,000) · KTX 서울→부산은 2월 초 오픈.</p>
       </div>
 
+      <!-- 11/16 추가: 예약 필요 체크리스트 (홈 「할 일 · 예약」과 같은 bookings 데이터 — 한쪽에서 체크하면 양쪽 다 바뀜) -->
+      <div class="card" id="bk-check">
+        <h2>✅ 예약 필요 체크리스트</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">예약이 끝나면 ✓를 누르고 메모에 예약번호·금액을 적어 두세요. 🏠 홈의 「할 일 · 예약」과 <strong>같은 체크</strong>라 어느 쪽에서 눌러도 함께 바뀝니다.</p>
+        <div id="bk-summary" style="margin:8px 0 10px;"></div>
+        <div style="overflow-x:auto;">
+          <table class="todo-table" style="font-size:13px; min-width:640px;">
+            <thead><tr><th style="width:44px; text-align:center;">✓</th><th>예약할 것</th><th style="min-width:96px;">언제까지</th><th style="min-width:70px;">담당</th><th style="min-width:170px;">메모</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ferry" onchange="toggleBooking('ferry', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🚢 뉴카멜리아 배 4명</strong><span class="sub">3/3(수) 22:30 부산 → 3/4 07:30 하카타 · 침대실</span></td>
+                <td class="when">11/15</td>
+                <td>총무</td>
+                <td><input type="text" class="booking-note" data-booking-note="ferry" onchange="saveBookingNote('ferry', this.value)" placeholder="메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="return" onchange="toggleBooking('return', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🛬 배 4명 귀국 KE792</strong><span class="sub">3/7(일) 13:45 후쿠오카 → 인천</span></td>
+                <td class="when">11/14</td>
+                <td>총무</td>
+                <td><input type="text" class="booking-note" data-booking-note="return" onchange="saveBookingNote('return', this.value)" placeholder="메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="daegu" onchange="toggleBooking('daegu', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>✈️ 조성화 대구 왕복</strong><span class="sub">TW213 3/4 08:20 · TW214 3/7 14:45</span></td>
+                <td class="when">11/15</td>
+                <td>조성화</td>
+                <td><input type="text" class="booking-note" data-booking-note="daegu" onchange="saveBookingNote('daegu', this.value)" placeholder="메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="flight" onchange="toggleBooking('flight', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>✈️ 최근호 · 윤유병 왕복 항공</strong><span class="sub">KE787 3/4 07:45 인천 → 09:15 · KE792 3/7 13:45 귀국 · 1인 약 50.8만원 (11/14 저녁 기준) · 김기태는 발권 완료</span></td>
+                <td class="when">지금<span class="sub">값 오르기 전</span></td>
+                <td>최근호 · 윤유병</td>
+                <td><input type="text" class="booking-note" data-booking-note="flight" onchange="saveBookingNote('flight', this.value)" placeholder="PNR·금액·메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="apt" onchange="toggleBooking('apt', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🏠 아파트 2박</strong><span class="sub">3/4(목) · 3/6(토) · 8명 한 채 — 한 채인지 · 욕실 수 · 침대 구성 · 체크인 전 짐 보관 가능한지</span></td>
+                <td class="when">12월 초</td>
+                <td>총무</td>
+                <td><input type="text" class="booking-note" data-booking-note="apt" onchange="saveBookingNote('apt', this.value)" placeholder="예약번호·금액·메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ryokan" onchange="toggleBooking('ryokan', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>♨️ 료칸 1박 2식</strong><span class="sub">3/5(금) · 금요일 온천 투표가 정해진 뒤 그 지역에서 8명으로 검색 (요금이 1인당)</span></td>
+                <td class="when">온천 확정 후<span class="sub">12월 초</span></td>
+                <td>총무</td>
+                <td><input type="text" class="booking-note" data-booking-note="ryokan" onchange="saveBookingNote('ryokan', this.value)" placeholder="예약번호·금액·메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="sat_act" onchange="toggleBooking('sat_act', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🎌 토요일 낮 일정 예약</strong><span class="sub">3/6(토) · 정해진 안에 예약이 필요할 때만 (골프·낚시·투어·체험 등). 예약 필요 없으면 ✓</span></td>
+                <td class="when">토요일 확정 후</td>
+                <td>총무</td>
+                <td><input type="text" class="booking-note" data-booking-note="sat_act" onchange="saveBookingNote('sat_act', this.value)" placeholder="예약 내용·메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ktx" onchange="toggleBooking('ktx', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🚄 KTX 서울 → 부산</strong><span class="sub">3/3(수) 점심, 15시 이전 편도 · 배 4명</span></td>
+                <td class="when">2/3(수) 07:00<span class="sub">예매 오픈</span></td>
+                <td>배 4명</td>
+                <td><input type="text" class="booking-note" data-booking-note="ktx" onchange="saveBookingNote('ktx', this.value)" placeholder="예약번호·금액·메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="onsen_trans" onchange="toggleBooking('onsen_trans', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🚌 온천지 오가는 교통</strong><span class="sub">벳푸면 고속버스 좌석 · 유후인이면 유후인노모리(2/5 10:00 일본시간 오픈, 금방 매진)</span></td>
+                <td class="when">2월 초</td>
+                <td>총무</td>
+                <td><input type="text" class="booking-note" data-booking-note="onsen_trans" onchange="saveBookingNote('onsen_trans', this.value)" placeholder="예약번호·금액·메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="kawataro" onchange="toggleBooking('kawataro', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🦑 3/4 첫날 저녁 — 카와타로 나카스 본점</strong><span class="sub">8명은 온라인 안 됨 → <strong>전화 예약</strong> ☎ 092-271-2133 · 약 30일 전부터 받음 · 당일 취소 100% 취소료</span></td>
+                <td class="when">2월 초<span class="sub">전화</span></td>
+                <td>총무</td>
+                <td><input type="text" class="booking-note" data-booking-note="kawataro" onchange="saveBookingNote('kawataro', this.value)" placeholder="예약 시간·메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="dinner" onchange="toggleBooking('dinner', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🍻 3/6 신년회 저녁 식당</strong><span class="sub">19:00 · 8명 개실 · 식당 투표가 정해진 뒤 예약 (3월은 일본 송별회 시즌이라 일찍)</span></td>
+                <td class="when">식당 확정 후<span class="sub">2월 중</span></td>
+                <td>총무</td>
+                <td><input type="text" class="booking-note" data-booking-note="dinner" onchange="saveBookingNote('dinner', this.value)" placeholder="식당·시간·메모"></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;"><input type="checkbox" data-booking="ferry_check" onchange="toggleBooking('ferry_check', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
+                <td><strong>🚢 고려훼리 운항 재확인</strong><span class="sub">3월 휴항일 · 출항 시간 (1688-7447)</span></td>
+                <td class="when">2월 말</td>
+                <td>배 4명</td>
+                <td><input type="text" class="booking-note" data-booking-note="ferry_check" onchange="saveBookingNote('ferry_check', this.value)" placeholder="메모"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div class="card">
         <h2>🍽️ 식사 · 이벤트 한눈에 보기</h2>
         <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">날짜별 점심·저녁과 주요 일정. 자세한 시간표는 아래 🗓️ 일정에서 확인하세요.</p>
@@ -4443,6 +4541,27 @@ function infoJump(id) {
   else go();
   return false;
 }
+</script>
+<script>
+// ============== 예약 필요 체크리스트 요약 (11/16 추가) ==============
+function renderBkSummary() {
+  var box = document.getElementById('bk-summary');
+  if (!box) return;
+  var ids = [].map.call(document.querySelectorAll('#bk-check [data-booking]'), function (c) { return c.dataset.booking; });
+  var bk = (typeof DB !== 'undefined' && DB.bookings) || {};
+  var done = ids.filter(function (id) { return bk[id] && bk[id].done; }).length;
+  var left = ids.length - done;
+  var pct = ids.length ? Math.round(done * 100 / ids.length) : 0;
+  box.innerHTML = '<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:14px;">' +
+    '<strong style="color:' + (left ? '#8a4500' : '#155f3a') + ';">' + (left ? '⏳ 남은 예약 ' + left + '건' : '🎉 예약 모두 완료') + '</strong>' +
+    '<span style="color:var(--text-muted);">완료 ' + done + ' / ' + ids.length + '</span>' +
+    '<div style="flex:1; min-width:120px; height:8px; background:#e8eef7; border-radius:99px; overflow:hidden;"><div style="width:' + pct + '%; height:100%; background:#22c55e;"></div></div></div>';
+}
+(function () {
+  var orig = renderBookings;
+  renderBookings = function () { orig.apply(this, arguments); renderBkSummary(); };
+  renderBookings();
+})();
 </script>
 </body>
 </html>
