@@ -405,6 +405,8 @@ tr.done-row td { opacity: 0.62; }
 .mt-st span { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; margin: 2px 2px 0 0; font-weight: 600; }
 .mt-ok { background: #e6f7ec; color: #155f3a; }
 .mt-no { background: #fef3e6; color: #8a4500; }
+.mt-code-row { margin-top: 8px; padding: 8px 12px; background: #fffbea; border: 1px solid #f3d27a; border-radius: 10px; font-size: 13.5px; }
+.mt-code { font-family: monospace; font-size: 16px; font-weight: 800; letter-spacing: 2px; color: #8a4500; }
 .mt-sec { font-size: 13.5px; font-weight: 800; color: var(--primary); margin: 14px 0 4px; }
 .mt-row { display: grid; grid-template-columns: 112px 1fr; gap: 8px; padding: 7px 4px; border-bottom: 1px dashed var(--border); font-size: 13.5px; line-height: 1.6; }
 .mt-t { font-weight: 700; color: var(--text-secondary); font-size: 12.5px; }
@@ -696,6 +698,7 @@ tr.done-row td { opacity: 0.62; }
           </table>
         </div>
         <p style="font-size:13px; margin-top:10px;">💰 <strong>결제 완료 합계 2,656,900원</strong> (김기태 361,100 + 조성화 361,800 + KE792 1,490,000 + 뉴카멜리아 444,000) · KTX 서울→부산은 2월 초 오픈.</p>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">🔑 <strong>예약 확인 번호</strong> — 김기태 왕복 <strong>6108</strong> · 배 4명 KE792 귀국 <strong>8133</strong> · 조성화 왕복 <strong>3686</strong> (🏠 홈 「🧳 사람별 여행 안내」에도 각자 표시)</p>
       </div>
 
       <!-- 11/16 추가: 예약 필요 체크리스트 (홈 「할 일 · 예약」과 같은 bookings 데이터 — 한쪽에서 체크하면 양쪽 다 바뀜) -->
@@ -4629,6 +4632,9 @@ var MT_PERSON = {
     ['3/4(목) 09:15', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분']];
   MT_PERSON[n].back = { when: '3/7(일)', txt: '대한항공 <strong>KE792 13:45</strong> 후쿠오카 → 15:10 인천 <span style="color:#8a4500;">· 예정 편 — 아직 미예약</span>', airport: '11:45' };
 });
+// 예약 확인 번호 (사람별 안내·티켓 카드에 그대로 표시)
+var MT_CODE = { '김기태': ['왕복 (7C1401 + BX446)', '6108'], '조성화': ['왕복 (TW213 + TW214)', '3686'],
+  '김석': ['귀국 KE792', '8133'], '김철현': ['귀국 KE792', '8133'], '박중산': ['귀국 KE792', '8133'], '최진원': ['귀국 KE792', '8133'] };
 var _mtSel = null;
 function mtPick(name) { _mtSel = name; renderMyTrip(); }
 function renderMyTrip() {
@@ -4649,6 +4655,9 @@ function renderMyTrip() {
   if (p.issued) st = '<span class="mt-ok">✅ 항공 발권 완료</span>';
   else st = g.bk.map(function (b) { var d = bk[b[0]] && bk[b[0]].done; return '<span class="' + (d ? 'mt-ok' : 'mt-no') + '">' + (d ? '✅ ' : '⏳ ') + b[1] + '</span>'; }).join(' ');
   h += '<div class="mt-head"><strong>' + sel + '</strong> · ' + g.label + ' <span class="mt-st">' + st + '</span></div>';
+  if (MT_CODE[sel]) {
+    h += '<div class="mt-code-row">🔑 <strong>예약 확인 번호</strong> · ' + MT_CODE[sel][0] + ' : <span class="mt-code">' + MT_CODE[sel][1] + '</span></div>';
+  }
   h += '<div class="mt-sec">🧳 가는 길</div>' + pre.map(function (r) { return row(r[0], r[1]); }).join('');
   h += '<div class="mt-sec">🛂 일본 입국 절차</div><div class="note info" style="margin:4px 0 0; font-size:13px;">' + g.entry +
     ' QR은 <strong>1인 1개</strong>라 각자 본인 휴대폰에 저장하세요. <a href="' + MT_VJW + '" target="_blank" rel="noopener">VJW 등록하기</a>' +
