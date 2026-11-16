@@ -380,6 +380,17 @@ tr.done-row td { opacity: 0.62; }
 .tl-branch-card .tl-votes b { color: var(--primary); }
 .tl-branch-btn { margin-top: 12px; width: 100%; padding: 11px; border: none; border-radius: 8px; background: var(--primary); color: white; font-size: 15px; font-weight: 700; cursor: pointer; }
 .tl-branch-btn:hover { background: var(--primary-dark); }
+/* ============ 여행정보 탭 (11/16 추가) ============ */
+.info-toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.info-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.info-toc a, .info-chips a { display: inline-block; padding: 8px 12px; border-radius: 999px; background: var(--primary-lighter); color: var(--primary); font-size: 13px; font-weight: 600; text-decoration: none; }
+.info-toc a:hover, .info-chips a:hover { background: #c7dcfa; }
+.info-list { padding-left: 18px; font-size: 13.5px; line-height: 1.7; }
+.info-list li { margin: 3px 0; }
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.info-box { border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; background: #fafcff; }
+.info-box-t { font-weight: 700; color: var(--primary); margin-bottom: 4px; font-size: 14px; }
+.info-muted { font-size: 11.5px; color: var(--text-muted); font-weight: 400; }
 </style>
 </head>
 <body>
@@ -423,6 +434,7 @@ tr.done-row td { opacity: 0.62; }
     <button class="tab active" data-section="home">🏠 홈</button>
     <button class="tab" data-section="ny">✈️ 신년회</button>
     <button class="tab" data-section="prep">🎒 준비물</button>
+    <button class="tab" data-section="info">📖 여행정보</button>
     <button class="tab" data-section="archive">📜 지난기록</button>
   </div>
 </header>
@@ -942,6 +954,219 @@ tr.done-row td { opacity: 0.62; }
 
     <!-- ============ 회원 ============ -->
 
+
+    <!-- ============ 여행정보 (11/16 추가 · 기존 탭 내용은 그대로 두고 새로 붙인 탭) ============ -->
+    <section class="section" id="section-info">
+      <div class="card">
+        <h2>📖 여행 정보 — 현지에서 바로 쓰는 것</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">티켓·일정·식당·비용은 ✈️ 신년회 탭에 그대로 있고, 여기엔 <strong>거기 없는 현지 정보</strong>만 새로 모았습니다. 요금·규정은 <strong>11/16 확인</strong> 기준이라 바뀔 수 있으니 출발 1주 전에 한 번 더 보세요.</p>
+        <div class="info-toc">
+          <a href="javascript:void(0)" onclick="return infoJump('info-arrive')">🧭 도착·귀국 이동</a>
+          <a href="javascript:void(0)" onclick="return infoJump('info-transit')">🚇 교통·결제</a>
+          <a href="javascript:void(0)" onclick="return infoJump('info-onsen')">♨️ 온천·료칸 매너</a>
+          <a href="javascript:void(0)" onclick="return infoJump('info-food')">🍜 식당 이용 팁</a>
+          <a href="javascript:void(0)" onclick="return infoJump('info-tax')">🛃 면세·세관</a>
+          <a href="javascript:void(0)" onclick="return infoJump('info-sos')">🆘 비상 연락처</a>
+          <a href="javascript:void(0)" onclick="return infoJump('info-jp')">🗣️ 일본어</a>
+          <a href="javascript:void(0)" onclick="return infoJump('info-map')">🗺️ 지도·날씨</a>
+        </div>
+      </div>
+
+      <div class="card" id="info-arrive">
+        <h2>🧭 도착 · 귀국 이동 — 공항·항구 ↔ 하카타</h2>
+        <div style="overflow-x:auto;">
+          <table style="font-size:12.5px; min-width:0;">
+            <thead><tr><th style="min-width:104px;">누가 · 어디</th><th>어떻게 가나</th><th>알아둘 것</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🚢 배 4명<br>3/4(목) 07:30<br><span class="info-muted">하카타항 국제터미널</span></td>
+                <td>입국심사·세관 → 터미널 앞 <strong>니시테츠 버스로 하카타역 약 20분</strong> · 택시 약 10분</td>
+                <td>밤배라 피곤하면 하카타역 주변에서 아침 먹고 쉬면서 나머지 4명 기다리기.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">✈️ 4명 · 공항<br>07:55 김기태<br>09:15 최근호·윤유병<br>09:25 조성화<br><span class="info-muted">후쿠오카공항 국제선</span></td>
+                <td>① <strong>하카타역 직행 버스</strong> (니시테츠, 약 20~25분, 310엔)<br>② 무료 셔틀로 국내선 터미널 → 지하철 (하카타 5분 · 텐진 11분, 260엔부터)</td>
+                <td>국제선 터미널에는 <strong>지하철역이 없습니다.</strong> 도착 시간이 제각각이니 <strong>만날 곳을 하카타역 한 곳으로</strong> 정해 두면 편합니다.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🧳 8명 짐<br>체크인 15:00 전</td>
+                <td>하카타역 <strong>코인로커</strong> (큰 칸은 오전에 금방 찹니다) 또는 역의 짐 보관 서비스</td>
+                <td>아파트에 <strong>짐만 먼저 맡길 수 있는지</strong> 예약할 때 물어보면 제일 편합니다.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:600; color:var(--primary);">🛫 3/7(일) 귀국<br>10:00 김기태<br>13:45 KE792 6명<br>14:45 조성화</td>
+                <td>하카타역 → 국제선 터미널 <strong>직행 버스 약 20~25분</strong> (일정표의 지하철 + 무료 셔틀도 가능)</td>
+                <td>각자 출발 <strong>2시간 전</strong> 공항 도착 (김기태 8시 · 6명 11시 45분 전 · 조성화 12시 45분 전). 면세품은 <strong>짐 부치기 전에 세관 확인</strong> (아래 🛃).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note info">🚕 <strong>일본 택시는 보통 4명까지</strong> — 8명이 같이 움직이면 택시 2대. 뒷문은 자동문이라 기사님이 열고 닫습니다(손으로 닫지 않기).</div>
+      </div>
+
+      <div class="card" id="info-transit">
+        <h2>🚇 시내 교통 · 결제 · 생활</h2>
+        <ul class="info-list">
+          <li><strong>💳 지하철은 터치 결제로 바로 탑니다</strong> — 비자·마스터 같은 컨택리스 카드(트래블카드 포함)를 개찰구에 대면 됩니다. 같은 카드로 하루 640엔(1일권 값)을 넘으면 640엔만 청구하는 서비스가 운영 중입니다(바뀔 수 있음).</li>
+          <li><strong>🪪 교통 IC카드</strong>(하야카켄·스이카 등)가 있으면 지하철·버스·JR·편의점까지 다 됩니다.</li>
+          <li><strong>🚌 니시테츠 버스</strong>는 <strong>가운데·뒷문으로 타서</strong> IC카드를 대거나 번호표(세이리켄)를 뽑고, <strong>내릴 때 앞문에서</strong> 요금을 냅니다.</li>
+          <li><strong>💴 현금</strong> — 세븐일레븐 ATM에서 한국 카드로 엔화를 뽑을 수 있습니다(카드별 수수료 확인). 동전이 금방 쌓이니 동전 지갑이 있으면 편합니다.</li>
+          <li><strong>🧾 숙박세 · 입탕세</strong> — 후쿠오카시 숙박세는 1인 1박 <strong>200엔</strong>(숙박요금 2만엔 미만), 온천지 료칸은 입탕세 1인 1박 <strong>150~250엔쯤</strong>(벳푸는 요금대에 따라 250엔)을 현장에서 따로 받기도 합니다.</li>
+          <li><strong>🚭 흡연</strong> — 식당 안은 금연인 곳이 많고 길거리 흡연 금지 구역이 있습니다. 지정 흡연소를 이용하세요.</li>
+          <li><strong>🗑️ 길에 쓰레기통이 거의 없습니다</strong> — 작은 비닐봉투 하나 들고 다니면 편합니다.</li>
+          <li><strong>🔋 보조배터리</strong> — 위탁 수하물 금지·기내 반입만 되고, 한·일 항공사 모두 규정이 강화돼 <strong>선반에 넣지 말고 몸에 지니는 게</strong> 원칙입니다. 탑승 전 항공사 공지를 확인하세요.</li>
+        </ul>
+      </div>
+
+      <div class="card" id="info-onsen">
+        <h2>♨️ 온천 · 료칸 이용 매너 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">3/5(금) 료칸 전에 읽어 두기</span></h2>
+        <div class="info-grid">
+          <div class="info-box">
+            <div class="info-box-t">🛁 탕에 들어갈 때</div>
+            <ul class="info-list">
+              <li>들어가기 전에 <strong>몸부터 씻기</strong> (씻는 자리에 앉아서)</li>
+              <li><strong>수건은 탕에 넣지 않기</strong> — 머리 위나 탕 밖에</li>
+              <li>문신이 있으면 대욕장 이용이 안 되는 곳이 많습니다 → <strong>전세탕(가시키리)</strong></li>
+              <li>탕 안에서 사진 촬영 금지 · 큰 소리 내지 않기</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="info-box-t">🧴 몸 챙기기</div>
+            <ul class="info-list">
+              <li><strong>술 마신 직후·밥 먹은 직후 입욕은 피하기</strong></li>
+              <li>한 번에 <strong>10분 안팎</strong>으로 여러 번 · 물 자주 마시기</li>
+              <li>탕 바닥·계단이 미끄럽습니다 — 일어날 땐 <strong>난간 잡고 천천히</strong>(어지럼 주의)</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="info-box-t">👘 료칸에서</div>
+            <ul class="info-list">
+              <li>유카타는 <strong>왼쪽 깃이 위로</strong> (오른쪽 섶을 먼저 몸에 붙이고 왼쪽으로 덮기 · 반대는 장례 때 방식)</li>
+              <li>체크인 보통 15시 · 체크아웃 10시 전후 · <strong>저녁 식사 시간은 체크인 때 정하고</strong> 늦으면 꼭 미리 전화</li>
+              <li>다다미 위로는 슬리퍼를 벗고 올라갑니다 · 침대방(화양실)을 원하면 예약 때 요청</li>
+              <li>3월 초 해 지는 시간은 <strong>18시 15분쯤</strong> — 벳푸 지옥순례(8~17시) 같은 바깥 구경은 오후 4시대에 마무리</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="info-food">
+        <h2>🍜 식당 · 술집 이용 팁 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">식당·야타이 후보는 신년회 탭 투표 카드에</span></h2>
+        <ul class="info-list">
+          <li><strong>🍜 하카타 라멘</strong> — 면 익힘을 고릅니다: 바리카타(아주 꼬들) · 카타(꼬들) · 후츠(보통). 면만 추가하는 건 <strong>카에다마</strong>.</li>
+          <li><strong>🥢 오토시(기본 안주)</strong> — 이자카야는 자리에 앉으면 1인 300~500엔쯤 <strong>자동으로 붙습니다.</strong> 바가지가 아니라 자릿세 같은 관행입니다.</li>
+          <li><strong>🏷️ 가격 표시</strong> — 메뉴에 <strong>税込</strong>(세금 포함) / <strong>税抜</strong>(세금 별도 · 10% 더 붙음) 표시를 보세요. 팁은 없습니다.</li>
+          <li><strong>🍺 노미호다이</strong>(음료 무제한) — 보통 2시간제, <strong>끝나기 30분 전 라스트 오더</strong>.</li>
+          <li><strong>📅 3월은 일본 송별회 시즌</strong> — 토요일 저녁 단체 개실이 빨리 찹니다. 3/6 신년회 식당이 정해지면 <strong>2월 중 예약</strong>을 권합니다.</li>
+          <li><strong>📞 예약할 때 확인</strong> — 인원 8명 · 못 먹는 음식 · 흡연석 여부 · 카드 결제 · <strong>당일 취소 위약금</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="card" id="info-tax">
+        <h2>🛃 면세 쇼핑 · 출국세 · 한국 세관</h2>
+        <div class="note warn">🛍️ <strong>일본 면세가 바뀌었습니다 — 2026년 11월 1일 구매분부터 「환급형」</strong><br>
+          가게에서는 <strong>세금 포함 가격으로 결제</strong> → 출국 때 공항의 면세 키오스크에 <strong>여권을 대고 세관 확인</strong> → 그 뒤 가게(또는 환급 대행)가 소비세를 돌려줍니다.</div>
+        <ul class="info-list">
+          <li>면세로 산 물건은 <strong>체크인해서 짐 부치기 전에</strong> 세관 확인을 받으세요 (구매일로부터 90일 안 출국).</li>
+          <li>과자·화장품 같은 소모품도 <strong>일본에서 먹거나 쓰면 환급이 안 됩니다.</strong></li>
+          <li>환급 방법(카드 환불 등)·수수료는 가게마다 다릅니다 — 영수증 보관.</li>
+          <li><strong>✈️ 일본 출국세</strong>가 2026년 7월부터 1,000엔 → <strong>3,000엔</strong>으로 올랐습니다. 항공권 값에 들어 있어 따로 내지는 않습니다.</li>
+          <li><strong>🇰🇷 한국 들어올 때 면세</strong> — 1인 <strong>800달러</strong> + 술 합계 <strong>2L · 400달러 이하</strong> · 담배 200개비 · 향수 100ml. 넘으면 <strong>자진신고</strong>(관세 30% 감면, 최대 20만원), 신고 안 하고 걸리면 가산세 40%.</li>
+          <li><strong>🥓 고기 들어간 가공품(육포·소시지·햄 등)은 한국 반입 금지</strong> — 일본 편의점 제품도 해당되고 과태료 대상입니다.</li>
+        </ul>
+      </div>
+
+      <div class="card" id="info-sos">
+        <h2>🆘 비상 연락처 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">휴대폰에서 누르면 바로 전화</span></h2>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>어디</th><th style="min-width:150px;">번호</th><th>언제</th></tr></thead>
+            <tbody>
+              <tr><td>🚓 경찰 · 🚑 구급·소방 (일본)</td><td><a href="tel:110"><strong>110</strong></a> · <a href="tel:119"><strong>119</strong></a></td><td>무료 · 24시간</td></tr>
+              <tr><td>🇰🇷 주후쿠오카 대한민국 총영사관</td><td><a href="tel:+81927710461">+81-92-771-0461</a></td><td>평일 9:00~12:00 · 13:30~17:30</td></tr>
+              <tr><td>└ 근무시간 외 긴급 (사건·사고)</td><td><a href="tel:+818085882806">+81-80-8588-2806</a></td><td>야간 · 휴일</td></tr>
+              <tr><td>└ 근무시간 외 긴급 (여권 분실)</td><td><a href="tel:+818029566736">+81-80-2956-6736</a></td><td>야간 · 휴일</td></tr>
+              <tr><td>☎️ 외교부 영사콜센터</td><td><a href="tel:+82232100404">+82-2-3210-0404</a></td><td>24시간</td></tr>
+              <tr><td>🏥 후쿠오카 의료 통역 콜센터<br><span class="info-muted">병원·환자·통역 3자 통화 · 한국어</span></td><td><a href="tel:0922869595">092-286-9595</a></td><td>24시간</td></tr>
+              <tr><td>🧳 일본정부관광국(JNTO) 관광객 핫라인<br><span class="info-muted">사고·재해·관광 안내 · 한국어</span></td><td><a href="tel:05038162787">050-3816-2787</a></td><td>24시간</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="info-list" style="margin-top:10px;">
+          <li><strong>🛂 여권을 잃어버리면</strong> — 가까운 경찰서·파출소(코반)에서 분실 신고서 받기 → 총영사관 긴급 번호로 연락 → 귀국용 여행증명서 발급. 여권 사진 면을 휴대폰에 찍어 두면 훨씬 빠릅니다.</li>
+          <li><strong>📱 「Safety tips」 앱</strong>(일본 관광청 공식, 한국어) — 지진·쓰나미·기상 경보를 알려 줍니다.</li>
+        </ul>
+      </div>
+
+      <div class="card" id="info-jp">
+        <h2>🗣️ 바로 쓰는 일본어</h2>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:0;">
+            <thead><tr><th>이럴 때</th><th>이렇게 말하기</th><th>뜻</th></tr></thead>
+            <tbody>
+              <tr><td>점원 부를 때</td><td><strong>스미마센</strong></td><td>저기요 · 실례합니다</td></tr>
+              <tr><td>식당 들어갈 때</td><td><strong>하치닌 데스</strong></td><td>8명이에요</td></tr>
+              <tr><td>예약한 곳에서</td><td><strong>요야쿠 시테마스, ○○ 데스</strong></td><td>예약했어요, ○○입니다</td></tr>
+              <tr><td>맥주 주문</td><td><strong>나마 비루 얏츠 오네가이시마스</strong></td><td>생맥주 8잔 주세요</td></tr>
+              <tr><td>메뉴 가리키며</td><td><strong>코레 쿠다사이</strong></td><td>이거 주세요</td></tr>
+              <tr><td>계산할 때</td><td><strong>오카이케 오네가이시마스</strong></td><td>계산해 주세요</td></tr>
+              <tr><td>카드 쓸 때</td><td><strong>카도 츠카에마스카?</strong></td><td>카드 되나요?</td></tr>
+              <tr><td>총무 정산용</td><td><strong>료슈쇼 오네가이시마스</strong></td><td>영수증 주세요</td></tr>
+              <tr><td>화장실 찾을 때</td><td><strong>토이레 와 도코 데스카?</strong></td><td>화장실 어디예요?</td></tr>
+              <tr><td>체크인 전 짐</td><td><strong>니모츠 아즈캇테 모라에마스카?</strong></td><td>짐 맡아 줄 수 있나요?</td></tr>
+              <tr><td>편의점에서</td><td><strong>후쿠로 이리마센</strong></td><td>봉투 필요 없어요</td></tr>
+              <tr><td>몸이 안 좋을 때</td><td><strong>구아이가 와루이 데스</strong></td><td>몸이 안 좋아요</td></tr>
+              <tr><td>먹고 나서</td><td><strong>오이시캇타 데스! 고치소사마데시타</strong></td><td>맛있었어요! 잘 먹었습니다</td></tr>
+              <tr><td>언제든</td><td><strong>아리가토 고자이마스</strong></td><td>감사합니다</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" id="info-map">
+        <h2>🗺️ 지도 바로가기 · 날씨</h2>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-top:-4px;">식당·온천·관광지 지도는 신년회 탭 카드마다 있고, 여기엔 이동 거점만 모았습니다.</p>
+        <div class="info-chips">
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=부산항국제여객터미널" target="_blank" rel="noopener">🚢 부산항 국제여객터미널</a>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=博多港国際ターミナル" target="_blank" rel="noopener">⚓ 하카타항 국제터미널</a>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=福岡空港国際線ターミナル" target="_blank" rel="noopener">✈️ 후쿠오카공항 국제선</a>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=JR博多駅" target="_blank" rel="noopener">🚉 하카타역</a>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=博多バスターミナル" target="_blank" rel="noopener">🚌 하카타 버스터미널</a>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=天神駅+福岡" target="_blank" rel="noopener">🏙️ 텐진역</a>
+        </div>
+        <div class="info-grid" style="margin-top:12px;">
+          <div class="info-box">
+            <div class="info-box-t">🌅 해 뜨고 지는 시간 (후쿠오카)</div>
+            <table style="font-size:13px; min-width:0; margin-top:4px;">
+              <tbody>
+                <tr><td>3/4(목)</td><td>06:44 · 18:17</td></tr>
+                <tr><td>3/5(금)</td><td>06:43 · 18:18</td></tr>
+                <tr><td>3/6(토)</td><td>06:42 · 18:19</td></tr>
+                <tr><td>3/7(일)</td><td>06:40 · 18:19</td></tr>
+              </tbody>
+            </table>
+            <div class="info-muted" style="margin-top:4px;">계산값 · 벳푸·유후인은 몇 분 빠릅니다</div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-t">🌦️ 날씨 · 환율 보기</div>
+            <ul class="info-list">
+              <li><a href="https://tenki.jp/forecast/9/43/8210/40132/10days.html" target="_blank" rel="noopener">하카타 10일 예보 (tenki.jp)</a> — 출발 1주 전부터</li>
+              <li><a href="https://search.naver.com/search.naver?query=엔화+환율" target="_blank" rel="noopener">오늘 엔화 환율 (네이버)</a> — 💰 비용 계산기 환율칸에 넣어 보기</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:11.5px; color:var(--text-muted); margin:4px 4px 0; line-height:1.7;">
+        확인한 곳(11/16): <a href="https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00021.html" target="_blank" rel="noopener">일본 관광청 면세 환급제</a> ·
+        <a href="https://overseas.mofa.go.kr/jp-fukuoka-ko/brd/m_29790/index.do" target="_blank" rel="noopener">주후쿠오카 총영사관</a> ·
+        <a href="https://www.japan.travel/ko/plan/hotline/" target="_blank" rel="noopener">JNTO 핫라인</a> ·
+        <a href="https://www.city.fukuoka.lg.jp/zaisei/zeisei/life/syukuqa.html" target="_blank" rel="noopener">후쿠오카시 숙박세</a> ·
+        <a href="https://www.city.fukuoka.lg.jp/kowan/somu/hakata-port/access.html" target="_blank" rel="noopener">하카타항 교통</a> ·
+        <a href="https://trafficnews.jp/post/667615" target="_blank" rel="noopener">출국세 인상 보도</a>.
+        버스 요금은 여행 매체 기준이라 현지 표시를 따르세요.
+      </p>
+    </section>
 
     <!-- ============ 지난기록 ============ -->
     <section class="section" id="section-archive">
@@ -4199,6 +4424,17 @@ function saveBookingNote(itemId, value) {
 
 // ============== START ==============
 init();
+</script>
+<script>
+// ============== 여행정보 탭 (11/16 추가 · 기존 코드는 건드리지 않음) ==============
+function infoJump(id) {
+  var el = document.getElementById(id);
+  if (!el) return false;
+  var head = document.querySelector('header');
+  var h = head ? head.offsetHeight : 0;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - h - 10, behavior: 'smooth' });
+  return false;
+}
 </script>
 </body>
 </html>
