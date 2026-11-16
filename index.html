@@ -445,6 +445,17 @@ tr.done-row td { opacity: 0.62; }
 .cost-flow .v { white-space: nowrap; font-weight: 700; }
 .cost-more { margin-top: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
 .cost-more > summary { cursor: pointer; font-weight: 600; color: var(--primary); }
+.cost-tile .v2 { font-size: 15px; font-weight: 800; margin-top: 3px; }
+.cost-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 6px; }
+.cost-chip { font-size: 12px; border-radius: 8px; padding: 3px 8px; border: 1px solid; }
+.cost-chip.ok { background: #e8f1fd; border-color: #a9c8f5; color: #1a56b0; }
+.cost-chip.plan { background: #f3effb; border-color: #d4c6ef; color: #5b3f9e; }
+.cost-chip .m { font-size: 11px; opacity: .8; }
+.cost-ledger tr.ok td { color: #1a56b0; }
+.cost-ledger tr.plan td { color: #5b3f9e; }
+.cost-ledger tr.ok { background: #f2f7fe; }
+.cost-ledger td.m { font-size: 12px; opacity: .85; }
+.cost-ledger tr.sum td { font-weight: 800; border-top: 2px solid var(--border); }
 </style>
 </head>
 <body>
@@ -1088,47 +1099,61 @@ tr.done-row td { opacity: 0.62; }
 
       <!-- 11/16 비용 정리: 💰 비용 한눈에 + 🧾 회비·정산 (숫자는 scratchpad cost_clean.py DATA 기준) -->
       <div class="card" id="cost-card">
-        <h2>💰 비용 한눈에 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">11/16 · 교통비는 실제 결제액, 숙소·현지비는 예상</span></h2>
+        <h2>💰 비용 한눈에 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">11/16 · 🔵 확정(결제 완료) · 🟣 예정 · 100만원 넘는 부분은 본인 부담</span></h2>
         <div class="cost-tiles">
-          <div class="cost-tile"><div class="t">1인 총비용</div><div class="v">110~132만원</div><div class="s">이동 방법마다 다름</div></div>
-          <div class="cost-tile"><div class="t">회비 지원</div><div class="v">1인 100만원</div><div class="s">8명 전원</div></div>
-          <div class="cost-tile"><div class="t">본인 부담</div><div class="v">10~32만원</div><div class="s">100만원 넘는 부분만</div></div>
-          <div class="cost-tile"><div class="t">지금까지 결제</div><div class="v">266만원</div><div class="s">8명 예상 총비용 9,992,900원 중 · 아직 낼 돈 7,336,000원</div></div>
+          <div class="cost-tile"><div class="t">1인 총비용</div><div class="v">110~132만원</div><div class="s">이동 방법마다 다름 (확정 + 예정)</div></div>
+          <div class="cost-tile"><div class="t">회비 지원</div><div class="v">1인 100만원</div><div class="s">8명 전원 · 회비에서</div></div>
+          <div class="cost-tile"><div class="t">본인 부담</div><div class="v" style="color:#c62828;">10~32만원</div><div class="s">1인 합계에서 <strong>100만원 넘는 부분</strong></div></div>
+          <div class="cost-tile"><div class="t">8명 합계 9,992,900원</div><div class="v2" style="color:#2f7de1;">🔵 확정 2,656,900원</div><div class="v2" style="color:#6a4fb3;">🟣 예정 7,336,000원</div></div>
         </div>
         <h3 class="cost-h">👤 사람별 — 내 돈은 얼마?</h3>
-        <div class="cost-legend"><span><i style="background:#2f7de1"></i>결제 완료</span><span><i style="background:#b39ddb"></i>앞으로 낼 돈</span><span><i style="background:#333; width:3px;"></i>회비 지원선 100만</span></div>
+        <div class="cost-legend"><span><i style="background:#2f7de1"></i>확정 (결제 완료)</span><span><i style="background:#b39ddb"></i>예정</span><span><i style="background:repeating-linear-gradient(135deg, rgba(211,47,47,.75) 0 4px, rgba(211,47,47,.15) 4px 8px)"></i>본인 부담 (100만원 넘는 부분)</span><span><i style="background:#333; width:3px;"></i>회비 지원 100만원</span></div>
         <div class="cost-person">
           <div class="cost-p-head"><strong>김기태</strong> · ✈️ 비행기 왕복<span class="cost-own">본인 부담 <strong>101,100원</strong></span></div>
-          <div class="cost-bar"><div style="left:0; width:26.7%; background:#2f7de1;"></div><div style="left:26.7%; width:54.8%; background:#b39ddb;"></div><div style="left:74.1%; width:3px; background:#333;"></div></div>
-          <div class="cost-p-sum">교통비 361,100원 + 공통비 740,000원 = <strong>1,101,100원</strong> <span class="info-muted">· 결제 완료 361,100원</span></div>
-          <div class="cost-p-note">교통비: 7C1401 + BX446 <span class="c-ok">✅ 발권</span></div>
+          <div class="cost-bar"><div style="left:0.0%; width:25.8%; background:#2f7de1; border-right:1px solid #fff;" title="✈️ 항공 7C1401 + BX446 361,100원"></div><div style="left:25.8%; width:13.9%; background:#b39ddb; border-right:1px solid #fff;" title="🏠 아파트 2박 195,000원"></div><div style="left:39.7%; width:17.9%; background:#b39ddb; border-right:1px solid #fff;" title="♨️ 료칸 1박 2식 250,000원"></div><div style="left:57.6%; width:21.1%; background:#b39ddb; border-right:1px solid #fff;" title="🍱 식사·현지 교통·온천 295,000원"></div><div style="left:71.4%; width:7.2%; background:repeating-linear-gradient(135deg, rgba(211,47,47,.75) 0 4px, rgba(211,47,47,.15) 4px 8px);"></div><div style="left:71.4%; width:3px; background:#333;"></div></div>
+          <div class="cost-chips"><span class="cost-chip ok">🔵 ✈️ 항공 7C1401 + BX446 <strong>361,100원</strong> <span class="m">발권 완료</span></span><span class="cost-chip plan">🟣 🏠 아파트 2박 <strong>195,000원</strong> <span class="m">GRHT-H · 예약 전</span></span><span class="cost-chip plan">🟣 ♨️ 료칸 1박 2식 <strong>250,000원</strong> <span class="m">온천지 미정 · 예상</span></span><span class="cost-chip plan">🟣 🍱 식사·현지 교통·온천 <strong>295,000원</strong> <span class="m">예상 (벳푸 기준)</span></span></div>
+          <div class="cost-p-sum">합계 <strong>1,101,100원</strong> = <span style="color:#2f7de1; font-weight:700;">확정 361,100원</span> + <span style="color:#6a4fb3; font-weight:700;">예정 740,000원</span> → 회비 지원 1,000,000원 · <span style="color:#c62828; font-weight:700;">본인 부담 101,100원</span></div>
         </div>
         <div class="cost-person">
           <div class="cost-p-head"><strong>조성화</strong> · ✈️ 대구 왕복<span class="cost-own">본인 부담 <strong>101,800원</strong></span></div>
-          <div class="cost-bar"><div style="left:0; width:26.8%; background:#2f7de1;"></div><div style="left:26.8%; width:54.8%; background:#b39ddb;"></div><div style="left:74.1%; width:3px; background:#333;"></div></div>
-          <div class="cost-p-sum">교통비 361,800원 + 공통비 740,000원 = <strong>1,101,800원</strong> <span class="info-muted">· 결제 완료 361,800원</span></div>
-          <div class="cost-p-note">교통비: TW213 + TW214 <span class="c-ok">✅ 발권</span></div>
+          <div class="cost-bar"><div style="left:0.0%; width:25.8%; background:#2f7de1; border-right:1px solid #fff;" title="✈️ 항공 TW213 + TW214 361,800원"></div><div style="left:25.8%; width:13.9%; background:#b39ddb; border-right:1px solid #fff;" title="🏠 아파트 2박 195,000원"></div><div style="left:39.8%; width:17.9%; background:#b39ddb; border-right:1px solid #fff;" title="♨️ 료칸 1박 2식 250,000원"></div><div style="left:57.6%; width:21.1%; background:#b39ddb; border-right:1px solid #fff;" title="🍱 식사·현지 교통·온천 295,000원"></div><div style="left:71.4%; width:7.3%; background:repeating-linear-gradient(135deg, rgba(211,47,47,.75) 0 4px, rgba(211,47,47,.15) 4px 8px);"></div><div style="left:71.4%; width:3px; background:#333;"></div></div>
+          <div class="cost-chips"><span class="cost-chip ok">🔵 ✈️ 항공 TW213 + TW214 <strong>361,800원</strong> <span class="m">발권 완료</span></span><span class="cost-chip plan">🟣 🏠 아파트 2박 <strong>195,000원</strong> <span class="m">GRHT-H · 예약 전</span></span><span class="cost-chip plan">🟣 ♨️ 료칸 1박 2식 <strong>250,000원</strong> <span class="m">온천지 미정 · 예상</span></span><span class="cost-chip plan">🟣 🍱 식사·현지 교통·온천 <strong>295,000원</strong> <span class="m">예상 (벳푸 기준)</span></span></div>
+          <div class="cost-p-sum">합계 <strong>1,101,800원</strong> = <span style="color:#2f7de1; font-weight:700;">확정 361,800원</span> + <span style="color:#6a4fb3; font-weight:700;">예정 740,000원</span> → 회비 지원 1,000,000원 · <span style="color:#c62828; font-weight:700;">본인 부담 101,800원</span></div>
         </div>
         <div class="cost-person">
           <div class="cost-p-head"><strong>최근호 · 윤유병</strong> · ✈️ 비행기 왕복 <span class="info-muted">(1인 기준)</span><span class="cost-own">본인 부담 <strong>248,000원</strong></span></div>
-          <div class="cost-bar"><div style="left:0.0%; width:92.4%; background:#b39ddb;"></div><div style="left:74.1%; width:3px; background:#333;"></div></div>
-          <div class="cost-p-sum">교통비 508,000원 + 공통비 740,000원 = <strong>1,248,000원</strong> <span class="info-muted">· 결제 완료 0원</span></div>
-          <div class="cost-p-note">교통비: KE787 + KE792 <span class="c-wait">⏳ 미예약 · 추정</span></div>
+          <div class="cost-bar"><div style="left:0.0%; width:36.3%; background:#b39ddb; border-right:1px solid #fff;" title="✈️ 항공 KE787 + KE792 508,000원"></div><div style="left:36.3%; width:13.9%; background:#b39ddb; border-right:1px solid #fff;" title="🏠 아파트 2박 195,000원"></div><div style="left:50.2%; width:17.9%; background:#b39ddb; border-right:1px solid #fff;" title="♨️ 료칸 1박 2식 250,000원"></div><div style="left:68.1%; width:21.1%; background:#b39ddb; border-right:1px solid #fff;" title="🍱 식사·현지 교통·온천 295,000원"></div><div style="left:71.4%; width:17.7%; background:repeating-linear-gradient(135deg, rgba(211,47,47,.75) 0 4px, rgba(211,47,47,.15) 4px 8px);"></div><div style="left:71.4%; width:3px; background:#333;"></div></div>
+          <div class="cost-chips"><span class="cost-chip plan">🟣 ✈️ 항공 KE787 + KE792 <strong>508,000원</strong> <span class="m">미예약 · 추정</span></span><span class="cost-chip plan">🟣 🏠 아파트 2박 <strong>195,000원</strong> <span class="m">GRHT-H · 예약 전</span></span><span class="cost-chip plan">🟣 ♨️ 료칸 1박 2식 <strong>250,000원</strong> <span class="m">온천지 미정 · 예상</span></span><span class="cost-chip plan">🟣 🍱 식사·현지 교통·온천 <strong>295,000원</strong> <span class="m">예상 (벳푸 기준)</span></span></div>
+          <div class="cost-p-sum">합계 <strong>1,248,000원</strong> = <span style="color:#2f7de1; font-weight:700;">확정 0원</span> + <span style="color:#6a4fb3; font-weight:700;">예정 1,248,000원</span> → 회비 지원 1,000,000원 · <span style="color:#c62828; font-weight:700;">본인 부담 248,000원</span></div>
         </div>
         <div class="cost-person">
           <div class="cost-p-head"><strong>배 4명</strong> <span class="info-muted">김석 · 김철현 · 박중산 · 최진원</span> · 🚢 배 + 귀국 항공 <span class="info-muted">(1인 기준)</span><span class="cost-own">본인 부담 <strong>323,500원</strong></span></div>
-          <div class="cost-bar"><div style="left:0; width:35.8%; background:#2f7de1;"></div><div style="left:35.8%; width:62.2%; background:#b39ddb;"></div><div style="left:74.1%; width:3px; background:#333;"></div></div>
-          <div class="cost-p-sum">교통비 583,500원 + 공통비 740,000원 = <strong>1,323,500원</strong> <span class="info-muted">· 결제 완료 483,500원</span></div>
-          <div class="cost-p-note">교통비: 배 111,000 <span class="c-ok">✅</span> + 귀국 KE792 372,500 <span class="c-ok">✅</span> + KTX·부산 저녁 100,000 <span class="c-wait">예상</span></div>
+          <div class="cost-bar"><div style="left:0.0%; width:7.9%; background:#2f7de1; border-right:1px solid #fff;" title="🚢 뉴카멜리아 111,000원"></div><div style="left:7.9%; width:26.6%; background:#2f7de1; border-right:1px solid #fff;" title="🛬 귀국 KE792 372,500원"></div><div style="left:34.5%; width:7.1%; background:#b39ddb; border-right:1px solid #fff;" title="🚄 KTX · 부산 저녁 100,000원"></div><div style="left:41.7%; width:13.9%; background:#b39ddb; border-right:1px solid #fff;" title="🏠 아파트 2박 195,000원"></div><div style="left:55.6%; width:17.9%; background:#b39ddb; border-right:1px solid #fff;" title="♨️ 료칸 1박 2식 250,000원"></div><div style="left:73.5%; width:21.1%; background:#b39ddb; border-right:1px solid #fff;" title="🍱 식사·현지 교통·온천 295,000원"></div><div style="left:71.4%; width:23.1%; background:repeating-linear-gradient(135deg, rgba(211,47,47,.75) 0 4px, rgba(211,47,47,.15) 4px 8px);"></div><div style="left:71.4%; width:3px; background:#333;"></div></div>
+          <div class="cost-chips"><span class="cost-chip ok">🔵 🚢 뉴카멜리아 <strong>111,000원</strong> <span class="m">결제 완료</span></span><span class="cost-chip ok">🔵 🛬 귀국 KE792 <strong>372,500원</strong> <span class="m">발권 완료</span></span><span class="cost-chip plan">🟣 🚄 KTX · 부산 저녁 <strong>100,000원</strong> <span class="m">예상</span></span><span class="cost-chip plan">🟣 🏠 아파트 2박 <strong>195,000원</strong> <span class="m">GRHT-H · 예약 전</span></span><span class="cost-chip plan">🟣 ♨️ 료칸 1박 2식 <strong>250,000원</strong> <span class="m">온천지 미정 · 예상</span></span><span class="cost-chip plan">🟣 🍱 식사·현지 교통·온천 <strong>295,000원</strong> <span class="m">예상 (벳푸 기준)</span></span></div>
+          <div class="cost-p-sum">합계 <strong>1,323,500원</strong> = <span style="color:#2f7de1; font-weight:700;">확정 483,500원</span> + <span style="color:#6a4fb3; font-weight:700;">예정 840,000원</span> → 회비 지원 1,000,000원 · <span style="color:#c62828; font-weight:700;">본인 부담 323,500원</span></div>
         </div>
+        <h3 class="cost-h">📒 확정 · 예정 내역 (8명 전체) <span class="info-muted">— 결제되면 🟣 → 🔵 로 바뀝니다</span></h3>
+        <div style="overflow-x:auto;"><table class="cost-ledger" style="font-size:13px; min-width:0;">
+          <thead><tr><th>상태</th><th>항목</th><th style="text-align:right;">금액</th><th>메모</th></tr></thead><tbody>
+            <tr class="ok"><td>🔵 확정</td><td>✈️ 김기태 항공</td><td style="text-align:right;"><strong>361,100원</strong></td><td class="m">7C1401 + BX446 발권</td></tr>
+            <tr class="ok"><td>🔵 확정</td><td>✈️ 조성화 항공</td><td style="text-align:right;"><strong>361,800원</strong></td><td class="m">TW213 + TW214 발권</td></tr>
+            <tr class="ok"><td>🔵 확정</td><td>🛬 귀국 KE792 (배 4명)</td><td style="text-align:right;"><strong>1,490,000원</strong></td><td class="m">1인 372,500원 · 발권</td></tr>
+            <tr class="ok"><td>🔵 확정</td><td>🚢 뉴카멜리아 (배 4명)</td><td style="text-align:right;"><strong>444,000원</strong></td><td class="m">1인 111,000원 · 결제</td></tr>
+            <tr class="plan"><td>🟣 예정</td><td>✈️ 최근호 · 윤유병 항공</td><td style="text-align:right;"><strong>1,016,000원</strong></td><td class="m">508,000원 × 2 · 미예약 추정</td></tr>
+            <tr class="plan"><td>🟣 예정</td><td>🚄 KTX · 부산 저녁 (배 4명)</td><td style="text-align:right;"><strong>400,000원</strong></td><td class="m">100,000원 × 4</td></tr>
+            <tr class="plan"><td>🟣 예정</td><td>🏠 아파트 GRHT-H 2박</td><td style="text-align:right;"><strong>1,560,000원</strong></td><td class="m">195,000원 × 8 · 예약 전</td></tr>
+            <tr class="plan"><td>🟣 예정</td><td>♨️ 료칸 1박 2식</td><td style="text-align:right;"><strong>2,000,000원</strong></td><td class="m">250,000원 × 8 · 온천지 미정</td></tr>
+            <tr class="plan"><td>🟣 예정</td><td>🍱 식사 · 현지 교통 · 온천</td><td style="text-align:right;"><strong>2,360,000원</strong></td><td class="m">295,000원 × 8</td></tr>
+            <tr class="sum ok"><td colspan="2">🔵 확정 합계 (결제 완료)</td><td style="text-align:right;">2,656,900원</td><td></td></tr>
+            <tr class="sum plan"><td colspan="2">🟣 예정 합계 (아직 낼 돈)</td><td style="text-align:right;">7,336,000원</td><td></td></tr>
+            <tr class="sum"><td colspan="2">8명 합계</td><td style="text-align:right;">9,992,900원</td><td class="m">회비 지원 8,000,000원 · 본인 부담 1,992,900원</td></tr>
+          </tbody></table></div>
         <h3 class="cost-h">🏠 공통비 1인 740,000원 <span class="info-muted">— 8명 모두 같음 · 회비로 냄</span></h3>
         <div class="cost-common">
           <div><div class="t">🏠 아파트 2박</div><div class="v">195,000원</div><div class="s">GRHT-H 실측 (2박 173,167엔) · <span class="c-wait">예약 전</span></div></div>
           <div><div class="t">♨️ 료칸 1박 2식</div><div class="v">250,000원</div><div class="s"><span class="c-wait">예상</span> · 온천지에 따라 약 17~26만 (벳푸 1인 19,000엔 ~ 유후인 28,400엔)</div></div>
           <div><div class="t">🍱 식사 · 현지 교통 · 온천</div><div class="v">295,000원</div><div class="s"><span class="c-wait">예상</span> · 식비·공항·시내 교통 약 23만 + 온천지 버스 등 (벳푸 기준)</div></div>
         </div>
-        <h3 class="cost-h">✅ 지금까지 결제한 돈 2,656,900원</h3>
-        <div class="cost-paid">김기태 항공 <strong>361,100원</strong> · 조성화 항공 <strong>361,800원</strong> · 귀국 KE792 (배 4명) <strong>1,490,000원</strong> · 뉴카멜리아 (배 4명) <strong>444,000원</strong></div>
         <details style="margin-top:14px; border:1px solid var(--border); border-radius:10px; padding:10px 12px;">
           <summary style="cursor:pointer; font-weight:600; color:var(--primary);">🧮 경비 계산기 — 조건 바꿔서 계산해 보기</summary>
           <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr)); gap:10px; margin-top:12px;">
