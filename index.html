@@ -568,7 +568,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td class="when">2/3(수) 07:00</td>
-                <td><strong>🚄 KTX 예매 오픈</strong><span class="sub">3/3(수) 14:30경, 광명 → 부산 편도 약 6만원 · 승차 1개월 전 오픈</span></td>
+                <td><strong>🚄 KTX 예매 오픈</strong><span class="sub">3/3(수) 14:30경 광명 출발 · 서울 1명 + 광명 3명, 같은 열차 · 편도 약 6만원 · 승차 1개월 전 오픈</span></td>
                 <td>배 4명<span class="sub">김석·김철현·박중산·최진원</span></td>
                 <td style="text-align:center;"><input type="checkbox" data-booking="ktx" onchange="toggleBooking('ktx', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
                 <td><input type="text" class="booking-note" data-booking-note="ktx" onchange="saveBookingNote('ktx', this.value)" placeholder="예약번호·확정 금액·메모"></td>
@@ -735,7 +735,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">🚄 KTX · 배 4명<br><span style="font-size:11px; color:var(--text-muted);">김석 · 김철현 · 박중산 · 최진원 · 편도 약 6만원/인</span></td>
-                <td>광명 → 부산<br>3/3(수) 14:30경 출발 · 약 2시간 30분<br><span style="font-size:11px; color:var(--text-muted);">일반실 4석 · 4명 약 24만원</span></td>
+                <td>서울 1명 + 광명 3명 → 부산<br>3/3(수) 14:30경 광명 출발 · 같은 열차 · 약 2시간 30분<br><span style="font-size:11px; color:var(--text-muted);">일반실 4석 · 4명 약 24만원</span></td>
                 <td>부산 도착 후 저녁 → 22:30 뉴카멜리아 승선<br><span style="font-size:11px; color:var(--text-muted);">3/4(목) 07:30 하카타 도착</span></td>
                 <td>⏳ 예정<br><span style="font-size:11px; color:var(--text-muted);">2/3(수) 07:00 예매 오픈 · 코레일 로그인 준비됨 · 예매되면 자동 갱신</span></td>
               </tr>
@@ -824,7 +824,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="text-align:center;"><input type="checkbox" data-booking="ktx" onchange="toggleBooking('ktx', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><strong>🚄 KTX 광명 → 부산</strong><span class="sub">3/3(수) 14:30경 편도 · 배 4명</span></td>
+                <td><strong>🚄 KTX → 부산</strong><span class="sub">3/3(수) 14:30경 광명 출발 · 서울 1명 + 광명 3명, 같은 열차</span></td>
                 <td class="when">2/3(수) 07:00<span class="sub">예매 오픈</span></td>
                 <td>배 4명</td>
                 <td><input type="text" class="booking-note" data-booking-note="ktx" onchange="saveBookingNote('ktx', this.value)" placeholder="예약번호·금액·메모"></td>
@@ -4470,7 +4470,7 @@ function renderTimeline() {
 
   let html = '';
   html += fixedStep('3/3 (수)', '🚢 배 4명 출발', '배 4명만 · ✈️ 비행기 3명은 이날 일정 없음', [
-    ['14:30', '🚄 광명역 KTX 출발 (약 2시간 30분) · 2월 초 예매 오픈 (아직 미예약)'],
+    ['14:30', '🚄 광명역 KTX 출발 (약 2시간 30분) · 서울 승차 1명은 서울역에서 같은 열차 탑승 · 2월 초 예매 오픈 (아직 미예약)'],
     ['저녁', '부산에서 저녁 (일찍 마치고 이동)'],
     ['18:30', '부산항 국제여객터미널 도착 · 체크인 16:30~19:00 (승선 마감 20:00)'],
     ['22:30', '🚢 뉴카멜리아 출항 · 선상 1박 (침대실 4명 · 주문번호 5129084 · 444,000원 · 예약 확인 완료)']
@@ -4613,7 +4613,7 @@ var MT_GROUP = {
   ferry: {
     label: '🚢 배 4명', bk: [['ktx', '🚄 KTX'], ['ferry', '🚢 뉴카멜리아'], ['return', '🛬 귀국 KE792']],
     pre: [
-      ['3/3(수) 14:30', '🚄 KTX 광명 → 부산 (약 2시간 30분) — <strong>2/3(수) 07:00 예매 오픈</strong>'],
+      ['3/3(수) 14:30', '🚄 KTX → 부산 (약 2시간 30분) · 서울 1명 + 광명 3명, 같은 열차 — <strong>2/3(수) 07:00 예매 오픈</strong>'],
       ['3/3(수) 저녁', '부산에서 저녁 → <strong>18:30까지 부산항 국제여객터미널</strong> (체크인 16:30~19:00 · 승선 마감 20:00) · 체크인 때 <strong>하카타항 세관 신고서(종이)</strong>를 받습니다'],
       ['3/3(수) 22:30', '🚢 뉴카멜리아 출항 — 침대실(1등4인실) · 주문번호 5129084 · <a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a> · 멀미약 챙기기'],
       ['3/4(목) 07:30', '하카타항 국제터미널 도착 → 입국심사(VJW QR) · 세관(종이 신고서) → 버스로 하카타역 약 20분']
