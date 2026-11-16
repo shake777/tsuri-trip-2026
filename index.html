@@ -4434,14 +4434,11 @@ function renderTimeline() {
   const satAct = actDec.reduce((a, k) => a.concat(detailOf('ny_activity', k).plan || []), []);
   const dinnerItems = dinnerDec.length ? (detailOf('ny_dinner', dinnerDec[0]).plan || []) : [];
   const arrivalItems = [
-    ['06:30', '✈️ 김기태 인천 출발 (제주 7C1401 · PNR IIJ4NX · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['07:30', '🚢 배 4명 하카타항 도착 (김석 · 김철현 · 박중산 · 최진원) · 뉴카멜리아 침대실 · 주문번호 5129084 · 아침 식사 · 짐 보관'],
-    ['07:45', '✈️ 최근호 · 윤유병 인천 출발 (대한항공 KE787 · 미예약)'],
     ['07:55', '✈️ 김기태 후쿠오카공항 도착 (제주 7C1401 · PNR IIJ4NX · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
-    ['08:20', '✈️ 조성화 대구 출발 (티웨이 TW213 · PNR AH7Y68 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
     ['09:15', '✈️ 최근호 · 윤유병 후쿠오카공항 도착 (대한항공 KE787 · 미예약)'],
     ['09:25', '✈️ 조성화 후쿠오카공항 도착 (티웨이 TW213 · 대구 · PNR AH7Y68 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>)'],
-    ['10:00', '🤝 하카타 버스터미널에서 8명 집결 · 온천지로 출발 (짐은 버스 트렁크)']
+    ['10:00', '🤝 하카타 버스터미널에서 8명 집결 · 온천지로 함께 출발 (짐은 버스 트렁크)']
   ];
   const friItems = _sortPlan(onsenBack.concat([
     ['13:00', '🍜 하카타 점심 (온천 복귀 후 · 하카타역 주변)'],
@@ -4468,7 +4465,7 @@ function renderTimeline() {
     ['22:30', '🚢 뉴카멜리아 출항 · 선상 1박 (침대실 4명 · 주문번호 5129084 · 444,000원 · 예약 확인 완료)']
   ]);
   html += voteStep('ny_onsen', '3/4 (목)', '♨️ 온천 + 료칸 1박', '카드마다 거리·교통·요금·주의가 있어요 · 여러 개 선택 가능',
-    onsenDec.length ? '' : '첫날 도착 후 바로 온천지로 이동 · <strong>료칸에서 1박 2식</strong> (8명 · 중급 1인 약 25만원 · 확정). 이동이 길어 중간 휴식 넉넉히.',
+    onsenDec.length ? '' : '8명 도착 → <strong>10:00 하카타 버스터미널 집결</strong> → 온천지 함께 출발 (벳푸 버스 10:40 · 유후인 버스 10:18 · 쿠로가와 버스 11:38) · <strong>료칸에서 1박 2식</strong> (8명 · 중급 1인 약 25만원 · 확정). 이동이 길어 중간 휴식 넉넉히.',
     onsenNote, _sortPlan(arrivalItems.concat(onsenPlan)));
   html += fixedStep('3/5 (금)', '🏠 하카타 복귀 · 아파트 체크인 · 카와타로 저녁', '온천에서 돌아와 하카타에서 하루 · 첫날 일정(점심·체크인·카와타로)을 오늘로 옮김', friItems);
   html += voteStep('ny_activity', '3/6 (토)', '🎌 낮 자유 일정 → 아파트 1박', '하고 싶은 것 여러 개 선택',
