@@ -512,7 +512,7 @@ tr.done-row td { opacity: 0.62; }
         <div class="plan-head">
           <div>
             <div class="plan-title">✈️ 2027 신년회 — 후쿠오카</div>
-            <div class="plan-sub">2027년 3월 4일(목) ~ 3월 7일(일) · 3박 4일 · 초록 = 확정, 파랑·노랑 = 투표 중</div>
+            <div class="plan-sub">2027년 3월 4일(목) ~ 3월 7일(일) · 3박 4일 · 초록 = 확정, 회색 = 아직 미정 (총무가 정함)</div>
           </div>
           <div class="home-dday" id="ny-countdown-days">--</div>
           <span id="ny-countdown-date" style="display:none;"></span>
@@ -540,8 +540,8 @@ tr.done-row td { opacity: 0.62; }
             <tbody>
               <tr>
                 <td class="when">11월 중</td>
-                <td><strong>🗳️ 남은 투표 마감</strong><span class="sub">목요일 온천 · 토요일 낮 · 항공 기준 — 온천지가 정해져야 료칸을 잡습니다</span></td>
-                <td>참가자 전원</td>
+                <td><strong>📌 남은 결정</strong><span class="sub">토요일 낮 일정 · 신년회 저녁 식당 · 항공 기준 — 회원 투표 없이 총무가 정합니다 (온천은 유후인으로 확정 · 료칸 예약 완료)</span></td>
+                <td>총무</td>
                 <td style="text-align:center;"><input type="checkbox" data-booking="vote" onchange="toggleBooking('vote', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
                 <td><input type="text" class="booking-note" data-booking-note="vote" onchange="saveBookingNote('vote', this.value)" placeholder="메모"></td>
               </tr>
@@ -810,7 +810,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="text-align:center;"><input type="checkbox" data-booking="ryokan" onchange="toggleBooking('ryokan', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><strong>♨️ 료칸 1박 2식</strong><span class="sub">3/4(목) · 목요일 온천 투표가 정해진 뒤 그 지역에서 8명으로 검색 (요금이 1인당)</span></td>
+                <td><strong>♨️ 료칸 1박 2식</strong><span class="sub">3/4(목) · 유후인 冨季의舍 별채 花舎 예약 완료 (11/17) · 1인 33,000엔 · 현지 결제</span></td>
                 <td class="when">온천 확정 후<span class="sub">12월 초</span></td>
                 <td>총무</td>
                 <td><input type="text" class="booking-note" data-booking-note="ryokan" onchange="saveBookingNote('ryokan', this.value)" placeholder="예약번호·금액·메모"></td>
@@ -845,7 +845,7 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="text-align:center;"><input type="checkbox" data-booking="dinner" onchange="toggleBooking('dinner', event)" style="width:20px; height:20px; accent-color:var(--primary);"></td>
-                <td><strong>🍻 3/6 신년회 저녁 식당</strong><span class="sub">19:00 · 8명 개실 · 식당 투표가 정해진 뒤 예약 (3월은 일본 송별회 시즌이라 일찍)</span></td>
+                <td><strong>🍻 3/6 신년회 저녁 식당</strong><span class="sub">19:00 · 8명 개실 · 총무가 식당을 정하면 예약 (3월은 일본 송별회 시즌이라 일찍)</span></td>
                 <td class="when">식당 확정 후<span class="sub">2월 중</span></td>
                 <td>총무</td>
                 <td><input type="text" class="booking-note" data-booking-note="dinner" onchange="saveBookingNote('dinner', this.value)" placeholder="식당·시간·메모"></td>
@@ -877,8 +877,8 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/4 (목)<br><span style="font-size:11px; color:var(--text-muted);">온천</span></td>
-                <td>온천지에서 점심<br><span style="font-size:11px; color:var(--text-muted);">벳푸 · 유후인 · 쿠로가와 투표 중</span></td>
-                <td>료칸 가이세키 18:30<br><span style="font-size:11px; color:var(--text-muted);">1박 2식 · 온천지가 정해지면 료칸 확정</span></td>
+                <td>온천지에서 점심<br><span style="font-size:11px; color:var(--text-muted);">유후인 확정 · 12:17 도착 후 유노쓰보 거리에서</span></td>
+                <td>료칸 가이세키 18:30<br><span style="font-size:11px; color:var(--text-muted);">1박 2식 · 유후인 冨季의舍 별채 (예약 완료)</span></td>
                 <td>07:30 배 4명 하카타 도착 · 07:55~09:25 비행기 3명·대구 도착 · 10:00 하카타 버스터미널 집결 → 온천지 출발</td>
               </tr>
               <tr>
@@ -889,9 +889,9 @@ tr.done-row td { opacity: 0.62; }
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/6 (토)<br><span style="font-size:11px; color:var(--text-muted);">자유</span></td>
-                <td>낮 일정 따라 점심<br><span style="font-size:11px; color:var(--text-muted);">11개 안 투표 중 — 다자이후 · 야타이 · 텐진 · 돔 · 굴 · 낚시 · 골프 · 사케 · 경정 · 나가사키 · 쉬엄쉬엄</span></td>
-                <td>🍻 <strong>신년회 저녁 19:00</strong><br><span style="font-size:11px; color:var(--text-muted);">식당 투표 중 — 아래 투표에서 선택 · 정해지면 예약</span></td>
-                <td>오전 아파트에서 여유 → 낮 자유 일정 (투표 중) → 저녁 전 아파트 휴식 · 밤 아파트 1박 (하코자키 확정)</td>
+                <td>낮 일정 따라 점심<br><span style="font-size:11px; color:var(--text-muted);">11개 후보 (총무가 정함) — 다자이후 · 야타이 · 텐진 · 돔 · 굴 · 낚시 · 골프 · 사케 · 경정 · 나가사키 · 쉬엄쉬엄</span></td>
+                <td>🍻 <strong>신년회 저녁 19:00</strong><br><span style="font-size:11px; color:var(--text-muted);">식당 후보는 아래 일정 카드에 · 총무가 정하면 예약</span></td>
+                <td>오전 아파트에서 여유 → 낮 자유 일정 (미정) → 저녁 전 아파트 휴식 · 밤 아파트 1박 (하코자키 확정)</td>
               </tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary); white-space:nowrap;">3/7 (일)<br><span style="font-size:11px; color:var(--text-muted);">귀국</span></td>
@@ -906,7 +906,7 @@ tr.done-row td { opacity: 0.62; }
 
       <!-- 11/16 추가: 식당 이용 팁 (기존 카드는 그대로) -->
       <div class="card" id="info-food">
-        <h2>🍜 식당 · 술집 이용 팁 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">식당·야타이 후보는 아래 일정의 투표 카드에</span></h2>
+        <h2>🍜 식당 · 술집 이용 팁 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">식당·야타이 후보는 아래 일정의 후보 카드에</span></h2>
         <ul class="info-list">
           <li><strong>🍜 하카타 라멘</strong> — 면 익힘을 고릅니다: 바리카타(아주 꼬들) · 카타(꼬들) · 후츠(보통). 면만 추가하는 건 <strong>카에다마</strong>.</li>
           <li><strong>🥢 오토시(기본 안주)</strong> — 이자카야는 자리에 앉으면 1인 300~500엔쯤 <strong>자동으로 붙습니다.</strong> 바가지가 아니라 자릿세 같은 관행입니다.</li>
@@ -919,7 +919,7 @@ tr.done-row td { opacity: 0.62; }
 
       <div class="card" id="timeline-card">
         <h2>🗓️ 일정 — 3/3(수) ~ 3/7(일)</h2>
-        <p style="font-size:14px; margin-top:-4px;">초록 점은 확정, 주황 점은 투표 중입니다. 투표 칸은 <strong>비교 카드(거리·교통·요금·주의)를 좌우로 넘겨 보고</strong> [선택]을 누르세요(다시 누르면 취소). 1위 안은 카드 아래에 「확정되면 이렇게 진행」으로 미리 보이고, 총무가 [✅ 이걸로 확정]을 누르면 <strong>그 시간표가 세로선 위 확정 일정으로 들어가고 다음 날 일정도 따라 바뀝니다.</strong></p>
+        <p style="font-size:14px; margin-top:-4px;">초록 점은 확정, 주황 점은 아직 미정입니다. 회원 투표는 받지 않습니다. 미정 칸의 <strong>후보 비교 카드(거리·교통·요금·주의)를 좌우로 넘겨 보며</strong> 참고하시고, 총무가 [✅ 이걸로 확정]을 누르면 <strong>그 시간표가 세로선 위 확정 일정으로 들어가고 다음 날 일정도 따라 바뀝니다.</strong></p>
         <div id="ny-cloud-note"></div>
         <div id="timeline-flow" style="margin-top:12px;"></div>
         <div class="note info" style="margin-top:14px;">
@@ -1023,7 +1023,7 @@ tr.done-row td { opacity: 0.62; }
           </table>
         </div>
         <div class="note info">🚕 <strong>일본 택시는 보통 4명까지</strong> — 8명이 같이 움직이면 택시 2대. 뒷문은 자동문이라 기사님이 열고 닫습니다(손으로 닫지 않기).</div>
-        <div class="info-toc-label">📍 이동 거점 지도 <span class="info-muted">(식당·온천·관광지 지도는 투표 카드마다 있음)</span></div>
+        <div class="info-toc-label">📍 이동 거점 지도 <span class="info-muted">(식당·온천·관광지 지도는 후보 카드마다 있음)</span></div>
         <div class="info-chips">
           <a href="https://www.google.com/maps/search/?api=1&amp;query=부산항국제여객터미널" target="_blank" rel="noopener">🚢 부산항 국제여객터미널</a>
           <a href="https://www.google.com/maps/search/?api=1&amp;query=博多港国際ターミナル" target="_blank" rel="noopener">⚓ 하카타항 국제터미널</a>
@@ -1380,6 +1380,8 @@ function posOfKey(poll, k) { return optKeys(poll).indexOf(k); }
 function optLabel(poll, k) { const p = posOfKey(poll, k); return p >= 0 ? poll.options[p] : null; }
 function _valKeys(val) { return (typeof val === 'number') ? [val] : (Array.isArray(val) ? val : []); }
 
+// 11/17 회원 투표 없앰 — 투표 기록(votes)은 그대로 두고 화면에서만 뺌. 확정은 총무가 [✅ 이걸로 확정]
+var VOTING_CLOSED = true;
 // ============== 투표 항목 ==============
 const POLLS = [
   // ---------- 신년회 ----------
@@ -2254,12 +2256,10 @@ function renderHomeTodo() {
     '<div style="font-size:14px; color:' + (ok ? '#155f3a' : '#8a4500') + ';">' + (ok ? '✅ ' : '⬜ ') + text + '</div>' + (btn || '') + '</div>';
   const btn = (label, js) => '<button class="btn" style="padding:5px 12px; font-size:12px; white-space:nowrap;" onclick="' + js + '">' + label + '</button>';
   let html = '';
-  // 1) 남은 투표
+  // 1) 일정 확정 현황 (11/17 회원 투표 없앰 — 총무가 정함)
   const open = nyOpenPolls();
-  const left = open.filter(p => !_hasVote(p.id, me));
-  html += left.length
-    ? item(false, '<strong>투표 ' + left.length + '개 남음</strong> — ' + left.map(p => OPEN_POLL_LABEL[p.id] || _shortLabel(p)).join(' · '), btn('투표하러 →', "switchTab('ny')"))
-    : item(true, '투표 완료 <span style="font-size:12px;">(바꾸려면 ✈️ 신년회 탭)</span>', '');
+  html += item(true, '<strong>📅 숙소 확정</strong> — 3/4 유후인 冨季의舍 별채 · 3/5~3/6 하코자키 단독주택' +
+    (open.length ? ' <span style="font-size:12px;">(' + open.map(p => OPEN_POLL_LABEL[p.id] || _shortLabel(p)).join(' · ') + '은 총무가 정하는 중)</span>' : ''), btn('일정 보기 →', "switchTab('ny')"));
   // 2) 여권
   const ps = checkPassportStatus(getPassport(me), DB.nyDate);
   if (ps.code === 'ok') {
@@ -2308,26 +2308,27 @@ function renderHomeMemberStatus() {
     const st = getParticipationStatus(name, 'ny');
     const absent = st.code === 'no';
     const t = travelOf(name);
-    const voted = open.filter(p => _hasVote(p.id, name)).length;
+    const ps = checkPassportStatus(getPassport(name), DB.nyDate);
+    const PS = { ok: ['✅ 정상', '#e6f7ec', '#155f3a'], none: ['⏳ 미입력', '#f0f0f0', '#888'], expired: ['❌ 만료', '#fdecea', '#c62828'], short: ['⚠️ 6개월↓', '#fff7e3', '#7a5000'] }[ps.code] || ['⚠️ 확인', '#fff7e3', '#7a5000'];
     const cp = checklistProgress(name);
-    if (!absent && voted < open.length) pending.push(escapeHtml(name) + ' <span style="opacity:0.75;">' + voted + '/' + open.length + '</span>');
+    if (!absent && ps.code !== 'ok') pending.push(escapeHtml(name) + ' <span style="opacity:0.75;">' + PS[0] + '</span>');
     const dash = '<div style="text-align:center; color:var(--text-muted);">—</div>';
     rows += '<tr style="' + (isMe ? 'background:#f0f7fc;' : '') + '">' +
       '<td style="padding:8px 10px; font-weight:' + (isMe ? '700' : '500') + '; color:var(--primary); white-space:nowrap;">' + escapeHtml(name) + (isMe ? ' ✓' : '') + '</td>' +
       '<td style="text-align:center; padding:6px;"><span style="background:' + st.bg + '; color:' + st.color + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600; white-space:nowrap;">' + st.label + '</span></td>' +
       '<td style="text-align:center; padding:6px; white-space:nowrap;">' + (absent ? '—' : (t ? TRAVEL_LABEL[t] : (TRAVEL_EXTRA[name] || '미정'))) + '</td>' +
-      '<td style="padding:6px 8px;">' + ((absent || !open.length) ? dash : _miniBar(voted, open.length, 'var(--primary)')) + '</td>' +
+      '<td style="text-align:center; padding:6px;">' + (absent ? dash : '<span style="background:' + PS[1] + '; color:' + PS[2] + '; font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600; white-space:nowrap;">' + PS[0] + '</span>') + '</td>' +
       '<td style="padding:6px 8px;">' + (absent ? dash : _miniBar(cp.done, cp.total, '#185fa5')) + '</td></tr>';
   });
   let html = pending.length
-    ? '<div class="note warn" style="margin-top:0;">⏳ <strong>투표 남은 분</strong> — ' + pending.join(', ') + '</div>'
-    : '<div class="note success" style="margin-top:0;">🎉 참가자 전원 투표 완료</div>';
+    ? '<div class="note warn" style="margin-top:0;">🛂 <strong>여권 확인이 필요한 분</strong> — ' + pending.join(', ') + '</div>'
+    : '<div class="note success" style="margin-top:0;">🛂 참가자 전원 여권 정상</div>';
   html += '<div style="overflow-x:auto;"><table style="font-size:13px; min-width:0;"><thead><tr>' +
     '<th style="text-align:left;">회원</th><th style="text-align:center;">참가</th><th style="text-align:center;">이동</th>' +
-    '<th style="text-align:center; min-width:76px;">🗳️ 투표</th><th style="text-align:center; min-width:76px;">🎒 준비물</th></tr></thead><tbody>' +
+    '<th style="text-align:center; min-width:76px;">🛂 여권</th><th style="text-align:center; min-width:76px;">🎒 준비물</th></tr></thead><tbody>' +
     rows + '</tbody></table></div>';
-  html += '<div style="font-size:12px; color:var(--text-muted); margin-top:8px;">' + (open.length ? '남은 투표 = ' + open.map(p => OPEN_POLL_LABEL[p.id] || _shortLabel(p)).join(' · ') : '남은 투표 없음 (모두 확정)') +
-    ' · 여권 상태는 아래 🛂 여권 정보에 있습니다.</div>';
+  html += '<div style="font-size:12px; color:var(--text-muted); margin-top:8px;">' + (open.length ? '아직 미정 (총무가 정함) = ' + open.map(p => OPEN_POLL_LABEL[p.id] || _shortLabel(p)).join(' · ') : '모두 확정') +
+    ' · 여권 입력·수정은 아래 🛂 여권 정보에서 합니다.</div>';
   el.innerHTML = html;
 }
 
@@ -2474,6 +2475,7 @@ function buildSummaryText() {
         if (bd) L.push('· ' + (OPEN_POLL_LABEL[p.id] || _shortLabel(p)) + ': ' + bd);
         return;
       }
+      if (VOTING_CLOSED) { L.push('· ' + (OPEN_POLL_LABEL[p.id] || _shortLabel(p)) + ': 미정 (총무가 정함)'); return; }
       const r = _getPollWinner(p.id);
       if (!r || r.total === 0) return;
       const tie = r.winnerIdxs.length > 1;
@@ -2743,6 +2745,7 @@ function _planCell(pid) {
     const bd = _singleBreakdown(poll);
     return bd ? { state: 'info', text: bd } : { state: 'none', text: '아직 표 없음' };
   }
+  if (VOTING_CLOSED) return { state: 'none', text: '미정 — 후보 ' + optKeys(poll).length + '개', sub: '총무가 정함' };
   const r = _getPollWinner(pid);
   if (!r || r.total === 0) return { state: 'none', text: '아직 표 없음' };
   const nVoters = new Set([].concat.apply([], r.voters)).size;
@@ -2776,16 +2779,16 @@ function renderHomePlan() {
   html += row('fixed', '📅 날짜', '3/4(목) ~ 3/7(일) · 3박 4일', '', '');
   const extra = jn.go.filter(n => ferry.indexOf(n) < 0 && air.indexOf(n) < 0);
   const moveTxt = ['🚢 배 ' + ferry.length, '✈️ 비행기 ' + air.length].concat(extra.map(n => (TRAVEL_EXTRA[n] || '기타') + ' 1')).join(' · ');
-  html += row('fixed', '🙋 인원', jn.go.length + '명 — ' + moveTxt, '', others.concat(['사람별 참가·이동·투표·준비물은 아래 표 · 편명·시간은 신년회 탭 🎫 티켓']).join(' · '));
-  html += row('fixed', '🏠 숙소', '료칸(목) → 아파트(금·토 연박)', '', '료칸은 목요일 온천지에서 1박 2식');
-  html += voteRow('♨️ 목 온천', 'ny_onsen', '정해지면 그 지역 료칸 예약');
+  html += row('fixed', '🙋 인원', jn.go.length + '명 — ' + moveTxt, '', others.concat(['사람별 참가·이동·여권·준비물은 아래 표 · 편명·시간은 신년회 탭 🎫 티켓']).join(' · '));
+  html += row('fixed', '🏠 숙소', '료칸(목) → 아파트(금·토 연박)', '', '3/4 유후인 冨季의舍 별채 1박 2식 → 3/5~3/6 하코자키 단독주택 (둘 다 예약 완료)');
+  html += voteRow('♨️ 목 온천', 'ny_onsen', '冨季의舍 별채 花舎 예약 완료 (11/17)');
   html += voteRow('🎌 토 낮', 'ny_activity', '저녁은 신년회 (8명 식당 예약)');
   html += voteRow('💰 항공 기준', 'ny_budget', '');
   html += row('info', '💵 1인 비용', '약 112만 (김기태·조성화) · 127만 (최근호·윤유병) · 134만 (배 4명)', '', '교통비 + 공통비 76만 (숙소·식사·현지) · 회비 100만 지원 넘는 부분만 본인 부담 (12만~34만) · 자세한 건 신년회 탭 💰 비용 한눈에');
   html += '<div class="plan-members-h">👥 회원 현황</div><div id="home-member-status"></div>';
-  html += '<div class="plan-foot">🟡 노란 줄은 동률이거나 1표 차라 바뀔 수 있습니다. 투표는 ✈️ 신년회 탭의 일정 카드에서 누릅니다.</div>' +
+  html += '<div class="plan-foot">회색 줄은 아직 미정입니다 — 회원 투표 없이 총무가 정하고, 후보 비교는 ✈️ 신년회 탭 일정에서 볼 수 있습니다.</div>' +
     '<div class="btn-row" style="margin-top:10px;">' +
-    '<button class="btn" onclick="switchTab(\'ny\')">✈️ 일정 · 투표</button>' +
+    '<button class="btn" onclick="switchTab(\'ny\')">✈️ 일정 보기</button>' +
     '<button class="btn secondary" onclick="shareSummary()">💬 카톡으로 보내기</button>' +
     '</div>';
   el.innerHTML = html;
@@ -2810,7 +2813,7 @@ function getParticipationStatus(name, group) {
   if (v === 1) return { code: 'no', label: '❌ 미참석', color: '#e74c3c', bg: '#fdebec' };
   if (v === 2) return { code: 'maybe', label: '🟢 조건부', color: '#27ae60', bg: '#e6f7ec' };
   if (v === 3) return { code: 'undecided', label: '🤔 미정', color: '#e67e22', bg: '#fef3e6' };
-  return { code: 'none', label: '⏳ 미투표', color: '#888', bg: '#f0f0f0' };
+  return { code: 'none', label: '⏳ 미정', color: '#888', bg: '#f0f0f0' };
 }
 
 function _getPollWinner(pollId) {
@@ -3655,7 +3658,7 @@ function renderMembers() {
     const escName = escapeHtml(name).replace(/'/g, "\\'");
     html += '<div class="member-chip" style="' + (canSwitch ? 'cursor:pointer;' : '') + '" ' + (canSwitch ? 'onclick="loginAs(\'' + escName + '\')"' : '') + '>' +
       '<div class="name">' + escapeHtml(name) + (isMe ? ' ✓ (나)' : '') + '</div>' +
-      '<div class="meta">투표 ' + voteCount + '/' + visiblePolls().length + ' · 활동 ' + commentCount + (canSwitch ? ' · 👆 클릭해서 로그인' : '') + '</div>' +
+      '<div class="meta">🎒 준비물 ' + checklistProgress(name).done + '/' + checklistProgress(name).total + ' · 활동 ' + commentCount + (canSwitch ? ' · 👆 클릭해서 로그인' : '') + '</div>' +
       '</div>';
   });
   list.innerHTML = html;
@@ -3674,7 +3677,7 @@ function renderHomeLoginGrid() {
     }).length;
     const escName = escapeHtml(name).replace(/'/g, "\\'");
     html += '<button onclick="loginAs(\'' + escName + '\')" style="background: white; border: 2px solid var(--primary-lighter); color: var(--primary); padding: 14px 12px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600;" onmouseover="this.style.background=\'var(--primary)\'; this.style.color=\'white\';" onmouseout="this.style.background=\'white\'; this.style.color=\'var(--primary)\';">' +
-      escapeHtml(name) + '<div style="font-size: 11px; font-weight: 400; margin-top: 3px; opacity: 0.7;">투표 ' + voteCount + '/' + visiblePolls().length + '</div></button>';
+      escapeHtml(name) + '<div style="font-size: 11px; font-weight: 400; margin-top: 3px; opacity: 0.7;">🎒 준비물 ' + checklistProgress(name).done + '/' + checklistProgress(name).total + '</div></button>';
   });
   grid.innerHTML = html;
 }
@@ -4309,7 +4312,7 @@ function decideVote(pollId, key) {
   if (!poll || optKeys(poll).indexOf(key) < 0) return;
   const pos = posOfKey(poll, key);
   const label = (poll.short && poll.short[pos]) || _shortOption(poll.options[pos]);
-  if (!confirm('「' + label + '」(으)로 확정할까요?\n\n모두의 화면에 확정으로 표시되고, 그 시간표가 일정에 들어갑니다.\n투표 기록은 그대로 남고, 언제든 [확정 취소]로 되돌릴 수 있습니다.')) return;
+  if (!confirm('「' + label + '」(으)로 확정할까요?\n\n모두의 화면에 확정으로 표시되고, 그 시간표가 일정에 들어갑니다.\n언제든 [확정 취소]로 되돌릴 수 있습니다.')) return;
   if (!DB.decided) DB.decided = {};
   const cur = decidedKeys(pollId);
   const next = EXCLUSIVE_DECIDE[pollId] ? [key] : cur.concat(cur.indexOf(key) >= 0 ? [] : [key]).sort((a, b) => a - b);
@@ -4319,7 +4322,7 @@ function decideVote(pollId, key) {
 }
 function undecideVote(pollId, key) {
   if (!canDecide()) return;
-  if (!confirm('확정을 취소하고 다시 투표 중으로 돌릴까요?')) return;
+  if (!confirm('확정을 취소하고 다시 미정으로 돌릴까요?')) return;
   if (!DB.decided) DB.decided = {};
   const next = decidedKeys(pollId).filter(k => k !== key);
   if (next.length) DB.decided[pollId] = next;
@@ -4357,6 +4360,14 @@ function renderTimeline() {
 
   // 비교 카드 (좌우로 넘겨 보고 선택)
   const branch = (pollId, c) => {
+    if (VOTING_CLOSED) {
+      // 투표 없이 후보 안내만 — 확정된 안은 강조, 총무는 카드에서 바로 확정
+      const isDec = decidedKeys(pollId).indexOf(c.k) >= 0;
+      return '<div class="tl-branch-card' + (isDec ? ' sel' : '') + '"><div class="tl-branch-body">' +
+        '<strong style="font-size:15px;">' + c.name + '</strong>' + (isDec ? ' · ✅ 확정' : '') +
+        '<div class="tl-facts">' + c.facts.map(f => '<div><span>' + f[0] + '</span><span>' + f[1] + '</span></div>').join('') + '</div></div>' +
+        (canDecide() && !isDec ? '<button type="button" class="tl-branch-btn" onclick="decideVote(\'' + pollId + '\', ' + c.k + ')">✅ 이걸로 확정 (총무)</button>' : '') + '</div>';
+    }
     const isSel = mine(pollId).indexOf(c.k) >= 0;
     const isLeader = leaderKeys(pollId).indexOf(c.k) >= 0;
     const cls = 'tl-branch-card' + (isSel ? ' sel' : '') + (isLeader ? ' leader' : '');
@@ -4404,19 +4415,22 @@ function renderTimeline() {
     let h = '<div class="tl-step' + (decided ? '' : ' vote') + '"><div class="tl-node ' + (decided ? 'fixed' : 'branch') + '">' +
       (date ? '<div class="tl-date">' + date + '</div>' : '') +
       '<div class="tl-title">' + (decided ? dk.map(k => detailOf(pollId, k).title).join(' + ') : title) +
-      ' <span class="tl-badge ' + (decided ? 'fixed' : 'todo') + '">' + (decided ? '확정' : '투표 중') + '</span></div>' +
+      ' <span class="tl-badge ' + (decided ? 'fixed' : 'todo') + '">' + (decided ? '확정' : (VOTING_CLOSED ? '미정' : '투표 중')) + '</span></div>' +
       (desc ? '<div class="tl-desc">' + desc + '</div>' : '');
     if (decided) {
       h += dk.map(k => panel(pollId, k, 'decided')).join('');
       if (!EXCLUSIVE_DECIDE[pollId] && canDecide()) {
         const pollObj = POLLS.find(p => p.id === pollId);
-        const extra = optKeys(pollObj).filter(k => dk.indexOf(k) < 0 && countOf(pollId, k) > 0);
+        const extra = optKeys(pollObj).filter(k => dk.indexOf(k) < 0 && (VOTING_CLOSED || countOf(pollId, k) > 0));
         if (extra.length) {
           h += '<div style="margin-top:8px; font-size:12.5px; color:var(--text-muted);">같이 확정할 것 ' + extra.map(k =>
-            '<button type="button" class="tl-mini-btn ghost" style="margin:4px 4px 0 0;" onclick="decideVote(\'' + pollId + '\', ' + k + ')">＋ ' + labelOf(pollId, k) + ' (' + countOf(pollId, k) + '표)</button>').join('') + '</div>';
+            '<button type="button" class="tl-mini-btn ghost" style="margin:4px 4px 0 0;" onclick="decideVote(\'' + pollId + '\', ' + k + ')">＋ ' + labelOf(pollId, k) + (VOTING_CLOSED ? '' : ' (' + countOf(pollId, k) + '표)') + '</button>').join('') + '</div>';
         }
       }
-      h += '<details class="tl-revote"><summary>🗳️ 비교 카드 · 투표 결과 다시 보기</summary><div class="tl-carousel">' + cardsOf(pollId) + '</div>' + (note || '') + '</details>';
+      h += '<details class="tl-revote"><summary>' + (VOTING_CLOSED ? '🔍 다른 후보와 비교해 보기' : '🗳️ 비교 카드 · 투표 결과 다시 보기') + '</summary><div class="tl-carousel">' + cardsOf(pollId) + '</div>' + (note || '') + '</details>';
+    } else if (VOTING_CLOSED) {
+      h += '<div style="font-size:12px; color:var(--text-muted); margin-top:6px;">후보 비교 — 회원 투표 없이 총무가 정하면 시간표가 일정에 들어갑니다 · ← 좌우로 넘겨 보기 →</div>' +
+        '<div class="tl-carousel">' + cardsOf(pollId) + '</div>' + (note || '');
     } else {
       h += '<div style="font-size:12px; color:var(--text-muted); margin-top:6px;">' + hint + ' · ← 좌우로 넘겨 보기 →</div>' +
         '<div class="tl-carousel">' + cardsOf(pollId) + '</div>' + (note || '');
