@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗓️ 금·토 일정 — 후쿠오카 2027 신년회</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="bingbot" content="noindex, nofollow, noarchive">
+<meta name="Yeti" content="noindex, nofollow">
+<meta name="Daumoa" content="noindex, nofollow">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #0b5ed7;
+  --primary-dark: #0847a8;
+  --primary-light: #2f7de1;
+  --primary-lighter: #dbeafe;
+  --accent: #0b5ed7;
+  --bg: #eef4ff;
+  --card: #ffffff;
+  --text: #14213d;
+  --text-secondary: #3d4f6b;
+  --text-muted: #6b7a90;
+  --border: #d7e3f4;
+  --success: #15803d;
+  --warning: #b45309;
+  --danger: #dc2626;
+  --shadow: 0 2px 12px rgba(11, 94, 215, 0.08);
+}
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 16px;
+}
+.container { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+a { color: var(--primary-light); }
+
+/* ============ HEADER ============ */
+header {
+  background: linear-gradient(135deg, #0847a8 0%, #0b5ed7 55%, #2f7de1 100%);
+  color: white;
+  padding: 22px 16px 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-top {
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 880px; margin: 0 auto; flex-wrap: wrap; gap: 12px;
+}
+.brand h1 { font-size: 22px; font-weight: 800; line-height: 1.3; }
+.brand .subtitle { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+.member-area { display: flex; align-items: center; gap: 10px; font-size: 14px; flex-wrap: wrap; }
+.member-area input, .member-area select {
+  padding: 10px 12px; border-radius: 10px; border: none;
+  background: rgba(255,255,255,0.2); color: white; font-size: 15px;
+  min-height: 44px;
+}
+.member-area select { background: rgba(255,255,255,0.95); color: var(--primary); font-weight: 600; }
+.member-area input::placeholder { color: rgba(255,255,255,0.7); }
+.member-area button {
+  background: rgba(255,255,255,0.95); color: var(--primary);
+  border: none; padding: 10px 16px; border-radius: 10px;
+  font-weight: 700; cursor: pointer; font-size: 15px; min-height: 44px;
+}
+#current-user { font-weight: 700; }
+
+/* ============ NAVIGATION ============ */
+.tabs {
+  display: flex; gap: 8px; max-width: 880px; margin: 16px auto 0;
+  overflow-x: auto; padding-bottom: 0;
+}
+.tab {
+  padding: 12px 18px; background: rgba(255,255,255,0.15); color: white;
+  border: none; border-radius: 12px 12px 0 0; cursor: pointer;
+  font-size: 15px; font-weight: 600; min-height: 48px; white-space: nowrap;
+}
+.tab:hover { background: rgba(255,255,255,0.25); }
+.tab.active { background: var(--bg); color: var(--primary); font-weight: 800; }
+
+/* ============ MAIN ============ */
+main { padding: 24px 0 80px; }
+.section { display: none; }
+.section.active { display: block; }
+.card {
+  background: var(--card); border-radius: 16px; padding: 22px;
+  margin-bottom: 16px; box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.card h2 {
+  font-size: 20px; color: var(--primary);
+  margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary-lighter);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.card h3 { font-size: 16px; color: var(--primary-light); margin: 14px 0 8px; font-weight: 700; }
+.card p { margin-bottom: 10px; color: var(--text-secondary); font-size: 15px; }
+.card ul { padding-left: 20px; margin-bottom: 10px; }
+.card li { margin-bottom: 6px; color: var(--text-secondary); font-size: 15px; }
+
+/* ============ HERO ============ */
+.hero {
+  background: linear-gradient(135deg, #0847a8 0%, #0b5ed7 100%);
+  color: white; border-radius: 16px; padding: 22px;
+  margin-bottom: 16px; box-shadow: var(--shadow);
+}
+.hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.hero p { color: rgba(255,255,255,0.92); font-size: 15px; margin-bottom: 6px; }
+.hero .hero-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 14px; }
+.hero .hero-fact { background: rgba(255,255,255,0.14); border-radius: 12px; padding: 12px; }
+.hero .hero-fact .k { font-size: 12px; opacity: 0.85; }
+.hero .hero-fact .v { font-size: 17px; font-weight: 800; margin-top: 2px; }
+.hero .hero-fact .s { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+
+/* ============ COUNTDOWN / D-DAY ============ */
+.dday-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 18px; }
+.dday-card { color: white; padding: 20px; border-radius: 16px; background: linear-gradient(135deg, #0847a8 0%, #2f7de1 100%); }
+.dday-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.dday-label { font-size: 15px; font-weight: 700; }
+.dday-date { font-size: 14px; margin-top: 3px; opacity: 0.9; }
+.dday-days { font-size: 34px; font-weight: 800; line-height: 1; white-space: nowrap; }
+.dday-days span { font-size: 14px; font-weight: 400; opacity: 0.9; }
+.dday-controls { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.25); flex-wrap: wrap; }
+.dday-controls input { padding: 8px 10px; border-radius: 8px; border: none; font-size: 14px; background: rgba(255,255,255,0.95); color: #1a1a1a; min-height: 44px; }
+
+/* ============ TABLES (no horizontal scroll: wrap) ============ */
+table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 14px; table-layout: auto; }
+th {
+  background: var(--primary-lighter); color: var(--primary);
+  text-align: left; padding: 10px 12px; font-weight: 700;
+  border-bottom: 2px solid var(--primary); font-size: 14px;
+}
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+tr:hover td { background: #f5f9ff; }
+
+/* ============ TIMELINE ============ */
+.timeline { margin: 14px 0; padding-left: 0; list-style: none; border-left: 3px solid var(--primary-lighter); }
+.timeline li { position: relative; padding: 12px 0 12px 24px; margin-left: 8px; }
+.timeline li::before {
+  content: ''; position: absolute; left: -8px; top: 18px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--primary-light); border: 3px solid var(--card);
+}
+.timeline-time { font-weight: 700; color: var(--primary); font-size: 15px; }
+.timeline-title { font-weight: 600; color: var(--text); margin-top: 2px; font-size: 15px; }
+.timeline-detail { font-size: 14px; color: var(--text-muted); margin-top: 2px; }
+
+/* ============ PICK CARDS (큰 카드형 선택 UI) ============ */
+.pick-section { margin-bottom: 22px; }
+.pick-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.pick-title { font-size: 18px; font-weight: 800; color: var(--text); }
+.pick-sub { font-size: 13px; color: var(--text-muted); }
+.pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.pick-card {
+  border: 2px solid var(--border); border-radius: 14px; padding: 16px;
+  cursor: pointer; background: #fff; min-height: 108px;
+  display: flex; flex-direction: column; gap: 4px;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.pick-card:hover { border-color: var(--primary-light); }
+.pick-card.sel { border-color: var(--primary); background: #dcebfb; box-shadow: 0 0 0 2px var(--primary), 0 2px 12px rgba(11,94,215,0.25); }
+.pick-sel-badge { display: inline-block; align-self: flex-start; background: var(--primary); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 999px; margin-bottom: 2px; }
+.pick-card .pick-name { font-weight: 800; font-size: 16px; color: var(--text); line-height: 1.35; }
+.pick-card .pick-price { font-size: 18px; font-weight: 800; color: var(--primary); }
+.pick-card .pick-sub2 { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.pick-card .pick-trip { font-size: 13px; color: #0b6e4f; line-height: 1.5; }
+.pick-card .pick-votes { font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-top: auto; padding-top: 6px; line-height: 1.5; }
+.pick-badge {
+  display: inline-block; background: #dcfce7; color: #15803d;
+  font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 999px; margin-left: 6px; white-space: nowrap;
+}
+.pick-badge.blue { background: var(--primary-lighter); color: var(--primary); }
+.total-bar {
+  position: sticky; bottom: 12px; z-index: 50;
+  background: var(--primary); color: white; border-radius: 14px;
+  padding: 16px 18px; box-shadow: 0 6px 20px rgba(11,94,215,0.35);
+  margin-top: 6px;
+}
+.total-bar .tb-label { font-size: 13px; opacity: 0.9; }
+.total-bar .tb-value { font-size: 24px; font-weight: 800; margin-top: 2px; }
+.total-bar .tb-sub { font-size: 13px; opacity: 0.9; margin-top: 4px; line-height: 1.5; }
+
+/* ============ VOTING (기존 투표도 큰 카드로) ============ */
+.poll-card { margin-bottom: 18px; }
+.poll-question { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
+.poll-option {
+  margin-bottom: 10px; padding: 16px 18px; min-height: 58px;
+  border: 2px solid var(--border); border-radius: 12px;
+  cursor: pointer; transition: all 0.15s;
+  display: flex; justify-content: space-between; align-items: center; gap: 6px 10px; flex-wrap: wrap;
+  position: relative; overflow: hidden;
+}
+.poll-option:hover { border-color: var(--primary-light); background: #f5f9ff; }
+.poll-option.voted { border-color: var(--primary); background: #dcebfb; box-shadow: 0 0 0 2px var(--primary); }
+.poll-option .label { font-weight: 600; font-size: 15px; z-index: 1; position: relative; flex: 1 1 220px; }
+.poll-option .count { font-size: 13px; font-weight: 700; color: var(--text); z-index: 1; position: relative; white-space: nowrap; }
+.poll-mine-badge { background: var(--primary); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 999px; white-space: nowrap; z-index: 1; position: relative; }
+.poll-option .bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--primary-lighter); transition: width 0.4s ease; }
+.poll-voters { font-size: 13px; color: var(--text-muted); margin-top: 4px; padding-left: 4px; }
+.poll-total { text-align: right; font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+/* ============ DISCUSSION ============ */
+.thread-list { display: flex; flex-direction: column; gap: 12px; }
+.thread { border: 1px solid var(--border); border-radius: 12px; padding: 16px; background: white; }
+.thread-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 8px; flex-wrap: wrap; }
+.thread-title { font-weight: 700; font-size: 16px; color: var(--primary); }
+.thread-meta { font-size: 12px; color: var(--text-muted); }
+.thread-body { font-size: 15px; color: var(--text-secondary); margin-bottom: 10px; }
+.comments { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 8px; }
+.comment { padding: 10px 12px; background: #f5f9ff; border-radius: 8px; margin-bottom: 6px; font-size: 14px; }
+.comment-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 3px; display: flex; justify-content: space-between; }
+.comment-author { font-weight: 700; color: var(--primary); }
+.comment-body { color: var(--text); }
+.comment-form { display: flex; gap: 6px; margin-top: 8px; }
+.comment-form input { flex: 1; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; min-height: 44px; }
+.comment-form button { background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; min-height: 44px; }
+.new-thread { background: #f5f9ff; border: 2px dashed var(--border); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+.new-thread input, .new-thread textarea { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; margin-bottom: 8px; font-family: inherit; }
+.new-thread textarea { min-height: 70px; resize: vertical; }
+.new-thread button { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 15px; min-height: 48px; }
+
+/* ============ MEMBERS ============ */
+.member-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 10px 0; }
+.member-chip { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px; font-size: 14px; display: flex; flex-direction: column; gap: 2px; }
+.member-chip .name { font-weight: 700; color: var(--primary); }
+.member-chip .meta { font-size: 12px; color: var(--text-muted); }
+
+/* ============ ALERTS / NOTES ============ */
+.note { padding: 12px 14px; border-radius: 10px; font-size: 14px; margin: 10px 0; line-height: 1.6; }
+.note.info { background: #e6f1fb; color: #185fa5; border-left: 3px solid #2f7de1; }
+.note.warn { background: #fef3e6; color: #8a4500; border-left: 3px solid #d97706; }
+.note.success { background: #e6f7ec; color: #155f3a; border-left: 3px solid #22c55e; }
+
+/* ============ BUTTONS ============ */
+.btn {
+  background: var(--primary); color: white; border: none;
+  padding: 12px 20px; border-radius: 10px; cursor: pointer;
+  font-size: 15px; font-weight: 700; min-height: 48px;
+}
+.btn:hover { background: var(--primary-light); }
+.btn.secondary { background: white; color: var(--primary); border: 1.5px solid var(--primary); }
+.btn.danger { background: var(--danger); }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+input, select, textarea { font-size: 15px; }
+
+/* ============ EMPTY STATE ============ */
+.empty { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 15px; }
+.login-required { background: #fff8e1; border: 2px dashed #f0c040; padding: 24px; text-align: center; border-radius: 12px; color: #856404; margin: 14px 0; font-size: 15px; }
+
+footer { text-align: center; padding: 30px 16px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px; }
+
+/* ============ AUTH GATE ============ */
+#auth-gate {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #0847a8 0%, #0b5ed7 50%, #2f7de1 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; overflow-y: auto;
+}
+.gate-card { background: white; border-radius: 18px; padding: 32px 28px; max-width: 480px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.gate-title { font-size: 24px; font-weight: 800; color: var(--primary); text-align: center; margin-bottom: 6px; }
+.gate-subtitle { font-size: 14px; color: var(--text-secondary); text-align: center; margin-bottom: 22px; }
+.gate-step-label { font-size: 13px; font-weight: 700; color: var(--primary-light); margin-bottom: 8px; letter-spacing: 0.5px; }
+.gate-name-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
+.gate-name-btn { background: white; border: 2px solid var(--border); color: var(--text); padding: 14px 6px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 700; min-height: 52px; }
+.gate-name-btn:hover { border-color: var(--primary-light); background: #eaf2fe; }
+.gate-name-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
+.gate-other-row { display: flex; gap: 8px; margin-bottom: 18px; }
+.gate-other-row input { flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: 10px; font-size: 15px; font-family: inherit; min-height: 48px; }
+.gate-other-row button { background: white; border: 2px solid var(--border); color: var(--text-secondary); padding: 10px 14px; border-radius: 10px; cursor: pointer; font-size: 14px; min-height: 48px; }
+.gate-password-row { display: flex; gap: 8px; margin-bottom: 14px; }
+.gate-password-row input { flex: 1; padding: 12px 14px; border: 2px solid var(--border); border-radius: 10px; font-size: 18px; font-family: inherit; letter-spacing: 4px; min-height: 48px; }
+.gate-password-row input:focus { outline: none; border-color: var(--primary); }
+.gate-submit { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 15px; min-height: 48px; }
+.gate-submit:hover { background: var(--primary-light); }
+.gate-submit:disabled { background: #ccc; cursor: not-allowed; }
+.gate-error { color: var(--danger); font-size: 14px; margin-bottom: 10px; padding: 10px 12px; background: #fdebec; border-radius: 8px; text-align: center; display: none; }
+.gate-error.show { display: block; }
+.gate-hint { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+body.gated { overflow: hidden; }
+body.gated header, body.gated main, body.gated footer { display: none; }
+
+/* ============ 홈 잠정 계획 ============ */
+.plan-card { background: linear-gradient(180deg, #ffffff 0%, #f2f7ff 100%); border: 2px solid var(--primary); border-radius: 16px; padding: 18px 16px 12px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.plan-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.plan-title { font-size: 19px; font-weight: 800; color: var(--primary); }
+.plan-sub { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+.plan-badge { background: #eaf2fe; color: var(--primary); border: 1px solid #bcd7f7; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.plan-agenda { border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; }
+.plan-agenda-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; flex-wrap: wrap; }
+.plan-count { font-size: 13px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+.plan-row { display: grid; grid-template-columns: 112px 1fr; gap: 8px; padding: 10px; border-radius: 10px; margin-bottom: 4px; align-items: baseline; }
+.plan-row.lead { background: #eaf2fe; }
+.plan-row.fixed { background: #e6f7ec; }
+.plan-row.tie, .plan-row.close { background: #fff7e3; }
+.plan-row.none { background: #f5f5f5; }
+.plan-row.info { background: #eef2fb; }
+.plan-label { font-size: 14px; color: var(--text-secondary); }
+.plan-val { font-size: 15px; font-weight: 600; color: var(--text); word-break: keep-all; }
+.plan-row.none .plan-val { font-weight: 400; color: var(--text-muted); font-size: 14px; }
+.plan-members-h { font-size: 15px; font-weight: 800; color: var(--primary); margin: 14px 2px 8px; padding-top: 12px; border-top: 1px dashed var(--border); }
+#home-member-status table { background: #fff; }
+@media (max-width: 420px) { #home-member-status th, #home-member-status td { padding-left: 4px !important; padding-right: 4px !important; min-width: 0 !important; font-size: 12px; } }
+.plan-tag { font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 999px; margin-left: 4px; background: #dbeafe; color: var(--primary); white-space: nowrap; }
+.plan-row.tie .plan-tag, .plan-row.close .plan-tag { background: #fde6b8; color: #7a5000; }
+.plan-row.fixed .plan-tag { background: #c5ebd3; color: #155f3a; }
+.plan-people { font-size: 14px; color: var(--text-secondary); margin-top: 8px; line-height: 1.75; }
+.plan-foot { font-size: 13px; color: var(--text-muted); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); }
+
+.chat-log { display: flex; flex-direction: column; gap: 6px; }
+.chat-row { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; }
+.chat-who { flex: 0 0 62px; font-weight: 700; color: var(--primary); font-size: 13px; text-align: right; padding-top: 1px; }
+.chat-msg { background: #f5f9ff; border-radius: 8px; padding: 8px 10px; color: var(--text-secondary); }
+
+@media (max-width: 700px) {
+  body { font-size: 16px; }
+  .brand h1 { font-size: 19px; }
+  .card { padding: 18px 16px; }
+  .card h2 { font-size: 19px; }
+  th, td { padding: 8px; font-size: 13px; }
+  .gate-name-grid { grid-template-columns: repeat(3, 1fr); }
+  .plan-row { grid-template-columns: 1fr; gap: 2px; }
+  .pick-grid { grid-template-columns: 1fr; }
+  .poll-option .label { flex-basis: 100%; }
+}
+
+tr.done-row td { opacity: 0.62; }
+.home-dday { background: var(--primary); color: #fff; font-size: 24px; font-weight: 800; padding: 8px 14px; border-radius: 12px; white-space: nowrap; line-height: 1.15; }
+.home-dday span { font-size: 13px; font-weight: 600; margin-left: 2px; }
+.todo-table td.when { font-weight: 700; color: var(--primary); white-space: nowrap; }
+.todo-table .sub, .todo-table td .sub { display: block; font-size: 12px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
+.booking-note { width: 100%; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
+.tl-node { border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; background: white; }
+.tl-node.fixed { border-left: 4px solid #2e7d32; }
+.tl-node.branch { border-left: 4px solid #e65100; }
+.tl-date { font-size: 12px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+.tl-title { font-size: 15px; font-weight: 700; }
+.tl-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+.tl-badge.fixed { background: #e8f5e9; color: #2e7d32; }
+.tl-badge.todo { background: #fff3e0; color: #e65100; }
+.tl-desc { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
+.tl-arrow { text-align: center; font-size: 20px; color: var(--text-muted); line-height: 1.2; padding: 2px 0; }
+/* 일정: 왼쪽 세로선 하나로 처음부터 끝까지 이어지고, 날짜마다 점이 찍힌다 */
+.tl-flow { position: relative; padding-left: 30px; }
+.tl-flow::before { content: ''; position: absolute; left: 10px; top: 20px; bottom: 20px; width: 3px; background: #9db8dc; border-radius: 2px; }
+.tl-step { position: relative; margin-bottom: 14px; }
+.tl-step:last-child { margin-bottom: 0; }
+.tl-step::before { content: ''; position: absolute; left: -28px; top: 15px; width: 18px; height: 18px; box-sizing: border-box; border-radius: 50%; background: #2e7d32; border: 3px solid #fff; box-shadow: 0 0 0 2px #2e7d32; z-index: 1; }
+.tl-step.vote::before { background: #e65100; box-shadow: 0 0 0 2px #e65100; }
+.tl-facts { margin-top: 8px; display: grid; gap: 5px; font-size: 12.5px; line-height: 1.5; color: var(--text-secondary); }
+.tl-facts > div { display: grid; grid-template-columns: 22px 1fr; gap: 2px; }
+.tl-step.sub { margin: -6px 0 8px; }
+.tl-step.sub::before { left: -24px; top: 8px; width: 10px; height: 10px; border-width: 2px; background: #fff; box-shadow: 0 0 0 2px #2e7d32; }
+.tl-sub { font-size: 13.5px; padding: 2px 4px; line-height: 1.55; }
+.tl-sub .t { display: inline-block; min-width: 52px; font-weight: 700; color: #2e7d32; margin-right: 4px; }
+.tl-detail { margin-top: 12px; border-radius: 10px; padding: 12px 14px; background: #eef4fd; border: 1px solid #cfe0f7; }
+.tl-detail.decided { background: #eef8f0; border-color: #bfe3c8; }
+.tl-detail-head { font-weight: 700; font-size: 14px; color: var(--primary); margin-bottom: 8px; line-height: 1.5; }
+.tl-detail.decided .tl-detail-head { color: #1b5e20; }
+.tl-kv { display: grid; grid-template-columns: 92px 1fr; gap: 5px 10px; font-size: 13px; line-height: 1.55; }
+.tl-kv .k { color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+.tl-plan { list-style: none; margin: 12px 0 0 6px; padding: 0 0 0 16px; border-left: 2px solid #9db8dc; }
+.tl-plan li { position: relative; font-size: 13px; padding: 3px 0 3px 2px; line-height: 1.5; }
+.tl-plan li::before { content: ''; position: absolute; left: -22px; top: 9px; width: 10px; height: 10px; border-radius: 50%; background: #fff; border: 2px solid #5b8fd1; box-sizing: border-box; }
+.tl-plan .t { display: inline-block; min-width: 50px; font-weight: 700; color: var(--primary); }
+.tl-detail.decided .tl-plan { border-left-color: #8fcf9f; }
+.tl-detail.decided .tl-plan li::before { border-color: #2e7d32; }
+.tl-mini-btn { margin-top: 10px; padding: 7px 12px; border: none; border-radius: 8px; background: #2e7d32; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }
+.tl-mini-btn.ghost { background: #fff; color: #666; border: 1px solid var(--border); }
+.tl-revote { margin-top: 10px; font-size: 13px; }
+.tl-revote > summary { cursor: pointer; color: var(--text-muted); }
+@media (max-width: 600px) { .tl-kv { grid-template-columns: 1fr; gap: 0; } .tl-kv .k { margin-top: 6px; } }
+.tl-carousel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 10px; -webkit-overflow-scrolling: touch; margin-top: 10px; }
+.tl-branch-card { flex: 0 0 78%; max-width: 320px; scroll-snap-align: start; min-height: 190px; display: flex; flex-direction: column; border: 2px solid var(--border); border-radius: 12px; padding: 16px; background: #fafafa; font-size: 14px; line-height: 1.5; }
+.tl-branch-card.sel { border-color: var(--primary); background: #e8f0fe; }
+.tl-branch-card.leader { border-color: #2e7d32; }
+.tl-branch-body { flex: 1; }
+.tl-branch-card .tl-votes { display: block; font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+.tl-branch-card .tl-votes b { color: var(--primary); }
+.tl-branch-btn { margin-top: 12px; width: 100%; padding: 11px; border: none; border-radius: 8px; background: var(--primary); color: white; font-size: 15px; font-weight: 700; cursor: pointer; }
+.tl-branch-btn:hover { background: var(--primary-dark); }
+/* ============ 현지 정보 카드 (11/16 추가) ============ */
+.info-toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.info-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.info-toc a, .info-chips a { display: inline-block; padding: 8px 12px; border-radius: 999px; background: var(--primary-lighter); color: var(--primary); font-size: 13px; font-weight: 600; text-decoration: none; }
+.info-toc a:hover, .info-chips a:hover { background: #c7dcfa; }
+.info-toc-label { font-size: 12.5px; font-weight: 700; color: var(--text-secondary); margin-top: 12px; }
+.info-list { padding-left: 18px; font-size: 13.5px; line-height: 1.7; }
+.info-list li { margin: 3px 0; }
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.info-box { border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; background: #fafcff; }
+.info-box-t { font-weight: 700; color: var(--primary); margin-bottom: 4px; font-size: 14px; }
+.info-muted { font-size: 11.5px; color: var(--text-muted); font-weight: 400; }
+.info-more { margin-top: 12px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+.info-more > summary { cursor: pointer; font-weight: 700; color: var(--primary); }
+/* ============ 사람별 여행 안내 (11/16 추가) ============ */
+.mt-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.mt-chip { padding: 7px 12px; border-radius: 999px; border: 1px solid var(--border); background: #fff; color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer; }
+.mt-chip.on { background: var(--primary); color: #fff; border-color: var(--primary); }
+.mt-head { margin-top: 12px; padding: 10px 12px; background: #f0f7fc; border-radius: 10px; font-size: 14px; line-height: 1.8; }
+.mt-st span { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; margin: 2px 2px 0 0; font-weight: 600; }
+.mt-ok { background: #e6f7ec; color: #155f3a; }
+.mt-no { background: #fef3e6; color: #8a4500; }
+.mt-code-row { margin-top: 8px; padding: 8px 12px; background: #fffbea; border: 1px solid #f3d27a; border-radius: 10px; font-size: 13.5px; }
+.mt-code { font-family: monospace; font-size: 16px; font-weight: 800; letter-spacing: 2px; color: #8a4500; }
+.mt-sec { font-size: 13.5px; font-weight: 800; color: var(--primary); margin: 14px 0 4px; }
+.mt-row { display: grid; grid-template-columns: 112px 1fr; gap: 8px; padding: 7px 4px; border-bottom: 1px dashed var(--border); font-size: 13.5px; line-height: 1.6; }
+.mt-t { font-weight: 700; color: var(--text-secondary); font-size: 12.5px; }
+@media (max-width: 480px) { .mt-row { grid-template-columns: 1fr; gap: 0; } }
+/* ============ 비용 한눈에 (11/16) ============ */
+.cost-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
+.cost-tile { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; background: #fafcff; }
+.cost-tile .t { font-size: 12px; color: var(--text-muted); }
+.cost-tile .v { font-size: 19px; font-weight: 800; color: var(--primary); margin: 2px 0; }
+.cost-tile .s { font-size: 11.5px; color: var(--text-muted); }
+@media (max-width: 480px) { .cost-tile .v { font-size: 17px; } }
+.cost-h { font-size: 14.5px; margin: 18px 0 6px; }
+.cost-legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+.cost-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 4px; }
+.cost-person { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; }
+.cost-p-head { font-size: 14px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+.cost-own { margin-left: auto; font-size: 13px; color: #b3261e; }
+.cost-bar { position: relative; height: 14px; background: #eef0f3; border-radius: 7px; overflow: hidden; margin: 8px 0 6px; }
+.cost-bar > div { position: absolute; top: 0; bottom: 0; }
+.cost-p-sum { font-size: 13px; }
+.cost-p-note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.c-ok { color: #1e7b34; font-weight: 600; }
+.c-wait { color: #8a4500; font-weight: 600; }
+.cost-common { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
+.cost-common > div { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; }
+.cost-common .t { font-size: 13px; font-weight: 700; }
+.cost-common .v { font-size: 16px; font-weight: 800; color: var(--primary); }
+.cost-common .s { font-size: 12px; color: var(--text-muted); }
+.cost-paid { font-size: 13px; line-height: 1.8; }
+.cost-flow { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 8px; }
+.cost-flow > div { display: flex; align-items: baseline; gap: 8px; padding: 8px 12px; font-size: 13.5px; border-top: 1px solid var(--border); }
+.cost-flow > div:first-child { border-top: none; }
+.cost-flow > div.eq { background: #f0f7fc; font-weight: 700; }
+.cost-flow .op { width: 14px; color: var(--text-muted); font-weight: 700; }
+.cost-flow .t { flex: 1; }
+.cost-flow .v { white-space: nowrap; font-weight: 700; }
+.cost-more { margin-top: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+.cost-more > summary { cursor: pointer; font-weight: 600; color: var(--primary); }
+.cost-tile .v2 { font-size: 15px; font-weight: 800; margin-top: 3px; }
+.cost-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 6px; }
+.cost-chip { font-size: 12px; border-radius: 8px; padding: 3px 8px; border: 1px solid; }
+.cost-chip.ok { background: #e8f1fd; border-color: #a9c8f5; color: #1a56b0; }
+.cost-chip.plan { background: #f3effb; border-color: #d4c6ef; color: #5b3f9e; }
+.cost-chip .m { font-size: 11px; opacity: .8; }
+.cost-ledger tr.ok td { color: #1a56b0; }
+.cost-ledger tr.plan td { color: #5b3f9e; }
+.cost-ledger tr.ok { background: #f2f7fe; }
+.cost-ledger td.m { font-size: 12px; opacity: .85; }
+.cost-ledger tr.sum td { font-weight: 800; border-top: 2px solid var(--border); }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-top">
+    <div class="brand">
+      <h1>🗓️ 금·토 일정 — 당일투어 · 가볼만한 곳</h1>
+      <div class="subtitle">2027년 3월 5일(금) ~ 3월 6일(토) · 후쿠오카 · 8명</div>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="container">
+    <p style="margin:0 0 12px;"><a href="index.html">← 메인 페이지로 돌아가기</a></p>
+<!-- 11/20 추가: 금·토 당일투어 비교 (노랑풍선 패키지 + 다른 여행사 참고) -->
+      <div class="card" id="info-frisat">
+        <h2>🗓️ 금·토 일정 — 당일투어 비교 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">갈지 말지 결정용 · 11/20 확인</span></h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">금요일은 빈틈이 없어. 유후인 복귀 → 13:00 하카타 점심 → 16:00 아파트 체크인 → 18:00 카와타로 오징어 저녁. 금요일 오전 투어는 유후인에 있어서 안 돼. 토요일 낮이 열린 결정이야. 저녁 19:00 신년회라 17:00 전후 하카타 복귀가 좋아.</p>
+        <h3 style="font-size:14px; margin:12px 0 6px;">토요일 낮 — 여행사 당일투어 (8명 기준)</h3>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:720px;">
+            <thead><tr><th>옵션</th><th>시간</th><th>1인 요금</th><th>한 줄 평</th><th>링크</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>🦑 가라쓰·요부코</strong><br><span style="font-size:11px; color:var(--text-muted);">KKday·HIS 프라이빗 · 요부코 아침시장 + 오징어 점심 + 이토시마</span></td>
+                <td>08:00~17:20</td>
+                <td>₩233,844<br><span style="font-size:11px;">오징어 점심 별도</span></td>
+                <td>오징어 취향에 제일 직접적 · 8명 정확히 가능 · 19:00 저녁 여유 있음 · 단 비쌈</td>
+                <td><a href="https://www.kkday.com/en-us/product/701391" target="_blank" rel="noopener">KKday 보기</a></td>
+              </tr>
+              <tr>
+                <td><strong>🌊 이토시마 반일</strong><br><span style="font-size:11px; color:var(--text-muted);">Klook · 한국어 가이드 · 토토로의 숲 · 후타미가우라</span></td>
+                <td>오전 08:20~13:10</td>
+                <td>₩26,900</td>
+                <td>제일 쌈 · 오후 자유라 다른 일정과 결합 가능 · 굴 오두막은 포함 안 됨</td>
+                <td><a href="https://www.klook.com/ko/activity/177586-korean-guide-itoshima-one-day-tour-from-fukuoka/" target="_blank" rel="noopener">Klook 보기</a></td>
+              </tr>
+              <tr>
+                <td><strong>🌋 아소·구마모토성</strong><br><span style="font-size:11px; color:var(--text-muted);">Klook · 구사센리 · 아소 분화구 · 스이젠지</span></td>
+                <td>07:50~18:40</td>
+                <td>₩59,000<br><span style="font-size:11px;">구마모토성 입장권 별도</span></td>
+                <td>19:00 저녁이 촉박 · 18:40 종료 지점이 후쿠오카 복귀인지 불명확</td>
+                <td><a href="https://www.klook.com/ko/activity/224917-fukuoka-mount-aso-kumamoto-castle-full-day-tour/" target="_blank" rel="noopener">Klook 보기</a></td>
+              </tr>
+              <tr>
+                <td><strong>🏯 나가사키 당일치기</strong><br><span style="font-size:11px; color:var(--text-muted);">Klook · 원폭자료관 · 평화공원 · 글로버 정원</span></td>
+                <td>08:00~18:00</td>
+                <td>₩174,000<br><span style="font-size:11px;">입장료·점심 별도</span></td>
+                <td>상품 페이지에 히로시마 내용이 섞여 있어 예약 전 확인 필요 · KKday 야경 코스는 22:20 복귀로 저녁 충돌</td>
+                <td><a href="https://www.klook.com/ko/activity/191563-nagasaki-day-trip-small-group-tour/" target="_blank" rel="noopener">Klook 보기</a></td>
+              </tr>
+              <tr>
+                <td><strong>⛩️ 다자이후 반일</strong><br><span style="font-size:11px; color:var(--text-muted);">KKday · 후쿠오카타워 + 다자이후 텐만구</span></td>
+                <td>10:00~15:00</td>
+                <td>₩59,956</td>
+                <td>크루즈 승객용 상품 · 최소 15명이라 8명만으로 출발 보장 안 됨</td>
+                <td><a href="https://www.kkday.com/en-us/product/526459" target="_blank" rel="noopener">KKday 보기</a></td>
+              </tr>
+              <tr>
+                <td><strong>🎣 하카타만 바다낚시</strong><br><span style="font-size:11px; color:var(--text-muted);">Deeper Japan · 프라이빗 5시간</span></td>
+                <td>06:00~11:00</td>
+                <td>$1,600<br><span style="font-size:11px;">1인/1회 불명확</span></td>
+                <td>시간은 저녁과 안 겹침 · 인원 선택이 1~4명까지만 있어 8명 동시 예약 미확인</td>
+                <td><a href="https://www.deeperjapan.com/kyushu/p/hakata-bay-deep-sea-fishing" target="_blank" rel="noopener">상품 보기</a></td>
+              </tr>
+              <tr>
+                <td><strong>🚤 나카스 크루즈</strong><br><span style="font-size:11px; color:var(--text-muted);">Klook · 30분 유람선</span></td>
+                <td>11:00~21:00 중 선택</td>
+                <td>₩15,800</td>
+                <td>당일투어가 아니라 추가 체험용 · 19:00 하카타 노선은 단체 저녁과 겹침</td>
+                <td><a href="https://www.klook.com/ko/activity/81471-nakasu-river-cruise-ticket-in-fukuoka/" target="_blank" rel="noopener">Klook 보기</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px; margin-top:8px;">투어 말고 직접 가는 안은 아래 토요일 낮 투표 카드에 그대로 있어. 🦪 이토시마 굴 오두막 · 🎣 하카타만 바다낚시공원 · ⛳ 골프 · 🍶 사케 양조장 · 🚤 보트레이스.</p>
+        <h3 style="font-size:14px; margin:12px 0 6px;">참고 — 노랑풍선 12월 패키지 (3월 여행이 아님)</h3>
+        <p style="font-size:13px;">12/8(화)~12/10(목) 2박 3일 · 1인 799,000원 (7% 적용가 743,070원) · 후쿠오카+유후인+구마모토(아소·기쿠치 온천) · 힐튼 1박 + 온천호텔 1박 · 대게·스테이크 + 주류 60분 무제한 석식 · 나카스 크루즈 · 다자이후. 12월 상품이라 3월 일정 참고용으로만 봐줘. <a href="https://nshopping-pkgtour.naver.com/products/ybtour/JKP1654TW00-20261208" target="_blank" rel="noopener">네이버 패키지 보기</a></p>
+        <p style="font-size:12px; color:var(--text-muted);">⚠️ 모든 상품 페이지 달력에는 근일(11월 말~12월 초)만 표시돼서 2027-03-05·03-06 날짜 선택 가능 여부는 아직 확인 안 됨. 가격·시간은 11/20 확인 기준이라 변동 가능. 결정하면 상품 페이지에서 3월 날짜를 다시 확인해.</p>
+      </div>
+
+      <!-- 11/20 추가: 가볼만한 곳 (투어 말고 직접 가는 곳) -->
+      <div class="card" id="info-places">
+        <h2>📍 가볼만한 곳 — 금·토 둘러보기 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">투어 말고 직접 가는 곳 · 11/20 확인</span></h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">진행은 다 됐고, 이제 어디 갈지 고르면 돼. 금요일은 시간이 없어서 하카타 근처 짧은 곳만, 토요일은 하루 코스로 정리했어.</p>
+        <h3 style="font-size:14px; margin:12px 0 6px;">금요일 틈새 — 점심 먹고 체크인 전까지 1~2시간 (하카타 근처)</h3>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:660px;">
+            <thead><tr><th>곳</th><th>왜 가볼 만한지</th><th>시간·비용</th><th>지도</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>⛩️ 구시다신사</strong></td>
+                <td>하카타 총진수 · 하카타 기온 야마카사 거대 수레 연중 전시 · 카와바타 상점가 바로 옆</td>
+                <td>30분~1시간 · 무료</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E6%AB%BB%E7%94%B0%E7%A5%9E%E7%A4%BE" target="_blank" rel="noopener">🗺️ 지도</a></td>
+              </tr>
+              <tr>
+                <td><strong>🛍️ 캐널시티 하카타</strong></td>
+                <td>운하 쇼핑몰 · 구시다신사랑 같이 돌기 좋음 · 분수쇼</td>
+                <td>1시간 안팎 · 입장 무료</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E3%82%AD%E3%83%A3%E3%83%8A%E3%83%AB%E3%82%B7%E3%83%86%E3%82%A3%E5%8D%9A%E5%A4%9A" target="_blank" rel="noopener">🗺️ 지도</a></td>
+              </tr>
+              <tr>
+                <td><strong>🌳 오호리공원</strong></td>
+                <td>호수 한 바퀴 약 40분 산책 · 옆 마이즈루공원은 후쿠오카성터</td>
+                <td>40분~1시간 · 무료</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E6%BF%B1%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">🗺️ 지도</a></td>
+              </tr>
+              <tr>
+                <td><strong>🗼 후쿠오카타워·모모치</strong></td>
+                <td>123m 전망실에서 하카타만 360도 · 해변 산책</td>
+                <td>1시간 안팎 · 전망실 1,000엔 · 09:30~22:00</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E5%B2%A1%E3%82%BF%E3%83%AF%E3%83%BC" target="_blank" rel="noopener">🗺️ 지도</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="font-size:14px; margin:12px 0 6px;">토요일 하루 코스 — 19:00 신년회 전에 복귀</h3>
+        <div style="overflow-x:auto;">
+          <table style="font-size:13px; min-width:720px;">
+            <thead><tr><th>코스</th><th>핵심 스폿</th><th>소요·비용</th><th>지도</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>🦑 가라쓰·요부코</strong><br><span style="font-size:11px; color:var(--text-muted);">오징어 코스</span></td>
+                <td>요부코 아침시장(7:30~12:00 · 일본 3대 아침시장 · 오징어 사시미) → 오징어 점심 → 가라쓰성 360도 전망 → 나나쓰가마 동굴 보트</td>
+                <td>하루 · JR 치쿠히선 하카타 직행</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E5%91%BC%E5%AD%90%E6%9C%9D%E5%B8%82" target="_blank" rel="noopener">🗺️ 요부코</a> · <a href="https://www.google.com/maps/search/?api=1&query=%E5%94%90%E6%B4%A5%E5%9F%8E" target="_blank" rel="noopener">가라쓰성</a></td>
+              </tr>
+              <tr>
+                <td><strong>🌊 이토시마</strong><br><span style="font-size:11px; color:var(--text-muted);">바다 코스</span></td>
+                <td>사쿠라이 후타미가우라 하얀 토리이·부부바위(석양 100선) → 토토로 숲 왕복 25분 → 팜비치 그네 → 굴 오두막(3월 말 시즌 종료 · 3/6 막바지)</td>
+                <td>반나절~하루 · 하카타에서 서쪽 약 40분</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E6%A1%9C%E4%BA%95%E4%BA%8C%E8%A6%8B%E3%83%B6%E6%B5%A6" target="_blank" rel="noopener">🗺️ 후타미가우라</a> · <a href="https://www.google.com/maps/search/?api=1&query=%E8%8A%A5%E5%B1%8B%E3%81%AE%E3%81%8A%E3%81%8A%E3%81%A8" target="_blank" rel="noopener">토토로 숲</a></td>
+              </tr>
+              <tr>
+                <td><strong>🏯 나가사키</strong><br><span style="font-size:11px; color:var(--text-muted);">역사 코스</span></td>
+                <td>글로버가든(1,300엔 · 항구 전망) → 오우라 천주당 → 짬뽕 점심 → 데지마(1,100엔) → 이나사야마 야경(로프웨이 왕복 1,900엔)</td>
+                <td>하루 · 가모메 왕복 약 2시간 40분 · 시내 이동은 시덴</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E3%82%B0%E3%83%A9%E3%83%90%E3%83%BC%E5%9C%92" target="_blank" rel="noopener">🗺️ 글로버가든</a> · <a href="https://www.google.com/maps/search/?api=1&query=%E5%87%BA%E5%B3%B6" target="_blank" rel="noopener">데지마</a></td>
+              </tr>
+              <tr>
+                <td><strong>🌋 아소·구마모토</strong><br><span style="font-size:11px; color:var(--text-muted);">자연 코스</span></td>
+                <td>구사센리 초원(말 방목) → 다이칸보 파노라마 → 구마모토성(800엔 · 천수각 재공개) → 스이젠지 정원</td>
+                <td>하루 · ⚠️ 나카다케 화구 견학은 화산가스 규제 수시 — 방문 전 확인 필수</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E8%8D%89%E5%8D%83%E9%87%8C%E3%83%B6%E6%B5%9C" target="_blank" rel="noopener">🗺️ 구사센리</a> · <a href="https://www.google.com/maps/search/?api=1&query=%E7%86%8A%E6%9C%AC%E5%9F%8E" target="_blank" rel="noopener">구마모토성</a></td>
+              </tr>
+              <tr>
+                <td><strong>🏛️ 모지코 레트로</strong><br><span style="font-size:11px; color:var(--text-muted);">레트로 코스</span></td>
+                <td>모지코역(1914년) → 구 세관 무료 견학 → 미쓰이클럽 → 간몬해협 산책 → 야키카레 → 연락선 5분 시모노세키 가라토</td>
+                <td>반나절~하루 · 하카타 전철 1~1.5시간</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E9%96%80%E5%8F%B8%E6%B8%AF%E3%83%AC%E3%83%88%E3%83%AD" target="_blank" rel="noopener">🗺️ 모지코</a></td>
+              </tr>
+              <tr>
+                <td><strong>⛩️ 다자이후</strong><br><span style="font-size:11px; color:var(--text-muted);">반일 코스</span></td>
+                <td>다자이후 텐만구(본전 2026년 5월 재공개) + 참배길 + 규슈국립박물관</td>
+                <td>반나절 · 하카타에서 30분</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%AA%E5%AE%B0%E5%BA%9C%E5%A4%A9%E6%BA%80%E5%AE%AE" target="_blank" rel="noopener">🗺️ 텐만구</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted);">⚠️ 요금·운영시간은 11/20 확인 기준. 아소 화구·글로버가든 일부 건물은 수리·규제 중일 수 있으니 가기 전 공식 안내 확인해.</p>
+      </div>
+    <p style="margin:16px 0 0;"><a href="index.html">← 메인 페이지로 돌아가기</a></p>
+  </div>
+</main>
+</body>
+</html>
