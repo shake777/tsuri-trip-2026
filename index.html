@@ -1136,6 +1136,7 @@ tr.done-row td { opacity: 0.62; }
       <div class="card" id="info-docs">
         <h2>🧾 1인별 서류 · 티켓 (PDF로 보낼 준비)</h2>
         <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">나중에 각자 티켓·서류를 PDF로 보낼 때 이 표에서 확인해. VJW QR은 각자 본인 계정으로 로그인해서 확인해 (비밀번호는 여기에 안 올려).</p>
+        <button class="btn" id="copy-docs-btn" onclick="copyDocsForKakao()">📋 카톡용으로 복사하기</button>
         <div style="overflow-x:auto;">
           <table style="font-size:13px; min-width:660px;">
             <thead><tr><th>이름</th><th>VJW (입국·세관 QR)</th><th>티켓 · 서류 (PDF)</th></tr></thead>
@@ -2227,6 +2228,57 @@ function switchTab(name) {
   if (name === 'prep') renderChecklists();
   if (name === 'archive') renderArchive();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// 1인별 서류·티켓 카톡용 복사 (11/20 추가)
+function copyDocsForKakao() {
+  var base = 'https://shake777.github.io/tsuri-trip-2026/';
+  var vjw = 'https://www.vjw.digital.go.jp/main/#/vjwpco001';
+  var lines = [
+    '[후쿠오카 신년회 3/4(목)~3/7(일) · 1인별 서류·티켓]',
+    'VJW 등록·QR 확인: ' + vjw,
+    '',
+    '박중산 — VJW ✅ 등록·QR 확인됨 (jungsanpark@gmail.com / 비번: ______)',
+    '티켓: 페리 e-티켓 ' + base + 'tickets/ferry-e-ticket.pdf',
+    'KE792 e-티켓 ' + base + 'tickets/ke792-e-itinerary.pdf',
+    '',
+    '최진원 — VJW ✅ 등록·QR 확인됨 (shop-shop@daum.net / 비번: ______)',
+    '티켓: 페리 e-티켓 ' + base + 'tickets/ferry-e-ticket.pdf',
+    'KE792 e-티켓 ' + base + 'tickets/ke792-e-itinerary.pdf',
+    '',
+    '김석 — VJW ⏳ 등록 전',
+    '티켓: 페리 e-티켓 ' + base + 'tickets/ferry-e-ticket.pdf',
+    'KE792 e-티켓 ' + base + 'tickets/ke792-e-itinerary.pdf',
+    '',
+    '김철현 — VJW ⏳ 등록 전',
+    '티켓: 페리 e-티켓 ' + base + 'tickets/ferry-e-ticket.pdf',
+    'KE792 e-티켓 ' + base + 'tickets/ke792-e-itinerary.pdf',
+    '',
+    '김기태 — VJW ⏳ 등록 전',
+    '티켓: e-티켓(왕복) ' + base + 'tickets/kim-gitae-e-itinerary.pdf',
+    '',
+    '조성화 — VJW ⏳ 등록 전',
+    '티켓: e-티켓(왕복) ' + base + 'tickets/jo-seonghwa-e-itinerary.pdf',
+    '',
+    '최근호 — VJW ⏳ 등록 전 / 티켓 미예약',
+    '',
+    '윤유병 — VJW ⏳ 등록 전 / 티켓 미예약'
+  ];
+  var text = lines.join('\n');
+  var done = function() {
+    var b = document.getElementById('copy-docs-btn');
+    if (b) { b.textContent = '✅ 복사됐어 — 카톡에 붙여넣어'; setTimeout(function(){ b.textContent = '📋 카톡용으로 복사하기'; }, 2500); }
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
+  } else { fallbackCopy(text, done); }
+}
+function fallbackCopy(text, done) {
+  var ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta); done();
 }
 
 // ============== COUNTDOWN (두 안건) ==============
