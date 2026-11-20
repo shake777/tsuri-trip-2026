@@ -246,6 +246,7 @@ tr:hover td { background: #f5f9ff; }
 .btn.secondary { background: white; color: var(--primary); border: 1.5px solid var(--primary); }
 .btn.danger { background: var(--danger); }
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.btn.sm { padding: 6px 10px; font-size: 13px; min-height: 0; }
 input, select, textarea { font-size: 15px; }
 
 /* ============ EMPTY STATE ============ */
@@ -456,6 +457,7 @@ tr.done-row td { opacity: 0.62; }
 .cost-ledger tr.ok { background: #f2f7fe; }
 .cost-ledger td.m { font-size: 12px; opacity: .85; }
 .cost-ledger tr.sum td { font-weight: 800; border-top: 2px solid var(--border); }
+.card details > summary { cursor: pointer; color: var(--primary-light); font-size: 13px; font-weight: 700; padding: 4px 0 8px; }
 </style>
 </head>
 <body>
@@ -908,6 +910,8 @@ tr.done-row td { opacity: 0.62; }
       <!-- 11/16 추가: 식당 이용 팁 (기존 카드는 그대로) -->
       <div class="card" id="info-food">
         <h2>🍜 식당 · 술집 이용 팁 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">식당·야타이 후보는 아래 일정의 후보 카드에</span></h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <ul class="info-list">
           <li><strong>🍜 하카타 라멘</strong> — 면 익힘을 고릅니다: 바리카타(아주 꼬들) · 카타(꼬들) · 후츠(보통). 면만 추가하는 건 <strong>카에다마</strong>.</li>
           <li><strong>🥢 오토시(기본 안주)</strong> — 이자카야는 자리에 앉으면 1인 300~500엔쯤 <strong>자동으로 붙습니다.</strong> 바가지가 아니라 자릿세 같은 관행입니다.</li>
@@ -916,7 +920,8 @@ tr.done-row td { opacity: 0.62; }
           <li><strong>📅 3월은 일본 송별회 시즌</strong> — 토요일 저녁 단체 개실이 빨리 찹니다. 3/6 신년회 식당이 정해지면 <strong>2월 중 예약</strong>을 권합니다.</li>
           <li><strong>📞 예약할 때 확인</strong> — 인원 8명 · 못 먹는 음식 · 흡연석 여부 · 카드 결제 · <strong>당일 취소 위약금</strong>.</li>
         </ul>
-      </div>
+            </details>
+</div>
 
       <div class="card" id="timeline-card">
         <h2>🗓️ 일정 — 3/3(수) ~ 3/7(일)</h2>
@@ -932,6 +937,8 @@ tr.done-row td { opacity: 0.62; }
       <!-- 11/16 추가: 날씨 · 해 시간 · 환율 (기존 카드는 그대로) -->
       <div class="card" id="info-weather">
         <h2>🌦️ 날씨 · 해 뜨고 지는 시간 · 환율</h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <div class="info-grid">
           <div class="info-box">
             <div class="info-box-t">🌅 해 뜨고 지는 시간 (후쿠오카)</div>
@@ -953,7 +960,8 @@ tr.done-row td { opacity: 0.62; }
             </ul>
           </div>
         </div>
-      </div>
+            </details>
+</div>
 
       <div class="card">
         <h2>🚢✈️ 이동 — 배 4명 · 비행기 3명</h2>
@@ -1001,6 +1009,8 @@ tr.done-row td { opacity: 0.62; }
       <!-- 11/16 추가: 도착·귀국 이동 + 시내 교통 (기존 카드는 그대로) -->
       <div class="card" id="info-arrive">
         <h2>🧭 도착 · 귀국 이동 — 공항·항구 ↔ 하카타</h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <div style="overflow-x:auto;">
           <table style="font-size:12.5px; min-width:0;">
             <thead><tr><th style="min-width:104px;">누가 · 어디</th><th>어떻게 가나</th><th>알아둘 것</th></tr></thead>
@@ -1038,10 +1048,13 @@ tr.done-row td { opacity: 0.62; }
           <a href="https://www.google.com/maps/search/?api=1&amp;query=博多バスターミナル" target="_blank" rel="noopener">🚌 하카타 버스터미널</a>
           <a href="https://www.google.com/maps/search/?api=1&amp;query=天神駅+福岡" target="_blank" rel="noopener">🏙️ 텐진역</a>
         </div>
-      </div>
+            </details>
+</div>
 
       <div class="card" id="info-transit">
         <h2>🚇 시내 교통 · 결제 · 생활</h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <ul class="info-list">
           <li><strong>💳 지하철은 터치 결제로 바로 탑니다</strong> — 비자·마스터 같은 컨택리스 카드(트래블카드 포함)를 개찰구에 대면 됩니다. 같은 카드로 하루 640엔(1일권 값)을 넘으면 640엔만 청구하는 서비스가 운영 중입니다(바뀔 수 있음).</li>
           <li><strong>🪪 교통 IC카드</strong>(하야카켄·스이카 등)가 있으면 지하철·버스·JR·편의점까지 다 됩니다.</li>
@@ -1052,7 +1065,8 @@ tr.done-row td { opacity: 0.62; }
           <li><strong>🗑️ 길에 쓰레기통이 거의 없습니다</strong> — 작은 비닐봉투 하나 들고 다니면 편합니다.</li>
           <li><strong>🔋 보조배터리</strong> — 위탁 수하물 금지·기내 반입만 되고, 한·일 항공사 모두 규정이 강화돼 <strong>선반에 넣지 말고 몸에 지니는 게</strong> 원칙입니다. 탑승 전 항공사 공지를 확인하세요.</li>
         </ul>
-      </div>
+            </details>
+</div>
 
       <div class="card">
         <h2>🏠 숙소 — 아파트 2박 + 료칸 1박 (확정)</h2>
@@ -1095,6 +1109,8 @@ tr.done-row td { opacity: 0.62; }
       <!-- 11/18 추가: VJW 등록 현황 정리 -->
       <div class="card" id="info-vjw">
         <h2>📱 Visit Japan Web (VJW) — 입국·세관 등록</h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <div class="info-grid">
           <div class="info-box">
             <div class="info-box-t">✅ 끝난 것 (박중산)</div>
@@ -1130,7 +1146,8 @@ tr.done-row td { opacity: 0.62; }
         </div>
         <div style="margin-top:8px; font-size:12.5px;">🔗 바로가기: <a href="https://www.vjw.digital.go.jp/main/#/vjwpco001" target="_blank" rel="noopener">VJW 등록·QR 확인</a> · <a href="https://reserve.489ban.net/client/fukinoya/0/booked/show?reserve_no=yoyaku000417" target="_blank" rel="noopener">료칸 예약 확인</a> · <a href="https://www.koreaferry.co.kr/rs/idv/member/cert/5129084" target="_blank" rel="noopener">페리 e-티켓 확인</a> · <a href="https://www.airbnb.co.kr/rooms/1763764639129861479?adults=8&check_in=2027-03-05&check_out=2027-03-07" target="_blank" rel="noopener">Airbnb 숙소 보기</a></div>
         <div style="margin-top:8px; font-size:12.5px;">🔑 VJW 계정 아이디: 박중산 jungsanpark@gmail.com · 최진원 shop-shop@daum.net — 각자 본인 비번으로 위 VJW 링크에서 로그인해서 QR 확인해.</div>
-      </div>
+            </details>
+</div>
 
       <!-- 11/19 추가: 1인별 서류 · 티켓 (나중에 각자 PDF로 보낼 준비) -->
       <div class="card" id="info-docs">
@@ -1139,48 +1156,48 @@ tr.done-row td { opacity: 0.62; }
         <button class="btn" id="copy-docs-btn" onclick="copyDocsForKakao()">📋 카톡용으로 복사하기</button>
         <div style="overflow-x:auto;">
           <table style="font-size:13px; min-width:660px;">
-            <thead><tr><th>이름</th><th>VJW (입국·세관 QR)</th><th>티켓 · 서류 (PDF)</th></tr></thead>
+            <thead><tr><th>이름</th><th>VJW (입국·세관 QR)</th><th>티켓 · 서류 (PDF)</th><th>복사</th></tr></thead>
             <tbody>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">박중산</td>
                 <td>✅ 등록·QR 확인됨<br><span style="font-size:11px; color:var(--text-muted);">jungsanpark@gmail.com</span></td>
                 <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
-              </tr>
+              <td><button class="btn sm" onclick="copyOneDoc('박중산', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">최진원</td>
                 <td>✅ 등록·QR 확인됨 (11/19)<br><span style="font-size:11px; color:var(--text-muted);">shop-shop@daum.net</span></td>
                 <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
-              </tr>
+              <td><button class="btn sm" onclick="copyOneDoc('최진원', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">김석</td>
                 <td>⏳ 등록 전</td>
                 <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
-              </tr>
+              <td><button class="btn sm" onclick="copyOneDoc('김석', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">김철현</td>
                 <td>⏳ 등록 전</td>
                 <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
-              </tr>
+              <td><button class="btn sm" onclick="copyOneDoc('김철현', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">김기태</td>
                 <td>⏳ 등록 전</td>
                 <td><a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓 (왕복)</a></td>
-              </tr>
+              <td><button class="btn sm" onclick="copyOneDoc('김기태', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">조성화</td>
                 <td>⏳ 등록 전</td>
                 <td><a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓 (왕복)</a></td>
-              </tr>
+              <td><button class="btn sm" onclick="copyOneDoc('조성화', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">최근호</td>
                 <td>⏳ 등록 전</td>
                 <td>미예약</td>
-              </tr>
+              <td><button class="btn sm" onclick="copyOneDoc('최근호', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">윤유병</td>
                 <td>⏳ 등록 전</td>
                 <td>미예약</td>
-              </tr>
+              <td><button class="btn sm" onclick="copyOneDoc('윤유병', this)">복사</button></td></tr>
             </tbody>
           </table>
         </div>
@@ -1195,6 +1212,8 @@ tr.done-row td { opacity: 0.62; }
 <!-- 11/16 추가: 온천·료칸 매너 (기존 카드는 그대로) -->
       <div class="card" id="info-onsen">
         <h2>♨️ 온천 · 료칸 이용 매너 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">3/4(목) 료칸 전에 읽어 두기</span></h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <div class="info-grid">
           <div class="info-box">
             <div class="info-box-t">🛁 탕에 들어갈 때</div>
@@ -1223,11 +1242,14 @@ tr.done-row td { opacity: 0.62; }
             </ul>
           </div>
         </div>
-      </div>
+            </details>
+</div>
 
       <!-- 11/16 비용 정리: 💰 비용 한눈에 + 🧾 회비·정산 (숫자는 scratchpad cost_clean.py DATA 기준) -->
       <div class="card" id="cost-card">
         <h2>💰 비용 한눈에 <span style="font-size:13px; font-weight:400; color:var(--text-muted);">11/17 · 🔵 확정(결제 완료) · 🟣 예정 · 100만원 넘는 부분은 본인 부담</span></h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <div class="cost-tiles">
           <div class="cost-tile"><div class="t">1인 총비용</div><div class="v">112~134만원</div><div class="s">이동 방법마다 다름 (확정 + 예정)</div></div>
           <div class="cost-tile"><div class="t">회비 지원</div><div class="v">1인 100만원</div><div class="s">8명 전원 · 회비에서</div></div>
@@ -1317,10 +1339,13 @@ tr.done-row td { opacity: 0.62; }
           </div>
         </details>
         <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">항공은 화면 표시 가격 그대로라 세금 포함 여부가 따로 없습니다. 예약 전 항공사 공식 사이트에서 다시 확인하세요.</p>
-      </div>
+            </details>
+</div>
 
       <div class="card" id="fee-card">
         <h2>🧾 회비·정산 — 2월까지 입금</h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <p style="font-size:14px;">회비는 <strong>2월까지 입금</strong>합니다. <strong>100만원은 통장에 남겨두고</strong>, 나머지로 1인 100만원씩 지원합니다. <strong>교통비도 모두 회비에서 내고</strong>, 1인 100만원을 넘는 부분은 각자 부담 — 아래 「📅 매월 낼 돈」처럼 12·1·2월 회비에 더해 냅니다.</p>
         <div class="cost-flow">
           <div><span class="op"></span><span class="t">모임 통장 지금 <span class="info-muted">8명 × 700,000원 + 기존 잔액 1,761,410원</span></span><span class="v">7,361,410원</span></div>
@@ -1386,11 +1411,14 @@ tr.done-row td { opacity: 0.62; }
             </tbody>
           </table>
         </div>
-      </div>
+            </details>
+</div>
 
       <!-- 11/16 추가: 면세·세관 (기존 카드는 그대로) -->
       <div class="card" id="info-tax">
         <h2>🛃 면세 쇼핑 · 출국세 · 한국 세관</h2>
+      <details>
+        <summary>펼쳐보기</summary>
         <div class="note warn">🛍️ <strong>일본 면세가 바뀌었습니다 — 2026년 11월 1일 구매분부터 「환급형」</strong><br>
           가게에서는 <strong>세금 포함 가격으로 결제</strong> → 출국 때 공항의 면세 키오스크에 <strong>여권을 대고 세관 확인</strong> → 그 뒤 가게(또는 환급 대행)가 소비세를 돌려줍니다.</div>
         <ul class="info-list">
@@ -1410,7 +1438,8 @@ tr.done-row td { opacity: 0.62; }
           <a href="https://trafficnews.jp/post/667615" target="_blank" rel="noopener">출국세 인상 보도</a>.
           요금·규정은 바뀔 수 있고, 버스 요금은 여행 매체 기준이라 현지 표시를 따르세요.
         </p>
-      </div>
+            </details>
+</div>
 
     </section>
 
@@ -2230,45 +2259,45 @@ function switchTab(name) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// 1인별 서류·티켓 카톡용 복사 (11/20 추가)
-function copyDocsForKakao() {
-  var base = 'https://shake777.github.io/tsuri-trip-2026/';
-  var vjw = 'https://www.vjw.digital.go.jp/main/#/vjwpco001';
-  var lines = [
-    '[후쿠오카 신년회 3/4(목)~3/7(일) · 1인별 서류·티켓]',
-    'VJW 등록·QR 확인: ' + vjw,
-    '',
+// 1인별 서류·티켓 카톡용 복사 (11/20 추가 · 각자 복사)
+var DOCS_BASE = 'https://shake777.github.io/tsuri-trip-2026/';
+var DOCS_VJW = 'https://www.vjw.digital.go.jp/main/#/vjwpco001';
+var DOCS_BY_NAME = {
+  '박중산': [
     '박중산 — VJW ✅ 등록·QR 확인됨 (jungsanpark@gmail.com / 비번: ______)',
-    '티켓: 페리 e-티켓 ' + base + 'tickets/ferry-e-ticket.pdf',
-    'KE792 e-티켓 ' + base + 'tickets/ke792-e-itinerary.pdf',
-    '',
+    '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.pdf',
+    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.pdf'
+  ],
+  '최진원': [
     '최진원 — VJW ✅ 등록·QR 확인됨 (shop-shop@daum.net / 비번: ______)',
-    '티켓: 페리 e-티켓 ' + base + 'tickets/ferry-e-ticket.pdf',
-    'KE792 e-티켓 ' + base + 'tickets/ke792-e-itinerary.pdf',
-    '',
+    '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.pdf',
+    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.pdf'
+  ],
+  '김석': [
     '김석 — VJW ⏳ 등록 전',
-    '티켓: 페리 e-티켓 ' + base + 'tickets/ferry-e-ticket.pdf',
-    'KE792 e-티켓 ' + base + 'tickets/ke792-e-itinerary.pdf',
-    '',
+    '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.pdf',
+    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.pdf'
+  ],
+  '김철현': [
     '김철현 — VJW ⏳ 등록 전',
-    '티켓: 페리 e-티켓 ' + base + 'tickets/ferry-e-ticket.pdf',
-    'KE792 e-티켓 ' + base + 'tickets/ke792-e-itinerary.pdf',
-    '',
+    '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.pdf',
+    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.pdf'
+  ],
+  '김기태': [
     '김기태 — VJW ⏳ 등록 전',
-    '티켓: e-티켓(왕복) ' + base + 'tickets/kim-gitae-e-itinerary.pdf',
-    '',
+    '티켓: e-티켓(왕복) ' + DOCS_BASE + 'tickets/kim-gitae-e-itinerary.pdf'
+  ],
+  '조성화': [
     '조성화 — VJW ⏳ 등록 전',
-    '티켓: e-티켓(왕복) ' + base + 'tickets/jo-seonghwa-e-itinerary.pdf',
-    '',
-    '최근호 — VJW ⏳ 등록 전 / 티켓 미예약',
-    '',
-    '윤유병 — VJW ⏳ 등록 전 / 티켓 미예약'
-  ];
-  var text = lines.join('\n');
-  var done = function() {
-    var b = document.getElementById('copy-docs-btn');
-    if (b) { b.textContent = '✅ 복사됐어 — 카톡에 붙여넣어'; setTimeout(function(){ b.textContent = '📋 카톡용으로 복사하기'; }, 2500); }
-  };
+    '티켓: e-티켓(왕복) ' + DOCS_BASE + 'tickets/jo-seonghwa-e-itinerary.pdf'
+  ],
+  '최근호': ['최근호 — VJW ⏳ 등록 전 / 티켓 미예약'],
+  '윤유병': ['윤유병 — VJW ⏳ 등록 전 / 티켓 미예약']
+};
+function docsHeaderLines() {
+  return ['[후쿠오카 신년회 3/4(목)~3/7(일) · 1인별 서류·티켓]', 'VJW 등록·QR 확인: ' + DOCS_VJW, ''];
+}
+function copyTextToClipboard(text, done) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
   } else { fallbackCopy(text, done); }
@@ -2279,6 +2308,23 @@ function fallbackCopy(text, done) {
   document.body.appendChild(ta); ta.select();
   try { document.execCommand('copy'); } catch(e) {}
   document.body.removeChild(ta); done();
+}
+function copyDocsForKakao() {
+  var lines = docsHeaderLines();
+  Object.keys(DOCS_BY_NAME).forEach(function(n, i) {
+    if (i) lines.push('');
+    lines = lines.concat(DOCS_BY_NAME[n]);
+  });
+  copyTextToClipboard(lines.join('\n'), function() {
+    var b = document.getElementById('copy-docs-btn');
+    if (b) { b.textContent = '✅ 복사됐어 — 카톡에 붙여넣어'; setTimeout(function(){ b.textContent = '📋 카톡용으로 복사하기'; }, 2500); }
+  });
+}
+function copyOneDoc(name, btn) {
+  var lines = docsHeaderLines().concat(DOCS_BY_NAME[name]);
+  copyTextToClipboard(lines.join('\n'), function() {
+    if (btn) { var t = btn.textContent; btn.textContent = '✅ 복사됨'; setTimeout(function(){ btn.textContent = t; }, 2000); }
+  });
 }
 
 // ============== COUNTDOWN (두 안건) ==============
