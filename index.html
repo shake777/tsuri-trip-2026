@@ -498,6 +498,7 @@ tr.done-row td { opacity: 0.62; }
   <div class="tabs">
     <button class="tab active" data-section="home">🏠 홈</button>
     <button class="tab" data-section="ny">✈️ 신년회</button>
+    <a class="tab" href="fri-sat.html" style="text-decoration:none; display:inline-flex; align-items:center;">🗓️ 금·토 일정</a>
     <button class="tab" data-section="prep">🎒 준비물</button>
     <button class="tab" data-section="archive">📜 지난기록</button>
   </div>
@@ -2208,7 +2209,7 @@ function init() {
     });
     if (DB.nyDate) nyDateEl.value = DB.nyDate;
   }
-  document.querySelectorAll('.tab').forEach(t => {
+  document.querySelectorAll('.tab[data-section]').forEach(t => {
     t.onclick = () => switchTab(t.dataset.section);
   });
 }
