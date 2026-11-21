@@ -1102,8 +1102,8 @@ tr.done-row td { opacity: 0.62; }
             </ul>
           </div>
         </div>
-        <div style="margin-top:8px; font-size:12.5px;">🔗 바로가기: <a href="https://www.vjw.digital.go.jp/main/#/vjwpco001" target="_blank" rel="noopener">VJW 등록·QR 확인</a> · <a href="https://reserve.489ban.net/client/fukinoya/0/booked/show?reserve_no=yoyaku000417" target="_blank" rel="noopener">료칸 예약 확인</a> · <a href="https://www.koreaferry.co.kr/rs/idv/member/cert/5129084" target="_blank" rel="noopener">페리 e-티켓 확인</a> · <a href="https://www.airbnb.co.kr/rooms/1763764639129861479?adults=8&check_in=2027-03-05&check_out=2027-03-07" target="_blank" rel="noopener">Airbnb 숙소 보기</a></div>
-        <div style="margin-top:8px; font-size:12.5px;">🔑 VJW 계정 아이디: 박중산 jungsanpark@gmail.com · 최진원 shop-shop@daum.net — 각자 본인 비번으로 위 VJW 링크에서 로그인해서 QR 확인해.</div>
+        <div style="margin-top:8px; font-size:12.5px;">🔗 바로가기: 📱 QR 바로 보기 — <a href="vjw-qr/park-jungsan-vjw-qr.png" target="_blank" rel="noopener">박중산</a> · <a href="vjw-qr/kim-seok-vjw-qr.png" target="_blank" rel="noopener">김석</a> · <a href="vjw-qr/kim-cheolhyeon-vjw-qr.png" target="_blank" rel="noopener">김철현</a> · <a href="https://www.vjw.digital.go.jp/main/#/vjwpco001" target="_blank" rel="noopener">VJW 로그인</a> · <a href="https://reserve.489ban.net/client/fukinoya/0/booked/show?reserve_no=yoyaku000417" target="_blank" rel="noopener">료칸 예약 확인</a> · <a href="https://www.koreaferry.co.kr/rs/idv/member/cert/5129084" target="_blank" rel="noopener">페리 e-티켓 확인</a> · <a href="https://www.airbnb.co.kr/rooms/1763764639129861479?adults=8&check_in=2027-03-05&check_out=2027-03-07" target="_blank" rel="noopener">Airbnb 숙소 보기</a></div>
+        <div style="margin-top:8px; font-size:12.5px;">🔑 VJW 계정 아이디: 박중산 jungsanpark@gmail.com · 최진원 shop-shop@daum.net · 김석 yarkim@naver.com · 김철현 k1069528@hanmail.net — QR은 위 [QR 바로 보기] 링크에서 바로 확인해. (진원 QR은 비번 확인 후 추가 · 비밀번호는 공개 페이지라 안 올려)</div>
             </details>
 </div>
 
@@ -2219,7 +2219,6 @@ function switchTab(name) {
 
 // 1인별 서류·티켓 카톡용 복사 (11/20 추가 · 각자 복사)
 var DOCS_BASE = 'https://shake777.github.io/tsuri-trip-2026/';
-var DOCS_VJW = 'https://www.vjw.digital.go.jp/main/#/vjwpco001';
 var DOCS_BY_NAME = {
   '박중산': [
     '박중산 — VJW ✅ 등록·QR 확인됨 (jungsanpark@gmail.com / 비번: ______)',
@@ -2257,7 +2256,7 @@ var DOCS_BY_NAME = {
   '윤유병': ['윤유병 — VJW ⏳ 등록 전 / 티켓 미예약']
 };
 function docsHeaderLines() {
-  return ['[후쿠오카 신년회 3/4(목)~3/7(일) · 1인별 서류·티켓]', 'VJW 등록·QR 확인: ' + DOCS_VJW, ''];
+  return ['[후쿠오카 신년회 3/4(목)~3/7(일) · 1인별 서류·티켓]', 'QR은 아래 각자 "QR 바로 보기" 링크를 누르면 바로 보여.', ''];
 }
 function copyTextToClipboard(text, done) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -4894,6 +4893,7 @@ function renderBkSummary() {
 // ============== 홈 — 사람별 여행 안내 (11/16 추가) ==============
 // 티켓 정보는 신년회 탭 🎫 티켓 카드와 같은 내용, 예약 체크는 bookings 값을 그대로 읽는다.
 var MT_VJW = 'https://www.vjw.digital.go.jp/main/#/vjwplo001';
+var MT_QR = { '박중산': 'vjw-qr/park-jungsan-vjw-qr.png', '김석': 'vjw-qr/kim-seok-vjw-qr.png', '김철현': 'vjw-qr/kim-cheolhyeon-vjw-qr.png' };
 var MT_FERRY_NOTICE = 'https://www.koreaferry.kr/bbs/board.php?bo_table=ferry_notice&wr_id=41';
 var MT_GROUP = {
   ferry: {
@@ -4968,7 +4968,8 @@ function renderMyTrip() {
   }
   h += '<div class="mt-sec">🧳 가는 길</div>' + pre.map(function (r) { return row(r[0], r[1]); }).join('');
   h += '<div class="mt-sec">🛂 일본 입국 절차</div><div class="note info" style="margin:4px 0 0; font-size:13px;">' + g.entry +
-    ' QR은 <strong>1인 1개</strong>라 각자 본인 휴대폰에 저장하세요. <a href="' + MT_VJW + '" target="_blank" rel="noopener">VJW 등록하기</a>' +
+    ' QR은 <strong>1인 1개</strong>라 각자 본인 휴대폰에 저장하세요. ' +
+    (MT_QR[sel] ? '<a href="' + MT_QR[sel] + '" target="_blank" rel="noopener">📱 QR 바로 보기</a>' : '<a href="' + MT_VJW + '" target="_blank" rel="noopener">VJW 등록하기</a>') +
     (p.g === 'ferry' ? ' · <a href="' + MT_FERRY_NOTICE + '" target="_blank" rel="noopener">고려훼리 안내문</a>' : '') + '</div>';
   h += '<div class="mt-sec">🗓️ 3/4 ~ 3/6</div>' + row('현지', '하카타에서 8명 합류 → 3/4 온천·료칸 · 3/5 하카타 복귀·아파트·카와타로 저녁 · 3/6 자유 일정 + 19:00 신년회 — <a href="javascript:void(0)" onclick="switchTab(\'ny\')">일정·투표 보기 →</a>');
   h += '<div class="mt-sec">🛬 돌아오는 길</div>' +
