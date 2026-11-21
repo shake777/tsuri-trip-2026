@@ -1110,7 +1110,7 @@ tr.done-row td { opacity: 0.62; }
       <!-- 11/19 추가: 1인별 서류 · 티켓 (나중에 각자 PDF로 보낼 준비) -->
       <div class="card" id="info-docs">
         <h2>🧾 1인별 서류 · 티켓 (PDF로 보낼 준비)</h2>
-        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">나중에 각자 티켓·서류를 PDF로 보낼 때 이 표에서 확인해. VJW QR은 각자 본인 계정으로 로그인해서 확인해 (비밀번호는 여기에 안 올려).</p>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">나중에 각자 티켓·서류를 PDF로 보낼 때 이 표에서 확인해. VJW QR은 [📱 QR 바로 보기] 링크를 누르면 바로 보여 (본인 계정으로 로그인해서 확인도 가능 · 비밀번호는 여기에 안 올려).</p>
         <button class="btn" id="copy-docs-btn" onclick="copyDocsForKakao()">📋 카톡용으로 복사하기</button>
         <div style="overflow-x:auto;">
           <table style="font-size:13px; min-width:660px;">
@@ -1118,22 +1118,22 @@ tr.done-row td { opacity: 0.62; }
             <tbody>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">박중산</td>
-                <td>✅ 등록·QR 확인됨<br><span style="font-size:11px; color:var(--text-muted);">jungsanpark@gmail.com</span></td>
+                <td>✅ 등록·QR 확인됨<br><span style="font-size:11px; color:var(--text-muted);">jungsanpark@gmail.com</span><br><a href="vjw-qr/park-jungsan-vjw-qr.png" target="_blank">📱 QR 바로 보기</a></td>
                 <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
               <td><button class="btn sm" onclick="copyOneDoc('박중산', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">최진원</td>
-                <td>✅ 등록·QR 확인됨 (11/19)<br><span style="font-size:11px; color:var(--text-muted);">shop-shop@daum.net</span></td>
+                <td>✅ 등록·QR 확인됨 (11/19)<br><span style="font-size:11px; color:var(--text-muted);">shop-shop@daum.net</span><br><span style="font-size:11px; color:var(--text-muted);">QR 이미지 비번 확인 후 추가</span></td>
                 <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
               <td><button class="btn sm" onclick="copyOneDoc('최진원', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">김석</td>
-                <td>⏳ 등록 전</td>
+                <td>✅ 등록·QR 확인됨<br><span style="font-size:11px; color:var(--text-muted);">yarkim@naver.com</span><br><a href="vjw-qr/kim-seok-vjw-qr.png" target="_blank">📱 QR 바로 보기</a></td>
                 <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
               <td><button class="btn sm" onclick="copyOneDoc('김석', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">김철현</td>
-                <td>⏳ 등록 전</td>
+                <td>✅ 등록·QR 확인됨<br><span style="font-size:11px; color:var(--text-muted);">k1069528@hanmail.net</span><br><a href="vjw-qr/kim-cheolhyeon-vjw-qr.png" target="_blank">📱 QR 바로 보기</a></td>
                 <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
               <td><button class="btn sm" onclick="copyOneDoc('김철현', this)">복사</button></td></tr>
               <tr>
@@ -2223,21 +2223,25 @@ var DOCS_VJW = 'https://www.vjw.digital.go.jp/main/#/vjwpco001';
 var DOCS_BY_NAME = {
   '박중산': [
     '박중산 — VJW ✅ 등록·QR 확인됨 (jungsanpark@gmail.com / 비번: ______)',
+    'QR 바로 보기: ' + DOCS_BASE + 'vjw-qr/park-jungsan-vjw-qr.png',
     '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.pdf',
     'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.pdf'
   ],
   '최진원': [
     '최진원 — VJW ✅ 등록·QR 확인됨 (shop-shop@daum.net / 비번: ______)',
+    'QR 이미지는 비번 확인 후 추가 예정',
     '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.pdf',
     'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.pdf'
   ],
   '김석': [
-    '김석 — VJW ⏳ 등록 전',
+    '김석 — VJW ✅ 등록·QR 확인됨 (yarkim@naver.com)',
+    'QR 바로 보기: ' + DOCS_BASE + 'vjw-qr/kim-seok-vjw-qr.png',
     '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.pdf',
     'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.pdf'
   ],
   '김철현': [
-    '김철현 — VJW ⏳ 등록 전',
+    '김철현 — VJW ✅ 등록·QR 확인됨 (k1069528@hanmail.net)',
+    'QR 바로 보기: ' + DOCS_BASE + 'vjw-qr/kim-cheolhyeon-vjw-qr.png',
     '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.pdf',
     'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.pdf'
   ],
