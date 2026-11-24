@@ -1110,7 +1110,7 @@ tr.done-row td { opacity: 0.62; }
       <!-- 11/19 추가: 1인별 서류 · 티켓 (나중에 각자 PDF로 보낼 준비) -->
       <div class="card" id="info-docs">
         <h2>🧾 1인별 서류 · 티켓 (PDF로 보낼 준비)</h2>
-        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">나중에 각자 티켓·서류를 PDF로 보낼 때 이 표에서 확인해. VJW QR은 [📱 QR 바로 보기] 링크를 누르면 바로 보여 (본인 계정으로 로그인해서 확인도 가능 · 비밀번호는 여기에 안 올려).</p>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-4px;">나중에 각자 티켓·서류를 PDF로 보낼 때 이 표에서 확인해. VJW QR은 [📱 QR 바로 보기] 링크를 누르면 바로 보여 (본인 계정으로 로그인해서 확인도 가능 · 비밀번호는 여기에 안 올려).<br>💡 카톡은 메시지의 <strong>첫 번째 링크만</strong> 그림(미리보기)으로 보여 줘 — 그래서 복사 문구는 <strong>QR 링크를 맨 위</strong>에 뒀어. 각자 오른쪽 [복사]로 <strong>한 명씩 따로</strong> 보내면 그 사람 QR이 카톡에서 바로 보여. (전체 복사는 맨 위 한 명 것만 그림으로 나옴)</p>
         <button class="btn" id="copy-docs-btn" onclick="copyDocsForKakao()">📋 카톡용으로 복사하기</button>
         <div style="overflow-x:auto;">
           <table style="font-size:13px; min-width:660px;">
@@ -1119,22 +1119,22 @@ tr.done-row td { opacity: 0.62; }
               <tr>
                 <td style="font-weight:600; color:var(--primary);">박중산</td>
                 <td>✅ 등록·QR 확인됨<br><span style="font-size:11px; color:var(--text-muted);">jungsanpark@gmail.com</span><br><a href="vjw-qr/park-jungsan-vjw-qr.png" target="_blank">📱 QR 바로 보기</a></td>
-                <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
+                <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a><br><span style="font-size:11.5px;">🛳️ 하카타항 국제터미널 → 🚌 하카타 버스터미널 (10:00 집결) · 07:30 도착 · 입국·세관 후 니시테츠 버스 약 20분 (택시 약 10분)</span><br><a href="https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit" target="_blank" rel="noopener">🗺️ 길찾기 (구글 지도)</a> · <a href="https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">📍 버스터미널 위치</a></td>
               <td><button class="btn sm" onclick="copyOneDoc('박중산', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">최진원</td>
                 <td>✅ 등록·QR 확인됨 (11/19)<br><span style="font-size:11px; color:var(--text-muted);">shop-shop@daum.net</span><br><span style="font-size:11px; color:var(--text-muted);">QR 이미지 비번 확인 후 추가</span></td>
-                <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
+                <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a><br><span style="font-size:11.5px;">🛳️ 하카타항 국제터미널 → 🚌 하카타 버스터미널 (10:00 집결) · 07:30 도착 · 입국·세관 후 니시테츠 버스 약 20분 (택시 약 10분)</span><br><a href="https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit" target="_blank" rel="noopener">🗺️ 길찾기 (구글 지도)</a> · <a href="https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">📍 버스터미널 위치</a></td>
               <td><button class="btn sm" onclick="copyOneDoc('최진원', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">김석</td>
                 <td>✅ 등록·QR 확인됨<br><span style="font-size:11px; color:var(--text-muted);">yarkim@naver.com</span><br><a href="vjw-qr/kim-seok-vjw-qr.png" target="_blank">📱 QR 바로 보기</a></td>
-                <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
+                <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a><br><span style="font-size:11.5px;">🛳️ 하카타항 국제터미널 → 🚌 하카타 버스터미널 (10:00 집결) · 07:30 도착 · 입국·세관 후 니시테츠 버스 약 20분 (택시 약 10분)</span><br><a href="https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit" target="_blank" rel="noopener">🗺️ 길찾기 (구글 지도)</a> · <a href="https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">📍 버스터미널 위치</a></td>
               <td><button class="btn sm" onclick="copyOneDoc('김석', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">김철현</td>
                 <td>✅ 등록·QR 확인됨<br><span style="font-size:11px; color:var(--text-muted);">k1069528@hanmail.net</span><br><a href="vjw-qr/kim-cheolhyeon-vjw-qr.png" target="_blank">📱 QR 바로 보기</a></td>
-                <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a></td>
+                <td><a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a><br><a href="tickets/ke792-e-itinerary.pdf" target="_blank">🎫 KE792 e-티켓</a><br><span style="font-size:11.5px;">🛳️ 하카타항 국제터미널 → 🚌 하카타 버스터미널 (10:00 집결) · 07:30 도착 · 입국·세관 후 니시테츠 버스 약 20분 (택시 약 10분)</span><br><a href="https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit" target="_blank" rel="noopener">🗺️ 길찾기 (구글 지도)</a> · <a href="https://www.google.com/maps/search/?api=1&query=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener">📍 버스터미널 위치</a></td>
               <td><button class="btn sm" onclick="copyOneDoc('김철현', this)">복사</button></td></tr>
               <tr>
                 <td style="font-weight:600; color:var(--primary);">김기태</td>
@@ -2222,31 +2222,35 @@ var DOCS_BASE = 'https://shake777.github.io/tsuri-trip-2026/';
 var DOCS_BY_NAME = {
   '박중산': [
     '박중산 — VJW ✅ 등록·QR 확인됨',
-    'VJW 로그인: https://www.vjw.digital.go.jp/main/#/vjwpco001 · 아이디: jungsanpark@gmail.com · 비번: ______',
     'QR 바로 보기: ' + DOCS_BASE + 'vjw-qr/park-jungsan-vjw-qr.png',
     '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.png',
-    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.png'
+    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.png',
+    '하카타항 → 하카타 버스터미널(10:00 집결): 07:30 도착 · 입국·세관 후 니시테츠 버스 약 20분(택시 약 10분) · 길찾기 https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit',
+    'VJW 로그인: https://www.vjw.digital.go.jp/main/#/vjwpco001 · 아이디: jungsanpark@gmail.com · 비번: ______'
   ],
   '최진원': [
     '최진원 — VJW ✅ 등록·QR 확인됨',
-    'VJW 로그인: https://www.vjw.digital.go.jp/main/#/vjwpco001 · 아이디: shop-shop@daum.net · 비번: ______',
     'QR 이미지는 비번 확인 후 추가 예정',
     '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.png',
-    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.png'
+    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.png',
+    '하카타항 → 하카타 버스터미널(10:00 집결): 07:30 도착 · 입국·세관 후 니시테츠 버스 약 20분(택시 약 10분) · 길찾기 https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit',
+    'VJW 로그인: https://www.vjw.digital.go.jp/main/#/vjwpco001 · 아이디: shop-shop@daum.net · 비번: ______'
   ],
   '김석': [
     '김석 — VJW ✅ 등록·QR 확인됨',
-    'VJW 로그인: https://www.vjw.digital.go.jp/main/#/vjwpco001 · 아이디: yarkim@naver.com · 비번: 11qqaaZZ..',
     'QR 바로 보기: ' + DOCS_BASE + 'vjw-qr/kim-seok-vjw-qr.png',
     '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.png',
-    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.png'
+    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.png',
+    '하카타항 → 하카타 버스터미널(10:00 집결): 07:30 도착 · 입국·세관 후 니시테츠 버스 약 20분(택시 약 10분) · 길찾기 https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit',
+    'VJW 로그인: https://www.vjw.digital.go.jp/main/#/vjwpco001 · 아이디: yarkim@naver.com · 비번: 11qqaaZZ..'
   ],
   '김철현': [
     '김철현 — VJW ✅ 등록·QR 확인됨',
-    'VJW 로그인: https://www.vjw.digital.go.jp/main/#/vjwpco001 · 아이디: k1069528@hanmail.net · 비번: 11qqaaZZ..',
     'QR 바로 보기: ' + DOCS_BASE + 'vjw-qr/kim-cheolhyeon-vjw-qr.png',
     '티켓: 페리 e-티켓 ' + DOCS_BASE + 'tickets/ferry-e-ticket.png',
-    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.png'
+    'KE792 e-티켓 ' + DOCS_BASE + 'tickets/ke792-e-itinerary.png',
+    '하카타항 → 하카타 버스터미널(10:00 집결): 07:30 도착 · 입국·세관 후 니시테츠 버스 약 20분(택시 약 10분) · 길찾기 https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit',
+    'VJW 로그인: https://www.vjw.digital.go.jp/main/#/vjwpco001 · 아이디: k1069528@hanmail.net · 비번: 11qqaaZZ..'
   ],
   '김기태': [
     '김기태 — VJW ⏳ 등록 전',
@@ -4961,6 +4965,8 @@ function renderBkSummary() {
 var MT_VJW = 'https://www.vjw.digital.go.jp/main/#/vjwplo001';
 var MT_QR = { '박중산': 'vjw-qr/park-jungsan-vjw-qr.png', '김석': 'vjw-qr/kim-seok-vjw-qr.png', '김철현': 'vjw-qr/kim-cheolhyeon-vjw-qr.png' };
 var MT_FERRY_NOTICE = 'https://www.koreaferry.kr/bbs/board.php?bo_table=ferry_notice&wr_id=41';
+var MT_MAP_PORT = 'https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E6%B8%AF%E5%9B%BD%E9%9A%9B%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit', MT_MAP_AIR = 'https://www.google.com/maps/dir/?api=1&origin=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%20%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&destination=%E5%8D%9A%E5%A4%9A%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit', MT_MAP_BACK = 'https://www.google.com/maps/dir/?api=1&origin=%E5%8D%9A%E5%A4%9A%E9%A7%85&destination=%E7%A6%8F%E5%B2%A1%E7%A9%BA%E6%B8%AF%20%E5%9B%BD%E9%9A%9B%E7%B7%9A%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&travelmode=transit';
+function mtMap(u, t) { return ' · <a href="' + u + '" target="_blank" rel="noopener">🗺️ ' + (t || '하카타 버스터미널 길찾기') + '</a>'; }
 var MT_GROUP = {
   ferry: {
     label: '🚢 배 4명', bk: [['ktx', '🚄 KTX'], ['ferry', '🚢 뉴카멜리아'], ['return', '🛬 귀국 KE792']],
@@ -4968,7 +4974,7 @@ var MT_GROUP = {
       ['3/3(수) 14:00', '🚄 KTX → 부산 (약 2시간 30분) · 서울 김석 + 광명 3명, 같은 열차 — <strong>2/3(수) 07:00 예매 오픈</strong>'],
       ['3/3(수) 저녁', '부산에서 저녁 → <strong>18:30까지 부산항 국제여객터미널</strong> (체크인 16:30~19:00 · 승선 마감 20:00) · 체크인 때 <strong>하카타항 세관 신고서(종이)</strong>를 받습니다'],
       ['3/3(수) 22:30', '🚢 뉴카멜리아 출항 — 침대실(1등4인실) · 주문번호 5129084 · <a href="tickets/ferry-e-ticket.pdf" target="_blank">🚢 페리 e-티켓</a> · 멀미약 챙기기 · <a href="javascript:void(0)" onclick="switchTab(\'ny\'); setTimeout(function(){var e=document.getElementById(\'ferry-photos\'); if(e) e.scrollIntoView({behavior:\'smooth\', block:\'center\'});}, 250);">📷 배 객실 사진</a><br><a href="javascript:void(0)" onclick="switchTab(\'ny\'); setTimeout(function(){var e=document.getElementById(\'ferry-photos\'); if(e) e.scrollIntoView({behavior:\'smooth\', block:\'center\'});}, 250);" style="display:inline-flex; gap:4px; margin-top:4px;"><img src="https://www.camellia-line.co.jp/wp-content/themes/2017theme_0111/camellialine/shipfacility/roomguide/img/photo_yoC.jpg" loading="lazy" alt="1등 양실 C" style="height:70px; width:94px; object-fit:cover; border-radius:6px;"><img src="https://www.camellia-line.co.jp/wp-content/themes/2017theme_0111/camellialine/shipfacility/commonus/img/photo02.jpg" loading="lazy" alt="전망 목욕탕" style="height:70px; width:94px; object-fit:cover; border-radius:6px;"><img src="https://www.camellia-line.co.jp/wp-content/uploads/2026/10/restaurant2.jpg" loading="lazy" alt="레스토랑" style="height:70px; width:94px; object-fit:cover; border-radius:6px;"></a>'],
-      ['3/4(목) 07:30', '하카타항 국제터미널 도착 → 입국심사(VJW QR) · 세관(종이 신고서) → 버스로 하카타역 약 20분']
+      ['3/4(목) 07:30', '하카타항 국제터미널 도착 → 입국심사(VJW QR) · 세관(종이 신고서) → 버스로 하카타역 약 20분' + mtMap(MT_MAP_PORT)]
     ],
     entry: '<strong>입국심사</strong>는 Visit Japan Web(VJW) QR, <strong>세관은 종이 신고서</strong> — 하카타항으로 들어오는 배 승객은 별도 세관 신고서를 써야 하고, 3/3 부산 체크인 때 나눠 줍니다(배 안에서 작성). VJW 입국심사 등록은 출발 전에 끝내 두세요.',
     back: { when: '3/7(일)', txt: '대한항공 <strong>KE792 13:45</strong> 후쿠오카 → 15:10 인천 · PNR XEJFYA · 위탁 23kg', airport: '11:45', pdf: 'tickets/ke792-e-itinerary.pdf' }
@@ -4990,20 +4996,20 @@ var MT_PERSON = {
   '김기태': { g: 'air', issued: true,
     pre: [['3/4(목) 04:30', '인천공항 도착 (출발 2시간 전)'],
           ['3/4(목) 06:30', '✈️ 제주항공 <strong>7C1401</strong> 인천 → 07:55 후쿠오카 · PNR IIJ4NX · e-티켓 806-3926482595 · <a href="tickets/kim-gitae-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>'],
-          ['3/4(목) 07:55', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분 · 먼저 도착하니 하카타역에서 배 4명과 합류']],
+          ['3/4(목) 07:55', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분 · 먼저 도착하니 하카타역에서 배 4명과 합류' + mtMap(MT_MAP_AIR)]],
     back: { when: '3/7(일)', txt: '에어부산 <strong>BX446 10:00</strong> 후쿠오카 → 11:45 인천 · PNR KCTNEI · e-티켓 982-2325474159 · 위탁 15kg', airport: '08:00', pdf: 'tickets/kim-gitae-e-itinerary.pdf' } },
   '최근호': { g: 'air' }, '윤유병': { g: 'air' },
   '조성화': { g: 'daegu',
     pre: [['3/4(목) 06:20', '대구공항 도착 (출발 2시간 전)'],
           ['3/4(목) 08:20', '✈️ 티웨이 <strong>TW213</strong> 대구 → 09:25 후쿠오카 · PNR AH7Y68 · e-티켓 722-5862661409 · <a href="tickets/jo-seonghwa-e-itinerary.pdf" target="_blank">🎫 e-티켓</a>'],
-          ['3/4(목) 09:25', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분']],
+          ['3/4(목) 09:25', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분' + mtMap(MT_MAP_AIR)]],
     back: { when: '3/7(일)', txt: '티웨이 <strong>TW214 14:45</strong> 후쿠오카 → 15:55 대구 · PNR AH7Y68', airport: '12:45', pdf: 'tickets/jo-seonghwa-e-itinerary.pdf' } }
 };
 // 최근호·윤유병 (아직 미예약 — 예정 편)
 ['최근호', '윤유병'].forEach(function (n) {
   MT_PERSON[n].pre = [['3/4(목) 05:45', '인천공항 도착 (출발 2시간 전)'],
     ['3/4(목) 07:45', '✈️ 대한항공 <strong>KE787</strong> 인천 → 09:15 후쿠오카 (A350) <span style="color:#8a4500;">· 예정 편 — 아직 미예약</span>'],
-    ['3/4(목) 09:15', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분']];
+    ['3/4(목) 09:15', '후쿠오카공항 국제선 도착 → 입국·세관(VJW QR) → 직행 버스로 하카타역 약 20~25분' + mtMap(MT_MAP_AIR)]];
   MT_PERSON[n].back = { when: '3/7(일)', txt: '대한항공 <strong>KE792 13:45</strong> 후쿠오카 → 15:10 인천 <span style="color:#8a4500;">· 예정 편 — 아직 미예약</span>', airport: '11:45' };
 });
 // 예약 확인 번호 (사람별 안내·티켓 카드에 그대로 표시)
@@ -5039,7 +5045,7 @@ function renderMyTrip() {
     (p.g === 'ferry' ? ' · <a href="' + MT_FERRY_NOTICE + '" target="_blank" rel="noopener">고려훼리 안내문</a>' : '') + '</div>';
   h += '<div class="mt-sec">🗓️ 3/4 ~ 3/6</div>' + row('현지', '하카타에서 8명 합류 → 3/4 온천·료칸 · 3/5 하카타 복귀·아파트·카와타로 저녁 · 3/6 자유 일정 + 19:00 신년회 — <a href="javascript:void(0)" onclick="switchTab(\'ny\')">일정·투표 보기 →</a>');
   h += '<div class="mt-sec">🛬 돌아오는 길</div>' +
-    row(back.when + ' ' + back.airport + '까지', '후쿠오카공항 국제선 도착 (출발 2시간 전) — 하카타역에서 직행 버스 약 20~25분 · 면세품은 짐 부치기 전에 세관 확인') +
+    row(back.when + ' ' + back.airport + '까지', '후쿠오카공항 국제선 도착 (출발 2시간 전) — 하카타역에서 직행 버스 약 20~25분 · 면세품은 짐 부치기 전에 세관 확인' + mtMap(MT_MAP_BACK, '공항 가는 길')) +
     row(back.when, back.txt + (p.eticket ? ' · e-티켓 ' + p.eticket : '') + (back.pdf ? ' · <a href="' + back.pdf + '" target="_blank">🎫 e-티켓</a>' : ''));
   var cp = checklistProgress(sel);
   h += '<div class="mt-sec">🎒 준비물</div>' + row(cp.done + '/' + cp.total, (cp.done === cp.total && cp.total ? '✅ 다 챙겼습니다' : '남은 준비물이 있습니다') + ' — <a href="javascript:void(0)" onclick="switchTab(\'prep\')">준비물 체크 →</a>');
